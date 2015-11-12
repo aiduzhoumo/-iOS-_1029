@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MZLLocDetailHeaderAddressView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="杭州" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="230" translatesAutoresizingMaskIntoConstraints="NO" id="lku-gB-8Xh" userLabel="lblName">
+                    <rect key="frame" x="15" y="15" width="230" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="230" id="JMQ-Fq-bCx"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OK4-F7-SMb" userLabel="vwInterestClickable">
+                    <rect key="frame" x="255" y="0.0" width="65" height="65"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Location_Interested" translatesAutoresizingMaskIntoConstraints="NO" id="cMZ-tM-7vv">
+                            <rect key="frame" x="2" y="10" width="48" height="48"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="48" id="Jtd-ss-zEb"/>
+                                <constraint firstAttribute="height" constant="48" id="qNc-vl-abE"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="cMZ-tM-7vv" secondAttribute="trailing" constant="15" id="FUe-9W-0ER"/>
+                        <constraint firstAttribute="height" constant="65" id="FlX-oD-JO3"/>
+                        <constraint firstAttribute="width" constant="65" id="ciq-td-8Cm"/>
+                        <constraint firstItem="cMZ-tM-7vv" firstAttribute="top" secondItem="OK4-F7-SMb" secondAttribute="top" constant="10" id="hDv-jw-aKl"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="OK4-F7-SMb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0Ng-eE-7mh"/>
+                <constraint firstAttribute="bottom" secondItem="lku-gB-8Xh" secondAttribute="bottom" constant="20" id="26C-Xc-NeK"/>
+                <constraint firstAttribute="trailing" secondItem="OK4-F7-SMb" secondAttribute="trailing" id="FkU-G1-a3j"/>
+                <constraint firstItem="lku-gB-8Xh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="IZd-uR-yQD"/>
+                <constraint firstItem="lku-gB-8Xh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="qJe-hJ-ENt"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="image" destination="cMZ-tM-7vv" id="bt5-1c-oyY"/>
+                <outlet property="lblName" destination="lku-gB-8Xh" id="OjM-he-deY"/>
+                <outlet property="vwInterestClickable" destination="OK4-F7-SMb" id="1Cn-NN-OPO"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="Location_Interested" width="24" height="24"/>
+    </resources>
+</document>

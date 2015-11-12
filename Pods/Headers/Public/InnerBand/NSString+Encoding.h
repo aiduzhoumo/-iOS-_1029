@@ -1,0 +1,1 @@
+../../../InnerBand/InnerBand/Core/Categories/NSString+Encoding.h

@@ -1,0 +1,1 @@
+PODS_INNERBAND_OTHER_LDFLAGS = -framework "CoreData" -framework "CoreGraphics" -framework "CoreText" -framework "QuartzCore" -framework "UIKit"

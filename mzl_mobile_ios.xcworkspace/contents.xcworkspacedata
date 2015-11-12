@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:mzl_mobile_ios.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <Group
+      location = "container:"
+      name = "GPX">
+      <FileRef
+         location = "group:Chongqing.gpx">
+      </FileRef>
+      <FileRef
+         location = "group:Hangzhou.gpx">
+      </FileRef>
+      <FileRef
+         location = "group:Tianjin.gpx">
+      </FileRef>
+      <FileRef
+         location = "group:Beijing.gpx">
+      </FileRef>
+      <FileRef
+         location = "group:Shanghai.gpx">
+      </FileRef>
+   </Group>
+</Workspace>

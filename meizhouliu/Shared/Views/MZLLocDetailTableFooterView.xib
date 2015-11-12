@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MZLLocDetailTableFooterView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hF1-5S-Xab" userLabel="bg">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LD_ShareBg" translatesAutoresizingMaskIntoConstraints="NO" id="Qmm-ho-2W9" userLabel="imgShareBg">
+                            <rect key="frame" x="85" y="25" width="150" height="190"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="150" id="amM-wN-Jxl"/>
+                                <constraint firstAttribute="height" constant="190" id="ldR-Fs-9Gm"/>
+                            </constraints>
+                        </imageView>
+                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LD_ShareToWeixin" translatesAutoresizingMaskIntoConstraints="NO" id="pfW-z9-2dP" userLabel="imgShareToWeixin">
+                            <rect key="frame" x="20" y="205" width="280" height="70"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="70" id="6bl-hU-bBM"/>
+                                <constraint firstAttribute="width" constant="280" id="97U-kf-Drw"/>
+                            </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uCR-HT-iA3" userLabel="imgLocation">
+                            <rect key="frame" x="108" y="65" width="105" height="105"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="105" id="27i-pq-bb9"/>
+                                <constraint firstAttribute="width" constant="105" id="dDB-Oj-qlx"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="杭州" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XpE-Pr-gbd" userLabel="lblLocation">
+                            <rect key="frame" x="148" y="180" width="24" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="105" id="cQx-mn-yfa"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Qmm-ho-2W9" secondAttribute="bottom" constant="65" id="9WQ-Gs-r4S"/>
+                        <constraint firstAttribute="bottom" secondItem="pfW-z9-2dP" secondAttribute="bottom" constant="5" id="CuD-Me-JC2"/>
+                        <constraint firstAttribute="centerX" secondItem="pfW-z9-2dP" secondAttribute="centerX" id="Fzo-Kz-ZUi"/>
+                        <constraint firstAttribute="centerX" secondItem="XpE-Pr-gbd" secondAttribute="centerX" id="GB6-Be-lvN"/>
+                        <constraint firstItem="XpE-Pr-gbd" firstAttribute="top" secondItem="uCR-HT-iA3" secondAttribute="bottom" constant="10" id="USM-6Y-mg9"/>
+                        <constraint firstItem="pfW-z9-2dP" firstAttribute="top" secondItem="XpE-Pr-gbd" secondAttribute="bottom" constant="10" id="orE-RB-yPq"/>
+                        <constraint firstAttribute="centerX" secondItem="uCR-HT-iA3" secondAttribute="centerX" id="pXi-pO-e1B"/>
+                        <constraint firstAttribute="centerX" secondItem="Qmm-ho-2W9" secondAttribute="centerX" id="wz5-g3-6Qg"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="hF1-5S-Xab" secondAttribute="trailing" id="1TT-JR-bXO"/>
+                <constraint firstAttribute="bottom" secondItem="hF1-5S-Xab" secondAttribute="bottom" id="ALu-dn-kwa"/>
+                <constraint firstItem="hF1-5S-Xab" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KmA-d4-hSo"/>
+                <constraint firstItem="hF1-5S-Xab" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gWC-5K-vwJ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imgLocation" destination="uCR-HT-iA3" id="dFJ-0P-Hnr"/>
+                <outlet property="imgShareToWeixin" destination="pfW-z9-2dP" id="E43-nI-b6s"/>
+                <outlet property="lblLocation" destination="XpE-Pr-gbd" id="kMw-Oz-pVP"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="LD_ShareBg" width="300" height="380"/>
+        <image name="LD_ShareToWeixin" width="560" height="140"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

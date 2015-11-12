@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1Fd-kK-wWi" customClass="MZLTableViewFooterViewForIntro">
+            <rect key="frame" x="0.0" y="0.0" width="370" height="155"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lTZ-X3-r0n" userLabel="View Empty">
+                    <rect key="frame" x="0.0" y="0.0" width="370" height="30"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="MaA-fe-cFp"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUS-wX-nZF">
+                    <rect key="frame" x="0.0" y="30" width="370" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bL9-ZA-K5s">
+                            <rect key="frame" x="15" y="17" width="16" height="16"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="EHY-tU-3vf"/>
+                                <constraint firstAttribute="width" constant="16" id="Poj-fm-x0g"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="个人简介" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gU7-88-1Ad">
+                            <rect key="frame" x="50" y="16" width="60" height="18"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerY" secondItem="bL9-ZA-K5s" secondAttribute="centerY" id="95j-Zd-uyo"/>
+                        <constraint firstItem="bL9-ZA-K5s" firstAttribute="leading" secondItem="uUS-wX-nZF" secondAttribute="leading" constant="15" id="HKL-Zy-Mfb"/>
+                        <constraint firstAttribute="centerY" secondItem="bL9-ZA-K5s" secondAttribute="centerY" id="a8z-g5-yyd"/>
+                        <constraint firstAttribute="height" constant="50" id="dYx-C2-3QN"/>
+                        <constraint firstAttribute="centerY" secondItem="gU7-88-1Ad" secondAttribute="centerY" id="f6b-YC-zKO"/>
+                        <constraint firstItem="gU7-88-1Ad" firstAttribute="leading" secondItem="uUS-wX-nZF" secondAttribute="leading" constant="50" id="udu-fL-X6t"/>
+                    </constraints>
+                </view>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="填写你的个人简介" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="ED4-6x-cP8">
+                    <rect key="frame" x="50" y="80" width="320" height="75"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ED4-6x-cP8" firstAttribute="top" secondItem="uUS-wX-nZF" secondAttribute="bottom" id="8hc-pT-oHt"/>
+                <constraint firstItem="uUS-wX-nZF" firstAttribute="leading" secondItem="1Fd-kK-wWi" secondAttribute="leading" id="A53-UZ-v5Y"/>
+                <constraint firstItem="lTZ-X3-r0n" firstAttribute="leading" secondItem="1Fd-kK-wWi" secondAttribute="leading" id="EGs-XP-MpB"/>
+                <constraint firstAttribute="bottom" secondItem="ED4-6x-cP8" secondAttribute="bottom" id="Ks5-7d-NEZ"/>
+                <constraint firstItem="ED4-6x-cP8" firstAttribute="leading" secondItem="1Fd-kK-wWi" secondAttribute="leading" constant="50" id="bHu-JV-9Bg"/>
+                <constraint firstAttribute="trailing" secondItem="lTZ-X3-r0n" secondAttribute="trailing" id="e1H-va-zcJ"/>
+                <constraint firstItem="lTZ-X3-r0n" firstAttribute="top" secondItem="1Fd-kK-wWi" secondAttribute="top" id="mZP-sS-y11"/>
+                <constraint firstAttribute="trailing" secondItem="ED4-6x-cP8" secondAttribute="trailing" id="okd-uN-kn9"/>
+                <constraint firstItem="uUS-wX-nZF" firstAttribute="top" secondItem="lTZ-X3-r0n" secondAttribute="bottom" id="spW-PJ-RNq"/>
+                <constraint firstAttribute="trailing" secondItem="uUS-wX-nZF" secondAttribute="trailing" id="vh3-fM-B1Q"/>
+            </constraints>
+            <connections>
+                <outlet property="imgTitle" destination="bL9-ZA-K5s" id="5TB-Yc-1vH"/>
+                <outlet property="lblIntro" destination="gU7-88-1Ad" id="HaL-Xw-bRb"/>
+                <outlet property="txtFieldIntro" destination="ED4-6x-cP8" id="79h-pc-5eh"/>
+                <outlet property="vwEmpty" destination="lTZ-X3-r0n" id="leJ-l4-ZAh"/>
+            </connections>
+        </view>
+    </objects>
+</document>

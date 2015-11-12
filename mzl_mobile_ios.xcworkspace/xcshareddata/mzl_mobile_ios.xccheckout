@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B98C31A3-8298-4167-86B4-BEA87807D650</string>
+	<key>IDESourceControlProjectName</key>
+	<string>mzl_mobile_ios</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D776F1DE51F9F711447B9291929A38288FBBA025</key>
+		<string>ssh://bitbucket.org/dev_meizhouliu/mzl_mobile_ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>mzl_mobile_ios.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D776F1DE51F9F711447B9291929A38288FBBA025</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://bitbucket.org/dev_meizhouliu/mzl_mobile_ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D776F1DE51F9F711447B9291929A38288FBBA025</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D776F1DE51F9F711447B9291929A38288FBBA025</string>
+			<key>IDESourceControlWCCName</key>
+			<string>mzl_mobile_ios</string>
+		</dict>
+	</array>
+</dict>
+</plist>

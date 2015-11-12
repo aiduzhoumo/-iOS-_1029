@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="400" id="KGk-i7-Jjw" customClass="MZLPersonalizedItemCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="334"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Dy-dZ-C5U" userLabel="vwCover">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QT5-JI-0mU" userLabel="imgLocCover">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="QT5-JI-0mU" secondAttribute="trailing" id="I1E-hK-RDc"/>
+                            <constraint firstItem="QT5-JI-0mU" firstAttribute="leading" secondItem="1Dy-dZ-C5U" secondAttribute="leading" id="Mjk-pA-wLg"/>
+                            <constraint firstAttribute="bottom" secondItem="QT5-JI-0mU" secondAttribute="bottom" id="g2i-Hm-jwK"/>
+                            <constraint firstItem="QT5-JI-0mU" firstAttribute="top" secondItem="1Dy-dZ-C5U" secondAttribute="top" id="hFX-i7-wuF"/>
+                            <constraint firstAttribute="height" constant="200" id="yXV-1N-261"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5z-3o-Oet" userLabel="vwInfo">
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" id="bTn-y0-j2D"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="skc-Z9-amQ" userLabel="vwLocDesp">
+                        <rect key="frame" x="0.0" y="200" width="320" height="134"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="134" id="tSw-d1-4rL"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="g5z-3o-Oet" secondAttribute="trailing" id="7yV-Gx-jaM"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="skc-Z9-amQ" secondAttribute="trailing" id="Fln-Ak-cRR"/>
+                    <constraint firstAttribute="trailing" secondItem="1Dy-dZ-C5U" secondAttribute="trailing" id="NCb-sF-naE"/>
+                    <constraint firstItem="1Dy-dZ-C5U" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="PFb-M5-c0U"/>
+                    <constraint firstItem="g5z-3o-Oet" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="UYe-85-aau"/>
+                    <constraint firstItem="skc-Z9-amQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="bNl-eq-73X"/>
+                    <constraint firstItem="g5z-3o-Oet" firstAttribute="top" secondItem="1Dy-dZ-C5U" secondAttribute="bottom" id="fEL-2w-rSc"/>
+                    <constraint firstItem="skc-Z9-amQ" firstAttribute="top" secondItem="g5z-3o-Oet" secondAttribute="bottom" id="g4j-Fc-ePX"/>
+                    <constraint firstItem="skc-Z9-amQ" firstAttribute="top" secondItem="g5z-3o-Oet" secondAttribute="bottom" id="jGs-M8-gog"/>
+                    <constraint firstItem="skc-Z9-amQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="lfy-34-aQO"/>
+                    <constraint firstAttribute="trailing" secondItem="skc-Z9-amQ" secondAttribute="trailing" id="qR3-DP-90e"/>
+                    <constraint firstItem="1Dy-dZ-C5U" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="y2a-LW-TkJ"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="Fln-Ak-cRR"/>
+                        <exclude reference="g4j-Fc-ePX"/>
+                        <exclude reference="lfy-34-aQO"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="consCoverHeight" destination="yXV-1N-261" id="Zor-fF-4LJ"/>
+                <outlet property="imgLocCover" destination="QT5-JI-0mU" id="Ehf-QO-Nnd"/>
+                <outlet property="vwCover" destination="1Dy-dZ-C5U" id="qES-eN-f7B"/>
+                <outlet property="vwLocDesp" destination="skc-Z9-amQ" id="pXo-R7-AQ0"/>
+            </connections>
+            <point key="canvasLocation" x="380" y="240"/>
+        </tableViewCell>
+    </objects>
+</document>

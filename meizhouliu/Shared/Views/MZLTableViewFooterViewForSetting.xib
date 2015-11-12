@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="ONN-90-0Fr" customClass="MZLTableViewFooterViewForSetting">
+            <rect key="frame" x="0.0" y="0.0" width="331" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="INU-Hs-fh1" userLabel="Empty View">
+                    <rect key="frame" x="0.0" y="0.0" width="331" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="J1H-j7-ib6"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bnu-Vs-Zfe" userLabel="Label View">
+                    <rect key="frame" x="0.0" y="30" width="331" height="70"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NOH-9r-fuf">
+                            <rect key="frame" x="0.0" y="0.0" width="331" height="70"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="退出登录">
+                                <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="NOH-9r-fuf" firstAttribute="leading" secondItem="Bnu-Vs-Zfe" secondAttribute="leading" id="BU2-zB-Hl8"/>
+                        <constraint firstAttribute="trailing" secondItem="NOH-9r-fuf" secondAttribute="trailing" id="VG4-U8-liV"/>
+                        <constraint firstAttribute="centerY" secondItem="NOH-9r-fuf" secondAttribute="centerY" id="Vz8-Ke-99a"/>
+                        <constraint firstAttribute="centerX" secondItem="NOH-9r-fuf" secondAttribute="centerX" id="W5N-pp-C1j"/>
+                        <constraint firstItem="NOH-9r-fuf" firstAttribute="top" secondItem="Bnu-Vs-Zfe" secondAttribute="top" id="c5i-a8-F5K"/>
+                        <constraint firstAttribute="bottom" secondItem="NOH-9r-fuf" secondAttribute="bottom" id="tcq-di-g9R"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="INU-Hs-fh1" secondAttribute="trailing" id="0Oz-Ft-xny"/>
+                <constraint firstAttribute="bottom" secondItem="Bnu-Vs-Zfe" secondAttribute="bottom" id="8Wa-qG-vM4"/>
+                <constraint firstItem="INU-Hs-fh1" firstAttribute="top" secondItem="ONN-90-0Fr" secondAttribute="top" id="Czp-ol-Dol"/>
+                <constraint firstItem="Bnu-Vs-Zfe" firstAttribute="top" secondItem="INU-Hs-fh1" secondAttribute="bottom" id="DuG-MP-dtA"/>
+                <constraint firstAttribute="trailing" secondItem="Bnu-Vs-Zfe" secondAttribute="trailing" id="MKx-RD-60A"/>
+                <constraint firstItem="Bnu-Vs-Zfe" firstAttribute="leading" secondItem="ONN-90-0Fr" secondAttribute="leading" id="VnQ-7b-1Df"/>
+                <constraint firstItem="INU-Hs-fh1" firstAttribute="leading" secondItem="ONN-90-0Fr" secondAttribute="leading" id="kSi-af-jPo"/>
+            </constraints>
+            <connections>
+                <outlet property="btnLogout" destination="NOH-9r-fuf" id="cXn-Kn-1nX"/>
+                <outlet property="vwEmpty" destination="INU-Hs-fh1" id="7JJ-xJ-XDG"/>
+                <outlet property="vwLbl" destination="Bnu-Vs-Zfe" id="UMu-yw-WyS"/>
+            </connections>
+        </view>
+    </objects>
+</document>

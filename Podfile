@@ -1,0 +1,15 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '7.0'
+
+pod 'ObjectiveSugar', '~> 1.1.0'
+pod 'InnerBand', '~> 1.0.6'
+pod 'FontAwesomeKit', '~> 2.1.0'
+pod 'RestKit', '~> 0.23.3'
+pod 'MBProgressHUD', '~> 0.9'
+pod 'FLKAutoLayout', '~> 0.1.1'
+pod 'Nimbus/Photos', :podspec => 'https://gist.github.com/exalted/7655606/raw/ce27220c457984ecd30fb800503b4c299159ace0/Nimbus.podspec'
+pod 'SDURLCache', '~> 1.2'
+pod 'pop', '~> 1.0'
+pod 'Masonry', '~> 0.5.3'
+pod 'AMapSearch' 

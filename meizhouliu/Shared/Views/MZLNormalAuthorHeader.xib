@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MZLNormalAuthorHeader">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="340"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Author_HeadPortraitBg" translatesAutoresizingMaskIntoConstraints="NO" id="Vln-IU-vZt" userLabel="imgAuthorHeaderBg">
+                    <rect key="frame" x="105" y="9" width="110" height="110"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="110" id="Stg-ST-rgA"/>
+                        <constraint firstAttribute="width" constant="110" id="Yvt-yN-ROa"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GQ7-me-Kos" userLabel="imgAuthorHeader">
+                    <rect key="frame" x="115" y="19" width="90" height="90"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="90" id="aoD-r5-DRR"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J37-26-vUb" userLabel="lblAuthorName">
+                    <rect key="frame" x="120" y="129" width="80" height="24"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="情侣、浪漫、咖啡" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLz-R7-buY" userLabel="lblAuthorAreas">
+                    <rect key="frame" x="71" y="173" width="238" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Author_Areas" translatesAutoresizingMaskIntoConstraints="NO" id="NzC-35-Yy7" userLabel="imgAuthorAreas">
+                    <rect key="frame" x="15" y="173" width="41" height="13"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="41" id="ROB-Eu-aNt"/>
+                        <constraint firstAttribute="height" constant="13" id="qcu-fy-aBo"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Author_Description" translatesAutoresizingMaskIntoConstraints="NO" id="EdG-RE-yxQ" userLabel="imgAuthorDescriptions">
+                    <rect key="frame" x="15" y="202" width="41" height="13"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="13" id="Lz6-gH-6Rc"/>
+                        <constraint firstAttribute="width" constant="41" id="gsM-wj-zwJ"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="梦想家，又是实现者" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="238" translatesAutoresizingMaskIntoConstraints="NO" id="KRQ-og-NwC" userLabel="lblAuthorDescriptions">
+                    <rect key="frame" x="71" y="202" width="238" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="45" id="XG8-jo-e6h"/>
+                        <constraint firstAttribute="width" constant="238" id="pxY-AB-zB1"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Author_Separator" translatesAutoresizingMaskIntoConstraints="NO" id="1ig-7k-DSJ">
+                    <rect key="frame" x="0.0" y="237" width="320" height="10"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="Yzu-Kh-C7a"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEu-V4-Qrx" userLabel="vwBottom">
+                    <rect key="frame" x="0.0" y="247" width="320" height="92.5"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者 去过" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKC-Ew-tvo" userLabel="lblAuthorPlayDesp">
+                            <rect key="frame" x="126.5" y="36.5" width="68.5" height="19.5"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerY" secondItem="SKC-Ew-tvo" secondAttribute="centerY" id="SmE-43-NtC"/>
+                        <constraint firstAttribute="centerX" secondItem="SKC-Ew-tvo" secondAttribute="centerX" id="fzr-fY-Trv"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="EdG-RE-yxQ" firstAttribute="leading" secondItem="NzC-35-Yy7" secondAttribute="leading" id="1QD-rj-DCM"/>
+                <constraint firstItem="1ig-7k-DSJ" firstAttribute="top" secondItem="EdG-RE-yxQ" secondAttribute="bottom" priority="750" constant="22" id="7fg-ls-Vm2"/>
+                <constraint firstAttribute="centerX" secondItem="J37-26-vUb" secondAttribute="centerX" id="8UX-c5-5kx"/>
+                <constraint firstItem="1ig-7k-DSJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8el-CQ-p4i"/>
+                <constraint firstAttribute="trailing" secondItem="fEu-V4-Qrx" secondAttribute="trailing" id="D3V-LP-UVv"/>
+                <constraint firstAttribute="trailing" secondItem="1ig-7k-DSJ" secondAttribute="trailing" id="F2p-aM-b3J"/>
+                <constraint firstItem="gLz-R7-buY" firstAttribute="top" secondItem="NzC-35-Yy7" secondAttribute="top" id="Fzu-N3-7dV"/>
+                <constraint firstItem="1ig-7k-DSJ" firstAttribute="top" secondItem="KRQ-og-NwC" secondAttribute="bottom" constant="20" id="IfI-dr-DMs"/>
+                <constraint firstItem="GQ7-me-Kos" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="19" id="Klm-OY-5Z7"/>
+                <constraint firstItem="GQ7-me-Kos" firstAttribute="centerY" secondItem="Vln-IU-vZt" secondAttribute="centerY" id="MV6-Sz-unf"/>
+                <constraint firstItem="fEu-V4-Qrx" firstAttribute="top" secondItem="1ig-7k-DSJ" secondAttribute="bottom" id="N6L-Dg-IT2"/>
+                <constraint firstItem="NzC-35-Yy7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="NuE-hj-Vne"/>
+                <constraint firstItem="Vln-IU-vZt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="9" id="R4J-Vi-VnB"/>
+                <constraint firstItem="gLz-R7-buY" firstAttribute="top" secondItem="J37-26-vUb" secondAttribute="bottom" constant="20" id="bVn-je-vqI"/>
+                <constraint firstAttribute="bottom" secondItem="fEu-V4-Qrx" secondAttribute="bottom" id="c3r-8E-0z3"/>
+                <constraint firstItem="KRQ-og-NwC" firstAttribute="leading" secondItem="EdG-RE-yxQ" secondAttribute="trailing" constant="15" id="dTg-vI-0CR"/>
+                <constraint firstAttribute="centerX" secondItem="Vln-IU-vZt" secondAttribute="centerX" id="er8-4G-Wcs"/>
+                <constraint firstItem="KRQ-og-NwC" firstAttribute="top" secondItem="gLz-R7-buY" secondAttribute="bottom" constant="15" id="gaI-ml-VDu"/>
+                <constraint firstItem="gLz-R7-buY" firstAttribute="leading" secondItem="NzC-35-Yy7" secondAttribute="trailing" constant="15" id="gg6-lF-B4f"/>
+                <constraint firstItem="KRQ-og-NwC" firstAttribute="width" secondItem="gLz-R7-buY" secondAttribute="width" id="k2D-fm-Hlj"/>
+                <constraint firstItem="GQ7-me-Kos" firstAttribute="centerX" secondItem="Vln-IU-vZt" secondAttribute="centerX" id="lvr-a2-IZZ"/>
+                <constraint firstItem="EdG-RE-yxQ" firstAttribute="top" secondItem="KRQ-og-NwC" secondAttribute="top" id="mqD-Or-QR4"/>
+                <constraint firstItem="J37-26-vUb" firstAttribute="top" secondItem="Vln-IU-vZt" secondAttribute="bottom" constant="10" id="tPs-t1-YrB"/>
+                <constraint firstItem="fEu-V4-Qrx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tir-wp-yhU"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imgAuthorHeader" destination="GQ7-me-Kos" id="NJw-Ni-lyh"/>
+                <outlet property="lblAreas" destination="gLz-R7-buY" id="FS7-Vy-9s0"/>
+                <outlet property="lblAuthorArticleTitle" destination="SKC-Ew-tvo" id="3pM-0E-RWy"/>
+                <outlet property="lblAuthorName" destination="J37-26-vUb" id="x8g-fj-MrA"/>
+                <outlet property="lblDescriptions" destination="KRQ-og-NwC" id="Lqn-cH-siS"/>
+                <outlet property="vwBottom" destination="fEu-V4-Qrx" id="Mmd-gg-c8c"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="Author_Areas" width="82" height="26"/>
+        <image name="Author_Description" width="82" height="26"/>
+        <image name="Author_HeadPortraitBg" width="220" height="220"/>
+        <image name="Author_Separator" width="640" height="20"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
