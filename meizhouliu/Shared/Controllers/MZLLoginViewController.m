@@ -245,6 +245,17 @@
 //    [btnWeiXin setBackgroundImage:[UIImage imageNamed:@"Login_Weixin"] forState:UIControlStateNormal];
 //    self.btnWeixinLogin = btnWeiXin;
 //    [btns addObject:btnWeiXin];
+    
+    
+    //判断用户是否已安装微信，若安装了则创建按钮，没有就不创建
+    if ([WXApi isWXAppInstalled]) {
+        
+        UIButton *btnWeiXin = [vwCenter createSubViewBtn];
+        [btnWeiXin setBackgroundImage:[UIImage imageNamed:@"Login_Weixin"] forState:UIControlStateNormal];
+        self.btnWeixinLogin = btnWeiXin;
+        [btns addObject:btnWeiXin];
+        
+    }
 
     UIButton *btnQQ = [vwCenter createSubViewBtn];
     [btnQQ setBackgroundImage:[UIImage imageNamed:@"Login_QQ"] forState:UIControlStateNormal];

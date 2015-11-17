@@ -110,12 +110,14 @@
     MZLAppUser *user = [MZLSharedData appUser];
     user.nickNameFrom3rdParty = self.txtNickName.text;
     [self showRegProgressIndicator];
-    [self reg];
-//    if (self.loginType == MZLLoginTypeSinaWeibo) {
-//        [self regWithSinaWeibo];
-//    } else {
-//        [self regWithQQ];
-//    }
+//    [self reg];
+    if (self.loginType == MZLLoginTypeSinaWeibo) {
+        [self regWithSinaWeibo];
+    } else if(self.loginType == MZLLoginTypeQQ){
+        [self regWithQQ];
+    } else {
+        [self regWithWechat];
+    }
 }
 
 #pragma mark - reg
@@ -128,6 +130,18 @@
     } errorBlock:^(NSError *error) {
         [self onRegError];
     }];
+}
+
+- (void)regWithWechat{
+    
+    MZLRegister3rdPartySvcParam *params = [MZLRegister3rdPartySvcParam instance];
+    [MZLServices registerByWeixinService:params succBlock:^(NSArray *models) {
+        MZLRegLoginResponse *result = ((MZLRegLoginResponse *)models[0]);
+        [self handleRegResponse:result type:MZLLoginTypeWeiXin];
+    } errorBlock:^(NSError *error) {
+        [self onRegError];
+    }];
+    
 }
 
 - (void)regWithSinaWeibo {

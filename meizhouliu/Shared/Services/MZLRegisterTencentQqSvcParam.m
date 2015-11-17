@@ -10,6 +10,12 @@
 
 @implementation MZLRegisterTencentQqSvcParam
 
+@dynamic openID;
+@dynamic token;
+@dynamic expiresIn;
+@dynamic refreshToken;
+@dynamic photo;
+
 + (MZLRegisterTencentQqSvcParam *)registerSvcParamWithmachineId:(NSString *)machineId
                                                          openID:(NSString *)openID
                                                           token:(NSString *)token

@@ -3420,7 +3420,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou Qiaji Network Technology Co., Ltd. (WQ6TNBM4UD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3475,7 +3475,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.ios;
 				PRODUCT_NAME = mzl_mobile_ios;
-				PROVISIONING_PROFILE = "c7a53676-ca19-469a-9d5c-c3c1a5f64400";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
@@ -3488,7 +3488,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou Qiaji Network Technology Co., Ltd. (WQ6TNBM4UD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3543,7 +3543,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.ios;
 				PRODUCT_NAME = mzl_mobile_ios;
-				PROVISIONING_PROFILE = "c7a53676-ca19-469a-9d5c-c3c1a5f64400";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;

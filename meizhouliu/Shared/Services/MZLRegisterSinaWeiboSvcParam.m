@@ -10,6 +10,12 @@
 
 @implementation MZLRegisterSinaWeiboSvcParam
 
+@dynamic openID;
+@dynamic token;
+@dynamic expiresIn;
+@dynamic refreshToken;
+@dynamic photo;
+
 + (MZLRegisterSinaWeiboSvcParam *)registerSvcParamWithmachineId:(NSString *)machineId
                                                          openID:(NSString *)openID
                                                           token:(NSString *)token
