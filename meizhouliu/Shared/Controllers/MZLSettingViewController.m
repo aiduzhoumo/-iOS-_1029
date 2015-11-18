@@ -193,6 +193,7 @@
     return 2;
 }
 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
@@ -267,7 +268,9 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)aImage editingInfo:(NSDictionary *)editingInfo {
     [picker dismissModalViewControllerAnimated:YES];
     [self showUpLoadingProgressIndicator];
-//    UIImage *image = [self compressAImageWithImage:aImage];
+    
+//  UIImage *image = [self compressAImageWithImage:aImage];
+
     [MZLServices uploadUserImageService:aImage succBlock:^(NSArray *models) {
         [self hideProgressIndicator];
         _userHeaderImage.image = aImage;

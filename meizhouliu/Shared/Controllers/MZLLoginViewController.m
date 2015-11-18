@@ -453,9 +453,12 @@
     [ShareSDK authWithType:type options:nil result:^(SSAuthState state, id<ICMErrorInfo> error) {
         if (state == SSAuthStateSuccess) {
             id<ISSPlatformCredential> credential = [ShareSDK getCredentialWithType:type];
+            
+             NSLog(@"credential uid == %@ ... credential token == %@.... credential expired == %@",[credential uid],[credential token],[credential expired]);
             if (! credential) {
                 return;
             }
+       
             [self showLoginProgressIndicator];
             [self saveUser3rdPartyAuthData:@[[credential uid], [credential token], [credential expired]]];
             [self getUserInfoWithShareType:type];
@@ -470,6 +473,9 @@
 - (void)getUserInfoWithShareType:(ShareType)type {
     [ShareSDK getUserInfoWithType:type authOptions:nil result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error) {
         if (result) {
+            
+            NSLog(@"nickname = %@",[userInfo nickname] );
+            
             [self saveUser3rdPartyNickName:[userInfo nickname] imageUrl:[userInfo profileImage]];
             MZLLoginType loginType = [self loginTypeFromShareType:type];
             [self login:loginType];
@@ -644,6 +650,11 @@
 
 - (void)saveUser3rdPartyNickName:(NSString *)name imageUrl:(NSString *)imageUrl {
     MZLAppUser *user = [MZLSharedData appUser];
+    
+//    //自己将name及imageUrl转成UTF8类型
+//    user.nickNameFrom3rdParty = [name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    user.imageUrlFrom3rdParty = [imageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
     user.nickNameFrom3rdParty = name;
     user.imageUrlFrom3rdParty = imageUrl;
 }

@@ -574,6 +574,9 @@
 
 + (void)loginBy3rdPartyWithServicePath:(NSString *)servicePath openId:(NSString *)openId succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    NSLog(@"%@",params);
+    
     [params setObject:openId forKey:MZL_KEY_AUTH_3RD_PARTY_OPENID];
     [self loginServiceWithPath:servicePath param:params succBlock:succBlock errorBlock:errorBlock];
 }
