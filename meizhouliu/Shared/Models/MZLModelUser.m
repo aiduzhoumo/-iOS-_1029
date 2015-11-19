@@ -24,7 +24,6 @@
 }
 
 - (NSString *)name {
-    
     return self.nickName;
 }
 

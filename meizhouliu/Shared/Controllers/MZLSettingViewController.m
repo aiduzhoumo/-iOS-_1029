@@ -193,7 +193,6 @@
     return 2;
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
@@ -268,14 +267,10 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)aImage editingInfo:(NSDictionary *)editingInfo {
     [picker dismissModalViewControllerAnimated:YES];
     [self showUpLoadingProgressIndicator];
-    
-    NSLog(@"%@", NSStringFromCGSize(aImage.size));
-   
-    UIImage *image = [self compressAImageWithImage:aImage];
-
-    [MZLServices uploadUserImageService:image succBlock:^(NSArray *models) {
+//    UIImage *image = [self compressAImageWithImage:aImage];
+    [MZLServices uploadUserImageService:aImage succBlock:^(NSArray *models) {
         [self hideProgressIndicator];
-        _userHeaderImage.image = image;
+        _userHeaderImage.image = aImage;
         [UIAlertView showAlertMessage:@"头像上传成功！"];
     } errorBlock:^(NSError *error) {
         [self hideProgressIndicator];
@@ -284,13 +279,7 @@
 }
 
 - (UIImage *)compressAImageWithImage:(UIImage *)aImage {
- 
-    CGFloat oldWidth = aImage.size.width;
-    CGFloat oldHeight = aImage.size.height;
-    CGFloat newWidth = oldWidth > 300.0f ? 300.0f : oldWidth;
-    CGFloat newHeight = oldHeight > 300.0f ? 300.0f : oldHeight;
-    
-    CGSize newSize = CGSizeMake(newWidth, newHeight);
+    CGSize newSize = CGSizeMake(100.0f, 100.0f);
     UIGraphicsBeginImageContext(newSize);
     [aImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -304,10 +293,3 @@
 }
 
 @end
-
-
-
-
-
-
-

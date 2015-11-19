@@ -33,14 +33,4 @@
     return result;
 }
 
-//- (void)setNickName:(NSString *)nickName
-//{
-//    _nickName = [nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//}
-
-//- (NSString *)nickName {
-//  
-//    return [_nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//}
-
 @end
