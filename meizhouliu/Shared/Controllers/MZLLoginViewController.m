@@ -67,6 +67,9 @@
     [super viewDidLoad];
     
     [self initInternal];
+    //
+    NSLog(@"测试一下而已");
+    NSLog(@"测试两下而已");
 }
 
 - (void)viewWillAppear:(BOOL)animated {
