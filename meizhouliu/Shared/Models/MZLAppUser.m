@@ -25,7 +25,7 @@
 }
 
 - (BOOL)isLoginFrom3rdParty {
-    return self.loginType == MZLLoginTypeQQ || self.loginType == MZLLoginTypeSinaWeibo;
+    return self.loginType == MZLLoginTypeQQ || self.loginType == MZLLoginTypeSinaWeibo || self.loginType == MZLLoginTypeWeiXin;
 }
 
 #pragma mark - NSCoding protocol
