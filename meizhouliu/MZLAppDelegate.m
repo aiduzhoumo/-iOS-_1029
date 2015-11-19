@@ -279,6 +279,8 @@
         //设置version标识
         NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         [MobClick setAppVersion:version];
+        
+
 #ifdef MZL_DEBUG
         [MobClick setLogEnabled:YES];
 #endif

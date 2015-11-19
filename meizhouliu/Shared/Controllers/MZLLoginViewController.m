@@ -31,6 +31,7 @@
 #import "UIView+MZLAdditions.h"
 #import <QZoneConnection/ISSQZoneApp.h>
 #import <WeChatConnection/WeChatConnection.h>
+#import "MZLPhoneRegViewController.h"
 
 #define LOGIN_BTN_TEXT_NORMAL @"登    录"
 #define LOGIN_BTN_TEXT_DISABLED @"登  录  中..."
@@ -107,6 +108,9 @@
      } else if ([MZL_SEGUE_TOREG isEqualToString:segue.identifier]) {
          MZLRegViewController *controller = (MZLRegViewController *)segue.destinationViewController;
          controller.fromController = self;
+     }else if ([MZL_SEGUE_TOPHONEREG isEqualToString:segue.identifier]){
+         MZLPhoneRegViewController *phoneController = (MZLPhoneRegViewController *)segue.destinationViewController;
+         phoneController.fromController = self;
      }
 }
 
@@ -117,6 +121,10 @@
 
 - (void)toReg {
     [self performSegueWithIdentifier:MZL_SEGUE_TOREG sender:nil];
+}
+
+- (void)toPhoneReg {
+    [self performSegueWithIdentifier:MZL_SEGUE_TOPHONEREG sender:nil];
 }
 
 #pragma mark - init methods
@@ -291,6 +299,9 @@
     [self.btnWeixinLogin addTarget:self action:@selector(onClickWeixinOAuth) forControlEvents:UIControlEventTouchUpInside];
     [self.btnTencentQqOAuth addTarget:self action:@selector(onClickTencentOAuth) forControlEvents:UIControlEventTouchUpInside];
     [self.btnFavDirect addTarget:self action:@selector(skip) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [self.phoneNumLogin addTarget:self action:@selector(toPhoneReg) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark - tip message
@@ -703,6 +714,7 @@
         [self onLoginErrorWithCode:ERROR_CODE_LOGIN_FAILED];
     }
 }
+
 
 @end
 

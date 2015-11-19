@@ -269,7 +269,7 @@
     [picker dismissModalViewControllerAnimated:YES];
     [self showUpLoadingProgressIndicator];
     
-    NSLog(@"%@", NSStringFromCGSize(aImage.size));
+//    NSLog(@"%@", NSStringFromCGSize(aImage.size));
    
     UIImage *image = [self compressAImageWithImage:aImage];
 

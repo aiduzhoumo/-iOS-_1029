@@ -34,6 +34,7 @@
 #define MZL_SEGUE_NOTICEDETAIL @"toNoticeDetail"
 #define MZL_SEGUE_TOPOINAV @"toPOINav"
 #define MZL_SEGUE_TOREG @"toReg"
+#define MZL_SEGUE_TOPHONEREG @"toPhoneReg"
 #define MZL_SEGUE_TOGOODSDETAIL @"toGoodsDetail"
 
 #define MZL_MSG_ALERT_VIEW_TITLE @"提示"

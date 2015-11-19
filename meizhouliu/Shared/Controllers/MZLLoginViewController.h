@@ -39,6 +39,9 @@ BOOL shouldPopupLogin();
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *conVwContentTop;
 
+@property (weak, nonatomic) IBOutlet UIButton *phoneNumLogin;
+
+
 @property (nonatomic, assign) MZLLoginPopupFrom popupFrom;
 @property (nonatomic, copy) CO_BLOCK_VOID executionBlockWhenDismissed;
 

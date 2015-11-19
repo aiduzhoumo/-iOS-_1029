@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "meizhouliu/Shared/Controllers/MZLLoginViewController.m"
-            timestampString = "469442260.308106"
+            timestampString = "469598459.840616"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "477"
-            endingLineNumber = "477"
+            startingLineNumber = "488"
+            endingLineNumber = "488"
             landmarkName = "-getUserInfoWithShareType:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "meizhouliu/Shared/Controllers/MZLLoginViewController.m"
-            timestampString = "469442872.10718"
+            timestampString = "469598459.840616"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "457"
-            endingLineNumber = "457"
+            startingLineNumber = "468"
+            endingLineNumber = "468"
             landmarkName = "-loginWithShareType:"
             landmarkType = "5">
          </BreakpointContent>

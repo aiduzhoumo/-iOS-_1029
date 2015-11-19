@@ -50,6 +50,7 @@
 		1BDE39531A480BBF002C1F86 /* MZLDescendantsParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDE39521A480BBF002C1F86 /* MZLDescendantsParam.m */; };
 		1BDE39561A48173A002C1F86 /* MZLModelRelatedLocationExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDE39551A48173A002C1F86 /* MZLModelRelatedLocationExt.m */; };
 		1BEA57511A7106C7009A3868 /* MZLShortArticleResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEA57501A7106C7009A3868 /* MZLShortArticleResponse.m */; };
+		78F900911BFD7B6A00429A2A /* MZLPhoneRegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F900901BFD7B6A00429A2A /* MZLPhoneRegViewController.m */; };
 		844382011BE0D00D00DF1C7E /* QQConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844381DB1BE0D00D00DF1C7E /* QQConnection.framework */; };
 		844382021BE0D00D00DF1C7E /* QZoneConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844381DC1BE0D00D00DF1C7E /* QZoneConnection.framework */; };
 		844382031BE0D00D00DF1C7E /* SinaWeiboConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844381DD1BE0D00D00DF1C7E /* SinaWeiboConnection.framework */; };
@@ -501,6 +502,8 @@
 		1BDE39551A48173A002C1F86 /* MZLModelRelatedLocationExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLModelRelatedLocationExt.m; sourceTree = "<group>"; };
 		1BEA574F1A7106C7009A3868 /* MZLShortArticleResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLShortArticleResponse.h; sourceTree = "<group>"; };
 		1BEA57501A7106C7009A3868 /* MZLShortArticleResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLShortArticleResponse.m; sourceTree = "<group>"; };
+		78F9008F1BFD7B6A00429A2A /* MZLPhoneRegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLPhoneRegViewController.h; sourceTree = "<group>"; };
+		78F900901BFD7B6A00429A2A /* MZLPhoneRegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLPhoneRegViewController.m; sourceTree = "<group>"; };
 		79A770220297C32F7E1E7330 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		844381DB1BE0D00D00DF1C7E /* QQConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QQConnection.framework; sourceTree = "<group>"; };
 		844381DC1BE0D00D00DF1C7E /* QZoneConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QZoneConnection.framework; sourceTree = "<group>"; };
@@ -2520,6 +2523,8 @@
 				E58E8ED71991DF5D008079F3 /* MZLRegViewController.m */,
 				DCE157FF1993247B00533A2D /* UIViewController+MZLRegLoginCommon.h */,
 				DCE158001993247B00533A2D /* UIViewController+MZLRegLoginCommon.m */,
+				78F9008F1BFD7B6A00429A2A /* MZLPhoneRegViewController.h */,
+				78F900901BFD7B6A00429A2A /* MZLPhoneRegViewController.m */,
 			);
 			name = RegLogin;
 			sourceTree = "<group>";
@@ -2979,6 +2984,7 @@
 				E5884CCF199CA6CD00CF26AE /* MZLSettingItemCell.m in Sources */,
 				E58E8ED81991DF5D008079F3 /* MZLRegViewController.m in Sources */,
 				DCD2129119AAD9F4003BB633 /* UIView+COAdditions.m in Sources */,
+				78F900911BFD7B6A00429A2A /* MZLPhoneRegViewController.m in Sources */,
 				DCD2128519AAD9F4003BB633 /* NSInvocation+COAdditions.m in Sources */,
 				DC8EB4E21AA857690073B9BC /* MZLServices+Utils.m in Sources */,
 				E5E153F0192CBCA40099421D /* iVersion.m in Sources */,
