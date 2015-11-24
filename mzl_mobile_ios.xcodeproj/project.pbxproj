@@ -402,6 +402,7 @@
 		E5EDE5A4199CC91D00C3D3EF /* MZLTableViewFooterViewForIntro.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDE5A3199CC91D00C3D3EF /* MZLTableViewFooterViewForIntro.m */; };
 		E5EDE5A7199CD47A00C3D3EF /* MZLPasswordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDE5A6199CD47A00C3D3EF /* MZLPasswordTableViewCell.m */; };
 		E5EDE5B8199E028300C3D3EF /* MZLModelUserInfoDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDE5B7199E028300C3D3EF /* MZLModelUserInfoDetail.m */; };
+		F3D727F11C02B8D2008FAA3C /* MZLNewRegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D727F01C02B8D2008FAA3C /* MZLNewRegViewController.m */; };
 		FB7CBDC1E70A4BC5BD1085AA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC92BF518AF04D9195561CA5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -1156,6 +1157,8 @@
 		E5EDE5A6199CD47A00C3D3EF /* MZLPasswordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLPasswordTableViewCell.m; sourceTree = "<group>"; };
 		E5EDE5B6199E028300C3D3EF /* MZLModelUserInfoDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLModelUserInfoDetail.h; sourceTree = "<group>"; };
 		E5EDE5B7199E028300C3D3EF /* MZLModelUserInfoDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLModelUserInfoDetail.m; sourceTree = "<group>"; };
+		F3D727EF1C02B8D2008FAA3C /* MZLNewRegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLNewRegViewController.h; sourceTree = "<group>"; };
+		F3D727F01C02B8D2008FAA3C /* MZLNewRegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLNewRegViewController.m; sourceTree = "<group>"; };
 		FC92BF518AF04D9195561CA5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -2518,6 +2521,8 @@
 				E58E8EDA1991DF7B008079F3 /* MZLRegModifyNameViewController.m */,
 				E58E8ED61991DF5D008079F3 /* MZLRegViewController.h */,
 				E58E8ED71991DF5D008079F3 /* MZLRegViewController.m */,
+				F3D727EF1C02B8D2008FAA3C /* MZLNewRegViewController.h */,
+				F3D727F01C02B8D2008FAA3C /* MZLNewRegViewController.m */,
 				DCE157FF1993247B00533A2D /* UIViewController+MZLRegLoginCommon.h */,
 				DCE158001993247B00533A2D /* UIViewController+MZLRegLoginCommon.m */,
 			);
@@ -3017,6 +3022,7 @@
 				E569B39E1961329C00BB097A /* MZLCarouselView.m in Sources */,
 				DC75E4FE193324EF0043BEB6 /* MZLModelLocationExt.m in Sources */,
 				DC4445FC19B847430097BF81 /* MZLFilterBar.m in Sources */,
+				F3D727F11C02B8D2008FAA3C /* MZLNewRegViewController.m in Sources */,
 				DCDA780B19C0369F00D3E576 /* MZLSvcParamWithPaging.m in Sources */,
 				DC46C67E19414F5900A917B1 /* MZLModelTagType.m in Sources */,
 				DCC231A8190A443800F181B0 /* MZLLocationItemCell.m in Sources */,
