@@ -402,6 +402,8 @@
 		E5EDE5A4199CC91D00C3D3EF /* MZLTableViewFooterViewForIntro.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDE5A3199CC91D00C3D3EF /* MZLTableViewFooterViewForIntro.m */; };
 		E5EDE5A7199CD47A00C3D3EF /* MZLPasswordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDE5A6199CD47A00C3D3EF /* MZLPasswordTableViewCell.m */; };
 		E5EDE5B8199E028300C3D3EF /* MZLModelUserInfoDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDE5B7199E028300C3D3EF /* MZLModelUserInfoDetail.m */; };
+		F3EC2C251C044982008B8403 /* MZLNEWLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EC2C241C044982008B8403 /* MZLNEWLogViewController.m */; };
+		F3EC2C281C044E9E008B8403 /* MZLOldLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EC2C271C044E9E008B8403 /* MZLOldLogViewController.m */; };
 		FB7CBDC1E70A4BC5BD1085AA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC92BF518AF04D9195561CA5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -1156,6 +1158,10 @@
 		E5EDE5A6199CD47A00C3D3EF /* MZLPasswordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLPasswordTableViewCell.m; sourceTree = "<group>"; };
 		E5EDE5B6199E028300C3D3EF /* MZLModelUserInfoDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLModelUserInfoDetail.h; sourceTree = "<group>"; };
 		E5EDE5B7199E028300C3D3EF /* MZLModelUserInfoDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLModelUserInfoDetail.m; sourceTree = "<group>"; };
+		F3EC2C231C044982008B8403 /* MZLNEWLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLNEWLogViewController.h; sourceTree = "<group>"; };
+		F3EC2C241C044982008B8403 /* MZLNEWLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLNEWLogViewController.m; sourceTree = "<group>"; };
+		F3EC2C261C044E9E008B8403 /* MZLOldLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLOldLogViewController.h; sourceTree = "<group>"; };
+		F3EC2C271C044E9E008B8403 /* MZLOldLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLOldLogViewController.m; sourceTree = "<group>"; };
 		FC92BF518AF04D9195561CA5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -2520,6 +2526,10 @@
 				E58E8ED71991DF5D008079F3 /* MZLRegViewController.m */,
 				DCE157FF1993247B00533A2D /* UIViewController+MZLRegLoginCommon.h */,
 				DCE158001993247B00533A2D /* UIViewController+MZLRegLoginCommon.m */,
+				F3EC2C231C044982008B8403 /* MZLNEWLogViewController.h */,
+				F3EC2C241C044982008B8403 /* MZLNEWLogViewController.m */,
+				F3EC2C261C044E9E008B8403 /* MZLOldLogViewController.h */,
+				F3EC2C271C044E9E008B8403 /* MZLOldLogViewController.m */,
 			);
 			name = RegLogin;
 			sourceTree = "<group>";
@@ -3217,6 +3227,7 @@
 				DC5E945818FD434800B2032F /* MZLServices.m in Sources */,
 				DC5E7A31193583060017BEF6 /* MZLServiceResponseObject.m in Sources */,
 				DCC231AF190A566700F181B0 /* MZLModelAuthorDetail.m in Sources */,
+				F3EC2C251C044982008B8403 /* MZLNEWLogViewController.m in Sources */,
 				DC0920131A81C691003A14CD /* MZLPersonalizedShortArticleVC.m in Sources */,
 				DCFC567519B5990E006FCFD6 /* MZLModelFilterObject.m in Sources */,
 				1B61DC351A514D6300B47F7A /* MZLShortArticleChooseLocItemCell.m in Sources */,
@@ -3236,6 +3247,7 @@
 				1B229EDD1A67AE2B00F56705 /* MZLShortArticleTagItem.m in Sources */,
 				DC60FB0519CC157A0046E105 /* ChineseToPinyinResource.m in Sources */,
 				DCD2128619AAD9F4003BB633 /* NSObject+COAdditions.m in Sources */,
+				F3EC2C281C044E9E008B8403 /* MZLOldLogViewController.m in Sources */,
 				1B8CB70219CC039600341C47 /* MZLAuthorCoverCollectionViewCell.m in Sources */,
 				DCBCACFA1AD4C9850033A0D5 /* MZLShortArticleCellBase.m in Sources */,
 				DCC283821A5ED37F0001FAF1 /* COCache.m in Sources */,

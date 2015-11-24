@@ -38,7 +38,10 @@
 #define STATUS_NOT_LOGINED 0
 #define STATUS_LOGINED 1
 
-#define SEGUE_TOLOGIN @"toLogin"
+
+//#define SEGUE_TOLOGIN @"toLogin"
+
+#define SEGUE_TOLOGIN @"toLog"
 #define SEGUE_TOSETTING @"toSetting"
 
 @interface MZLMyFavoriteViewController () <MZLMyTopBarDelegate> {
