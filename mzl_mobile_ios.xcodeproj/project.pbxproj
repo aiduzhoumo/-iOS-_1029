@@ -402,6 +402,10 @@
 		E5EDE5A4199CC91D00C3D3EF /* MZLTableViewFooterViewForIntro.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDE5A3199CC91D00C3D3EF /* MZLTableViewFooterViewForIntro.m */; };
 		E5EDE5A7199CD47A00C3D3EF /* MZLPasswordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDE5A6199CD47A00C3D3EF /* MZLPasswordTableViewCell.m */; };
 		E5EDE5B8199E028300C3D3EF /* MZLModelUserInfoDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDE5B7199E028300C3D3EF /* MZLModelUserInfoDetail.m */; };
+		F319E2FF1C05BB0900480E73 /* MZLPhoneLogVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F319E2FE1C05BB0900480E73 /* MZLPhoneLogVC.m */; };
+		F319E3051C05BB7000480E73 /* MZLPhoneLogBindingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F319E3041C05BB7000480E73 /* MZLPhoneLogBindingVC.m */; };
+		F319E3081C05BB9800480E73 /* MZLThirdLogPhoneBindVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F319E3071C05BB9800480E73 /* MZLThirdLogPhoneBindVC.m */; };
+		F319E30B1C05BBE300480E73 /* MZLThirdLogPhoneAndNameBdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F319E30A1C05BBE300480E73 /* MZLThirdLogPhoneAndNameBdVC.m */; };
 		F3D727F11C02B8D2008FAA3C /* MZLNewRegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D727F01C02B8D2008FAA3C /* MZLNewRegViewController.m */; };
 		FB7CBDC1E70A4BC5BD1085AA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC92BF518AF04D9195561CA5 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -1157,6 +1161,14 @@
 		E5EDE5A6199CD47A00C3D3EF /* MZLPasswordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLPasswordTableViewCell.m; sourceTree = "<group>"; };
 		E5EDE5B6199E028300C3D3EF /* MZLModelUserInfoDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLModelUserInfoDetail.h; sourceTree = "<group>"; };
 		E5EDE5B7199E028300C3D3EF /* MZLModelUserInfoDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLModelUserInfoDetail.m; sourceTree = "<group>"; };
+		F319E2FD1C05BB0900480E73 /* MZLPhoneLogVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLPhoneLogVC.h; sourceTree = "<group>"; };
+		F319E2FE1C05BB0900480E73 /* MZLPhoneLogVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLPhoneLogVC.m; sourceTree = "<group>"; };
+		F319E3031C05BB7000480E73 /* MZLPhoneLogBindingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLPhoneLogBindingVC.h; sourceTree = "<group>"; };
+		F319E3041C05BB7000480E73 /* MZLPhoneLogBindingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLPhoneLogBindingVC.m; sourceTree = "<group>"; };
+		F319E3061C05BB9800480E73 /* MZLThirdLogPhoneBindVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLThirdLogPhoneBindVC.h; sourceTree = "<group>"; };
+		F319E3071C05BB9800480E73 /* MZLThirdLogPhoneBindVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLThirdLogPhoneBindVC.m; sourceTree = "<group>"; };
+		F319E3091C05BBE300480E73 /* MZLThirdLogPhoneAndNameBdVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLThirdLogPhoneAndNameBdVC.h; sourceTree = "<group>"; };
+		F319E30A1C05BBE300480E73 /* MZLThirdLogPhoneAndNameBdVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLThirdLogPhoneAndNameBdVC.m; sourceTree = "<group>"; };
 		F3D727EF1C02B8D2008FAA3C /* MZLNewRegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLNewRegViewController.h; sourceTree = "<group>"; };
 		F3D727F01C02B8D2008FAA3C /* MZLNewRegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLNewRegViewController.m; sourceTree = "<group>"; };
 		FC92BF518AF04D9195561CA5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2525,6 +2537,14 @@
 				F3D727F01C02B8D2008FAA3C /* MZLNewRegViewController.m */,
 				DCE157FF1993247B00533A2D /* UIViewController+MZLRegLoginCommon.h */,
 				DCE158001993247B00533A2D /* UIViewController+MZLRegLoginCommon.m */,
+				F319E2FD1C05BB0900480E73 /* MZLPhoneLogVC.h */,
+				F319E2FE1C05BB0900480E73 /* MZLPhoneLogVC.m */,
+				F319E3031C05BB7000480E73 /* MZLPhoneLogBindingVC.h */,
+				F319E3041C05BB7000480E73 /* MZLPhoneLogBindingVC.m */,
+				F319E3061C05BB9800480E73 /* MZLThirdLogPhoneBindVC.h */,
+				F319E3071C05BB9800480E73 /* MZLThirdLogPhoneBindVC.m */,
+				F319E3091C05BBE300480E73 /* MZLThirdLogPhoneAndNameBdVC.h */,
+				F319E30A1C05BBE300480E73 /* MZLThirdLogPhoneAndNameBdVC.m */,
 			);
 			name = RegLogin;
 			sourceTree = "<group>";
@@ -3118,6 +3138,7 @@
 				DC5E945118FCFC5600B2032F /* MZLLocationDetailViewController.m in Sources */,
 				DCD2129E19AAD9F4003BB633 /* UIImage+ImageEffects.m in Sources */,
 				1B7BCB491A1C439400106165 /* MZLFilterCrowdSectionView.m in Sources */,
+				F319E3081C05BB9800480E73 /* MZLThirdLogPhoneBindVC.m in Sources */,
 				DCF115D51A591EAA000BB6E0 /* COKeyboardToolbar.m in Sources */,
 				1B8BDF751A776BE400A48F99 /* MZLShortArticleGalleryVC.m in Sources */,
 				DCAAE3DE18F3DE54002C593B /* MZLFunctions.m in Sources */,
@@ -3125,6 +3146,7 @@
 				DCAED84D1A511D87004DA3B6 /* MZLShortArticleContentVC.m in Sources */,
 				DCDA77FD19C0019C00D3E576 /* MZLFilterView.m in Sources */,
 				DC6AB42E19D2A53D00A08E99 /* Reachability.m in Sources */,
+				F319E2FF1C05BB0900480E73 /* MZLPhoneLogVC.m in Sources */,
 				DCD2128719AAD9F4003BB633 /* NSObject+COAssociation.m in Sources */,
 				DCAED84A1A511D64004DA3B6 /* MZLShortArticleChooseLocVC.m in Sources */,
 				DC75E4FB1933211A0043BEB6 /* MZLModelRouteInfo.m in Sources */,
@@ -3213,6 +3235,7 @@
 				DCC283871A5ED3F80001FAF1 /* COAssets.m in Sources */,
 				DCD212A119AADD26003BB633 /* UIViewController+COScroll.m in Sources */,
 				E5EDE5B8199E028300C3D3EF /* MZLModelUserInfoDetail.m in Sources */,
+				F319E30B1C05BBE300480E73 /* MZLThirdLogPhoneAndNameBdVC.m in Sources */,
 				DC7F2D40195A6FD00095CDA5 /* MZLLocationDelegate.m in Sources */,
 				E5B965BF199A04A300995028 /* MZLMyAuthorTopBar.m in Sources */,
 				DC0EBD311906086600D9248D /* MZLAuthorDetailViewController.m in Sources */,
@@ -3283,6 +3306,7 @@
 				DCDA780819C033C100D3E576 /* MZLFilterParam.m in Sources */,
 				DC99BFA8190E232A00DBF2F7 /* MZLChildLocationsViewController.m in Sources */,
 				DC3112D519E8D2C100CC3E5A /* FMDatabaseQueue.m in Sources */,
+				F319E3051C05BB7000480E73 /* MZLPhoneLogBindingVC.m in Sources */,
 				DCF374C7195BC34400B3D514 /* MZLSystemArticleListViewController.m in Sources */,
 				DC0EBD1F1900CF0100D9248D /* WeViewLinearLayout.m in Sources */,
 				DC9B892F192ABD7600CF1467 /* JDStatusBarStyle.m in Sources */,
