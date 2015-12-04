@@ -13,10 +13,15 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneNum;
 @property (weak, nonatomic) IBOutlet UITextField *passWord;
-@property (weak, nonatomic) IBOutlet UITextField *SecCode;
 @property (weak, nonatomic) IBOutlet UIButton *getSecCodeBtn;
 @property (weak, nonatomic) IBOutlet UINavigationBar *phoneNavBar;
 @property (weak, nonatomic) IBOutlet UIView *phoneStateBar;
+@property (weak, nonatomic) IBOutlet UITextField *secCode;
+@property (weak, nonatomic) IBOutlet UIButton *canSeePassWBtn;
+@property (weak, nonatomic) IBOutlet UITextField *name;
+
+
+@property (assign, nonatomic) BOOL isSecure;
 
 - (IBAction)canSeePassWord:(id)sender;
 - (IBAction)getSecCode:(id)sender;

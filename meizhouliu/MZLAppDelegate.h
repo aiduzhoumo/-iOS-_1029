@@ -11,5 +11,7 @@
 @interface MZLAppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;
 
+//@property (nonatomic, assign) BOOL isBind;
+
 - (UIViewController *)currentVisibleViewController;
 @end

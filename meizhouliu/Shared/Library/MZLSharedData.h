@@ -125,4 +125,6 @@
 //+ (void)loadNoticesFromCache;
 //+ (void)clearAppNotices;
 
++ (void)loadAppUserBindInfoFromCache;
+
 @end

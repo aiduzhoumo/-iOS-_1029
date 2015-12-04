@@ -17,6 +17,7 @@
 #import "MobClick.h"
 #import "MZLServiceResponseObject.h"
 #import "MZLRegisterNormalSvcParam.h"
+#import "MZLRegisterPhoneSvcParam.h"
 #import "MZLRegisterSinaWeiboSvcParam.h"
 #import "MZLRegisterTencentQqSvcParam.h"
 #import "MZLLoginSvcParam.h"
@@ -59,20 +60,32 @@
 #import <AMapSearchKit/AMapSearchAPI.h>
 #import "MZLAMapSearchDelegateForService.h"
 #import "MZLLocResponse.h"
+#import "MZLGetCodeSvcParam.h"
+#import "MZLVerifyCodeSvcParam.h"
+#import "MZLPhoneLoginSvcParam.h"
+
 
 #define MZL_SERVICE_REGISTER @"users/register"
+#define MZL_SERVICE_REGISTER_PHONE @"users/register/phone"
 #define MZL_SERVICE_REGISTER_SINA_WEIBO @"users/register/weibo"
 #define MZL_SERVICE_REGISTER_TENCENT_QQ @"users/register/qq"
 #define MZL_SERVICE_REGISTER_WEIXIN @"users/register/wechat"
 #define MZL_SERVICE_LOGIN @"login"
+#define MZL_SERVICE_PHONE_LOGIN @"users/login/phone"
 #define MZL_SERVICE_SINA_WEIBO_LOGIN @"login/weibo"
 #define MZL_SERVICE_TENCENT_QQ_LOGIN @"login/qq"
 #define MZL_SERVICE_WEIXIN_LOGIN @"login/wechat"
 #define MZL_SERVICE_LOGOUT @"logout"
-#define MZL_SERVICE_USER_INFO @"users/%d"
+//#define MZL_SERVICE_USER_INFO @"users/%d"
+#define MZL_SERVICE_USER_INFO @"users/info"
 #define MZL_SERVICE_MODIFY_USER_INFO @"users/%d"
 #define MZL_SERVICE_MODIFY_USER_PASSWORD @"users/%d/password"
+#define MZL_SERVICE_MODIFY_USERS_FORGET @"users/forget/phone"
+#define MZL_SERVICE_BIND_PHONE @"users/bind/phone"
+#define MZL_SERVICE_FORGET_EMAIL @"users/forget/email"
 #define MZL_SERVICE_USER_UPLOAD_IMAGE @"users/%d/photo"
+#define MZL_SERVICE_PHONES_GETCODE @"phones/%@/%@"
+#define MZL_SERVICE_PHONES_VERIFYCODE @"phones/%@/%@/verify"
 
 #define MZL_SERVICE_ARTICLES @"articles"
 #define MZL_SERVICE_SYSTEM_ARTICLES @"articles/choice"
@@ -519,6 +532,9 @@
         case MZLLoginTypeQQ:
             servicePath = [self servicePath:MZL_SERVICE_REGISTER_TENCENT_QQ];
             break;
+        case MZLLoginTypePhone:
+            servicePath = [self servicePath:MZL_SERVICE_REGISTER_PHONE];
+            break;
         default:
             servicePath = [self servicePath:MZL_SERVICE_REGISTER];
             break;
@@ -532,6 +548,13 @@
 
 + (void)registerByNormalService:(MZLRegisterNormalSvcParam *)param succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock{
     [self registerServiceWithPath:[self servicePath:MZL_SERVICE_REGISTER]
+                            param:param
+                        succBlock:succBlock
+                       errorBlock:errorBlock];
+}
+
++ (void)registerByPhoneService:(MZLRegisterPhoneSvcParam *)param succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock{
+    [self registerServiceWithPath:[self serviceUrl_v2:MZL_SERVICE_REGISTER_PHONE]
                             param:param
                         succBlock:succBlock
                        errorBlock:errorBlock];
@@ -614,6 +637,10 @@
 
 + (void)loginByNormalService:(MZLLoginSvcParam *)param succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
     [self loginServiceWithPath:[self servicePath:MZL_SERVICE_LOGIN] param:[param toDictionary] succBlock:succBlock errorBlock:errorBlock];
+}
+
++ (void)loginByPhoneNumService:(MZLPhoneLoginSvcParam *)param succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+    [self loginServiceWithPath:[self serviceUrl_v2:MZL_SERVICE_PHONE_LOGIN] param:[param toDictionary] succBlock:succBlock errorBlock:errorBlock];
 }
 
 #pragma mark - user logout service
@@ -995,18 +1022,39 @@
 
 #pragma mark - user info
 
+//+ (void)userInfoServiceWithSuccBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+//    RKObjectManager *objectManager = [self objectManager];
+//    NSString *servicePath = [self servicePath:MZL_SERVICE_USER_INFO];
+////    NSLog(@"%ld",[MZLSharedData appUserId]);
+//    
+//    servicePath = [NSString stringWithFormat:servicePath, [MZLSharedData appUserId]];
+//    [objectManager addResponseDescriptor:[self responseDescriptor:[MZLServiceMapping userInfoObjectMapping] servicePath:servicePath]];
+//    
+//    [self getObjects:objectManager
+//              atPath:servicePath
+//          parameters:nil
+//           succBlock:succBlock
+//          errorBlock:errorBlock];
+//}
+
 + (void)userInfoServiceWithSuccBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
     RKObjectManager *objectManager = [self objectManager];
-    NSString *servicePath = [self servicePath:MZL_SERVICE_USER_INFO];
-    servicePath = [NSString stringWithFormat:servicePath, [MZLSharedData appUserId]];
+    NSString *servicePath = [self serviceUrl_v2:MZL_SERVICE_USER_INFO];
+    //    NSLog(@"%ld",[MZLSharedData appUserId]);
+    
+//    servicePath = [NSString stringWithFormat:servicePath, [MZLSharedData appUserAccessToken]];
     [objectManager addResponseDescriptor:[self responseDescriptor:[MZLServiceMapping userInfoObjectMapping] servicePath:servicePath]];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:[MZLSharedData appUserAccessToken] forKey:@"access_token"];
     
     [self getObjects:objectManager
               atPath:servicePath
-          parameters:nil
+          parameters:params
            succBlock:succBlock
           errorBlock:errorBlock];
 }
+
 
 + (void)modifyPasswordWithOldPassword:(NSString *)oldPassword newPassword:(NSString *)newPassword succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
     RKObjectManager *objectManager = [self objectManager];
@@ -1021,7 +1069,7 @@
 
 + (void)modifyUserInfo:(MZLModelUserInfoDetail *)user succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
     RKObjectManager *objectManager = [self objectManager];
-    NSString *servicePath = [self servicePath:MZL_SERVICE_MODIFY_USER_INFO];
+    NSString *servicePath = [self servicePath:MZL_SERVICE_BIND_PHONE];
     servicePath = [NSString stringWithFormat:servicePath, [MZLSharedData appUserId]];
     [objectManager addResponseDescriptor:[self responseDescriptor:[MZLServiceMapping serviceResponseObjectMapping] servicePath:servicePath]];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -1584,5 +1632,73 @@
     [self objectManager:objectManager addResponseDescriptorFromMapping:[MZLShortArticleResponse rkObjectMapping]];
     [self postObject:objectManager atPath:serviceUrl parameters:nil succBlock:succBlock errorBlock:errorBlock];
 }
+
+#pragma mark - user get code
++ (void)getSecCode:(MZLGetCodeSvcParam *)secCodeParams succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+    RKObjectManager *objectManager = [self objectManager];
+    NSString *servicePath = [[self servicePath:MZL_SERVICE_PHONES_GETCODE] co_stringWithNSStringParam1:secCodeParams.phone nsstringParam2:secCodeParams.type];
+
+    [objectManager addResponseDescriptor:[self responseDescriptor:[MZLServiceMapping serviceResponseObjectMapping] servicePath:servicePath]];
+//    addResponseDescriptor:[self responseDescriptor:[MZLServiceMapping serviceResponseObjectMapping]
+    [self getObjects:objectManager atPath:servicePath parameters:[NSDictionary dictionary] succBlock:succBlock errorBlock:errorBlock];
+}
+
+#pragma mark - user verify code
++ (void)verifyCode:(MZLVerifyCodeSvcParam *)secCodeParams succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+    RKObjectManager *objectManager = [self objectManager];
+    NSString *servicePath = [[self servicePath:MZL_SERVICE_PHONES_VERIFYCODE] co_stringWithNSStringParam1:secCodeParams.phone nsstringParam2:secCodeParams.type ];
+    [objectManager addResponseDescriptor:[self responseDescriptor:[MZLServiceMapping userFavoredArticleResponseObjectMapping] servicePath:servicePath]];
+    [self getObjects:objectManager atPath:servicePath parameters:[secCodeParams toDictionary] succBlock:succBlock errorBlock:errorBlock];
+
+}
+
+#pragma mark - user modify password
++ (void)modifyPasswordWithNewPassword:(NSString *)newPassword phone:(NSString *)phone code:(NSString *)code succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+    RKObjectManager *objectManager = [self objectManager];
+    NSString *servicePath = [self serviceUrl_v2:MZL_SERVICE_MODIFY_USERS_FORGET];
+//    servicePath = [NSString stringWithFormat:servicePath, [MZLSharedData appUserId]];
+    [objectManager addResponseDescriptor:[self responseDescriptor:[MZLServiceMapping serviceResponseObjectMapping] servicePath:servicePath]];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:code forKey:@"code"];
+    [params setObject:newPassword forKey:@"password"];
+    [params setObject:phone forKey:@"phone"];
+    [self putObject:objectManager object:params atPath:servicePath parameters:params succBlock:succBlock errorBlock:errorBlock];
+}
+
+#pragma mark - user bind phone
++ (void)bindPhoneWithToken:(NSString *)token phone:(NSString *)phone code:(NSString *)code succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+    RKObjectManager *objectManager = [self objectManager];
+    NSString *servicePath = [self serviceUrl_v2:MZL_SERVICE_BIND_PHONE];
+    //    servicePath = [NSString stringWithFormat:servicePath, [MZLSharedData appUserId]];
+    [objectManager addResponseDescriptor:[self responseDescriptor:[MZLServiceMapping userBindPhoneObjectMapping] servicePath:servicePath]];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:token forKey:@"access_token"];
+    [params setObject:phone forKey:@"user[phone]"];
+    [params setObject:code forKey:@"user[code]"];
+    [self putObject:objectManager object:params atPath:servicePath parameters:params succBlock:succBlock errorBlock:errorBlock];
+}
+
+#pragma mark - user forget password by email
++ (void)forgetPassWordByEmail:(NSString *)email succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+    RKObjectManager *objectManager = [self objectManager];
+    NSString *servicePath = [self serviceUrl_v2:MZL_SERVICE_FORGET_EMAIL];
+//    [objectManager addRequestDescriptor:[self responseDescriptor:[MZLServiceMapping serviceResponseObjectMapping] servicePath:servicePath]];
+    RKResponseDescriptor *responseDescriptor = [self responseDescriptor:[MZLServiceMapping serviceResponseObjectMapping] servicePath:servicePath];
+    [objectManager addResponseDescriptor:responseDescriptor];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:email forKey:@"email"];
+    [self postObject:objectManager atPath:servicePath parameters:params succBlock:succBlock errorBlock:errorBlock];
+}
+
+//
+///** 启动时发送一条消息到服务端，方便统计 */
+//+ (void)heartbeatOnAppStartup {
+//    RKObjectManager *objectManager = [self objectManager];
+//    NSString *servicePath = [self servicePath:MZL_SERVICE_APP_HEARTBEAT];
+//    [objectManager addResponseDescriptor:[self responseDescriptor:[MZLServiceMapping serviceResponseObjectMapping] servicePath:servicePath]];
+//    [self getObjects:objectManager atPath:servicePath parameters:nil succBlock:^(NSArray *models) {
+//    } errorBlock:^(NSError *error) {
+//    }];
+//}
 
 @end

@@ -32,6 +32,7 @@
 #import "MZLUserDetailResponse.h"
 #import "MZLModelUserInfoDetail.h"
 #import "MZLImageUploadResponse.h"
+#import "MZLBindPhoneResponse.h"
 
 #define ID_MAPPING @"id":@"identifier"
 #define TAGS_MAPPING @"tags_str":@"tags"
@@ -377,7 +378,9 @@
     return @{
              ID_MAPPING,
              @"nickname":   @"nickName",
-             @"level"   :   @"level"
+             @"level"   :   @"level",
+             @"bind"    :   @"bind"
+//             @"phone"   :   @"phone"
              };
 }
 
@@ -408,17 +411,31 @@
 }
 
 #pragma mark - userInfo
++ (NSArray *)userInfoBindMappings {
+    NSMutableArray *result = [NSMutableArray array];
+    [result addObject:[self relMappingToKeyPath:@"user" fromAttr:@"user" withMapping:[self userObjectMapping]]];
+    [result addObject:[self relMappingToKeyPath:@"messages" fromAttr:@"messages" withMapping:[self messagesResponseObjectMapping]]];
+    return result;
+}
 + (NSArray *)userInfoMappings {
     NSMutableArray *result = [NSMutableArray array];
     [result addObject:[self relMappingToKeyPath:@"user" fromAttr:@"user" withMapping:[self userObjectMapping]]];
     [result addObject:[self relMappingToKeyPath:@"access_token" fromAttr:@"accessToken" withMapping:[self accessTokenObjectMapping]]];
-    [result addObject:[self relMappingToKeyPath:@"messages" fromAttr:@"messages" withMapping:[self messagesResponseObjectMapping]]];    return result;
+    [result addObject:[self relMappingToKeyPath:@"messages" fromAttr:@"messages" withMapping:[self messagesResponseObjectMapping]]];
+    return result;
 }
 
 + (RKObjectMapping *)userRegLogInObjectMapping {
     RKObjectMapping *result = [RKObjectMapping mappingForClass:[MZLRegLoginResponse class]];
     [result addAttributeMappingsFromArray:@[ @"error",@"message" ]];
     [result addPropertyMappingsFromArray:[self userInfoMappings]];
+    return result;
+}
+
++ (RKObjectMapping *)userBindPhoneObjectMapping {
+    RKObjectMapping *result = [RKObjectMapping mappingForClass:[MZLBindPhoneResponse class]];
+    [result addAttributeMappingsFromArray:@[@"error",@"message"]];
+    [result addPropertyMappingsFromArray:[self userInfoBindMappings]];
     return result;
 }
 
@@ -431,6 +448,8 @@
              @"level":       @"level",
              @"sex":       @"sex",
              @"intro": @"introduction",
+             @"bind" : @"bind"
+//             @"phone": @"phone"
              };
 }
 

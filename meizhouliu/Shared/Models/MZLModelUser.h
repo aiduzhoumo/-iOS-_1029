@@ -24,6 +24,8 @@ typedef NS_ENUM(NSInteger, MZLModelUserType) {
 @property (nonatomic , strong) MZLModelImage *headerImage;
 @property (nonatomic, assign) NSInteger sex;
 @property (nonatomic, assign) MZLModelUserType level;
+@property (nonatomic, copy) NSString *phone;
+@property (nonatomic, copy) NSString *bind;
 
 @property (nonatomic, copy) NSString *introduction;
 @property (nonatomic , strong) MZLModelImage *cover;
@@ -32,6 +34,8 @@ typedef NS_ENUM(NSInteger, MZLModelUserType) {
 @property (nonatomic, readonly) NSString *photoUrl;
 @property (nonatomic, readonly) NSString *coverUrl;
 @property (nonatomic, readonly) NSString *name;
+
+
 
 - (MZLModelAuthor *)toAuthor;
 - (BOOL)isSignedAuthor;

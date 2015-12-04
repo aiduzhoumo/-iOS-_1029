@@ -37,6 +37,10 @@
     [[IBAlertView alertWithTitle:title message:message dismissTitle:NSLocalizedString(@"Dismiss", nil) okTitle:nil dismissBlock:dismissBlock okBlock:nil] show];
 }
 
++ (void)showDetermineWithTitle:(NSString *)title message:(NSString *)message dismissBlock:(void (^)(void))dismissBlock {
+    [[IBAlertView alertWithTitle:title message:message dismissTitle:NSLocalizedString(@"确定", nil) okTitle:nil dismissBlock:dismissBlock okBlock:nil] show];
+}
+
 - (id)initWithTitle:(NSString *)title message:(NSString *)message dismissTitle:(NSString *)dismissTitle okTitle:(NSString *)okTitle dismissBlock:(void (^)(void))dismissBlock okBlock:(void (^)(void))okBlock {
     self = [super initWithTitle:title message:message delegate:self cancelButtonTitle:dismissTitle otherButtonTitles:okTitle, nil];
     

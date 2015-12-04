@@ -43,4 +43,5 @@
 
 + (RKObjectMapping *)dummyObjectMapping;
 
++ (RKObjectMapping *)userBindPhoneObjectMapping;
 @end

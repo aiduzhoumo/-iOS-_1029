@@ -17,6 +17,8 @@
 #import "TalkingDataAppCpa.h"
 #import <Masonry/Masonry.h>
 #import "UIImage+COAdditions.h"
+#import "MZLLoginViewController.h"
+#import "MZLBindPhoneViewController.h"
 
 #define IMAGE_EMAIL_NORMAL @"Email"
 #define IMAGE_EMAIL_HIGHLIGHT @"EmailHighlight"
@@ -70,6 +72,13 @@
 //    if (txtUserEmail && isEmptyString(txtUserEmail.text)) {
 //        return NO;
 //    }
+    
+    UITextField *phoneNum = [self textField:TAG_TEXT_PHONENUM];
+    if (phoneNum && isEmptyString(phoneNum.text)) {
+        [UIAlertView showAlertMessage:@"请填写手机号！"];
+        return NO;
+    }
+    
     UITextField *txtPwd = [self textField:TAG_TEXT_PWD];
     if (txtPwd && isEmptyString(txtPwd.text)) {
         [UIAlertView showAlertMessage:@"请填写密码！"];
@@ -130,8 +139,8 @@
 #pragma mark - on logined
 
 - (void)onLogined:(MZLLoginType)type {
-//    [MZLSharedData clearLoginRemind];
     [MZLSharedData appUser].loginType = type;
+    
     [[MZLSharedData appUser] saveInPreference];
     // 登录后，需要重新绑定deviceToken到userId上
     [MZLServices recordUserLocation:[MZLSharedData selectedCity]];
@@ -157,14 +166,55 @@
 - (void)handleRegResponse:(MZLRegLoginResponse *)response type:(MZLLoginType)type {
     [self hideProgressIndicator:NO]; // no animation, no delay
     if (response.error == MZL_SVC_RESPONSE_CODE_SUCCESS) {
+  
         [self saveUserAndToken:response];
+        
+        if (![response.user.bind isEqualToString:@"true"]) {
+            self.token = response.accessToken.token;
+            [self performSegueWithIdentifier:MZL_SEGUE_TOBINDPHONE sender:nil];
+            return ;
+        }
+        
         [self onLogined:type];
+        
+//        NSUserDefaults *bingPhoneInfo = [NSUserDefaults standardUserDefaults];
+//        [bingPhoneInfo setObject:@([MZLSharedData appUser].isBindPhone) forKey:@"bindPhoneInfo"];
+        
         __weak UIViewController *controller = [self fromController];
         [self dismissCurrentViewController:^{
             if (controller) {
                 [controller dismissCurrentViewController:nil animatedFlag:YES];
             }
         } animatedFlag:YES];
+        [TalkingDataAppCpa onRegister:response.accessToken.token];
+    } else if (response.error == MZL_RL_RCODE_GENERAL_ERROR) { // 错误码-1
+        [UIAlertView showAlertMessage:response.errorMessage];
+    } else if (response.error == MZL_RL_RCODE_TOKEN_NOTACCQUIRED) { // server端token获取失败
+        [IBAlertView showAlertWithTitle:nil message:@"注册成功，但自动登录失败，请稍后手动登录！" dismissTitle:MZL_MSG_OK dismissBlock:^{
+            [self dismissCurrentViewController];
+        }];
+    } else if (! isEmptyString(response.errorMessage)) { // 其它server返回的错误
+        [UIAlertView showAlertMessage:response.errorMessage];
+    } else { // 不明错误
+        [self onRegErrorWithCode:ERROR_CODE_LOGIN_FAILED];
+    }
+}
+
+- (void)handleRegPhoneResponse:(MZLRegLoginResponse *)response type:(MZLLoginType)type {
+    [self hideProgressIndicator:NO]; // no animation, no delay
+    if (response.error == MZL_SVC_RESPONSE_CODE_SUCCESS) {
+        
+        
+        [self saveUserAndToken:response];
+        [self onLogined:type];
+        
+        __weak UIViewController *controller = [self fromController];
+        [self dismissCurrentViewController:^{
+            if (controller) {
+                [controller dismissCurrentViewController:nil animatedFlag:NO];
+            }
+        } animatedFlag:YES];
+        
         [TalkingDataAppCpa onRegister:response.accessToken.token];
     } else if (response.error == MZL_RL_RCODE_GENERAL_ERROR) { // 错误码-1
         [UIAlertView showAlertMessage:response.errorMessage];
@@ -190,5 +240,16 @@
 - (UIViewController *)fromController {
     return nil;
 }
+
+
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ([MZL_SEGUE_TOBINDPHONE isEqualToString:segue.identifier]) {
+//        
+//        MZLBindPhoneViewController *bind = (MZLBindPhoneViewController *)segue.destinationViewController;
+//        bind.token = self.token;
+//    }
+//
+//}
 
 @end

@@ -32,11 +32,20 @@
 #import <QZoneConnection/ISSQZoneApp.h>
 #import <WeChatConnection/WeChatConnection.h>
 #import "MZLPhoneRegViewController.h"
+#import "MZLPhoneRegNameViewController.h"
+#import "MZLPhoneLoginSvcParam.h"
+#import "MZLMailLoginView.h"
+#import "MZLBindPhoneViewController.h"
+#import "MZLAppUser.h"
+#import "MZLModifyNameByPhoneViewController.h"
 
 #define LOGIN_BTN_TEXT_NORMAL @"登    录"
 #define LOGIN_BTN_TEXT_DISABLED @"登  录  中..."
-#define SEGUE_TOMODIFYNAME @"toModifyName"
+#define SEGUE_TOMODIFYNAME @"toModifyNameByPhone"
+#define SEGUE_TOFORGETPASSWORD @"toForgetPassWord"
 
+#define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
 
 @interface MZLLoginViewController (){
     TencentOAuth *_tencentOAuth;
@@ -49,6 +58,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSinaWeiboOAuth;
 @property (weak, nonatomic) IBOutlet UIButton *btnTencentQqOAuth;
 @property (weak, nonatomic) IBOutlet UIButton *btnWeixinLogin;
+
+@property (weak, nonatomic) MZLMailLoginView *mailLoginView;
 
 @end
 
@@ -72,11 +83,22 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [self dismissKeyboard];
+ 
+//    NSArray *subViewsArr = [UIApplication sharedApplication].keyWindow.subviews;
+//    for (int i = 0; i<subViewsArr.count; i++) {
+//        NSLog(@"subViewsArr[%d] = %@",i,subViewsArr[i]);
+//    }
+//    [MZLMailLoginView removeFromCurrentView];
+    
     if ([MZLSharedData isAppUserLogined]) { // 从注册界面跳转回来
-        self.txtUser.text = [MZLSharedData appUser].user.nickName;
-        self.txtPwd.text = @"somepassword"; // fake password, just for display purpose
+        
+        self.phoneNumTF.text = [MZLSharedData appUser].user.phone;
+        self.passWordTF.text = @"somepassword"; // fake password, just for display purpose
         [self showLoginProgressIndicator];
     }
+    [self hideProgressIndicator];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -90,15 +112,17 @@
 }
 
 
- #pragma mark - Navigation
+#pragma mark - Navigation
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
  {
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
      if ([SEGUE_TOMODIFYNAME isEqualToString:segue.identifier]) {
-         MZLRegModifyNameViewController *controller = (MZLRegModifyNameViewController *)segue.destinationViewController;
+//         MZLRegModifyNameViewController *controller = (MZLRegModifyNameViewController *)segue.destinationViewController;
+         MZLModifyNameByPhoneViewController *controller = (MZLModifyNameByPhoneViewController *)segue.destinationViewController;
+//         controller.token = self.token;
          controller.fromController = self;
          if (sender) {
              MZLLoginType type = [sender[0] integerValue];
@@ -111,21 +135,35 @@
      }else if ([MZL_SEGUE_TOPHONEREG isEqualToString:segue.identifier]){
          MZLPhoneRegViewController *phoneController = (MZLPhoneRegViewController *)segue.destinationViewController;
          phoneController.fromController = self;
+     }else if ([MZL_SEGUE_TOBINDPHONE isEqualToString:segue.identifier]) {
+         MZLBindPhoneViewController *bindPhone = (MZLBindPhoneViewController *)segue.destinationViewController;
+         bindPhone.token = self.token;
+         bindPhone.fromController = self;
      }
+//     else if ([MZL_SEGUE_TOPHONEREGNAME isEqualToString:segue.identifier]){
+//         MZLPhoneRegNameViewController *name = (MZLPhoneRegNameViewController *)segue.destinationViewController;
+//         name.fromVieController = self;
+//     }
 }
 
+
 - (void)toModifyNickNameWithType:(MZLLoginType)type message:(NSString *)message {
-    NSArray *result = [NSArray arrayWithObjects:@(type),message, nil];
+    NSArray *result = [NSArray arrayWithObjects:@(type),message,nil];
     [self performSegueWithIdentifier:SEGUE_TOMODIFYNAME sender:result];
 }
 
-- (void)toReg {
-    [self performSegueWithIdentifier:MZL_SEGUE_TOREG sender:nil];
-}
-
-- (void)toPhoneReg {
+- (void)toPhoneFreeReg {
     [self performSegueWithIdentifier:MZL_SEGUE_TOPHONEREG sender:nil];
 }
+
+
+//- (void)toReg {
+//    [self performSegueWithIdentifier:MZL_SEGUE_TOREG sender:nil];
+//}
+//
+//- (void)toPhoneReg {
+//    [self performSegueWithIdentifier:MZL_SEGUE_TOPHONEREG sender:nil];
+//}
 
 #pragma mark - init methods
 
@@ -183,10 +221,10 @@
             break;
     }
     
-    self.txtUser.tag = TAG_TEXT_USER;
-    self.txtPwd.tag = TAG_TEXT_PWD;
-    self.txtPwd.secureTextEntry = YES;
-    [self initTextFields:@[self.txtUser, self.txtPwd]];
+    self.phoneNumTF.tag = TAG_TEXT_USER;
+    self.passWordTF.tag = TAG_TEXT_PWD;
+    self.passWordTF.secureTextEntry = YES;
+    [self initTextFields:@[self.phoneNumTF, self.passWordTF]];
     
     self.imgUser.tag = TAG_IMAGE_USER;
     self.imgPwd.tag = TAG_IMAGE_PWD;
@@ -200,7 +238,8 @@
     [self.btnLogin setTitle:LOGIN_BTN_TEXT_NORMAL forState:UIControlStateNormal];
     [self.btnLogin setTitle:LOGIN_BTN_TEXT_DISABLED forState:UIControlStateDisabled];
     
-    [self.btnRegNormal setTitleColor:colorWithHexString(@"#999999") forState:UIControlStateNormal];
+    //给免费注册按钮设置颜色
+    [self.freePhoneReg setTitleColor:colorWithHexString(@"#e2c251") forState:UIControlStateNormal];
     
     self.vw3rdPartyLogin.backgroundColor = [UIColor clearColor];
     self.consVw3rdPartyViewHeight.constant = 40.0;
@@ -294,14 +333,15 @@
     [self.vwContent addTapGestureRecognizerToDismissKeyboard];
     
     [self.btnLogin addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
-    [self.btnRegNormal addTarget:self action:@selector(toReg) forControlEvents:UIControlEventTouchUpInside];
+    [self.freePhoneReg addTarget:self action:@selector(toPhoneFreeReg) forControlEvents:UIControlEventTouchUpInside];
+    [self.forgetPassW addTarget:self action:@selector(toForgetPassWord) forControlEvents:UIControlEventTouchUpInside];
     [self.btnSinaWeiboOAuth addTarget:self action:@selector(onClickSinaWeiboOAuth) forControlEvents:UIControlEventTouchUpInside];
     [self.btnWeixinLogin addTarget:self action:@selector(onClickWeixinOAuth) forControlEvents:UIControlEventTouchUpInside];
     [self.btnTencentQqOAuth addTarget:self action:@selector(onClickTencentOAuth) forControlEvents:UIControlEventTouchUpInside];
     [self.btnFavDirect addTarget:self action:@selector(skip) forControlEvents:UIControlEventTouchUpInside];
     
     
-    [self.phoneNumLogin addTarget:self action:@selector(toPhoneReg) forControlEvents:UIControlEventTouchUpInside];
+//    [self.forgetPassW addTarget:self action:@selector(toFindPassWord) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark - tip message
@@ -313,8 +353,8 @@
 #pragma mark - login
 
 - (BOOL)validateInput {
-    if (isEmptyString(self.txtUser.text)) {
-        [UIAlertView showAlertMessage:@"请填写昵称或邮箱！"];
+    if (isEmptyString(self.phoneNumTF.text)) {
+        [UIAlertView showAlertMessage:@"请填写手机号码！"];
         return NO;
     }
     if (! [super validateInput]) {
@@ -329,10 +369,15 @@
         return;
     }
     [self showLoginProgressIndicator];
-    MZLLoginSvcParam *param = [MZLLoginSvcParam loginSvcParamWithname:self.txtUser.text password:self.txtPwd.text];
-    [MZLServices loginByNormalService:param succBlock:^(NSArray *models) {
+    
+    MZLPhoneLoginSvcParam *param = [MZLPhoneLoginSvcParam phoneLoginSvcParamWithPhoneNum:self.phoneNumTF.text password:self.passWordTF.text];
+
+    [MZLServices loginByPhoneNumService:param succBlock:^(NSArray *models) {
+        
         MZLRegLoginResponse *result = ((MZLRegLoginResponse *)models[0]);
+
         [self handleRegLoginResponse:result type:MZLLoginTypeNormal];
+        
     } errorBlock:^(NSError *error) {
         [self onLoginError];
     }];
@@ -465,12 +510,12 @@
         if (state == SSAuthStateSuccess) {
             id<ISSPlatformCredential> credential = [ShareSDK getCredentialWithType:type];
             
-             NSLog(@"credential uid == %@ ... credential token == %@.... credential expired == %@",[credential uid],[credential token],[credential expired]);
             if (! credential) {
                 return;
             }
        
             [self showLoginProgressIndicator];
+            
             [self saveUser3rdPartyAuthData:@[[credential uid], [credential token], [credential expired]]];
             [self getUserInfoWithShareType:type];
         } else if (state == SSAuthStateFail) {
@@ -484,8 +529,6 @@
 - (void)getUserInfoWithShareType:(ShareType)type {
     [ShareSDK getUserInfoWithType:type authOptions:nil result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error) {
         if (result) {
-            
-            NSLog(@"nickname = %@",[userInfo nickname] );
             
             [self saveUser3rdPartyNickName:[userInfo nickname] imageUrl:[userInfo profileImage]];
             MZLLoginType loginType = [self loginTypeFromShareType:type];
@@ -502,6 +545,7 @@
         if (result.error == MZL_RL_RCODE_USER_NOTEXIST) { // openId不存在，注册
             [self reg:type];
         } else {
+            
             [self handleRegLoginResponse:result type:type];
         }
     } errorBlock:^(NSError *error) {
@@ -615,6 +659,9 @@
 //- (void)getUserInfoFromSinaWeibo {
 //    [ShareSDK getUserInfoWithType:ShareTypeSinaWeibo authOptions:nil result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error) {
 //        if (result) {
+//            
+////            [ShareSDK currentAuthUserWithType:ShareTypeSinaWeibo];
+////            [ShareSDK setCurrentAuthUser:userInfo type:ShareTypeSinaWeibo];
 //            [self saveUser3rdPartyNickName:[userInfo nickname] imageUrl:[userInfo profileImage]];
 //            [self loginWithSinaWeibo];
 //        } else {
@@ -645,7 +692,7 @@
 //        [self onLoginError];
 //    }];
 //}
-
+//
 //- (void)cancelSinaWeiboOAuth{
 //    [ShareSDK cancelAuthWithType:ShareTypeSinaWeibo];
 //}
@@ -674,6 +721,7 @@
     [[MZLSharedData appUser] setUser:response.user token:response.accessToken];
 }
 
+
 #pragma mark - error related
 
 - (void)onLoginError {
@@ -691,7 +739,8 @@
 - (void)handle3rdPartyRegResponse:(MZLRegLoginResponse *)response type:(MZLLoginType)type {
     [self hideProgressIndicator:NO];
     if (response.error == MZL_RL_RCODE_USER_ALREADY_EXIST) {
-        [self toModifyNickNameWithType:type message:response.errorMessage];
+        [UIAlertView showAlertMessage:response.errorMessage];
+        [self toModifyNickNameWithType:type message:response.errorMessage ];
     } else {
         [self handleRegLoginResponse:response type:type];
     }
@@ -699,8 +748,17 @@
 
 - (void)handleRegLoginResponse:(MZLRegLoginResponse *)response type:(MZLLoginType)type {
     [self hideProgressIndicator:NO];
+    
     if (response.error == MZL_SVC_RESPONSE_CODE_SUCCESS) {
         [self saveUserAndToken:response];
+        
+        if (![response.user.bind isEqualToString:@"true"]) {
+            [UIAlertView showAlertMessage:@"您的用户未绑定手机号，请绑定后再登录"];
+            self.token = response.accessToken.token;
+            [self performSegueWithIdentifier:MZL_SEGUE_TOBINDPHONE sender:nil];
+            return ;
+        }
+        
         [self onLogined:type];
         [self dismissCurrentViewController:self.executionBlockWhenDismissed];
         [TalkingDataAppCpa onLogin:response.accessToken.token];
@@ -713,6 +771,72 @@
     } else { // 不明错误
         [self onLoginErrorWithCode:ERROR_CODE_LOGIN_FAILED];
     }
+}
+
+
+- (IBAction)loginByMail:(id)sender {
+
+    self.mailLoginView = [MZLMailLoginView mailLoginViewInstance];
+    [self.mailLoginView.mailLoginBtn addTarget:self action:@selector(tologinText) forControlEvents:UIControlEventTouchUpInside];
+    [self.mailLoginView.mailForgetPassWord addTarget:self action:@selector(toForgetPassWord) forControlEvents:UIControlEventTouchUpInside];
+    [self.mailLoginView.phoneLoginInMailView addTarget:self action:@selector(tologinTextByphone) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.mailLoginView];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+       self.mailLoginView.frame = CGRectMake(0, 65 , SCREENWIDTH, SCREENHEIGHT - 64);
+    } completion:^(BOOL finished) {
+        self.mailLoginView.phoneLoginInMailView.enabled = YES;
+    }];
+    
+    
+}
+
+- (void)tologinTextByphone {
+
+    [UIView animateWithDuration:0.3 animations:^{
+        self.mailLoginView.phoneLoginInMailView.enabled = NO;
+        self.mailLoginView.frame = CGRectMake(0, SCREENHEIGHT, SCREENWIDTH, SCREENHEIGHT);
+    } completion:^(BOOL finished) {
+        self.mailLoginView.phoneLoginInMailView.enabled = NO;
+    }];
+}
+
+- (void)tologinText {
+
+    [self dismissKeyboard];
+    if (! [self validateInputMail]) {
+        return;
+    }
+    [self showLoginProgressIndicator];
+    MZLLoginSvcParam *param = [MZLLoginSvcParam loginSvcParamWithname:self.mailLoginView.mailOrNameTF.text password:self.mailLoginView.passWordTF.text];
+    [MZLServices loginByNormalService:param succBlock:^(NSArray *models) {
+        MZLRegLoginResponse *result = ((MZLRegLoginResponse *)models[0]);
+        
+        [self handleRegLoginResponse:result type:MZLLoginTypeNormal];
+    } errorBlock:^(NSError *error) {
+        [self onLoginError];
+    }];
+}
+
+
+
+#pragma mark - login
+
+- (BOOL)validateInputMail {
+    if (isEmptyString(self.mailLoginView.mailOrNameTF.text)) {
+        [UIAlertView showAlertMessage:@"请填写昵称或邮箱！"];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)toForgetPassWord {
+    [self performSegueWithIdentifier:SEGUE_TOFORGETPASSWORD sender:nil];
+}
+
+- (void)dealloc {
+
+    NSLog(@"登入界面消失了");
 }
 
 

@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIView *statusBar;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 
+@property (nonatomic, copy) NSString *token;
+
 @property (nonatomic, assign) MZLLoginType loginType;
 
 @property (nonatomic, copy) NSString *errorMessage;

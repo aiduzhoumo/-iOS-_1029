@@ -131,6 +131,7 @@
 }
  */
 
+
 // 重写openURL方法：
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -146,6 +147,7 @@
     if ([self isMeizhouliuSchema:url]) {
         return YES;
     }
+    
     return [ShareSDK handleOpenURL:url
                  sourceApplication:sourceApplication
                         annotation:annotation
@@ -176,12 +178,24 @@
     [self initTalkingDataAppCpa];
     [self initUMtrack];
     
+//    //从本地获取绑定信息
+//    [self loadAppUserBindInfoFromCache];
+    
     [self initData];
     
     [self initNavigationBar];
     [self initTabBarController];
     [self initJDStatusBar];
 }
+
+//- (void)loadAppUserBindInfoFromCache {
+//
+//   NSUserDefaults *bindPhoneInfo = [NSUserDefaults standardUserDefaults];
+////    [bindPhoneInfo setObject:self.isBind forKey:@"bindPhoneInfo"];
+//    NSLog(@"[MZLSharedData appUser].isBindPhone = %@",[bindPhoneInfo objectForKey:@"bindPhoneInfo"]);
+//    
+//   [MZLSharedData appUser].isBindPhone = [bindPhoneInfo objectForKey:@"bindPhoneInfo"];
+//}
 
 - (void)initData {
     [MZLSharedData loadAppUserFromCache];
@@ -227,8 +241,7 @@
                      qqApiInterfaceCls:[QQApiInterface class]
                        tencentOAuthCls:[TencentOAuth class]];
     
-#warning qq好友应该用这个方法
-//    + (void)connectQQWithAppId:(NSString *)appId qqApiCls:(Class)qqApiCls;
+
     
     
     //添加QQ空间应用
@@ -359,11 +372,38 @@
             MZLAppUser *appUser = [MZLSharedData appUser];
             appUser.user = user;
             [appUser saveInPreference];
+            
         } errorBlock:^(NSError *error) {
             // ignore error...
         }];
     }
 }
+
+//- (void)refreshLoginedUserInfo {
+//    // 刷新userInfo，如果已登录，避免当从用户升级到作者时在我的界面看不到自己的文章
+//    if ([MZLSharedData isAppUserLogined]) {
+//        [MZLServices userInfoServiceWithSuccBlock:^(NSArray *models) {
+//            MZLModelUser *user = ((MZLUserDetailResponse *)models[0]).user;
+//            MZLAppUser *appUser = [MZLSharedData appUser];
+//            appUser.user = user;
+//            [appUser saveInPreference];
+//
+//        } errorBlock:^(NSError *error) {
+//            // ignore error...
+//        }];
+//    }
+//}
+
+//- (id)initWithCoder:(NSCoder *)aDecoder {
+//    if (self = [super init]) {
+//       [MZLSharedData appUser].user.level = [[aDecoder decodeObjectForKey:@"KEY_USER_LEVEL"] integerValue];
+//    }
+//    return self;
+//}
+//
+//- (void)encodeWithCoder:(NSCoder *)aCoder {
+//     [aCoder encodeObject:@([MZLSharedData appUser].user.level) forKey:@"KEY_USER_LEVEL"];;
+//}
 
 #pragma mark - remote notification delegate
 
@@ -438,6 +478,7 @@
     }
     return vc;
 }
+
 
 //- (UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController {
 //    if ([rootViewController isKindOfClass:[UITabBarController class]]) {

@@ -24,6 +24,8 @@
 @property (nonatomic, copy) NSDate *expirationDateFrom3rdParty;
 @property (nonatomic, readonly) NSString *expirationFrom3rdParty;
 
+@property (nonatomic, assign) BOOL isBindPhone;
+
 @property (nonatomic, readonly) BOOL isLogined;
 @property (nonatomic, assign) MZLLoginType loginType;
 

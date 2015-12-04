@@ -140,6 +140,8 @@ static MZLAppUser *_mzlAppUser;
     _mzlAppUser = [MZLAppUser loadUserFromPreference];
 }
 
+
+
 + (void)clearAppUser {
     [MZLAppUser removeUserFromPreference];
     _mzlAppUser = nil;
@@ -441,5 +443,12 @@ static NSDictionary *_info;
         _info = nil;
     }
 }
+
+
++ (void)loadAppUserBindInfoFromCache {
+
+
+}
+
 
 @end

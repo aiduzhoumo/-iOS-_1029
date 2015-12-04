@@ -28,6 +28,10 @@
     return self.nickName;
 }
 
+- (NSString *)phone {
+    return _phone;
+}
+
 #pragma mark - restkit mapping
 
 + (NSMutableArray *)attrArray {
@@ -35,10 +39,12 @@
 }
 
 + (NSMutableDictionary *)attributeDictionary {
-    return [[[[super attributeDictionary]
+    return [[[[[super attributeDictionary]
             fromPath:@"nickname"    toProperty:@"nickName"]
+            fromPath:@"phone"       toProperty:@"phone"]
             fromPath:@"intro"       toProperty:@"introduction"]
             fromPath:@"tags_str"    toProperty:@"tags"];
+    
 }
 
 + (void)addRelationMapping:(RKObjectMapping *)mapping {
@@ -51,6 +57,7 @@
     author.identifier = self.identifier;
     author.name = self.nickName;
     author.photo = self.headerImage;
+    author.phone = self.phone;
     return author;
 }
 

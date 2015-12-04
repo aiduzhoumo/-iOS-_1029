@@ -35,6 +35,8 @@
 #define MZL_SEGUE_TOPOINAV @"toPOINav"
 #define MZL_SEGUE_TOREG @"toReg"
 #define MZL_SEGUE_TOPHONEREG @"toPhoneReg"
+//#define MZL_SEGUE_TOPHONEREGNAME @"toPhoneRegName"
+#define MZL_SEGUE_TOBINDPHONE @"toBindPhone"
 #define MZL_SEGUE_TOGOODSDETAIL @"toGoodsDetail"
 
 #define MZL_MSG_ALERT_VIEW_TITLE @"提示"
@@ -203,5 +205,6 @@ typedef NS_ENUM(NSInteger, MZLLoginType) {
     MZLLoginTypeNormal      = 0,
     MZLLoginTypeSinaWeibo   = 1,
     MZLLoginTypeQQ          = 2,
-    MZLLoginTypeWeiXin          = 3
+    MZLLoginTypeWeiXin          = 3,
+    MZLLoginTypePhone           = 4
 };

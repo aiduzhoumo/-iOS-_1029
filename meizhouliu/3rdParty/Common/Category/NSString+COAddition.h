@@ -35,6 +35,8 @@
 
 - (NSString *)co_stringWithIntegerParam:(NSInteger)intergerParam;
 - (NSString *)co_stringWithIntegerParam1:(NSInteger)intergerParam1 intergerParam2:(NSInteger)intergerParam2;
+- (NSString *)co_stringWithNSStringParam1:(NSString *)param1 nsstringParam2:(NSString *)param2;
+- (NSString *)co_stringWithNSStringParam1:(NSString *)param1 nsstringParam2:(NSString *)param2 nsstringParam3:(NSString *)param3;
 
 - (CGSize)co_boundingRectWithWidth:(CGFloat)width font:(UIFont *)font;
 - (NSInteger)co_numberOfLinesConstrainedToWidth:(CGFloat)width withFont:(UIFont *)font;

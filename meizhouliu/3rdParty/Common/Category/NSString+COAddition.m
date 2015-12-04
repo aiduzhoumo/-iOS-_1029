@@ -78,6 +78,16 @@
     return [NSString stringWithFormat:self, intergerParam1, intergerParam2];
 }
 
+- (NSString *)co_stringWithNSStringParam1:(NSString *)param1 nsstringParam2:(NSString *)param2 {
+    return [NSString stringWithFormat:self, param1, param2];
+}
+
+
+- (NSString *)co_stringWithNSStringParam1:(NSString *)param1 nsstringParam2:(NSString *)param2 nsstringParam3:(NSString *)param3 {
+    return [NSString stringWithFormat:self, param1, param2,param3];
+}
+
+
 - (CGSize)co_boundingRectWithWidth:(CGFloat)width font:(UIFont *)font {
     NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:self attributes:@{NSFontAttributeName: font}];
     CGRect rect = [attributedText boundingRectWithSize:(CGSize){width, CGFLOAT_MAX}

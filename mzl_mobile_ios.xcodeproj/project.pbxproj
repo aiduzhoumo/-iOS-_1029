@@ -50,7 +50,24 @@
 		1BDE39531A480BBF002C1F86 /* MZLDescendantsParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDE39521A480BBF002C1F86 /* MZLDescendantsParam.m */; };
 		1BDE39561A48173A002C1F86 /* MZLModelRelatedLocationExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDE39551A48173A002C1F86 /* MZLModelRelatedLocationExt.m */; };
 		1BEA57511A7106C7009A3868 /* MZLShortArticleResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEA57501A7106C7009A3868 /* MZLShortArticleResponse.m */; };
+		785A45771C0C2B1800B8D821 /* CountdownButtonByTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 785A45761C0C2B1800B8D821 /* CountdownButtonByTime.m */; };
+		785D1CDA1BFEFD7D00959334 /* MZLRegisterPhoneSvcParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 785D1CD91BFEFD7D00959334 /* MZLRegisterPhoneSvcParam.m */; };
+		78644F1B1C1071400081CD4E /* MZLBindPhoneResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 78644F1A1C1071400081CD4E /* MZLBindPhoneResponse.m */; };
+		7885BA1A1C05EBEA00A49658 /* MZLPhoneLoginSvcParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 7885BA191C05EBEA00A49658 /* MZLPhoneLoginSvcParam.m */; };
+		7895AE391C0B074D006686FA /* MZLMailLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7895AE381C0B074D006686FA /* MZLMailLoginView.m */; };
+		7895AE3B1C0B0762006686FA /* MZLMailLoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7895AE3A1C0B0762006686FA /* MZLMailLoginView.xib */; };
+		7895AE3F1C0B286E006686FA /* MZLBindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7895AE3E1C0B286E006686FA /* MZLBindPhoneViewController.m */; };
+		78CB3B991C071AD000126D05 /* MZLForgetPWByPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78CB3B981C071AD000126D05 /* MZLForgetPWByPhoneViewController.m */; };
+		78E7B7C31C10395C00968E8A /* MZLModifyNameByPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E7B7C21C10395C00968E8A /* MZLModifyNameByPhoneViewController.m */; };
+		78EB81471C083C7B009342A1 /* MZLChooseModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EB81461C083C7B009342A1 /* MZLChooseModeViewController.m */; };
+		78EB814A1C084BC3009342A1 /* MZLModifyPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EB81491C084BC3009342A1 /* MZLModifyPassWordViewController.m */; };
+		78EB814D1C084C03009342A1 /* MZLForgetPWByMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EB814C1C084C03009342A1 /* MZLForgetPWByMailViewController.m */; };
+		78EB81501C084C54009342A1 /* MZLModifyPWByMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EB814F1C084C54009342A1 /* MZLModifyPWByMailViewController.m */; };
+		78EE6B691C09E8540046D026 /* MZLLoginByMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EE6B681C09E8540046D026 /* MZLLoginByMailViewController.m */; };
+		78F32E091C055293008ECF78 /* MZLGetCodeSvcParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F32E081C055293008ECF78 /* MZLGetCodeSvcParam.m */; };
+		78F32E0C1C0558E3008ECF78 /* MZLVerifyCodeSvcParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F32E0B1C0558E3008ECF78 /* MZLVerifyCodeSvcParam.m */; };
 		78F900911BFD7B6A00429A2A /* MZLPhoneRegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F900901BFD7B6A00429A2A /* MZLPhoneRegViewController.m */; };
+		78FF94431C0431BD0062120A /* MZLPhoneRegNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78FF94421C0431BD0062120A /* MZLPhoneRegNameViewController.m */; };
 		844382011BE0D00D00DF1C7E /* QQConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844381DB1BE0D00D00DF1C7E /* QQConnection.framework */; };
 		844382021BE0D00D00DF1C7E /* QZoneConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844381DC1BE0D00D00DF1C7E /* QZoneConnection.framework */; };
 		844382031BE0D00D00DF1C7E /* SinaWeiboConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844381DD1BE0D00D00DF1C7E /* SinaWeiboConnection.framework */; };
@@ -502,8 +519,41 @@
 		1BDE39551A48173A002C1F86 /* MZLModelRelatedLocationExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLModelRelatedLocationExt.m; sourceTree = "<group>"; };
 		1BEA574F1A7106C7009A3868 /* MZLShortArticleResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLShortArticleResponse.h; sourceTree = "<group>"; };
 		1BEA57501A7106C7009A3868 /* MZLShortArticleResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLShortArticleResponse.m; sourceTree = "<group>"; };
+		785A45751C0C2B1800B8D821 /* CountdownButtonByTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountdownButtonByTime.h; sourceTree = "<group>"; };
+		785A45761C0C2B1800B8D821 /* CountdownButtonByTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountdownButtonByTime.m; sourceTree = "<group>"; };
+		785D1CD81BFEFD7D00959334 /* MZLRegisterPhoneSvcParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLRegisterPhoneSvcParam.h; sourceTree = "<group>"; };
+		785D1CD91BFEFD7D00959334 /* MZLRegisterPhoneSvcParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLRegisterPhoneSvcParam.m; sourceTree = "<group>"; };
+		78644F191C1071400081CD4E /* MZLBindPhoneResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLBindPhoneResponse.h; sourceTree = "<group>"; };
+		78644F1A1C1071400081CD4E /* MZLBindPhoneResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLBindPhoneResponse.m; sourceTree = "<group>"; };
+		7885BA181C05EBEA00A49658 /* MZLPhoneLoginSvcParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLPhoneLoginSvcParam.h; sourceTree = "<group>"; };
+		7885BA191C05EBEA00A49658 /* MZLPhoneLoginSvcParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLPhoneLoginSvcParam.m; sourceTree = "<group>"; };
+		7895AE371C0B074D006686FA /* MZLMailLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLMailLoginView.h; sourceTree = "<group>"; };
+		7895AE381C0B074D006686FA /* MZLMailLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLMailLoginView.m; sourceTree = "<group>"; };
+		7895AE3A1C0B0762006686FA /* MZLMailLoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MZLMailLoginView.xib; sourceTree = "<group>"; };
+		7895AE3D1C0B286E006686FA /* MZLBindPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLBindPhoneViewController.h; sourceTree = "<group>"; };
+		7895AE3E1C0B286E006686FA /* MZLBindPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLBindPhoneViewController.m; sourceTree = "<group>"; };
+		78CB3B971C071AD000126D05 /* MZLForgetPWByPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLForgetPWByPhoneViewController.h; sourceTree = "<group>"; };
+		78CB3B981C071AD000126D05 /* MZLForgetPWByPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLForgetPWByPhoneViewController.m; sourceTree = "<group>"; };
+		78E7B7C11C10395C00968E8A /* MZLModifyNameByPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLModifyNameByPhoneViewController.h; sourceTree = "<group>"; };
+		78E7B7C21C10395C00968E8A /* MZLModifyNameByPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLModifyNameByPhoneViewController.m; sourceTree = "<group>"; };
+		78EB81451C083C7B009342A1 /* MZLChooseModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLChooseModeViewController.h; sourceTree = "<group>"; };
+		78EB81461C083C7B009342A1 /* MZLChooseModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLChooseModeViewController.m; sourceTree = "<group>"; };
+		78EB81481C084BC3009342A1 /* MZLModifyPassWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLModifyPassWordViewController.h; sourceTree = "<group>"; };
+		78EB81491C084BC3009342A1 /* MZLModifyPassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLModifyPassWordViewController.m; sourceTree = "<group>"; };
+		78EB814B1C084C03009342A1 /* MZLForgetPWByMailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLForgetPWByMailViewController.h; sourceTree = "<group>"; };
+		78EB814C1C084C03009342A1 /* MZLForgetPWByMailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLForgetPWByMailViewController.m; sourceTree = "<group>"; };
+		78EB814E1C084C54009342A1 /* MZLModifyPWByMailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLModifyPWByMailViewController.h; sourceTree = "<group>"; };
+		78EB814F1C084C54009342A1 /* MZLModifyPWByMailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLModifyPWByMailViewController.m; sourceTree = "<group>"; };
+		78EE6B671C09E8540046D026 /* MZLLoginByMailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLLoginByMailViewController.h; sourceTree = "<group>"; };
+		78EE6B681C09E8540046D026 /* MZLLoginByMailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLLoginByMailViewController.m; sourceTree = "<group>"; };
+		78F32E071C055293008ECF78 /* MZLGetCodeSvcParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLGetCodeSvcParam.h; sourceTree = "<group>"; };
+		78F32E081C055293008ECF78 /* MZLGetCodeSvcParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLGetCodeSvcParam.m; sourceTree = "<group>"; };
+		78F32E0A1C0558E3008ECF78 /* MZLVerifyCodeSvcParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLVerifyCodeSvcParam.h; sourceTree = "<group>"; };
+		78F32E0B1C0558E3008ECF78 /* MZLVerifyCodeSvcParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLVerifyCodeSvcParam.m; sourceTree = "<group>"; };
 		78F9008F1BFD7B6A00429A2A /* MZLPhoneRegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLPhoneRegViewController.h; sourceTree = "<group>"; };
 		78F900901BFD7B6A00429A2A /* MZLPhoneRegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLPhoneRegViewController.m; sourceTree = "<group>"; };
+		78FF94411C0431BD0062120A /* MZLPhoneRegNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLPhoneRegNameViewController.h; sourceTree = "<group>"; };
+		78FF94421C0431BD0062120A /* MZLPhoneRegNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLPhoneRegNameViewController.m; sourceTree = "<group>"; };
 		79A770220297C32F7E1E7330 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		844381DB1BE0D00D00DF1C7E /* QQConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QQConnection.framework; sourceTree = "<group>"; };
 		844381DC1BE0D00D00DF1C7E /* QZoneConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QZoneConnection.framework; sourceTree = "<group>"; };
@@ -1338,6 +1388,42 @@
 			path = UmengPush;
 			sourceTree = "<group>";
 		};
+		7895AE361C0B05C7006686FA /* mailLogin */ = {
+			isa = PBXGroup;
+			children = (
+				7895AE371C0B074D006686FA /* MZLMailLoginView.h */,
+				7895AE381C0B074D006686FA /* MZLMailLoginView.m */,
+				7895AE3A1C0B0762006686FA /* MZLMailLoginView.xib */,
+			);
+			name = mailLogin;
+			sourceTree = "<group>";
+		};
+		7895AE3C1C0B2849006686FA /* bindPhoneNum */ = {
+			isa = PBXGroup;
+			children = (
+				7895AE3D1C0B286E006686FA /* MZLBindPhoneViewController.h */,
+				7895AE3E1C0B286E006686FA /* MZLBindPhoneViewController.m */,
+			);
+			name = bindPhoneNum;
+			sourceTree = "<group>";
+		};
+		78CB3B951C071A0800126D05 /* forgetPassW */ = {
+			isa = PBXGroup;
+			children = (
+				78CB3B971C071AD000126D05 /* MZLForgetPWByPhoneViewController.h */,
+				78CB3B981C071AD000126D05 /* MZLForgetPWByPhoneViewController.m */,
+				78EB81481C084BC3009342A1 /* MZLModifyPassWordViewController.h */,
+				78EB81491C084BC3009342A1 /* MZLModifyPassWordViewController.m */,
+				78EB81451C083C7B009342A1 /* MZLChooseModeViewController.h */,
+				78EB81461C083C7B009342A1 /* MZLChooseModeViewController.m */,
+				78EB814B1C084C03009342A1 /* MZLForgetPWByMailViewController.h */,
+				78EB814C1C084C03009342A1 /* MZLForgetPWByMailViewController.m */,
+				78EB814E1C084C54009342A1 /* MZLModifyPWByMailViewController.h */,
+				78EB814F1C084C54009342A1 /* MZLModifyPWByMailViewController.m */,
+			);
+			name = forgetPassW;
+			sourceTree = "<group>";
+		};
 		844381D91BE0D00D00DF1C7E /* ShareSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -1601,6 +1687,8 @@
 				DC2A12561915E1A30045B300 /* MZLChildLocationsSvcParam.m */,
 				E5487A2E1989FF6800AACB75 /* MZLLoginSvcParam.h */,
 				E5487A2F1989FF6800AACB75 /* MZLLoginSvcParam.m */,
+				7885BA181C05EBEA00A49658 /* MZLPhoneLoginSvcParam.h */,
+				7885BA191C05EBEA00A49658 /* MZLPhoneLoginSvcParam.m */,
 				DCDA780619C033C100D3E576 /* MZLFilterParam.h */,
 				DCDA780719C033C100D3E576 /* MZLFilterParam.m */,
 				DCDA780919C0369F00D3E576 /* MZLSvcParamWithPaging.h */,
@@ -1611,6 +1699,10 @@
 				1BDE39521A480BBF002C1F86 /* MZLDescendantsParam.m */,
 				1BA2CEAA1A5A70B70049C190 /* MZLSurroundingLocSvcParam.h */,
 				1BA2CEAB1A5A70B70049C190 /* MZLSurroundingLocSvcParam.m */,
+				78F32E071C055293008ECF78 /* MZLGetCodeSvcParam.h */,
+				78F32E081C055293008ECF78 /* MZLGetCodeSvcParam.m */,
+				78F32E0A1C0558E3008ECF78 /* MZLVerifyCodeSvcParam.h */,
+				78F32E0B1C0558E3008ECF78 /* MZLVerifyCodeSvcParam.m */,
 			);
 			name = Input;
 			sourceTree = "<group>";
@@ -1734,6 +1826,8 @@
 				1B2E1A5F19B804BC0063641F /* MZLNoticeResponse.m */,
 				E5AA8D1D1988A43B00675C89 /* MZLRegLoginResponse.h */,
 				E5AA8D1E1988A43B00675C89 /* MZLRegLoginResponse.m */,
+				78644F191C1071400081CD4E /* MZLBindPhoneResponse.h */,
+				78644F1A1C1071400081CD4E /* MZLBindPhoneResponse.m */,
 				DCB3B563194AF3D80093F3BA /* MZLSelectedArticleListResponse.h */,
 				DCB3B564194AF3D80093F3BA /* MZLSelectedArticleListResponse.m */,
 				E5B4E073198F91AF0053A1EF /* MZLServiceResponseDetail.h */,
@@ -2043,6 +2137,7 @@
 		DCBE063C18EE61A300AAB840 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7895AE3C1C0B2849006686FA /* bindPhoneNum */,
 				DC953D4C197E3DAF00A9B67D /* ArticleDetail */,
 				DCD212CF19AF0612003BB633 /* Base */,
 				DCF374C4195BC30800B3D514 /* Home */,
@@ -2062,6 +2157,7 @@
 				DC07ABF01947F97200355EEB /* MZLTabBarViewController.h */,
 				DC07ABF11947F97200355EEB /* MZLTabBarViewController.m */,
 				DCE157F8199312A700533A2D /* RegLogin */,
+				78CB3B951C071A0800126D05 /* forgetPassW */,
 				DCD212CE19AE625B003BB633 /* Settings */,
 				DCAED8441A511B10004DA3B6 /* ShortArticle */,
 			);
@@ -2174,6 +2270,8 @@
 				DC76507E199E82A700D1DB04 /* UIViewController+MZLValidation.m */,
 				DC43555D19713600006CCFCD /* UIViewController+ScrollToRefresh.h */,
 				DC43555E19713600006CCFCD /* UIViewController+ScrollToRefresh.m */,
+				785A45751C0C2B1800B8D821 /* CountdownButtonByTime.h */,
+				785A45761C0C2B1800B8D821 /* CountdownButtonByTime.m */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -2181,6 +2279,7 @@
 		DCBE064018EE61A300AAB840 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7895AE361C0B05C7006686FA /* mailLogin */,
 				DCF115D61A59386C000BB6E0 /* ShortArticle */,
 				DCEE41F51A2570E4009BA815 /* TableViewCell */,
 				1B2E52AD1A199AAA007718FF /* Filter UI 2.0 */,
@@ -2517,14 +2616,20 @@
 			children = (
 				E5EBB3A7197E7957004B1133 /* MZLLoginViewController.h */,
 				E5EBB3A8197E7957004B1133 /* MZLLoginViewController.m */,
+				78EE6B671C09E8540046D026 /* MZLLoginByMailViewController.h */,
+				78EE6B681C09E8540046D026 /* MZLLoginByMailViewController.m */,
 				E58E8ED91991DF7B008079F3 /* MZLRegModifyNameViewController.h */,
 				E58E8EDA1991DF7B008079F3 /* MZLRegModifyNameViewController.m */,
+				78E7B7C11C10395C00968E8A /* MZLModifyNameByPhoneViewController.h */,
+				78E7B7C21C10395C00968E8A /* MZLModifyNameByPhoneViewController.m */,
 				E58E8ED61991DF5D008079F3 /* MZLRegViewController.h */,
 				E58E8ED71991DF5D008079F3 /* MZLRegViewController.m */,
 				DCE157FF1993247B00533A2D /* UIViewController+MZLRegLoginCommon.h */,
 				DCE158001993247B00533A2D /* UIViewController+MZLRegLoginCommon.m */,
 				78F9008F1BFD7B6A00429A2A /* MZLPhoneRegViewController.h */,
 				78F900901BFD7B6A00429A2A /* MZLPhoneRegViewController.m */,
+				78FF94411C0431BD0062120A /* MZLPhoneRegNameViewController.h */,
+				78FF94421C0431BD0062120A /* MZLPhoneRegNameViewController.m */,
 			);
 			name = RegLogin;
 			sourceTree = "<group>";
@@ -2749,6 +2854,8 @@
 			children = (
 				E5487A3A198A083100AACB75 /* MZLRegisterBaseSvcParam.h */,
 				E5487A3B198A083100AACB75 /* MZLRegisterBaseSvcParam.m */,
+				785D1CD81BFEFD7D00959334 /* MZLRegisterPhoneSvcParam.h */,
+				785D1CD91BFEFD7D00959334 /* MZLRegisterPhoneSvcParam.m */,
 				E503B316199874EE003F04DB /* MZLRegisterNormalSvcParam.h */,
 				E503B317199874EE003F04DB /* MZLRegisterNormalSvcParam.m */,
 				E503B31C19988C1D003F04DB /* MZLRegisterSinaWeiboSvcParam.h */,
@@ -2918,6 +3025,7 @@
 				DC5E7A4919372EDE0017BEF6 /* MZLSignedAuthorHeader.xib in Resources */,
 				844382081BE0D00D00DF1C7E /* Resource.bundle in Resources */,
 				DC9B893E192C4ABE00CF1467 /* MZLSelectedRouteCell.xib in Resources */,
+				7895AE3B1C0B0762006686FA /* MZLMailLoginView.xib in Resources */,
 				DC60FB0A19CC157A0046E105 /* unicode_to_hanyu_pinyin.txt in Resources */,
 				DCFDB98D19E9496F0006426F /* all_locations.txt in Resources */,
 				DCC231A9190A443800F181B0 /* MZLLocationItemCell.xib in Resources */,
@@ -3003,14 +3111,17 @@
 				DCE2AA031A83336500936125 /* MZLLocationInfoViewController.m in Sources */,
 				DC76507F199E82A700D1DB04 /* UIViewController+MZLValidation.m in Sources */,
 				DCAAE3D218F3C299002C593B /* UIAlertView+MZLAdditions.m in Sources */,
+				7895AE391C0B074D006686FA /* MZLMailLoginView.m in Sources */,
 				DC26FF78199B0595009F87AF /* MZLRegister3rdPartySvcParam.m in Sources */,
 				DCD2129219AAD9F4003BB633 /* UIViewController+COAdditions.m in Sources */,
+				78FF94431C0431BD0062120A /* MZLPhoneRegNameViewController.m in Sources */,
 				DCC283811A5ED37F0001FAF1 /* COKeyValuePair.m in Sources */,
 				DCC283981A656E200001FAF1 /* MZLShortArticlePhotoScrollEditView.m in Sources */,
 				DCEE41F41A24876F009BA815 /* MZLPersonalizedViewController.m in Sources */,
 				1B2E1A5919B443B60063641F /* MZLNotificationItemTableViewCell.m in Sources */,
 				DCD212C319AC87CE003BB633 /* CORestKitMappingExtension.m in Sources */,
 				DC3582D31A67B4AF00EF4105 /* MZLModelShortArticle.m in Sources */,
+				78EB814D1C084C03009342A1 /* MZLForgetPWByMailViewController.m in Sources */,
 				1B942F011A8245450064A0E9 /* ParallaxHeaderView.m in Sources */,
 				DCD212A419AB114E003BB633 /* MZLModelComment.m in Sources */,
 				DC58B1ED1A09EF1F00BE6F01 /* MZLNavView.m in Sources */,
@@ -3039,6 +3150,7 @@
 				DCD2128819AAD9F4003BB633 /* NSString+COAddition.m in Sources */,
 				DCD2128A19AAD9F4003BB633 /* NSString+COValidation.m in Sources */,
 				DC0EBD3419066DF500D9248D /* MZLLocationMapViewController.m in Sources */,
+				78E7B7C31C10395C00968E8A /* MZLModifyNameByPhoneViewController.m in Sources */,
 				DCB3B565194AF3D80093F3BA /* MZLSelectedArticleListResponse.m in Sources */,
 				DCFF9E71190766C60098D620 /* MZLDummyIPhoneView.m in Sources */,
 				1BDE39531A480BBF002C1F86 /* MZLDescendantsParam.m in Sources */,
@@ -3068,6 +3180,7 @@
 				DC2A12571915E1A30045B300 /* MZLChildLocationsSvcParam.m in Sources */,
 				DC8C704319FF3E6B0042F03F /* MZLNavViewPeople.m in Sources */,
 				DCEE41F91A2571C7009BA815 /* MZLPersonalizedItemCell.m in Sources */,
+				78EB814A1C084BC3009342A1 /* MZLModifyPassWordViewController.m in Sources */,
 				DC18985A18FF6D9E008843B5 /* MZLMyFavoriteViewController.m in Sources */,
 				DC9FA5CD18FBD81C006DBAAD /* UIImageView+MZLNetwork.m in Sources */,
 				DCD212BD19AC851C003BB633 /* NSObject+CODictionaryParameter.m in Sources */,
@@ -3077,7 +3190,9 @@
 				DC75E501193431BA0043BEB6 /* MZLLocationRouteInfo.m in Sources */,
 				DC037E681977C710005C163D /* MZLArticleCommentViewController.m in Sources */,
 				DCD212D219AF07E3003BB633 /* MZLTableViewController+ScrollExtension.m in Sources */,
+				785A45771C0C2B1800B8D821 /* CountdownButtonByTime.m in Sources */,
 				E5B4E075198F91AF0053A1EF /* MZLServiceResponseDetail.m in Sources */,
+				78EB81471C083C7B009342A1 /* MZLChooseModeViewController.m in Sources */,
 				1BA2CEA81A5A6A630049C190 /* MZLModelSurroundingLocations.m in Sources */,
 				DC8CD7BF192096E1007AC4B5 /* MZLArticleDetailNavVwController.m in Sources */,
 				DC3112D619E8D2C100CC3E5A /* FMResultSet.m in Sources */,
@@ -3095,6 +3210,7 @@
 				1B2E1A6619B97B9A0063641F /* MZLAppNotices.m in Sources */,
 				DCDA780519C0159400D3E576 /* MZLFilterScrollView.m in Sources */,
 				DC11DDB819C95FBE00B820FF /* MZLBaseViewController+CityList.m in Sources */,
+				78F32E0C1C0558E3008ECF78 /* MZLVerifyCodeSvcParam.m in Sources */,
 				1B4332C21A1AF1D200D9C23E /* MZLFilterItemWithImage.m in Sources */,
 				DC3FA84118FDFA7100A14FD1 /* MZLServiceMapping.m in Sources */,
 				DCA8BF3A198F5BD70091F8AE /* UIViewController+MZLModelPresentation.m in Sources */,
@@ -3104,6 +3220,7 @@
 				DCAAE3D818F3CF0B002C593B /* MZLArticleListViewController.m in Sources */,
 				DC9FA5AF18FB74CD006DBAAD /* MZLModelObject.m in Sources */,
 				DC57FBE319E8DD1800BBF1AB /* MZLSysLocationLocalStore.m in Sources */,
+				78644F1B1C1071400081CD4E /* MZLBindPhoneResponse.m in Sources */,
 				DCD2129419AAD9F4003BB633 /* UIViewController+COTextFieldDelegate.m in Sources */,
 				DC9FA5B818FB789D006DBAAD /* MZLModelAuthor.m in Sources */,
 				DCD2128C19AAD9F4003BB633 /* UIBarButtonItem+COAdditions.m in Sources */,
@@ -3148,6 +3265,7 @@
 				DC0F18B91A4A967900A707AC /* MZLServiceOperation.m in Sources */,
 				E5884CDB199CAFF600CF26AE /* MZLIntroductionItemCell.m in Sources */,
 				DCD2129C19AAD9F4003BB633 /* pinyin.m in Sources */,
+				78EB81501C084C54009342A1 /* MZLModifyPWByMailViewController.m in Sources */,
 				DC99BFA2190E016C00DBF2F7 /* MZLRecommendLocationItemCell.m in Sources */,
 				DC2655791940427400AE9400 /* MZLLocDetailHeaderAddressView.m in Sources */,
 				DCCF0A6D1A763FD200C40227 /* MZLModelLocationDesp.m in Sources */,
@@ -3161,6 +3279,7 @@
 				DC60FB0919CC157A0046E105 /* PinyinHelper.m in Sources */,
 				DCD212C619AC980B003BB633 /* MZLCommentResponse.m in Sources */,
 				DCF6B9221AEF3D2F00E613A5 /* MZLLocResponse.m in Sources */,
+				7885BA1A1C05EBEA00A49658 /* MZLPhoneLoginSvcParam.m in Sources */,
 				1B77FFB71A43D6A200CF8E30 /* NSObject+UmengNotification.m in Sources */,
 				DC3FA84518FE24E300A14FD1 /* MZLArticleListSvcParam.m in Sources */,
 				DC931FC41950250400EE6564 /* MZLiVersionDelegate.m in Sources */,
@@ -3195,6 +3314,7 @@
 				DC94C2731A6CD4AA00E8A74A /* MZLLocationDetailGoodsCell.m in Sources */,
 				DC5E7A4419372E130017BEF6 /* MZLAuthorHeader.m in Sources */,
 				DCDA77FA19C0019C00D3E576 /* MZLFilterSectionView.m in Sources */,
+				78CB3B991C071AD000126D05 /* MZLForgetPWByPhoneViewController.m in Sources */,
 				DCFD7FBD1925E89600FD6D91 /* MZLLocationHeaderInfo.m in Sources */,
 				DC9FA5DA18FBEBA8006DBAAD /* UIView+MZLAdditions.m in Sources */,
 				DC33517D190E95EC00219E3D /* UITableView+MZLHeaderFooterView.m in Sources */,
@@ -3213,12 +3333,14 @@
 				DCC283871A5ED3F80001FAF1 /* COAssets.m in Sources */,
 				DCD212A119AADD26003BB633 /* UIViewController+COScroll.m in Sources */,
 				E5EDE5B8199E028300C3D3EF /* MZLModelUserInfoDetail.m in Sources */,
+				785D1CDA1BFEFD7D00959334 /* MZLRegisterPhoneSvcParam.m in Sources */,
 				DC7F2D40195A6FD00095CDA5 /* MZLLocationDelegate.m in Sources */,
 				E5B965BF199A04A300995028 /* MZLMyAuthorTopBar.m in Sources */,
 				DC0EBD311906086600D9248D /* MZLAuthorDetailViewController.m in Sources */,
 				1B8C98D21A4131F9009D5C16 /* MZLModelGoodsDetail.m in Sources */,
 				DCA1142D1A3EB56700C429D5 /* MZLPersonalizedFilterContentView.m in Sources */,
 				DC0EBD1A1900CF0100D9248D /* WeViewBlockLayout.m in Sources */,
+				78F32E091C055293008ECF78 /* MZLGetCodeSvcParam.m in Sources */,
 				DCC686F6199A0E9400EFDA29 /* MZLAppUser.m in Sources */,
 				DC5E945818FD434800B2032F /* MZLServices.m in Sources */,
 				DC5E7A31193583060017BEF6 /* MZLServiceResponseObject.m in Sources */,
@@ -3266,6 +3388,8 @@
 				DCFC568119B5B8FD006FCFD6 /* MGSwipeButton.m in Sources */,
 				DCD2F5D91AC52F7C003AB9FB /* MZLShortArticleCellStyle2.m in Sources */,
 				DC0EBD1D1900CF0100D9248D /* WeViewLayout.m in Sources */,
+				78EE6B691C09E8540046D026 /* MZLLoginByMailViewController.m in Sources */,
+				7895AE3F1C0B286E006686FA /* MZLBindPhoneViewController.m in Sources */,
 				DCD212B719AC7D90003BB633 /* CODictionaryParameterExtension.m in Sources */,
 				DC26557419401EFF00AE9400 /* MZLLocDetailTableFooterView.m in Sources */,
 				E5884CD5199CADEE00CF26AE /* MZLIntroductionViewController.m in Sources */,
