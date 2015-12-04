@@ -46,10 +46,6 @@
     
     [self initWithStatusBar:self.statesBar navBar:self.navBar];
     
-    NSLog(@"self.token == %@",self.token);
-    
-//    self.token = [MZLSharedData appUserAccessToken];
-    
     [self.getCodeBtn addTarget:self action:@selector(getCode) forControlEvents:UIControlEventTouchUpInside];
     
 }
@@ -96,6 +92,9 @@
     if (! [self verifyNickName:self.nameTF]) {
         return NO;
     }
+    if (isEmptyString(_phoneTF.text)) {
+        return NO;
+    }
     if (! [self verifyPhone:self.phoneTF]) {
         return NO;
     }
@@ -110,9 +109,13 @@
 - (void)modifyName {
 
     [self dismissKeyboard];
-    if (! [self validateInput]) {
+    if (! [self validateInputGetCode]) {
         return;
     }
+    if (isEmptyString(_codeTF.text)) {
+        return;
+    }
+    
     MZLAppUser *user = [MZLSharedData appUser];
     user.nickNameFrom3rdParty = self.nameTF.text;
     [self showRegProgressIndicator];
@@ -198,6 +201,7 @@
     if (response.error == MZL_SVC_RESPONSE_CODE_SUCCESS) {
         
         self.token = response.accessToken.token;
+        self.accessToken = response.accessToken;
         
         if ([response.user.bind isEqualToString:@"false"]) {
 
@@ -207,8 +211,9 @@
                 if (response.error == MZL_SVC_RESPONSE_CODE_SUCCESS) {
 
                     [MZLSharedData appUser].user = response.user;
-//                    [[MZLSharedData appUser] setUser:[MZLSharedData appUser].user token:[MZLSharedData appUser].token];
-                    [self onLogined:_loginType];
+                    [MZLSharedData appUser].token = self.accessToken;
+//                    [[MZLSharedData appUser] setUser:[MZLSharedData appUser].user token:];
+                    [self onLogined:type];
                     
                     //跳回登入界面
                     [IBAlertView showDetermineWithTitle:@"提示" message:@"注册绑定成功" dismissBlock:^{

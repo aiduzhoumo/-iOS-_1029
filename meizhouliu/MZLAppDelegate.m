@@ -178,9 +178,6 @@
     [self initTalkingDataAppCpa];
     [self initUMtrack];
     
-//    //从本地获取绑定信息
-//    [self loadAppUserBindInfoFromCache];
-    
     [self initData];
     
     [self initNavigationBar];
@@ -188,17 +185,11 @@
     [self initJDStatusBar];
 }
 
-//- (void)loadAppUserBindInfoFromCache {
-//
-//   NSUserDefaults *bindPhoneInfo = [NSUserDefaults standardUserDefaults];
-////    [bindPhoneInfo setObject:self.isBind forKey:@"bindPhoneInfo"];
-//    NSLog(@"[MZLSharedData appUser].isBindPhone = %@",[bindPhoneInfo objectForKey:@"bindPhoneInfo"]);
-//    
-//   [MZLSharedData appUser].isBindPhone = [bindPhoneInfo objectForKey:@"bindPhoneInfo"];
-//}
-
 - (void)initData {
     [MZLSharedData loadAppUserFromCache];
+    
+    MZLAppUser *user = [MZLSharedData appUser];
+    
     [MZLSharedData loadLocationFromCache];
     [MZLSharedData loadSystemLocations];
     [MZLAppNotices loadNoticesFromCache];

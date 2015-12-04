@@ -74,7 +74,7 @@
                   moduleName = "mzl_mobile_ios"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mzl_jfang/Desktop/11.27%E6%89%8B%E6%9C%BA%E6%B3%A8%E5%86%8C%E5%9F%BA%E6%9C%AC%E5%AE%8C%E6%88%90/-iOS-_1029/meizhouliu/Shared/Controllers/MZLPhoneRegViewController.m"
-                  timestampString = "470901574.908084"
+                  timestampString = "470905472.566494"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "202"
@@ -89,7 +89,7 @@
                   moduleName = "mzl_mobile_ios"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mzl_jfang/Desktop/11.27%E6%89%8B%E6%9C%BA%E6%B3%A8%E5%86%8C%E5%9F%BA%E6%9C%AC%E5%AE%8C%E6%88%90/-iOS-_1029/meizhouliu/Shared/Controllers/MZLPhoneRegViewController.m"
-                  timestampString = "470901574.908287"
+                  timestampString = "470905472.566758"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "202"
@@ -104,7 +104,7 @@
                   moduleName = "mzl_mobile_ios"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mzl_jfang/Desktop/11.27%E6%89%8B%E6%9C%BA%E6%B3%A8%E5%86%8C%E5%9F%BA%E6%9C%AC%E5%AE%8C%E6%88%90/-iOS-_1029/meizhouliu/Shared/Controllers/MZLPhoneRegViewController.m"
-                  timestampString = "470901574.908462"
+                  timestampString = "470905472.567055"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -119,7 +119,7 @@
                   moduleName = "mzl_mobile_ios"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mzl_jfang/Desktop/11.27%E6%89%8B%E6%9C%BA%E6%B3%A8%E5%86%8C%E5%9F%BA%E6%9C%AC%E5%AE%8C%E6%88%90/-iOS-_1029/meizhouliu/Shared/Controllers/MZLPhoneRegViewController.m"
-                  timestampString = "470901574.908641"
+                  timestampString = "470905472.567274"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -134,7 +134,7 @@
                   moduleName = "mzl_mobile_ios"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mzl_jfang/Desktop/11.27%E6%89%8B%E6%9C%BA%E6%B3%A8%E5%86%8C%E5%9F%BA%E6%9C%AC%E5%AE%8C%E6%88%90/-iOS-_1029/meizhouliu/Shared/Controllers/MZLPhoneRegViewController.m"
-                  timestampString = "470901574.908821"
+                  timestampString = "470905472.567557"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "202"
@@ -199,7 +199,7 @@
                   moduleName = "mzl_mobile_ios"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mzl_jfang/Desktop/11.27%E6%89%8B%E6%9C%BA%E6%B3%A8%E5%86%8C%E5%9F%BA%E6%9C%AC%E5%AE%8C%E6%88%90/-iOS-_1029/meizhouliu/3rdParty/Common/Category/UIViewController+COAdditions.m"
-                  timestampString = "470901574.912343"
+                  timestampString = "470905472.571926"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "52"
@@ -214,7 +214,7 @@
                   moduleName = "mzl_mobile_ios"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mzl_jfang/Desktop/11.27%E6%89%8B%E6%9C%BA%E6%B3%A8%E5%86%8C%E5%9F%BA%E6%9C%AC%E5%AE%8C%E6%88%90/-iOS-_1029/meizhouliu/3rdParty/Common/Category/UIViewController+COAdditions.m"
-                  timestampString = "470901574.912548"
+                  timestampString = "470905472.572134"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "52"
@@ -247,11 +247,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "meizhouliu/Shared/Controllers/UIViewController+MZLRegLoginCommon.m"
-            timestampString = "470838719.762542"
+            timestampString = "470904540.507345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
             landmarkName = "-handleRegPhoneResponse:type:"
             landmarkType = "5">
          </BreakpointContent>
@@ -263,11 +263,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "meizhouliu/Shared/Controllers/UIViewController+MZLRegLoginCommon.m"
-            timestampString = "470838719.762542"
+            timestampString = "470904540.507345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "-handleRegResponse:type:"
             landmarkType = "5">
          </BreakpointContent>
@@ -295,7 +295,7 @@
                   moduleName = "mzl_mobile_ios"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mzl_jfang/Desktop/11.27%E6%89%8B%E6%9C%BA%E6%B3%A8%E5%86%8C%E5%9F%BA%E6%9C%AC%E5%AE%8C%E6%88%90/-iOS-_1029/meizhouliu/Shared/Controllers/MZLRegViewController.m"
-                  timestampString = "470901574.91574"
+                  timestampString = "470905472.599754"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "98"
@@ -310,7 +310,7 @@
                   moduleName = "mzl_mobile_ios"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mzl_jfang/Desktop/11.27%E6%89%8B%E6%9C%BA%E6%B3%A8%E5%86%8C%E5%9F%BA%E6%9C%AC%E5%AE%8C%E6%88%90/-iOS-_1029/meizhouliu/Shared/Controllers/MZLRegViewController.m"
-                  timestampString = "470901574.91595"
+                  timestampString = "470905472.599989"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "98"
@@ -327,11 +327,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "meizhouliu/Shared/Controllers/UIViewController+MZLRegLoginCommon.m"
-            timestampString = "470838719.762542"
+            timestampString = "470904540.507345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
             landmarkName = "-handleRegPhoneResponse:type:"
             landmarkType = "5">
          </BreakpointContent>
@@ -407,28 +407,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "meizhouliu/Shared/Controllers/MZLModifyNameByPhoneViewController.m"
-            timestampString = "470901573.718576"
+            timestampString = "470903925.058704"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
             landmarkName = "-handle3rdRegResponse:type:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "meizhouliu/Shared/Controllers/UIViewController+MZLRegLoginCommon.m"
-            timestampString = "470901812.437356"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "-onLogined:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -455,11 +439,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "meizhouliu/Shared/Controllers/MZLModifyNameByPhoneViewController.m"
-            timestampString = "470902026.289025"
+            timestampString = "470903925.058704"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "-handle3rdRegResponse:type:"
             landmarkType = "5">
          </BreakpointContent>
@@ -470,13 +454,93 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+            filePath = "meizhouliu/Shared/Controllers/UIViewController+MZLRegLoginCommon.m"
+            timestampString = "470904540.507345"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "-onLogined:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "meizhouliu/Shared/Controllers/UIViewController+MZLRegLoginCommon.m"
+            timestampString = "470904540.507345"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "-onLogined:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "meizhouliu/Shared/Controllers/MZLModifyNameByPhoneViewController.m"
+            timestampString = "470904656.558711"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "-handle3rdRegResponse:type:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "meizhouliu/MZLAppDelegate.m"
+            timestampString = "470905406.879518"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "364"
+            endingLineNumber = "364"
+            landmarkName = "-refreshLoginedUserInfo"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
             filePath = "meizhouliu/Shared/Models/MZLAppUser.m"
-            timestampString = "470902278.21317"
+            timestampString = "470905146.361867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "17"
             endingLineNumber = "17"
             landmarkName = "-isLogined"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "meizhouliu/MZLAppDelegate.m"
+            timestampString = "470905386.886792"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
+            landmarkName = "-initData"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -47,7 +47,7 @@
                             </constraints>
                         </view>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入邮箱地址或昵称" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ASM-q5-nVj">
-                            <rect key="frame" x="109" y="22" width="191" height="30"/>
+                            <rect key="frame" x="100" y="22" width="200" height="30"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
@@ -59,9 +59,9 @@
                             </constraints>
                         </view>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mt1-hm-9YC">
-                            <rect key="frame" x="109" y="73" width="191" height="30"/>
+                            <rect key="frame" x="100" y="73" width="200" height="30"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -72,7 +72,7 @@
                         <constraint firstAttribute="height" constant="115" id="6YT-dE-LhR"/>
                         <constraint firstItem="2j3-pl-G0n" firstAttribute="top" secondItem="v4w-ap-yer" secondAttribute="top" constant="62" id="893-RD-H0Z"/>
                         <constraint firstAttribute="trailing" secondItem="ASM-q5-nVj" secondAttribute="trailing" constant="20" id="Eq7-kZ-PvB"/>
-                        <constraint firstItem="Mt1-hm-9YC" firstAttribute="leading" secondItem="NJk-3W-tzN" secondAttribute="trailing" constant="64" id="FC5-Eo-GCL"/>
+                        <constraint firstItem="Mt1-hm-9YC" firstAttribute="leading" secondItem="NJk-3W-tzN" secondAttribute="trailing" constant="55" id="FC5-Eo-GCL"/>
                         <constraint firstAttribute="trailing" secondItem="o1C-n1-RqU" secondAttribute="trailing" constant="15" id="GVX-Yk-gcE"/>
                         <constraint firstItem="Mt1-hm-9YC" firstAttribute="top" secondItem="2j3-pl-G0n" secondAttribute="bottom" constant="10" id="IS9-Dj-ifq"/>
                         <constraint firstAttribute="trailing" secondItem="2j3-pl-G0n" secondAttribute="trailing" constant="15" id="Jmf-hk-5L0"/>
@@ -87,7 +87,7 @@
                         <constraint firstItem="2j3-pl-G0n" firstAttribute="leading" secondItem="v4w-ap-yer" secondAttribute="leading" constant="15" id="gkN-LH-jKV"/>
                         <constraint firstItem="ASM-q5-nVj" firstAttribute="top" secondItem="v4w-ap-yer" secondAttribute="top" constant="22" id="hrD-z3-0Sa"/>
                         <constraint firstItem="NJk-3W-tzN" firstAttribute="leading" secondItem="v4w-ap-yer" secondAttribute="leading" constant="15" id="oxU-hm-Hwj"/>
-                        <constraint firstItem="ASM-q5-nVj" firstAttribute="leading" secondItem="2Qt-Pq-ybm" secondAttribute="trailing" constant="29" id="paA-nI-CLK"/>
+                        <constraint firstItem="ASM-q5-nVj" firstAttribute="leading" secondItem="2Qt-Pq-ybm" secondAttribute="trailing" constant="20" id="paA-nI-CLK"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bKk-BH-XTT">
@@ -96,7 +96,7 @@
                         <constraint firstAttribute="height" constant="43" id="a1G-Uq-31O"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <state key="normal" title="登录" backgroundImage="nextStepBtn">
+                    <state key="normal" title="登   录" backgroundImage="nextStepBtn">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>

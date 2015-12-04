@@ -7,10 +7,13 @@
 //
 
 #import "MZLBaseViewController.h"
+@class MZLModelAccessToken;
 
 @interface MZLModifyNameByPhoneViewController : MZLBaseViewController
 
 @property (nonatomic, copy) NSString *token;
+
+@property (nonatomic , strong) MZLModelAccessToken *accessToken;
 
 @property (nonatomic, assign) MZLLoginType loginType;
 

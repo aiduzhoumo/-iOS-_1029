@@ -96,6 +96,7 @@
         
         self.phoneNumTF.text = [MZLSharedData appUser].user.phone;
         self.passWordTF.text = @"somepassword"; // fake password, just for display purpose
+        
         [self showLoginProgressIndicator];
     }
     [self hideProgressIndicator];

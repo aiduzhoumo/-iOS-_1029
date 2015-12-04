@@ -141,6 +141,8 @@
 - (void)onLogined:(MZLLoginType)type {
     [MZLSharedData appUser].loginType = type;
     
+    [MZLSharedData appUser];
+    
     [[MZLSharedData appUser] saveInPreference];
     // 登录后，需要重新绑定deviceToken到userId上
     [MZLServices recordUserLocation:[MZLSharedData selectedCity]];
