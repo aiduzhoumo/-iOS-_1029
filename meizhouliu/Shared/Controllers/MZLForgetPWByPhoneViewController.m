@@ -57,9 +57,8 @@
         [self hideProgressIndicator:NO];
         if (result.error == MZL_SVC_RESPONSE_CODE_SUCCESS) {
            //获取成功
-            NSLog(@"获取短信验证码成功。。。忘记密码使用的");
+//            NSLog(@"获取短信验证码成功。。。忘记密码使用的");
             [CountdownButtonByTime countdownButton:_getSecCodeBtn time:59];
-            
             
         } else if (result.error == MZL_RL_RCODE_GENERAL_ERROR) { // 错误码-1
             [UIAlertView showAlertMessage:result.errorMessage];
@@ -127,7 +126,6 @@
         } else { // 不明错误
             [UIAlertView showAlertMessage:@"网络繁忙，请稍后再试"];
         }
-        
         
     } errorBlock:^(NSError *error) {
         [UIAlertView showAlertMessage:@"验证失败，请重新验证"];

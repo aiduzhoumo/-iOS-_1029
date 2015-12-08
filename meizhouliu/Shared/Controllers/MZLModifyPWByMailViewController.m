@@ -30,14 +30,17 @@
 - (IBAction)backLoginBtn:(id)sender {
     
     //跳回登入界面
-    [IBAlertView showDetermineWithTitle:@"提示" message:@"修改成功" dismissBlock:^{
-        NSArray *controllers = self.navigationController.viewControllers;
-        for (int i = 0; i< controllers.count ; i++) {
-            NSLog(@"controllers[%d] == %@",i,controllers[i]);
-        }
-        
-        [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
-    }];
+//    [IBAlertView showDetermineWithTitle:@"提示" message:@"修改成功" dismissBlock:^{
+//        NSArray *controllers = self.navigationController.viewControllers;
+//        for (int i = 0; i< controllers.count ; i++) {
+//            NSLog(@"controllers[%d] == %@",i,controllers[i]);
+//        }
+//        
+//        [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
+//    }];
+//
     
+    [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
+
 }
 @end

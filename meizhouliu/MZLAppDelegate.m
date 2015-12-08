@@ -187,9 +187,6 @@
 
 - (void)initData {
     [MZLSharedData loadAppUserFromCache];
-    
-    MZLAppUser *user = [MZLSharedData appUser];
-    
     [MZLSharedData loadLocationFromCache];
     [MZLSharedData loadSystemLocations];
     [MZLAppNotices loadNoticesFromCache];
@@ -242,7 +239,6 @@
                      tencentOAuthCls:[TencentOAuth class]];
 
     
-#warning 自己把下面的代码打开注释了
 //    //添加腾讯微博应用
 //    [ShareSDK connectTencentWeiboWithAppKey:@"801520494"
 //                                  appSecret:@"653d3aa85c7322e3fb5f41f4a58807ba"
@@ -369,21 +365,6 @@
         }];
     }
 }
-
-//- (void)refreshLoginedUserInfo {
-//    // 刷新userInfo，如果已登录，避免当从用户升级到作者时在我的界面看不到自己的文章
-//    if ([MZLSharedData isAppUserLogined]) {
-//        [MZLServices userInfoServiceWithSuccBlock:^(NSArray *models) {
-//            MZLModelUser *user = ((MZLUserDetailResponse *)models[0]).user;
-//            MZLAppUser *appUser = [MZLSharedData appUser];
-//            appUser.user = user;
-//            [appUser saveInPreference];
-//
-//        } errorBlock:^(NSError *error) {
-//            // ignore error...
-//        }];
-//    }
-//}
 
 //- (id)initWithCoder:(NSCoder *)aDecoder {
 //    if (self = [super init]) {

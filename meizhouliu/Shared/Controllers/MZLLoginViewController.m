@@ -232,7 +232,7 @@
     
     [self initSeparatorView:@[self.sepPwd, self.sepUser]];
     
-    [self.btnFavDirect setTitleColor:colorWithHexString(@"#999999") forState:UIControlStateNormal];
+    [self.btnFavDirect setTitleColor:colorWithHexString(@"#9A9898") forState:UIControlStateNormal];
     
     [self.btnLogin setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.btnLogin setBackgroundColor:colorWithHexString(@"#fdd926")]; //f0b80c
@@ -754,7 +754,7 @@
         [self saveUserAndToken:response];
         
         if (![response.user.bind isEqualToString:@"true"]) {
-            [UIAlertView showAlertMessage:@"您的用户未绑定手机号，请绑定后再登录"];
+//            [UIAlertView showAlertMessage:@"您的用户未绑定手机号，请绑定后再登录"];
             self.token = response.accessToken.token;
             [self performSegueWithIdentifier:MZL_SEGUE_TOBINDPHONE sender:nil];
             return ;
