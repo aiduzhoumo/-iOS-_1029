@@ -40,6 +40,7 @@
 #import "MZLShortArticleDetailVC.h"
 #import "MZLModelShortArticle.h"
 #import <TuSDK/TuSDK.h>
+#import "APService.h"
 
 #import <sys/socket.h>
 #import <sys/sysctl.h>
@@ -75,14 +76,96 @@
         }
     }
     
-    [self co_registerNotification];
+//    [self co_registerNotification];
 
+    // Required
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        //可以添加自定义categories
+        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                                       UIUserNotificationTypeSound |
+                                                       UIUserNotificationTypeAlert)
+                                           categories:nil];
+    } else {
+        //categories 必须为nil
+        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                       UIRemoteNotificationTypeSound |
+                                                       UIRemoteNotificationTypeAlert)
+                                           categories:nil];
+    }
+    
+    // Required
+    [APService setupWithOption:launchOptions];
+    
     [self internalInit];
     
     [self servicesOnStartup];
     
 //    [MZLDummyObject test];
     return YES;
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    // Required
+    [APService registerDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    // Required
+    [APService handleRemoteNotification:userInfo];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    
+    // IOS 7 Support Required
+    [APService handleRemoteNotification:userInfo];
+    _shouldInvokeEventsWhenActive = NO;
+    if(userInfo != nil) {
+        UIViewController *vc = [self currentVisibleViewController];
+        UIStoryboard *sb = MZL_MAIN_STORYBOARD();
+        UIViewController *targetVc;
+        //article 不为空，跳转到指定文章
+        if (!isEmptyString([[userInfo valueForKey:@"article"] valueForKey:@"id"])) {
+            MZLModelArticle *article = [[MZLModelArticle alloc] init];
+            article.identifier = [[[userInfo valueForKey:@"article"] valueForKey:@"id"] intValue];
+            MZLArticleDetailViewController * vcArticleDetail = (MZLArticleDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLArticleDetailViewController class])];
+            vcArticleDetail.articleParam = article;
+            targetVc = vcArticleDetail;
+        }
+        //destination 不为空 跳到指定目的地
+        else if(!isEmptyString([[userInfo valueForKey:@"destination"] valueForKey:@"id"])) {
+            MZLModelLocationBase *location = [[MZLModelLocationBase alloc] init];
+            location.identifier = [[[userInfo valueForKey:@"destination"] valueForKey:@"id"] intValue];
+            MZLLocationDetailViewController * vcLocationDetail = (MZLLocationDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLLocationDetailViewController class])];
+            vcLocationDetail.locationParam = location;
+            targetVc = vcLocationDetail;
+        }
+        // 跳转个人通知
+        else if(!isEmptyString([[userInfo valueForKey:@"notice"] valueForKey:@"id"])) {
+            MZLModelNotice *notice = [[MZLModelNotice alloc] init];
+            notice.identifier = [[[userInfo valueForKey:@"notice"] valueForKey:@"id"] intValue];
+            MZLNoticeDetailViewController * vcNoticeDetail = (MZLNoticeDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLNoticeDetailViewController class])];
+            vcNoticeDetail.noticeParam = notice;
+            targetVc = vcNoticeDetail;
+        }
+        // 跳转短文详情
+        else if (!isEmptyString([[[MZLSharedData apsInfo] valueForKey:@"short_article"] valueForKey:@"id"])) {
+            MZLModelShortArticle *shortArticle = [[MZLModelShortArticle alloc] init];
+            shortArticle.identifier = [[[[MZLSharedData apsInfo] valueForKey:@"short_article"] valueForKey:@"id"] intValue];
+            MZLShortArticleDetailVC *vcShortArticle = [MZL_SHORT_ARTICLE_STORYBOARD() instantiateViewControllerWithIdentifier:NSStringFromClass([MZLShortArticleDetailVC class])];
+            vcShortArticle.shortArticle = shortArticle;
+            vcShortArticle.popupCommentOnViewAppear = NO;
+            vcShortArticle.hidesBottomBarWhenPushed = YES;
+            targetVc = vcShortArticle;
+        }
+        if (targetVc) {
+            [vc mzl_pushViewController:targetVc];
+        }
+    }
+    
+    completionHandler(UIBackgroundFetchResultNewData);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -377,59 +460,59 @@
 //     [aCoder encodeObject:@([MZLSharedData appUser].user.level) forKey:@"KEY_USER_LEVEL"];;
 //}
 
-#pragma mark - remote notification delegate
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
-//    [UMessage didReceiveRemoteNotification:userInfo];
-    if([UIApplication sharedApplication].applicationState == UIApplicationStateBackground ||
-       [UIApplication sharedApplication].applicationState == UIApplicationStateInactive) {
-        _shouldInvokeEventsWhenActive = NO;
-        if(userInfo != nil) {
-            UIViewController *vc = [self currentVisibleViewController];
-            UIStoryboard *sb = MZL_MAIN_STORYBOARD();
-            UIViewController *targetVc;
-            //article 不为空，跳转到指定文章
-            if (!isEmptyString([[userInfo valueForKey:@"article"] valueForKey:@"id"])) {
-                MZLModelArticle *article = [[MZLModelArticle alloc] init];
-                article.identifier = [[[userInfo valueForKey:@"article"] valueForKey:@"id"] intValue];
-                MZLArticleDetailViewController * vcArticleDetail = (MZLArticleDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLArticleDetailViewController class])];
-                vcArticleDetail.articleParam = article;
-                targetVc = vcArticleDetail;
-            }
-            //destination 不为空 跳到指定目的地
-            else if(!isEmptyString([[userInfo valueForKey:@"destination"] valueForKey:@"id"])) {
-                MZLModelLocationBase *location = [[MZLModelLocationBase alloc] init];
-                location.identifier = [[[userInfo valueForKey:@"destination"] valueForKey:@"id"] intValue];
-                MZLLocationDetailViewController * vcLocationDetail = (MZLLocationDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLLocationDetailViewController class])];
-                vcLocationDetail.locationParam = location;
-                targetVc = vcLocationDetail;
-            }
-            // 跳转个人通知
-            else if(!isEmptyString([[userInfo valueForKey:@"notice"] valueForKey:@"id"])) {
-                MZLModelNotice *notice = [[MZLModelNotice alloc] init];
-                notice.identifier = [[[userInfo valueForKey:@"notice"] valueForKey:@"id"] intValue];
-                MZLNoticeDetailViewController * vcNoticeDetail = (MZLNoticeDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLNoticeDetailViewController class])];
-                vcNoticeDetail.noticeParam = notice;
-                targetVc = vcNoticeDetail;
-            }
-            // 跳转短文详情
-            else if (!isEmptyString([[[MZLSharedData apsInfo] valueForKey:@"short_article"] valueForKey:@"id"])) {
-                MZLModelShortArticle *shortArticle = [[MZLModelShortArticle alloc] init];
-                shortArticle.identifier = [[[[MZLSharedData apsInfo] valueForKey:@"short_article"] valueForKey:@"id"] intValue];
-                MZLShortArticleDetailVC *vcShortArticle = [MZL_SHORT_ARTICLE_STORYBOARD() instantiateViewControllerWithIdentifier:NSStringFromClass([MZLShortArticleDetailVC class])];
-                vcShortArticle.shortArticle = shortArticle;
-                vcShortArticle.popupCommentOnViewAppear = NO;
-                vcShortArticle.hidesBottomBarWhenPushed = YES;
-                targetVc = vcShortArticle;
-            }
-            if (targetVc) {
-                [vc mzl_pushViewController:targetVc];
-            }
-        }
-    }
-    //call the fetchCompletionHandler as soon as you're finished performing that operation, so the system can accurately estimate its power and data cost
-    completionHandler(UIBackgroundFetchResultNewData);
-}
+//#pragma mark - remote notification delegate
+//
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
+////    [UMessage didReceiveRemoteNotification:userInfo];
+//    if([UIApplication sharedApplication].applicationState == UIApplicationStateBackground ||
+//       [UIApplication sharedApplication].applicationState == UIApplicationStateInactive) {
+//        _shouldInvokeEventsWhenActive = NO;
+//        if(userInfo != nil) {
+//            UIViewController *vc = [self currentVisibleViewController];
+//            UIStoryboard *sb = MZL_MAIN_STORYBOARD();
+//            UIViewController *targetVc;
+//            //article 不为空，跳转到指定文章
+//            if (!isEmptyString([[userInfo valueForKey:@"article"] valueForKey:@"id"])) {
+//                MZLModelArticle *article = [[MZLModelArticle alloc] init];
+//                article.identifier = [[[userInfo valueForKey:@"article"] valueForKey:@"id"] intValue];
+//                MZLArticleDetailViewController * vcArticleDetail = (MZLArticleDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLArticleDetailViewController class])];
+//                vcArticleDetail.articleParam = article;
+//                targetVc = vcArticleDetail;
+//            }
+//            //destination 不为空 跳到指定目的地
+//            else if(!isEmptyString([[userInfo valueForKey:@"destination"] valueForKey:@"id"])) {
+//                MZLModelLocationBase *location = [[MZLModelLocationBase alloc] init];
+//                location.identifier = [[[userInfo valueForKey:@"destination"] valueForKey:@"id"] intValue];
+//                MZLLocationDetailViewController * vcLocationDetail = (MZLLocationDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLLocationDetailViewController class])];
+//                vcLocationDetail.locationParam = location;
+//                targetVc = vcLocationDetail;
+//            }
+//            // 跳转个人通知
+//            else if(!isEmptyString([[userInfo valueForKey:@"notice"] valueForKey:@"id"])) {
+//                MZLModelNotice *notice = [[MZLModelNotice alloc] init];
+//                notice.identifier = [[[userInfo valueForKey:@"notice"] valueForKey:@"id"] intValue];
+//                MZLNoticeDetailViewController * vcNoticeDetail = (MZLNoticeDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLNoticeDetailViewController class])];
+//                vcNoticeDetail.noticeParam = notice;
+//                targetVc = vcNoticeDetail;
+//            }
+//            // 跳转短文详情
+//            else if (!isEmptyString([[[MZLSharedData apsInfo] valueForKey:@"short_article"] valueForKey:@"id"])) {
+//                MZLModelShortArticle *shortArticle = [[MZLModelShortArticle alloc] init];
+//                shortArticle.identifier = [[[[MZLSharedData apsInfo] valueForKey:@"short_article"] valueForKey:@"id"] intValue];
+//                MZLShortArticleDetailVC *vcShortArticle = [MZL_SHORT_ARTICLE_STORYBOARD() instantiateViewControllerWithIdentifier:NSStringFromClass([MZLShortArticleDetailVC class])];
+//                vcShortArticle.shortArticle = shortArticle;
+//                vcShortArticle.popupCommentOnViewAppear = NO;
+//                vcShortArticle.hidesBottomBarWhenPushed = YES;
+//                targetVc = vcShortArticle;
+//            }
+//            if (targetVc) {
+//                [vc mzl_pushViewController:targetVc];
+//            }
+//        }
+//    }
+//    //call the fetchCompletionHandler as soon as you're finished performing that operation, so the system can accurately estimate its power and data cost
+//    completionHandler(UIBackgroundFetchResultNewData);
+//}
 
 //获取当前的viewControll
 - (UIViewController *)currentVisibleViewController {

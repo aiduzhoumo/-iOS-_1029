@@ -64,6 +64,10 @@
 		78EB814D1C084C03009342A1 /* MZLForgetPWByMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EB814C1C084C03009342A1 /* MZLForgetPWByMailViewController.m */; };
 		78EB81501C084C54009342A1 /* MZLModifyPWByMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EB814F1C084C54009342A1 /* MZLModifyPWByMailViewController.m */; };
 		78EE6B691C09E8540046D026 /* MZLLoginByMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EE6B681C09E8540046D026 /* MZLLoginByMailViewController.m */; };
+		78F1ED561C16E32000189C62 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78F1ED551C16E32000189C62 /* CFNetwork.framework */; };
+		78F1ED581C16E33500189C62 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78F1ED571C16E33500189C62 /* CoreFoundation.framework */; };
+		78F1ED5C1C16E37300189C62 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78F1ED5B1C16E37300189C62 /* libPushSDK-1.8.8.a */; };
+		78F1ED5E1C16E3A100189C62 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78F1ED5D1C16E3A100189C62 /* PushConfig.plist */; };
 		78F32E091C055293008ECF78 /* MZLGetCodeSvcParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F32E081C055293008ECF78 /* MZLGetCodeSvcParam.m */; };
 		78F32E0C1C0558E3008ECF78 /* MZLVerifyCodeSvcParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F32E0B1C0558E3008ECF78 /* MZLVerifyCodeSvcParam.m */; };
 		78F900911BFD7B6A00429A2A /* MZLPhoneRegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F900901BFD7B6A00429A2A /* MZLPhoneRegViewController.m */; };
@@ -546,6 +550,11 @@
 		78EB814F1C084C54009342A1 /* MZLModifyPWByMailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLModifyPWByMailViewController.m; sourceTree = "<group>"; };
 		78EE6B671C09E8540046D026 /* MZLLoginByMailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLLoginByMailViewController.h; sourceTree = "<group>"; };
 		78EE6B681C09E8540046D026 /* MZLLoginByMailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLLoginByMailViewController.m; sourceTree = "<group>"; };
+		78F1ED551C16E32000189C62 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		78F1ED571C16E33500189C62 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		78F1ED5A1C16E37300189C62 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
+		78F1ED5B1C16E37300189C62 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
+		78F1ED5D1C16E3A100189C62 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		78F32E071C055293008ECF78 /* MZLGetCodeSvcParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLGetCodeSvcParam.h; sourceTree = "<group>"; };
 		78F32E081C055293008ECF78 /* MZLGetCodeSvcParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLGetCodeSvcParam.m; sourceTree = "<group>"; };
 		78F32E0A1C0558E3008ECF78 /* MZLVerifyCodeSvcParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLVerifyCodeSvcParam.h; sourceTree = "<group>"; };
@@ -1217,6 +1226,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78F1ED581C16E33500189C62 /* CoreFoundation.framework in Frameworks */,
+				78F1ED561C16E32000189C62 /* CFNetwork.framework in Frameworks */,
 				846440411BCC922A00B9DA5D /* libUMessage_Sdk_1.2.0.a in Frameworks */,
 				8443820C1BE0D00D00DF1C7E /* libWeiboSDK.a in Frameworks */,
 				DCC283951A64E0950001FAF1 /* AssetsLibrary.framework in Frameworks */,
@@ -1243,6 +1254,7 @@
 				844382021BE0D00D00DF1C7E /* QZoneConnection.framework in Frameworks */,
 				E54DA432193EF5AF0034DB23 /* libz.dylib in Frameworks */,
 				E5432590190F9E4800C1AA9E /* MessageUI.framework in Frameworks */,
+				78F1ED5C1C16E37300189C62 /* libPushSDK-1.8.8.a in Frameworks */,
 				E543258C190F9E3600C1AA9E /* libstdc++.dylib in Frameworks */,
 				E5432588190F9E2100C1AA9E /* libz.1.2.5.dylib in Frameworks */,
 				E5432586190F9E1900C1AA9E /* libicucore.dylib in Frameworks */,
@@ -1422,6 +1434,15 @@
 				78EB814F1C084C54009342A1 /* MZLModifyPWByMailViewController.m */,
 			);
 			name = forgetPassW;
+			sourceTree = "<group>";
+		};
+		78F1ED591C16E37300189C62 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				78F1ED5A1C16E37300189C62 /* APService.h */,
+				78F1ED5B1C16E37300189C62 /* libPushSDK-1.8.8.a */,
+			);
+			path = lib;
 			sourceTree = "<group>";
 		};
 		844381D91BE0D00D00DF1C7E /* ShareSDK */ = {
@@ -1743,6 +1764,8 @@
 		DC48901A18EBE2870043D412 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				78F1ED571C16E33500189C62 /* CoreFoundation.framework */,
+				78F1ED551C16E32000189C62 /* CFNetwork.framework */,
 				DCF6B9231AEF7B2D00E613A5 /* GPUImage.framework */,
 				DCF6B9241AEF7B2D00E613A5 /* TuSDK.framework */,
 				DCC283941A64E0950001FAF1 /* AssetsLibrary.framework */,
@@ -1789,6 +1812,7 @@
 				DC48902718EBE2870043D412 /* main.m */,
 				DC48902318EBE2870043D412 /* mzl_mobile_ios-Info.plist */,
 				DC48902918EBE2870043D412 /* mzl_mobile_ios-Prefix.pch */,
+				78F1ED5D1C16E3A100189C62 /* PushConfig.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2080,6 +2104,7 @@
 		DCAAE3C018F3A870002C593B /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				78F1ED591C16E37300189C62 /* lib */,
 				844381D91BE0D00D00DF1C7E /* ShareSDK */,
 				84814B921BB3CCC90037D2CE /* UMAnalytics_Sdk_3.5.17 */,
 				1BD7D0161A42B79B007498A8 /* UmengPush */,
@@ -3015,6 +3040,7 @@
 				DC9B8939192B4CEE00CF1467 /* MZLRouteCell.xib in Resources */,
 				DCFF9E7D1907AD9C0098D620 /* Main_iPad.storyboard in Resources */,
 				DCAED8431A511AAA004DA3B6 /* ShortArticle.storyboard in Resources */,
+				78F1ED5E1C16E3A100189C62 /* PushConfig.plist in Resources */,
 				DC94C27E1A6F476800E8A74A /* Test.storyboard in Resources */,
 				E5E153E4192A0E6D0099421D /* iRate.bundle in Resources */,
 				DCD2129A19AAD9F4003BB633 /* SBPickerSelector.xib in Resources */,
@@ -3579,6 +3605,7 @@
 					"$(PROJECT_DIR)/meizhouliu/3rdParty/UMAnalytics_Sdk_3.5.17",
 					"$(PROJECT_DIR)/meizhouliu/3rdParty/ShareSDK/extends/SinaWeiboSDK",
 					"$(PROJECT_DIR)/meizhouliu/3rdParty/ShareSDK/extends/WeChatSDK",
+					"$(PROJECT_DIR)/meizhouliu/3rdParty/lib",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -3603,7 +3630,7 @@
 					UIKit,
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.adhoc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.ios;
 				PRODUCT_NAME = mzl_mobile_ios;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3647,6 +3674,7 @@
 					"$(PROJECT_DIR)/meizhouliu/3rdParty/UMAnalytics_Sdk_3.5.17",
 					"$(PROJECT_DIR)/meizhouliu/3rdParty/ShareSDK/extends/SinaWeiboSDK",
 					"$(PROJECT_DIR)/meizhouliu/3rdParty/ShareSDK/extends/WeChatSDK",
+					"$(PROJECT_DIR)/meizhouliu/3rdParty/lib",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -3671,7 +3699,7 @@
 					UIKit,
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.adhoc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.ios;
 				PRODUCT_NAME = mzl_mobile_ios;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
