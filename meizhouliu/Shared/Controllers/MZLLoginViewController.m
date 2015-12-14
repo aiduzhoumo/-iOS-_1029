@@ -760,6 +760,9 @@
             return ;
         }
         
+        //给服务器进行极光的注册
+        [MZLServices registerJpushWithUser];
+        
         [self onLogined:type];
         [self dismissCurrentViewController:self.executionBlockWhenDismissed];
         [TalkingDataAppCpa onLogin:response.accessToken.token];

@@ -14,7 +14,7 @@
 
 - (BOOL)isLogined {
     
-    NSLog(@"self.user.bind = == == %@",self.user.bind);
+//    NSLog(@"self.user.bind = == == %@",self.user.bind);
     
     if (![self.user.bind isEqualToString:@"true"]) {
         return NO;

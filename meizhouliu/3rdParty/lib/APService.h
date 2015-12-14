@@ -27,6 +27,7 @@ extern NSString *const kJPFServiceErrorNotification;  // 错误提示
                                 categories:(NSSet *)categories;  // 注册APNS类型
 + (void)registerDeviceToken:(NSData *)deviceToken;  // 向服务器上报Device Token
 + (void)handleRemoteNotification:(NSDictionary *)
+
     remoteInfo;  // 处理收到的APNS消息，向服务器上报收到APNS消息
 
 // 下面的接口是可选的

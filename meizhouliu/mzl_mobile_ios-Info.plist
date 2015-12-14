@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.3.2</string>
+	<string>3.4.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -88,7 +88,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>332.3</string>
+	<string>334.0</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>tencent</string>

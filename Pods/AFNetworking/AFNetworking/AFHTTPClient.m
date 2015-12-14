@@ -138,10 +138,11 @@ NSString * AFQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSS
     NSMutableArray *mutablePairs = [NSMutableArray array];
     for (AFQueryStringPair *pair in AFQueryStringPairsFromDictionary(parameters)) {
         [mutablePairs addObject:[pair URLEncodedStringValueWithEncoding:stringEncoding]];
-        [mutablePairs addObject:@"f=ios"];
-        NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-        [mutablePairs addObject:[NSString stringWithFormat:@"version=%@",version]];
+
     }
+    [mutablePairs addObject:@"f=ios"];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    [mutablePairs addObject:[NSString stringWithFormat:@"version=%@",version]];
 
     return [mutablePairs componentsJoinedByString:@"&"];
 }

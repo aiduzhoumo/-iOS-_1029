@@ -174,4 +174,7 @@ typedef void(^ MZL_SVC_ERR_BLOCK)(NSError *error);
 #pragma mark - user forget password by email
 + (void)forgetPassWordByEmail:(NSString *)email succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 
+#pragma mark - user register JPushID
++ (void)registerJpushWithUser;
+
 @end

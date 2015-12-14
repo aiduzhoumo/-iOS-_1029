@@ -63,7 +63,7 @@
 #import "MZLGetCodeSvcParam.h"
 #import "MZLVerifyCodeSvcParam.h"
 #import "MZLPhoneLoginSvcParam.h"
-
+#import "APService.h"
 
 #define MZL_SERVICE_REGISTER @"users/register"
 #define MZL_SERVICE_REGISTER_PHONE @"users/register/phone"
@@ -86,6 +86,7 @@
 #define MZL_SERVICE_USER_UPLOAD_IMAGE @"users/%d/photo"
 #define MZL_SERVICE_PHONES_GETCODE @"phones/%@/%@"
 #define MZL_SERVICE_PHONES_VERIFYCODE @"phones/%@/%@/verify"
+#define MZL_SERVICE_PUSH_REGISTER @"push/%@/register"
 
 #define MZL_SERVICE_ARTICLES @"articles"
 #define MZL_SERVICE_SYSTEM_ARTICLES @"articles/choice"
@@ -1690,6 +1691,18 @@
     [self postObject:objectManager atPath:servicePath parameters:params succBlock:succBlock errorBlock:errorBlock];
 }
 
+#pragma mark - user register JPushID
++ (void)registerJpushWithUser {
+    RKObjectManager *objecManager = [self objectManager];
+    NSString *servicePath = [self servicePath:MZL_SERVICE_PUSH_REGISTER] ;
+    servicePath = [NSString stringWithFormat:servicePath,[APService registrationID]];
+    RKResponseDescriptor *responseDescriptor = [self responseDescriptor:[MZLServiceMapping serviceResponseObjectMapping] servicePath:servicePath];
+    [objecManager addResponseDescriptor:responseDescriptor];
+    
+    [self postObject:objecManager object:nil atPath:servicePath parameters:nil succBlock:^(NSArray *models){
+    }errorBlock:^(NSError *error){
+    }];
+}
 //
 ///** 启动时发送一条消息到服务端，方便统计 */
 //+ (void)heartbeatOnAppStartup {

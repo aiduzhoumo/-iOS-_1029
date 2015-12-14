@@ -41,6 +41,7 @@
 #import "MZLModelShortArticle.h"
 #import <TuSDK/TuSDK.h>
 #import "APService.h"
+#import "IBAlertView.h"
 
 #import <sys/socket.h>
 #import <sys/sysctl.h>
@@ -96,6 +97,7 @@
     // Required
     [APService setupWithOption:launchOptions];
     
+
     [self internalInit];
     
     [self servicesOnStartup];
@@ -108,60 +110,119 @@
     
     // Required
     [APService registerDeviceToken:deviceToken];
+    
+    //向服务器进行注册
+    [MZLServices registerJpushWithUser];
+//    NSLog(@"[APService registrationID]== %@",[APService registrationID]);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
     // Required
     [APService handleRemoteNotification:userInfo];
+    
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
-    
     // IOS 7 Support Required
+    
+    NSLog(@"userInfo  ====  %@",userInfo);
+    
     [APService handleRemoteNotification:userInfo];
-    _shouldInvokeEventsWhenActive = NO;
-    if(userInfo != nil) {
-        UIViewController *vc = [self currentVisibleViewController];
-        UIStoryboard *sb = MZL_MAIN_STORYBOARD();
-        UIViewController *targetVc;
-        //article 不为空，跳转到指定文章
-        if (!isEmptyString([[userInfo valueForKey:@"article"] valueForKey:@"id"])) {
-            MZLModelArticle *article = [[MZLModelArticle alloc] init];
-            article.identifier = [[[userInfo valueForKey:@"article"] valueForKey:@"id"] intValue];
-            MZLArticleDetailViewController * vcArticleDetail = (MZLArticleDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLArticleDetailViewController class])];
-            vcArticleDetail.articleParam = article;
-            targetVc = vcArticleDetail;
+    
+    if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground || [UIApplication sharedApplication].applicationState == UIApplicationStateInactive) {
+        _shouldInvokeEventsWhenActive = NO;
+        if(userInfo != nil) {
+            UIViewController *vc = [self currentVisibleViewController];
+            UIStoryboard *sb = MZL_MAIN_STORYBOARD();
+            UIViewController *targetVc;
+            //article 不为空，跳转到指定文章
+            
+            if ([[userInfo valueForKey:@"article"] valueForKey:@"id"]) {
+                MZLModelArticle *article = [[MZLModelArticle alloc] init];
+                article.identifier = [[[userInfo valueForKey:@"article"] valueForKey:@"id"] intValue];
+                MZLArticleDetailViewController * vcArticleDetail = (MZLArticleDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLArticleDetailViewController class])];
+                vcArticleDetail.articleParam = article;
+                targetVc = vcArticleDetail;
+            }
+            else if([[userInfo valueForKey:@"notice"] valueForKey:@"id"]) {
+                MZLModelNotice *notice = [[MZLModelNotice alloc] init];
+                notice.identifier = [[[userInfo valueForKey:@"notice"] valueForKey:@"id"] intValue];
+                MZLNoticeDetailViewController * vcNoticeDetail = (MZLNoticeDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLNoticeDetailViewController class])];
+                vcNoticeDetail.noticeParam = notice;
+                targetVc = vcNoticeDetail;
+            }
+            if (targetVc) {
+                [vc mzl_pushViewController:targetVc];
+            }
+            
         }
-        //destination 不为空 跳到指定目的地
-        else if(!isEmptyString([[userInfo valueForKey:@"destination"] valueForKey:@"id"])) {
-            MZLModelLocationBase *location = [[MZLModelLocationBase alloc] init];
-            location.identifier = [[[userInfo valueForKey:@"destination"] valueForKey:@"id"] intValue];
-            MZLLocationDetailViewController * vcLocationDetail = (MZLLocationDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLLocationDetailViewController class])];
-            vcLocationDetail.locationParam = location;
-            targetVc = vcLocationDetail;
-        }
-        // 跳转个人通知
-        else if(!isEmptyString([[userInfo valueForKey:@"notice"] valueForKey:@"id"])) {
-            MZLModelNotice *notice = [[MZLModelNotice alloc] init];
-            notice.identifier = [[[userInfo valueForKey:@"notice"] valueForKey:@"id"] intValue];
-            MZLNoticeDetailViewController * vcNoticeDetail = (MZLNoticeDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLNoticeDetailViewController class])];
-            vcNoticeDetail.noticeParam = notice;
-            targetVc = vcNoticeDetail;
-        }
-        // 跳转短文详情
-        else if (!isEmptyString([[[MZLSharedData apsInfo] valueForKey:@"short_article"] valueForKey:@"id"])) {
-            MZLModelShortArticle *shortArticle = [[MZLModelShortArticle alloc] init];
-            shortArticle.identifier = [[[[MZLSharedData apsInfo] valueForKey:@"short_article"] valueForKey:@"id"] intValue];
-            MZLShortArticleDetailVC *vcShortArticle = [MZL_SHORT_ARTICLE_STORYBOARD() instantiateViewControllerWithIdentifier:NSStringFromClass([MZLShortArticleDetailVC class])];
-            vcShortArticle.shortArticle = shortArticle;
-            vcShortArticle.popupCommentOnViewAppear = NO;
-            vcShortArticle.hidesBottomBarWhenPushed = YES;
-            targetVc = vcShortArticle;
-        }
-        if (targetVc) {
-            [vc mzl_pushViewController:targetVc];
+
+    }else if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+        
+        _shouldInvokeEventsWhenActive = NO;
+        if(userInfo != nil) {
+            
+            
+            if ([[userInfo valueForKey:@"article"] valueForKey:@"id"]) {
+             
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您被点赞啦!" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                UIAlertAction *other = [UIAlertAction actionWithTitle:@"查看" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    UIViewController *vc = [self currentVisibleViewController];
+                    UIStoryboard *sb = MZL_MAIN_STORYBOARD();
+                    UIViewController *targetVc;
+                    
+                    MZLModelArticle *article = [[MZLModelArticle alloc] init];
+                    article.identifier = [[[userInfo valueForKey:@"article"] valueForKey:@"id"] intValue];
+                    MZLArticleDetailViewController * vcArticleDetail = (MZLArticleDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLArticleDetailViewController class])];
+                    vcArticleDetail.articleParam = article;
+                    targetVc = vcArticleDetail;
+                    
+                    if (targetVc) {
+                        [vc mzl_pushViewController:targetVc];
+                    }
+                }];
+                
+                [alert addAction:cancel];
+                [alert addAction:other];
+                
+                [self.currentVisibleViewController presentViewController:alert animated:YES completion:nil];
+                
+            }
+            else if([[userInfo valueForKey:@"notice"] valueForKey:@"id"]) {
+                
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"有精选文章推荐" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                UIAlertAction *other = [UIAlertAction actionWithTitle:@"查看" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    UIViewController *vc = [self currentVisibleViewController];
+                    UIStoryboard *sb = MZL_MAIN_STORYBOARD();
+                    UIViewController *targetVc;
+                    
+                    MZLModelNotice *notice = [[MZLModelNotice alloc] init];
+                    notice.identifier = [[[userInfo valueForKey:@"notice"] valueForKey:@"id"] intValue];
+                    MZLNoticeDetailViewController * vcNoticeDetail = (MZLNoticeDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLNoticeDetailViewController class])];
+                    vcNoticeDetail.noticeParam = notice;
+                    targetVc = vcNoticeDetail;
+                    
+                    if (targetVc) {
+                        [vc mzl_pushViewController:targetVc];
+                    }
+                }];
+                
+                [alert addAction:cancel];
+                [alert addAction:other];
+                
+                [self.currentVisibleViewController presentViewController:alert animated:YES completion:nil];
+               
+            }
         }
     }
     
@@ -170,6 +231,10 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    
+//    [UIAlertView showChoiceMessage:<#(NSString *)#> okBlock:<#^(void)okBlock#>]
+    
+  
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }

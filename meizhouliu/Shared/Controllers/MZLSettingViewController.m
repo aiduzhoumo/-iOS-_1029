@@ -252,6 +252,10 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == actionSheet.destructiveButtonIndex) {
         [MZLSharedData logout];
+        
+        //给服务进行极光注册
+        [MZLServices registerJpushWithUser];
+        
         [self dismissCurrentViewController];
     }
 }
