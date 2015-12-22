@@ -3510,8 +3510,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xin Ding (MH64249SWX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xin Ding (MH64249SWX)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou Qiaji Network Technology Co., Ltd. (WQ6TNBM4UD)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hangzhou Qiaji Network Technology Co., Ltd. (WQ6TNBM4UD)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3529,7 +3529,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "c7a53676-ca19-469a-9d5c-c3c1a5f64400";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3551,8 +3551,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xin Ding (MH64249SWX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xin Ding (MH64249SWX)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou Qiaji Network Technology Co., Ltd. (WQ6TNBM4UD)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hangzhou Qiaji Network Technology Co., Ltd. (WQ6TNBM4UD)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3563,7 +3563,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "c7a53676-ca19-469a-9d5c-c3c1a5f64400";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -3630,9 +3630,9 @@
 					UIKit,
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.adhoc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.ios;
 				PRODUCT_NAME = mzl_mobile_ios;
-				PROVISIONING_PROFILE = "b7207cdb-631b-4ceb-ac72-fb98816bcb7d";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
@@ -3699,9 +3699,9 @@
 					UIKit,
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.adhoc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.ios;
 				PRODUCT_NAME = mzl_mobile_ios;
-				PROVISIONING_PROFILE = "b7207cdb-631b-4ceb-ac72-fb98816bcb7d";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;

@@ -141,7 +141,6 @@
     [self presentViewController:login animated:YES completion:nil];
 }
 
-#warning 自己加的方法
 #pragma mark - when to pop up login controller
 
 - (void)popupMailLoginFrom:(NSInteger)from executionBlockWhenDismissed:(CO_BLOCK_VOID)executionBlockWhenDismissed {
@@ -157,6 +156,7 @@
 
 - (void)mzl_pushViewController:(UIViewController *)vc {
     // 一般来说，所有的vc都由splashVc模态展示，除非该vc再被其它vc模态展示
+    [UIAlertView showAlertMessage:NSStringFromClass([vc class])];
     if (! [self.presentingViewController isKindOfClass:[MZLSplashViewController class]]) {
         UIViewController *presentingVc = self.presentingViewController;
         __weak UINavigationController *navVc;
@@ -172,8 +172,10 @@
         }];
         return;
     }
+        
     [self.navigationController pushViewController:vc animated:YES];
 }
+
 
 #pragma mark - active from background
 

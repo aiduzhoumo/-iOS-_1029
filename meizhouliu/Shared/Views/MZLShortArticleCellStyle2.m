@@ -362,18 +362,18 @@ typedef enum : NSInteger {
         [btn co_leftFromRightOfPreSiblingWithOffset:12.0];
     }
     
-    UIView *goodsView = [[functionView createSubView] co_insetsParent:UIEdgeInsetsMake(0, COInvalidCons, 0, 0)];
-    [goodsView addTapGestureRecognizer:self action:@selector(onGoodsViewClicked:)];
-    self.goodsView = goodsView;
-    [goodsView co_leftFromRightOfPreSiblingWithOffset:0.0];
-    UILabel *lblGoodsCount = [goodsView createSubViewLabelWithFontSize:12 textColor:@"999999".co_toHexColor];
-    self.goodsLbl = lblGoodsCount;
-    [lblGoodsCount co_rightCenterYParentWithWidth:COInvalidCons height:COInvalidCons];
-    UILabel *lblGoodsTip = [goodsView createSubViewLabelWithFontSize:12 textColor:@"999999".co_toHexColor];
-    lblGoodsTip.text = @"相关商品";
-    [[lblGoodsTip co_rightFromLeftOfView:lblGoodsCount offset:8] co_centerYParent];
-    UIImageView *lblGoodsImage = [goodsView createSubViewImageViewWithImageNamed:@"Short_Article_List_Style2_Goods"];
-    [[lblGoodsImage co_rightFromLeftOfView:lblGoodsTip offset:4] co_centerYParent];
+//    UIView *goodsView = [[functionView createSubView] co_insetsParent:UIEdgeInsetsMake(0, COInvalidCons, 0, 0)];
+//    [goodsView addTapGestureRecognizer:self action:@selector(onGoodsViewClicked:)];
+//    self.goodsView = goodsView;
+//    [goodsView co_leftFromRightOfPreSiblingWithOffset:0.0];
+//    UILabel *lblGoodsCount = [goodsView createSubViewLabelWithFontSize:12 textColor:@"999999".co_toHexColor];
+//    self.goodsLbl = lblGoodsCount;
+//    [lblGoodsCount co_rightCenterYParentWithWidth:COInvalidCons height:COInvalidCons];
+//    UILabel *lblGoodsTip = [goodsView createSubViewLabelWithFontSize:12 textColor:@"999999".co_toHexColor];
+//    lblGoodsTip.text = @"相关商品";
+//    [[lblGoodsTip co_rightFromLeftOfView:lblGoodsCount offset:8] co_centerYParent];
+//    UIImageView *lblGoodsImage = [goodsView createSubViewImageViewWithImageNamed:@"Short_Article_List_Style2_Goods"];
+//    [[lblGoodsImage co_rightFromLeftOfView:lblGoodsTip offset:4] co_centerYParent];
 }
 
 - (void)onGoodsViewClicked:(UITapGestureRecognizer *)tap {
@@ -479,12 +479,12 @@ typedef enum : NSInteger {
         [self updateBtn:self.commentBtn withCount:self.shortArticle.commentsCount];
         [self toggleUp:self.shortArticle.isUpForCurrentUser];
         [self updateBtn:self.upsBtn withCount:self.shortArticle.upsCount];
-        if (self.shortArticle.goodsCount > 0) {
-            self.goodsView.hidden = NO;
-            self.goodsLbl.text = INT_TO_STR(self.shortArticle.goodsCount);
-        } else {
-            self.goodsView.hidden = YES;
-        }
+//        if (self.shortArticle.goodsCount > 0) {
+//            self.goodsView.hidden = NO;
+//            self.goodsLbl.text = INT_TO_STR(self.shortArticle.goodsCount);
+//        } else {
+//            self.goodsView.hidden = YES;
+//        }
         
         if ([self needsGetUpStatusForCurrentUser]) {
             [self getUpStatus];

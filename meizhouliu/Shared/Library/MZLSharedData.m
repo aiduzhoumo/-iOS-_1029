@@ -140,8 +140,6 @@ static MZLAppUser *_mzlAppUser;
     _mzlAppUser = [MZLAppUser loadUserFromPreference];
 }
 
-
-
 + (void)clearAppUser {
     [MZLAppUser removeUserFromPreference];
     _mzlAppUser = nil;
@@ -444,11 +442,20 @@ static NSDictionary *_info;
     }
 }
 
-
 + (void)loadAppUserBindInfoFromCache {
 
 
 }
 
++ (void)setApnsInfoForNotification:(NSDictionary *)info {
+    [COPreferences setUserPreference:info forKey:@"JPushInfo"];
+}
 
++ (NSDictionary *)getApnsInfoForNotification {
+   return [COPreferences getUserPreference:@"JPushInfo"];
+}
+
++ (void)removeApnsinfoForNotification {
+    [COPreferences removeUserPreference:@"JPushInfo"];
+}
 @end

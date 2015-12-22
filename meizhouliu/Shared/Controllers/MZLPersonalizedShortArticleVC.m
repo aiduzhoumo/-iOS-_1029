@@ -13,6 +13,13 @@
 #import "MZLServices.h"
 //#import "MZLShortArticleCell.h"
 #import "MZLShortArticleCellStyle2.h"
+#import "MZLModelArticle.h"
+#import "MZLModelNotice.h"
+#import "MZLModelShortArticle.h"
+#import "MZLArticleDetailViewController.h"
+#import "MZLNoticeDetailViewController.h"
+#import "MZLShortArticleDetailVC.h"
+#import "MZLSplashViewController.h"
 
 @interface MZLPersonalizedShortArticleVC () <UITableViewDataSource, UITableViewDelegate>
 
@@ -24,12 +31,65 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSDictionary *userInfo = [MZLSharedData getApnsInfoForNotification];
+    UIStoryboard *sb = MZL_MAIN_STORYBOARD();
+    UIViewController *targetVc;
+    
+    if ([[userInfo valueForKey:@"article"] valueForKey:@"id"]) {
+        MZLModelArticle *article = [[MZLModelArticle alloc] init];
+        article.identifier = [[[userInfo valueForKey:@"article"] valueForKey:@"id"] intValue];
+        MZLArticleDetailViewController * vcArticleDetail = (MZLArticleDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLArticleDetailViewController class])];
+        vcArticleDetail.articleParam = article;
+        targetVc = vcArticleDetail;
+    }
+    else if([[userInfo valueForKey:@"notice"] valueForKey:@"id"]) {
+        MZLModelNotice *notice = [[MZLModelNotice alloc] init];
+        notice.identifier = [[[userInfo valueForKey:@"notice"] valueForKey:@"id"] intValue];
+        MZLNoticeDetailViewController * vcNoticeDetail = (MZLNoticeDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLNoticeDetailViewController class])];
+        vcNoticeDetail.noticeParam = notice;
+        targetVc = vcNoticeDetail;
+    }
+    else if ([[userInfo valueForKey:@"short_article"] valueForKey:@"id"]) {
+        MZLModelShortArticle *shortArticle = [[MZLModelShortArticle alloc] init];
+        shortArticle.identifier = [[[userInfo valueForKey:@"short_article"] valueForKey:@"id"] intValue];
+        MZLShortArticleDetailVC *vcShortArticle = [MZL_SHORT_ARTICLE_STORYBOARD() instantiateViewControllerWithIdentifier:NSStringFromClass([MZLShortArticleDetailVC class])];
+        vcShortArticle.shortArticle = shortArticle;
+        vcShortArticle.popupCommentOnViewAppear = NO;
+        vcShortArticle.hidesBottomBarWhenPushed = YES;
+        targetVc = vcShortArticle;
+    }
+    if (targetVc) {
+        [self mzl_pushViewController:targetVc];
+        [MZLSharedData removeApnsinfoForNotification];
+    }
+
     // Do any additional setup after loading the view.
 }
 
-//- (void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:animated];
-//}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+  }
+
+- (void)mzl_pushViewController:(UIViewController *)vc {
+    // 一般来说，所有的vc都由splashVc模态展示，除非该vc再被其它vc模态展示
+    if (! [self.presentingViewController isKindOfClass:[MZLSplashViewController class]]) {
+        UIViewController *presentingVc = self.presentingViewController;
+        __weak UINavigationController *navVc;
+        if ([presentingVc isKindOfClass:[UITabBarController class]]) {
+            navVc = (UINavigationController *)(((UITabBarController *)presentingVc).selectedViewController);
+        } else if ([presentingVc isKindOfClass:[UINavigationController class]]) {
+            navVc = (UINavigationController *)presentingVc;
+        } else {
+            navVc = presentingVc.navigationController;
+        }
+        [presentingVc dismissViewControllerAnimated:YES completion:^{
+            [navVc pushViewController:vc animated:YES];
+        }];
+        return;
+    }
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -137,6 +197,10 @@
         paramPaging = [self pagingParamFromModels];
     }
     return @[paramFilter, paramPaging];
+}
+
+- (void)dealloc {
+
 }
 
 @end

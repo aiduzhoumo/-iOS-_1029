@@ -114,6 +114,10 @@
 + (NSDictionary *)apsInfo;
 + (void)setApnsInfo:(NSDictionary *)info;
 
++ (void)setApnsInfoForNotification:(NSDictionary *)info;
++ (NSDictionary *)getApnsInfoForNotification;
++ (void)removeApnsinfoForNotification;
+
 //#pragma mark - misc settings
 //
 //+ (BOOL)shouldPopupFiltersOnAppStartup;

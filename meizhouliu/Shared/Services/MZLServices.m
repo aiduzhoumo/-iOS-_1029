@@ -76,8 +76,8 @@
 #define MZL_SERVICE_TENCENT_QQ_LOGIN @"login/qq"
 #define MZL_SERVICE_WEIXIN_LOGIN @"login/wechat"
 #define MZL_SERVICE_LOGOUT @"logout"
-//#define MZL_SERVICE_USER_INFO @"users/%d"
-#define MZL_SERVICE_USER_INFO @"users/info"
+#define MZL_SERVICE_USER_INFO @"users/%d"
+#define MZL_SERVICE_USER_INFO_APP @"users/info"
 #define MZL_SERVICE_MODIFY_USER_INFO @"users/%d"
 #define MZL_SERVICE_MODIFY_USER_PASSWORD @"users/%d/password"
 #define MZL_SERVICE_MODIFY_USERS_FORGET @"users/forget/phone"
@@ -1040,7 +1040,7 @@
 
 + (void)userInfoServiceWithSuccBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
     RKObjectManager *objectManager = [self objectManager];
-    NSString *servicePath = [self serviceUrl_v2:MZL_SERVICE_USER_INFO];
+    NSString *servicePath = [self serviceUrl_v2:MZL_SERVICE_USER_INFO_APP];
     //    NSLog(@"%ld",[MZLSharedData appUserId]);
     
 //    servicePath = [NSString stringWithFormat:servicePath, [MZLSharedData appUserAccessToken]];
