@@ -763,6 +763,9 @@
         //给服务器进行极光的注册
         [MZLServices registerJpushWithUser];
         
+        //给服务器注册度周末的产品userToken
+        [MZLServices getDuzhoumoUserToken];
+        
         [self onLogined:type];
         [self dismissCurrentViewController:self.executionBlockWhenDismissed];
         [TalkingDataAppCpa onLogin:response.accessToken.token];

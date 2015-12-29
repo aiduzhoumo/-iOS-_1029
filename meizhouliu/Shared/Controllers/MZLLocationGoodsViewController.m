@@ -119,6 +119,7 @@
     MZLPagingSvcParam *pageSvc = [[MZLPagingSvcParam alloc] init];
     pageSvc.pageIndex = 1;
     [MZLServices locationGoodsService:self.locationParam pagingParam:pageSvc succBlock:nil errorBlock:nil];
+//    [self hideProgressIndicator];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModels:) name:@"goodsModel" object:nil];
 }
 
@@ -141,7 +142,7 @@
         [_models addObjectsFromArray:modelArr];
         [_tv reloadData];
         
-        NSLog(@"%ld",_models.count);
+//        MZLLog(@"%ld",_models.count);
         if (_models.count > 0) {
              [self setUpRefresh:_tv];
         }
@@ -208,7 +209,6 @@
 - (void)dealloc {
 //    MZLLog(@"页面销毁，通知也要移除");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    [NSNotificationCenter defaultCenter] removeObserver:<#(nonnull id)#> name:<#(nullable NSString *)#> object:<#(nullable id)#>
 }
 
 @end

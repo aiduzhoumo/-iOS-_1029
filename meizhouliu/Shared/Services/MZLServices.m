@@ -797,33 +797,45 @@
     return [self getObjects:objectManager atPath:serviceUrl parameters:[NSDictionary dictionary] succBlock:succBlock errorBlock:errorBlock];
 }
 
-+ (id)locationGoodsService:(MZLModelLocationBase *)location pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
-    MZLServiceOperation *operation = [[MZLServiceOperation alloc] init];
++ (void)locationGoodsService:(MZLModelLocationBase *)location pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+//    MZLServiceOperation *operation = [[MZLServiceOperation alloc] init];
     NSString *serviceUrl = [NSString stringWithFormat:@"%@/api/v2/products/dzm.json",MZL_SERVICE_BASE_URL];
     NSString *str = [NSString stringWithFormat:@"%@?destination_id=%@&pageindex=%@&api_key=web_test",serviceUrl,@(location.identifier),@(pagingParam.pageIndex)];
     NSURL *url = [NSURL URLWithString:str];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
 
     AFHTTPRequestOperation *redirectOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [redirectOperation start];
     [redirectOperation setRedirectResponseBlock:^NSURLRequest *(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse) {
-        if (redirectResponse) {
-            AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                //这里已经取到数据了
-                NSDictionary *responsDic = (NSDictionary *)JSON;
-                //通过通知中心发送通知
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"goodsModel" object:responsDic];
-                
-            } failure:nil];
-            [operation start];
-//            [redirectOperation cancel];
-            return request;
-        } else {
-            return request;
-        }
+        return request;
     }];
-    operation.internalOper = redirectOperation;
-    return operation;
+
+    [redirectOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *requestTmp = [NSString stringWithString:operation.responseString];
+        NSData *resData = [[NSData alloc] initWithData:[requestTmp dataUsingEncoding:NSUTF8StringEncoding]];
+        //系统自带JSON解析
+        NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:resData options:NSJSONReadingMutableLeaves error:nil];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"goodsModel" object:resultDic];
+    } failure:nil];
+    
+//    [redirectOperation setRedirectResponseBlock:^NSURLRequest *(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse) {
+//    
+//        if (redirectResponse) {
+//            AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+//                //这里已经取到数据了
+//                NSDictionary *responsDic = (NSDictionary *)JSON;
+//                //通过通知中心发送通知
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"goodsModel" object:responsDic];
+//               
+////                [redirectOperationTemp cancel];
+//            } failure:nil];
+//            [operation start];
+//            return request;
+//        } else {
+//            return request;
+//        }
+//    }];
+     [redirectOperation start];
 }
 
 //+ (id)locationGoodsService:(MZLModelLocationBase *)location pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
@@ -1480,31 +1492,45 @@
 }
 
 + (void)hotGoodsServiceTEXT:(MZLModelLocationBase *)location succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock{
-    //http://meizhouliu.test:3002/api/v2/products/dzm/hot.json?lon=119.7260431436&lat=29.808387857353&api_key=web_test
     NSString *serviceUrl = [NSString stringWithFormat:@"%@/api/v2/products/dzm/hot.json",MZL_SERVICE_BASE_URL];
     NSString *str = [NSString stringWithFormat:@"%@?lon=%@&lat=%@&api_key=web_test",serviceUrl,@(location.longitude),@(location.latitude)];
+    
     NSURL *url = [NSURL URLWithString:str];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     AFHTTPRequestOperation *redirectOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [redirectOperation start];
+
     [redirectOperation setRedirectResponseBlock:^NSURLRequest *(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse) {
-        if (redirectResponse) {
-            AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                //这里已经取到数据了
-                NSDictionary *responsDic = (NSDictionary *)JSON;
-                //通过通知中心发送通知
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"hotGoodsModel" object:responsDic];
-                
-            } failure:nil];
-            [operation start];
-//            [redirectOperation cancel];
-            return request;
-        } else {
-            return request;
-        }
+        return request;
     }];
+    
+    [redirectOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *requestTmp = [NSString stringWithString:operation.responseString];
+        NSData *resData = [[NSData alloc] initWithData:[requestTmp dataUsingEncoding:NSUTF8StringEncoding]];
+        //系统自带JSON解析
+        NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:resData options:NSJSONReadingMutableLeaves error:nil];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"hotGoodsModel" object:resultDic];
+    } failure:nil];
+    [redirectOperation start];
 }
+//    [redirectOperation setRedirectResponseBlock:^NSURLRequest *(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse) {
+//        if (redirectResponse) {
+//            AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+//                //这里已经取到数据了
+//                NSDictionary *responsDic = (NSDictionary *)JSON;
+//                //通过通知中心发送通知
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"hotGoodsModel" object:responsDic];
+//                
+//            } failure:nil];
+//            [operation start];
+////            [redirectOperation cancel];
+//            return request;
+//        } else {
+//            return request;
+//        }
+//    }];
+
 
 //+ (void)hotGoodsService:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
 //    RKObjectManager *objectManager = [self objectManager];

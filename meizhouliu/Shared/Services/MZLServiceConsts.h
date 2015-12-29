@@ -9,10 +9,10 @@
 #ifndef mzl_mobile_ios_MZLServiceConsts_h
 #define mzl_mobile_ios_MZLServiceConsts_h
 
-//#define MZL_SERVICE_BASE_URL @"http://i.duzhoumo.com"
+#define MZL_SERVICE_BASE_URL @"http://i.duzhoumo.com"
 //#define MZL_SERVICE_BASE_URL @"http://meizhouliu.test:3002"
 //花生壳
-#define MZL_SERVICE_BASE_URL @"http://blazingcd.vicp.net:3002"
+//#define MZL_SERVICE_BASE_URL @"http://blazingcd.vicp.net:3002"
 #define MZL_SERVICE_DEV_URL @"http://api.meizhouliu.dev"
 #define MZL_SERVICE_PHOTO_URL @"http://meizhouliu.dev"
 #define MZL_SERVICE_TEST_URL @"http://testapi.meizhouliu.com"

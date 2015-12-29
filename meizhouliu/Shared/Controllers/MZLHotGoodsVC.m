@@ -67,9 +67,7 @@
 - (void)_loadModels {
     [self reset];
 //    [self invokeService:@selector(hotGoodsService:succBlock:errorBlock:) params:@[[self pagingParamFromModels]]];
-//    [self invokeLoadMoreService:@selector(hotGoodsService:) params:@[self.locationParam]];
-//    [self loadModels:@selector(hotGoodsServiceTEXT:succBlock:errorBlock:) params:@[self.locationParam]];
-//    MZLLog(@"%@",_locationParam);
+
     [MZLServices hotGoodsServiceTEXT:self.locationParam succBlock:nil errorBlock:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModels:) name:@"hotGoodsModel" object:nil];
 }
@@ -78,16 +76,23 @@
     NSDictionary *responsDic = (NSDictionary *)notif.object;
     
 //    MZLLog(@"%@",responsDic);
-    
-    NSArray *goodsArr = [[responsDic objectForKey:@"Res"] objectForKey:@"list"];
-    NSMutableArray *modelArr = [NSMutableArray array];
-    for (NSDictionary *dict in goodsArr) {
-        MZLModelGoods *goods = [[MZLModelGoods alloc] initWithDic:dict];
-        [modelArr addObject:goods];
+    if([[responsDic objectForKey:@"IsSuccess"] intValue] == 1){
+//        MZLLog(@"*********有数据了**********");
+        NSArray *goodsArr = [[responsDic objectForKey:@"Res"] objectForKey:@"list"];
+        NSMutableArray *modelArr = [NSMutableArray array];
+        for (NSDictionary *dict in goodsArr) {
+            MZLModelGoods *goods = [[MZLModelGoods alloc] initWithDic:dict];
+            [modelArr addObject:goods];
+        }
+        _models = [NSMutableArray arrayWithArray:modelArr];
+        MZLLog(@"_model = %@",_models);
+        [_tv reloadData];
     }
-    _models = [NSMutableArray arrayWithArray:modelArr];
-//    MZLLog(@"_model = %@",_models);
-    [_tv reloadData];
+//    else if([[responsDic objectForKey:@"IsSuccess"] intValue] == 0){
+//        MZLLog(@"*********没有取到数据NONONONONONONONONONO**********");
+//        [_tv removeUnnecessarySeparators];
+//        [self noRecordView];
+//    }
     [self hideProgressIndicator];
 }
 
@@ -121,7 +126,7 @@
     NSString *url = [array objectAtIndex:0];
     NSString *token = [MZLSharedData appDuZhouMoToken];
     NSString *newGoodsUrl = [NSString stringWithFormat:@"%@%@",url,token];
-//    NSLog(@"%@",newGoodsUrl);
+    MZLLog(@"%@",newGoodsUrl);
     [self performSegueWithIdentifier:MZL_SEGUE_TOGOODSDETAIL sender:newGoodsUrl];
 }
 - (void)dealloc {
