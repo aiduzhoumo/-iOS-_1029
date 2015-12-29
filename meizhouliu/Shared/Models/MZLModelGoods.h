@@ -14,9 +14,14 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, assign) NSInteger price;
 @property (nonatomic, strong) MZLModelImage *coverImg;
-
+@property (nonatomic, strong) NSString *imageUrl;
 @property (nonatomic, assign) NSInteger sold;
 
-@property (nonatomic, readonly) NSString *goodsUrl;
+@property (nonatomic, copy) NSString *goodsUrl;
+
+@property (nonatomic, copy) NSString *cityName;
+
++ (instancetype)GoodsWithDic:(NSDictionary *)dic;
+- (instancetype)initWithDic:(NSDictionary *)dic;
 
 @end

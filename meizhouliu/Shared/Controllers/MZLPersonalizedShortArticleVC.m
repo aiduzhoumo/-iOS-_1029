@@ -63,13 +63,13 @@
         [self mzl_pushViewController:targetVc];
         [MZLSharedData removeApnsinfoForNotification];
     }
-
+    
     // Do any additional setup after loading the view.
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-  }
+}
 
 - (void)mzl_pushViewController:(UIViewController *)vc {
     // 一般来说，所有的vc都由splashVc模态展示，除非该vc再被其它vc模态展示
@@ -97,14 +97,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 
 #pragma mark - protected override
@@ -200,7 +200,7 @@
 }
 
 - (void)dealloc {
-
+    
 }
 
 @end

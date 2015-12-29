@@ -17,6 +17,8 @@
 /** 跟后台绑定的user */
 @property (nonatomic, strong) MZLModelUser *user;
 
+@property (nonatomic, copy) NSString *duzhoumoToken;
+
 @property (nonatomic, copy) NSString *tokenFrom3rdParty;
 @property (nonatomic, copy) NSString *openIdFrom3rdParty;
 @property (nonatomic, copy) NSString *imageUrlFrom3rdParty;

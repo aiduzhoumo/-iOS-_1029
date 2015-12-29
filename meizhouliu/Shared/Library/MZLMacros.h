@@ -199,7 +199,7 @@
 #define MZL_BASE_SCREEN_WIDTH 320.0
 #define MZL_BASE_SCREEN_HEIGHT 480.0
 
-#define MZL_BASE_URL @"http://meizhouliu.com"
+//#define MZL_BASE_URL @"http://meizhouliu.com"
 
 typedef NS_ENUM(NSInteger, MZLLoginType) {
     MZLLoginTypeNormal      = 0,

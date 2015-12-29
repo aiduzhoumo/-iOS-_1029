@@ -61,15 +61,39 @@
 #pragma mark - override
 
 - (BOOL)_canLoadMore {
-    return YES;
+    return NO;
 }
 
 - (void)_loadModels {
-    [self invokeService:@selector(hotGoodsService:succBlock:errorBlock:) params:@[[self pagingParamFromModels]]];
+    [self reset];
+//    [self invokeService:@selector(hotGoodsService:succBlock:errorBlock:) params:@[[self pagingParamFromModels]]];
+//    [self invokeLoadMoreService:@selector(hotGoodsService:) params:@[self.locationParam]];
+//    [self loadModels:@selector(hotGoodsServiceTEXT:succBlock:errorBlock:) params:@[self.locationParam]];
+//    MZLLog(@"%@",_locationParam);
+    [MZLServices hotGoodsServiceTEXT:self.locationParam succBlock:nil errorBlock:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModels:) name:@"hotGoodsModel" object:nil];
 }
 
+- (void)getModels:(NSNotification *)notif {
+    NSDictionary *responsDic = (NSDictionary *)notif.object;
+    
+//    MZLLog(@"%@",responsDic);
+    
+    NSArray *goodsArr = [[responsDic objectForKey:@"Res"] objectForKey:@"list"];
+    NSMutableArray *modelArr = [NSMutableArray array];
+    for (NSDictionary *dict in goodsArr) {
+        MZLModelGoods *goods = [[MZLModelGoods alloc] initWithDic:dict];
+        [modelArr addObject:goods];
+    }
+    _models = [NSMutableArray arrayWithArray:modelArr];
+//    MZLLog(@"_model = %@",_models);
+    [_tv reloadData];
+    [self hideProgressIndicator];
+}
+
+
 - (void)_loadMore {
-    [self invokeLoadMoreService:@selector(hotGoodsService:succBlock:errorBlock:) params:@[[self pagingParamFromModels]]];
+//    [self invokeLoadMoreService:@selector(hotGoodsService:succBlock:errorBlock:) params:@[[self pagingParamFromModels]]];
 }
 
 - (void)mzl_onWillBecomeTabVisibleController {
@@ -92,7 +116,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MZLModelGoods *goods = (MZLModelGoods *)(_models[indexPath.row]);
-    [self performSegueWithIdentifier:MZL_SEGUE_TOGOODSDETAIL sender:goods.goodsUrl];
+    NSString *nstring = goods.goodsUrl;
+    NSArray *array = [nstring componentsSeparatedByString:@"$"];
+    NSString *url = [array objectAtIndex:0];
+    NSString *token = [MZLSharedData appDuZhouMoToken];
+    NSString *newGoodsUrl = [NSString stringWithFormat:@"%@%@",url,token];
+//    NSLog(@"%@",newGoodsUrl);
+    [self performSegueWithIdentifier:MZL_SEGUE_TOGOODSDETAIL sender:newGoodsUrl];
+}
+- (void)dealloc {
+//    MZLLog(@"页面销毁，通知也要移除");
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

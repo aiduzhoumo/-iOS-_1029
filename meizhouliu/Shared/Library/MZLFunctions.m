@@ -244,6 +244,10 @@ NSURL *webUrl(NSString *url) {
     return [[NSURL alloc] initWithString:temp];
 }
 
+NSURL *webDuZhouMoUrl(NSString *url) {
+    return [[NSURL alloc] initWithString:url];
+}
+
 #pragma mark - identify bundle identifier;
 
 BOOL isMZLProdApp() {

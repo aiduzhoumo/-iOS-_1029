@@ -131,6 +131,7 @@ typedef void(^ MZL_SVC_ERR_BLOCK)(NSError *error);
 + (BOOL)hasGoodsFlagWithArticle:(MZLModelArticle *)arg1;
 + (void)goodsInArticle:(MZLModelArticle *)article succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)hotGoodsService:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
++ (void)hotGoodsServiceTEXT:(MZLModelLocationBase *)location succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 
 #pragma mark - short articles
 
@@ -176,5 +177,8 @@ typedef void(^ MZL_SVC_ERR_BLOCK)(NSError *error);
 
 #pragma mark - user register JPushID
 + (void)registerJpushWithUser;
+
+#pragma mark - duzhoumoUserToken
++ (void)getDuzhoumoUserToken;
 
 @end

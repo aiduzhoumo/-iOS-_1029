@@ -77,13 +77,14 @@ typedef enum : NSInteger {
 @property (nonatomic, weak) UILabel *tagsLbl;
 @property (nonatomic, weak) UILabel *priceLbl;
 
-//@property (nonatomic, weak) UIView *functionView;
+@property (nonatomic, weak) UIView *functionView;
 //@property (nonatomic, weak) UILabel *commentLbl;
 //@property (nonatomic, weak) UILabel *upsLbl;
 @property (nonatomic, weak) UIImageView *upsImage;
 @property (nonatomic, weak) UIButton *commentBtn;
 @property (nonatomic, weak) UIButton *upsBtn;
 @property (nonatomic, weak) UIButton *shareBtn;
+@property (nonatomic, weak) UIButton *gouwuBtn;
 //@property (nonatomic, weak) UIButton *reportBrn;
 @property (nonatomic, weak) UILabel *goodsLbl;
 @property (nonatomic, assign) UIView *goodsView;
@@ -102,7 +103,7 @@ typedef enum : NSInteger {
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -345,6 +346,12 @@ typedef enum : NSInteger {
     [btns addObject:commentBtn];
     self.commentBtn = commentBtn;
     [commentBtn addTarget:self action:@selector(onCommentBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *gouwuBtn = [self functionBtn:functionView imageName:@"Short_Article_List_Style2_gouwu"];
+    [btns addObject:gouwuBtn];
+    self.gouwuBtn = gouwuBtn;
+    [gouwuBtn addTarget:self action:@selector(onGoodsViewClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
     if ([UIViewController mzl_shouldShowShareShortArticleModule]) {
         UIButton *shareBtn = [self functionBtn:functionView imageName:@"Short_Article_List_Style2_Share"];
         self.shareBtn = shareBtn;
@@ -352,28 +359,28 @@ typedef enum : NSInteger {
         [shareBtn addTarget:self action:@selector(onShareBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     
-//    UIButton *reportBrn = [self functionBtn:functionView imageName:@"Short_Article_List_Style2_Share"];
-//    self.reportBrn = reportBrn;
-//    [btns addObject:reportBrn];
-//    [reportBrn addTarget:self action:@selector(onReportBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-
+    //    UIButton *reportBrn = [self functionBtn:functionView imageName:@"Short_Article_List_Style2_Share"];
+    //    self.reportBrn = reportBrn;
+    //    [btns addObject:reportBrn];
+    //    [reportBrn addTarget:self action:@selector(onReportBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
     for (UIButton *btn in btns) {
         [btn co_insetsParent:UIEdgeInsetsMake(0, COInvalidCons, 0, COInvalidCons)];
         [btn co_leftFromRightOfPreSiblingWithOffset:12.0];
     }
     
-//    UIView *goodsView = [[functionView createSubView] co_insetsParent:UIEdgeInsetsMake(0, COInvalidCons, 0, 0)];
-//    [goodsView addTapGestureRecognizer:self action:@selector(onGoodsViewClicked:)];
-//    self.goodsView = goodsView;
-//    [goodsView co_leftFromRightOfPreSiblingWithOffset:0.0];
-//    UILabel *lblGoodsCount = [goodsView createSubViewLabelWithFontSize:12 textColor:@"999999".co_toHexColor];
-//    self.goodsLbl = lblGoodsCount;
-//    [lblGoodsCount co_rightCenterYParentWithWidth:COInvalidCons height:COInvalidCons];
-//    UILabel *lblGoodsTip = [goodsView createSubViewLabelWithFontSize:12 textColor:@"999999".co_toHexColor];
-//    lblGoodsTip.text = @"相关商品";
-//    [[lblGoodsTip co_rightFromLeftOfView:lblGoodsCount offset:8] co_centerYParent];
-//    UIImageView *lblGoodsImage = [goodsView createSubViewImageViewWithImageNamed:@"Short_Article_List_Style2_Goods"];
-//    [[lblGoodsImage co_rightFromLeftOfView:lblGoodsTip offset:4] co_centerYParent];
+    //    UIView *goodsView = [[functionView createSubView] co_insetsParent:UIEdgeInsetsMake(0, COInvalidCons, 0, 0)];
+    //    [goodsView addTapGestureRecognizer:self action:@selector(onGoodsViewClicked:)];
+    //    self.goodsView = goodsView;
+    //    [goodsView co_leftFromRightOfPreSiblingWithOffset:0.0];
+    //    UILabel *lblGoodsCount = [goodsView createSubViewLabelWithFontSize:12 textColor:@"999999".co_toHexColor];
+    //    self.goodsLbl = lblGoodsCount;
+    //    [lblGoodsCount co_rightCenterYParentWithWidth:COInvalidCons height:COInvalidCons];
+    //    UILabel *lblGoodsTip = [goodsView createSubViewLabelWithFontSize:12 textColor:@"999999".co_toHexColor];
+    //    lblGoodsTip.text = @"相关商品";
+    //    [[lblGoodsTip co_rightFromLeftOfView:lblGoodsCount offset:8] co_centerYParent];
+    //    UIImageView *lblGoodsImage = [goodsView createSubViewImageViewWithImageNamed:@"Short_Article_List_Style2_Goods"];
+    //    [[lblGoodsImage co_rightFromLeftOfView:lblGoodsTip offset:4] co_centerYParent];
 }
 
 - (void)onGoodsViewClicked:(UITapGestureRecognizer *)tap {
@@ -479,12 +486,14 @@ typedef enum : NSInteger {
         [self updateBtn:self.commentBtn withCount:self.shortArticle.commentsCount];
         [self toggleUp:self.shortArticle.isUpForCurrentUser];
         [self updateBtn:self.upsBtn withCount:self.shortArticle.upsCount];
-//        if (self.shortArticle.goodsCount > 0) {
-//            self.goodsView.hidden = NO;
-//            self.goodsLbl.text = INT_TO_STR(self.shortArticle.goodsCount);
-//        } else {
-//            self.goodsView.hidden = YES;
-//        }
+//        [self updateBtn:self.gouwuBtn withCount:self.shortArticle.goodsCount];
+        
+        //        if (self.shortArticle.goodsCount > 0) {
+        //            self.goodsView.hidden = NO;
+        //            self.goodsLbl.text = INT_TO_STR(self.shortArticle.goodsCount);
+        //        } else {
+        //            self.goodsView.hidden = YES;
+        //        }
         
         if ([self needsGetUpStatusForCurrentUser]) {
             [self getUpStatus];

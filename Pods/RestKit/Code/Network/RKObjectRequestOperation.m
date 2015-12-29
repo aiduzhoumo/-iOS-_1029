@@ -210,7 +210,6 @@ static void *RKOperationFinishDate = &RKOperationFinishDate;
             if (objectRequestOperation.error.code == NSURLErrorCancelled) {
                 RKLogError(@"%@ '%@' %@: Cancelled", [HTTPRequestOperation.request HTTPMethod], [[HTTPRequestOperation.request URL] absoluteString], statusCodeAndElapsedTime);
             } else {
-                
                 RKLogError(@"%@ '%@' %@: %@", [HTTPRequestOperation.request HTTPMethod], [[HTTPRequestOperation.request URL] absoluteString], statusCodeAndElapsedTime, objectRequestOperation.error);
             }
         }

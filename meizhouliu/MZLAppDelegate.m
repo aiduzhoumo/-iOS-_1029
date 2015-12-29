@@ -85,11 +85,7 @@
     NSDictionary *userinfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     _userinfoTest = userinfo;
 //    [self co_registerNotification];
-   
-    [self internalInit];
-    
-    [self servicesOnStartup];
-    
+       
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         //可以添加自定义categories
         [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
@@ -106,6 +102,10 @@
     
     // Required
     [APService setupWithOption:launchOptions];
+    
+    [self internalInit];
+    
+    [self servicesOnStartup];
     
 //    [MZLDummyObject test];
     return YES;
@@ -524,6 +524,9 @@
 
 - (void)servicesOnStartup {
     [self checkAppMessages];
+    
+    //注册爱度周末产品的user_token
+    [MZLServices getDuzhoumoUserToken];
     
     [MZLServices heartbeatOnAppStartup];
     [MZLServices filtersListService];

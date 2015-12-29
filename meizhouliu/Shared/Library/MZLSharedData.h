@@ -12,6 +12,10 @@
 
 @interface MZLSharedData : NSObject
 
+#pragma mark -duzoumoToken
++ (void)setAppDuZhouMoUserToken:(NSString *)string;
++ (NSString *)appDuZhouMoToken;
+
 #pragma mark - tags config
 
 + (NSArray *)allTagTypes;
