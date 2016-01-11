@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, MZLModelUserType) {
     MZLModelUserTypeSignedAuthor  = 100
 };
 
-@class MZLModelAuthor;
+@class MZLModelAuthor,MZLModelShortArticle,MZLShortArticlesModel;
 
 @interface MZLModelUser : MZLModelObject
 
@@ -35,7 +35,13 @@ typedef NS_ENUM(NSInteger, MZLModelUserType) {
 @property (nonatomic, readonly) NSString *coverUrl;
 @property (nonatomic, readonly) NSString *name;
 
+@property (nonatomic, copy) NSString *followees_count;
+@property (nonatomic, copy) NSString *followers_count;
 
+@property (nonatomic, strong) NSArray *short_articles;
+
+/** 界面辅助字段，当前用户是否已关注该短文作者*/
+@property (nonatomic, assign) BOOL isAttentionForCurrentUser;
 
 - (MZLModelAuthor *)toAuthor;
 - (BOOL)isSignedAuthor;

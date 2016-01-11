@@ -15,6 +15,7 @@ typedef void(^ MZL_SVC_ERR_BLOCK)(NSError *error);
 
 @class MZLArticleListSvcParam, MZLChildLocationsSvcParam, MZLPagingSvcParam, MZLModelArticle, MZLRegisterNormalSvcParam,MZLRegisterPhoneSvcParam,MZLRegisterSinaWeiboSvcParam, MZLRegisterTencentQqSvcParam, MZLLoginSvcParam, MZLModelUser, MZLModelUserInfoDetail, MZLModelUserLocationPref, MZLModelUserFavoredArticle, MZLModelComment, MZLModelNotice, MZLFilterParam, MZLModelImage, MZLModelLocation, MZLPersonalizeSvcParam, MZLDescendantsParam, MZLSurroundingLocSvcParam, MZLModelShortArticle, MZLModelShortArticleComment, MZLModelAuthor, MZLRegister3rdPartySvcParam, MZLRegisterBaseSvcParam, MZLModelSurroundingLocations, MZLGetCodeSvcParam, MZLVerifyCodeSvcParam, MZLPhoneLoginSvcParam;
 
+
 @interface MZLServices : NSObject
 
 + (NSString *)versionPlistUrl;
@@ -57,6 +58,7 @@ typedef void(^ MZL_SVC_ERR_BLOCK)(NSError *error);
 + (void)locationPhotosService:(NSInteger)locationId succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (id)locationPhotosService:(MZLModelLocationBase *)location pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)isLocationFavoredService:(MZLModelLocationBase *)location succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+//+ (id)locationGoodsService:(MZLModelLocationBase *)location pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)locationGoodsService:(MZLModelLocationBase *)location pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 
 + (id)favoredLocationsWithPagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
@@ -181,4 +183,21 @@ typedef void(^ MZL_SVC_ERR_BLOCK)(NSError *error);
 #pragma mark - duzhoumoUserToken
 + (void)getDuzhoumoUserToken;
 
+#pragma mark - attention
+/** 关注了哪些人 */
++ (void)followDaRenListWithPagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+/** 对该用户的关注状态 */
++ (void)attentionStatesForCurrentUser:(MZLModelUser *)user succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+/** 对该用户添加关注 */
++ (void)addAttentionForShortArticleUser:(MZLModelUser *)user succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+/** 对该用户取消关注 */
++ (void)removeAttentionForShortArticleUser:(MZLModelUser *)user succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+/** 关注列表 */
++ (void)attentionListForUser:(MZLModelUser *)user WithPagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+/** 粉丝列表 */
++ (void)fensiListForUser:(MZLModelUser *)user WithPagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+/** 推荐达人列表 */
++ (void)tuijianDarenWithPagingParam:(MZLPagingSvcParam *)pagingParam SuccBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+/** 关注的文章列表 */
++ (id)followDarenShortArticleServiceWithFilter:(MZLFilterParam *)filter pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 @end

@@ -60,6 +60,7 @@ typedef enum : NSInteger {
 @property (nonatomic, weak) IBOutlet UIView *bg;
 @property (nonatomic, weak) IBOutlet UIView *leftView;
 @property (nonatomic, weak) IBOutlet UIView *rightView;
+@property (weak, nonatomic) IBOutlet UIView *topView;
 @property (nonatomic, weak) UIView *photoView;
 
 @property (nonatomic, weak) UIImageView *authorImage;
@@ -145,9 +146,15 @@ typedef enum : NSInteger {
     [bg addTapGestureRecognizer:self action:@selector(toShortArticleDetail)];
     UIView *leftView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, 0, COInvalidCons) width:LEFT_VIEW_WIDTH height:COInvalidCons];
     self.leftView = leftView;
+    
+//    UIView *topView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0) width:COInvalidCons height:26.0];
+//    self.topView = topView;
+//    topView.backgroundColor = [UIColor redColor];
+    
     UIView *rightView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(0, COInvalidCons, 0, 0)];
     self.rightView = rightView;
     [rightView co_leftFromRightOfView:leftView offset:0];
+//    [rightView co_bottomFromTopOfView:topView offset:0];
     
     [self initLeftView];
     [self initRightView];
@@ -366,7 +373,8 @@ typedef enum : NSInteger {
 }
 
 - (void)initNameDateView {
-    UIView *nameDateView = [[self.rightView createSubView] co_insetsParent:UIEdgeInsetsMake(9, 0, COInvalidCons, 0) width:COInvalidCons height:18.0];
+//    UIView *nameDateView = [[self.rightView createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0) width:COInvalidCons height:18.0];
+     UIView *nameDateView = [[self.rightView createSubView] co_insetsParent:UIEdgeInsetsMake(9, 0, COInvalidCons, 0) width:COInvalidCons height:18.0];
     if ([self isModeCalcHeight]) {
         return;
     }
@@ -870,6 +878,69 @@ typedef enum : NSInteger {
 
 @implementation MZLShortArticleCellAuthor
 
+- (void)initInternal {
+    UIView *bg = [[self.contentView createSubView] co_offsetParent:CELL_MARGIN];
+    [bg addTapGestureRecognizer:self action:@selector(toShortArticleDetail)];
+    UIView *leftView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, 0, COInvalidCons) width:LEFT_VIEW_WIDTH height:COInvalidCons];
+    
+    UIView *topView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0) width:COInvalidCons height:26.0];
+    self.topView = topView;
+    
+    UIView *rightView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(26.0, COInvalidCons, 0, 0)];
+    self.rightView = rightView;
+    [rightView co_leftFromRightOfView:leftView offset:0];
+    
+    [self initRightView];
+}
+
+- (void)initRightView{
+    [self initNameDateView];
+    [self initAddressView];
+    [self initContentView];
+    [self initPhotoView];
+    [self initTagView];
+    [self initPriceView];
+    [self initFunctionView];
+}
+
+- (void)initNameDateView {
+    UIView *nameDateView = [[self.rightView createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0) width:COInvalidCons height:0.0];
+    if ([self isModeCalcHeight]) {
+        return;
+    }
+}
+- (void)initAddressView{
+    UIView *addressView = [[self.topView createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0) width:COInvalidCons height:26.0];
+    [addressView co_topFromBottomOfPreSiblingWithOffset:12.0];
+    
+    UIButton *addressBtn = [addressView createSubViewBtn];
+    addressBtn.contentEdgeInsets = UIEdgeInsetsMake(3, 6, 3, 6);
+    [addressBtn co_centerButtonAndImageWithSpacing:6.0];
+    [addressBtn co_setCornerRadius:4.0];
+    addressBtn.titleLabel.font = MZL_FONT(14.0);
+    [addressBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [addressBtn setImage:[UIImage imageNamed:@"Short_Article_List_Style2_Location"] forState:UIControlStateNormal];
+    [addressBtn co_setNormalBgColor:@"64A3DC".co_toHexColor];
+    [addressBtn co_setHighlightBgColor: @"4993DB".co_toHexColor];
+
+    [addressBtn co_insetsParent:UIEdgeInsetsMake(COInvalidCons, 0, COInvalidCons, COInvalidCons)];
+    [addressBtn co_centerYParent];
+    [addressBtn addTarget:self action:@selector(toLocationDetail) forControlEvents:UIControlEventTouchUpInside];
+    [addressBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_lessThanOrEqualTo(180.0);
+    }];
+    self.addressBtn = addressBtn;
+    
+    UILabel *distanceLbl = [addressView createSubViewLabelWithFontSize:12 textColor:@"B9B9B9".co_toHexColor];
+    [[distanceLbl co_bottomParent:5.0] co_leftFromRightOfPreSiblingWithOffset:6.0];
+    self.distanceLbl = distanceLbl;
+    
+    UILabel *dateLbl = [addressView createSubViewLabelWithFontSize:12 textColor:@"CCCCCC".co_toHexColor];
+    dateLbl.textAlignment = NSTextAlignmentRight;
+    [[dateLbl co_insetsParent:UIEdgeInsetsMake(COInvalidCons, COInvalidCons, 0, 0) width:80 height:COInvalidCons] co_bottomParent:5.0];
+    self.dateLbl = dateLbl;
+}
+
 @end
 
 @implementation MZLShortArticleCellLocation
@@ -890,6 +961,69 @@ typedef enum : NSInteger {
 @end
 
 @implementation MZLShortArticleCellMy
+
+- (void)initInternal {
+    UIView *bg = [[self.contentView createSubView] co_offsetParent:CELL_MARGIN];
+    [bg addTapGestureRecognizer:self action:@selector(toShortArticleDetail)];
+    UIView *leftView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, 0, COInvalidCons) width:LEFT_VIEW_WIDTH height:COInvalidCons];
+    //    self.leftView = leftView;
+    
+    UIView *topView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0) width:COInvalidCons height:26.0];
+    self.topView = topView;
+    
+    UIView *rightView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(26.0, COInvalidCons, 0, 0)];
+    self.rightView = rightView;
+    [rightView co_leftFromRightOfView:leftView offset:0];
+    
+    [self initRightView];
+}
+
+- (void)initRightView{
+    [self initNameDateView];
+    [self initAddressView];
+    [self initContentView];
+    [self initPhotoView];
+    [self initTagView];
+    [self initPriceView];
+    [self initFunctionView];
+}
+
+- (void)initNameDateView {
+    UIView *nameDateView = [[self.rightView createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0) width:COInvalidCons height:0.0];
+    if ([self isModeCalcHeight]) {
+        return;
+    }
+}
+- (void)initAddressView{
+    UIView *addressView = [[self.topView createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0) width:COInvalidCons height:26.0];
+    [addressView co_topFromBottomOfPreSiblingWithOffset:12.0];
+    
+    UIButton *addressBtn = [addressView createSubViewBtn];
+    addressBtn.contentEdgeInsets = UIEdgeInsetsMake(3, 6, 3, 6);
+    [addressBtn co_centerButtonAndImageWithSpacing:6.0];
+    [addressBtn co_setCornerRadius:4.0];
+    addressBtn.titleLabel.font = MZL_FONT(14.0);
+    [addressBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [addressBtn setImage:[UIImage imageNamed:@"Short_Article_List_Style2_Location"] forState:UIControlStateNormal];
+    [addressBtn co_setNormalBgColor:@"64A3DC".co_toHexColor];
+    [addressBtn co_setHighlightBgColor: @"4993DB".co_toHexColor];
+    [addressBtn co_insetsParent:UIEdgeInsetsMake(COInvalidCons, 0, COInvalidCons, COInvalidCons)];
+    [addressBtn co_centerYParent];
+    [addressBtn addTarget:self action:@selector(toLocationDetail) forControlEvents:UIControlEventTouchUpInside];
+    [addressBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_lessThanOrEqualTo(150.0);
+    }];
+    self.addressBtn = addressBtn;
+    
+    UILabel *distanceLbl = [addressView createSubViewLabelWithFontSize:12 textColor:@"B9B9B9".co_toHexColor];
+    [[distanceLbl co_bottomParent:5.0] co_leftFromRightOfPreSiblingWithOffset:6.0];
+    self.distanceLbl = distanceLbl;
+    
+    UILabel *dateLbl = [addressView createSubViewLabelWithFontSize:12 textColor:@"CCCCCC".co_toHexColor];
+    dateLbl.textAlignment = NSTextAlignmentRight;
+    [[dateLbl co_insetsParent:UIEdgeInsetsMake(COInvalidCons, COInvalidCons, 0, 0) width:80 height:COInvalidCons] co_bottomParent:5.0];
+    self.dateLbl = dateLbl;
+}
 
 - (void)initFunctionViewModules {
     [super initFunctionViewModules];

@@ -88,6 +88,14 @@
 #define MZL_SERVICE_PHONES_VERIFYCODE @"phones/%@/%@/verify"
 #define MZL_SERVICE_PUSH_REGISTER @"push/%@/register"
 
+#define MZL_SERVICE_USERS_FOLLOWEES_FILTER @"users/followees/filter"
+#define MZL_SERVICE_USERS_FOLLOWEES_FILTER @"users/followees/filter"
+#define MZL_SERVICE_USERS_FOLLOWEES @"users/followees"
+#define MZL_SERVICE_USERS_ID_FOLLOWEES @"users/%d/followees"
+#define MZL_SERVICE_USERS_ID_FOLLOWERS @"users/%d/followers"
+#define MZL_SERVICE_FOLLOWEES_RECOMMEND @"followees/recommend"
+#define MZL_SERVICE_USERS_FOLLOWEES_SHORT_ARTICLES @"users/followees/short_articles"
+
 #define MZL_SERVICE_ARTICLES @"articles"
 #define MZL_SERVICE_SYSTEM_ARTICLES @"articles/choice"
 #define MZL_SERVICE_LOCATION_ARTICLES @"new_destinations/%d/articles"
@@ -181,6 +189,7 @@
 #define MZL_SERVICE_SHORT_ARTICLE_SHARE @"short_articles/%d/shares"
 #define MZL_SERVICE_AMAP_LOCATION_QUERY @"amap/%@"
 #define MZL_SERVICE_AMAP_LOCATION_CREATE @"amap"
+
 
 #define MZL_SERVICE_SHORT_ARTICLE_REPORT @"short_articles/%d/reports"
 
@@ -451,8 +460,10 @@
     CO_BLOCK_VOID getBlock = ^ {
         NSDictionary *parameters = [self handleParameters:params];
         [objectManager getObjectsAtPath:servicePath parameters:parameters success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+            
             [self onServiceSuccessWithCode:MZL_HTTP_RESPONSECODE_OK operation:operation mappping:mappingResult succBlock:succBlock errorBlock:errorBlock];
         } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+                        
             [self onServiceError:error operation:operation errorBlock:errorBlock];
         }];
 
@@ -797,8 +808,8 @@
     return [self getObjects:objectManager atPath:serviceUrl parameters:[NSDictionary dictionary] succBlock:succBlock errorBlock:errorBlock];
 }
 
-+ (void)locationGoodsService:(MZLModelLocationBase *)location pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
-//    MZLServiceOperation *operation = [[MZLServiceOperation alloc] init];
++ (void)locationGoodsService:(MZLModelLocationBase *)location pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock{
+    
     NSString *serviceUrl = [NSString stringWithFormat:@"%@/api/v2/products/dzm.json",MZL_SERVICE_BASE_URL];
     NSString *str = [NSString stringWithFormat:@"%@?destination_id=%@&pageindex=%@&api_key=web_test",serviceUrl,@(location.identifier),@(pagingParam.pageIndex)];
     NSURL *url = [NSURL URLWithString:str];
@@ -817,7 +828,8 @@
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"goodsModel" object:resultDic];
     } failure:nil];
-    
+    [redirectOperation start];
+}
 //    [redirectOperation setRedirectResponseBlock:^NSURLRequest *(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse) {
 //    
 //        if (redirectResponse) {
@@ -835,8 +847,7 @@
 //            return request;
 //        }
 //    }];
-     [redirectOperation start];
-}
+ 
 
 //+ (id)locationGoodsService:(MZLModelLocationBase *)location pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
 //    RKObjectManager *objectManager = [self objectManager];
@@ -845,37 +856,8 @@
 //    NSMutableDictionary *params = [NSMutableDictionary dictionary];
 //    [params setObject:@(location.identifier) forKey:@"destination_id"];
 //    [params setObject:@(1) forKey:@"pageindex"];
-//    return [self getObjectsTEXT:objectManager atPath:serviceUrl parameters:params succBlock:succBlock errorBlock:errorBlock];
+//    return [self getObjects:objectManager atPath:serviceUrl parameters:params succBlock:succBlock errorBlock:errorBlock];
 //}
-
-+ (id)getObjectsTEXT:(RKObjectManager *)objectManager atPath:(NSString *)servicePath parameters:(NSDictionary *)params succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
-    MZLServiceOperation *operation = [[MZLServiceOperation alloc] init];
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:servicePath]];
-        
-        AFHTTPRequestOperation *redirectOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-        [redirectOperation start];
-        [redirectOperation setRedirectResponseBlock:^NSURLRequest *(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse) {
-            if (redirectResponse) {
-                AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                    //这里已经取到数据了
-                    NSLog(@"JSON = %@",JSON);
-                    
-                } failure:nil];
-                [operation start];
-                return request;
-            } else {
-                return request;
-            }
-        }];
-        
-        operation.internalOper = redirectOperation;
-//    };
-
-//    [self runBlockOnNetworkOK:getBlock];
-    return operation;
-}
-
 
 + (void)childLocationsService:(MZLChildLocationsSvcParam *)param succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
     RKObjectManager *objectManager = [self objectManager];
@@ -1117,9 +1099,7 @@
 + (void)userInfoServiceWithSuccBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
     RKObjectManager *objectManager = [self objectManager];
     NSString *servicePath = [self serviceUrl_v2:MZL_SERVICE_USER_INFO_APP];
-    //    NSLog(@"%ld",[MZLSharedData appUserId]);
     
-    //    servicePath = [NSString stringWithFormat:servicePath, [MZLSharedData appUserAccessToken]];
     [objectManager addResponseDescriptor:[self responseDescriptor:[MZLServiceMapping userInfoObjectMapping] servicePath:servicePath]];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -1146,7 +1126,7 @@
 
 + (void)modifyUserInfo:(MZLModelUserInfoDetail *)user succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
     RKObjectManager *objectManager = [self objectManager];
-    NSString *servicePath = [self servicePath:MZL_SERVICE_BIND_PHONE];
+    NSString *servicePath = [self servicePath:MZL_SERVICE_MODIFY_USER_INFO];
     servicePath = [NSString stringWithFormat:servicePath, [MZLSharedData appUserId]];
     [objectManager addResponseDescriptor:[self responseDescriptor:[MZLServiceMapping serviceResponseObjectMapping] servicePath:servicePath]];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -1787,7 +1767,7 @@
 + (void)bindPhoneWithToken:(NSString *)token phone:(NSString *)phone code:(NSString *)code succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
     RKObjectManager *objectManager = [self objectManager];
     NSString *servicePath = [self serviceUrl_v2:MZL_SERVICE_BIND_PHONE];
-    //    servicePath = [NSString stringWithFormat:servicePath, [MZLSharedData appUserId]];
+
     [objectManager addResponseDescriptor:[self responseDescriptor:[MZLServiceMapping userBindPhoneObjectMapping] servicePath:servicePath]];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:token forKey:@"access_token"];
@@ -1800,7 +1780,7 @@
 + (void)forgetPassWordByEmail:(NSString *)email succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
     RKObjectManager *objectManager = [self objectManager];
     NSString *servicePath = [self serviceUrl_v2:MZL_SERVICE_FORGET_EMAIL];
-    //    [objectManager addRequestDescriptor:[self responseDescriptor:[MZLServiceMapping serviceResponseObjectMapping] servicePath:servicePath]];
+
     RKResponseDescriptor *responseDescriptor = [self responseDescriptor:[MZLServiceMapping serviceResponseObjectMapping] servicePath:servicePath];
     [objectManager addResponseDescriptor:responseDescriptor];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -1846,13 +1826,96 @@
         [MZLSharedData setAppDuZhouMoUserToken:newStr];
   
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
+        MZLLog(@"%@",error);
     }];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [queue addOperation:operation];
 
 }
 
+#pragma mark - attention
++ (void)followDaRenListWithPagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+    NSString *servicePath = [self serviceUrl_v2:MZL_SERVICE_USERS_FOLLOWEES];
+    RKObjectManager *objectManager = [self objectManager];
+    [self objectManager:objectManager addResponseDescriptorFromMapping:[MZLModelUser rkObjectMapping]];
+    [self getObjects:objectManager atPath:servicePath parameters:[pagingParam toDictionary] succBlock:succBlock errorBlock:errorBlock];
+}
+
++ (void)attentionStatesForCurrentUser:(MZLModelUser *)user succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+    NSString *serviceUrl = [self serviceUrl_v2:MZL_SERVICE_USERS_FOLLOWEES_FILTER];
+    RKObjectManager *objectManager = [self objectManager];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:@(user.identifier) forKey:@"target_ids"];
+    [self getObjectsTemp:objectManager atPath:serviceUrl parameters:params succBlock:succBlock errorBlock:errorBlock];
+}
+
++ (void)getObjectsTemp:(RKObjectManager *)objectManager atPath:(NSString *)servicePath parameters:(NSDictionary *)params succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+    
+    NSDictionary *parameters = [self handleParameters:params];
+
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:MZL_SERVICE_BASE_URL]];
+    [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [client getPath:servicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        succBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        MZLLog(@"operation == %@     ...    error == %@",operation,error);
+    }];
+
+}
+
++ (void)addAttentionForShortArticleUser:(MZLModelUser *)user succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+    NSString *serviceUrl = [self serviceUrl_v2:MZL_SERVICE_USERS_FOLLOWEES];
+    RKObjectManager *objectManager = [self objectManager];
+    [self objectManager:objectManager addResponseDescriptorFromMapping:[MZLServiceResponseObject rkObjectMapping]];
+    [IBMessageCenter sendGlobalMessageNamed:MZL_NOTIFICATION_USER_UP_ARTICLE_UPDATED];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:@(user.identifier) forKey:@"target_id"];
+    [self postObject:objectManager object:user atPath:serviceUrl parameters:params succBlock:succBlock errorBlock:errorBlock];
+}
+
++ (void)removeAttentionForShortArticleUser:(MZLModelUser *)user succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+    NSString *serviceUrl = [self serviceUrl_v2:MZL_SERVICE_USERS_FOLLOWEES] ;
+    RKObjectManager *objectManager = [self objectManager];
+    [self objectManager:objectManager addResponseDescriptorFromMapping:[MZLServiceResponseObject rkObjectMapping]];
+    [IBMessageCenter sendGlobalMessageNamed:MZL_NOTIFICATION_USER_UP_ARTICLE_UPDATED];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:@(user.identifier) forKey:@"target_id"];
+    [self delete:objectManager object:user atPath:serviceUrl parameters:params succBlock:succBlock errorBlock:errorBlock];
+}
+
++ (void)attentionListForUser:(MZLModelUser *)user WithPagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+    NSString *serviceUrl = [[self serviceUrl_v2:MZL_SERVICE_USERS_ID_FOLLOWEES] co_stringWithIntegerParam:user.identifier];
+    RKObjectManager *objectManager = [self objectManager];
+    [self objectManager:objectManager addResponseDescriptorFromMapping:[MZLModelUser rkObjectMapping] servicePath:serviceUrl];
+    [self getObjects:objectManager atPath:serviceUrl parameters:[pagingParam toDictionary] succBlock:succBlock errorBlock:errorBlock];
+}
+
++ (void)fensiListForUser:(MZLModelUser *)user WithPagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+    NSString *serviceUrl = [[self serviceUrl_v2:MZL_SERVICE_USERS_ID_FOLLOWERS] co_stringWithIntegerParam:user.identifier];
+    RKObjectManager *objectManager = [self objectManager];
+    [self objectManager:objectManager addResponseDescriptorFromMapping:[MZLModelUser rkObjectMapping] servicePath:serviceUrl];
+    [self getObjects:objectManager atPath:serviceUrl parameters:[pagingParam toDictionary] succBlock:succBlock errorBlock:errorBlock];
+}
+
++ (void)tuijianDarenWithPagingParam:(MZLPagingSvcParam *)pagingParam SuccBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+    NSString *serviceUrl = [self serviceUrl_v2:MZL_SERVICE_FOLLOWEES_RECOMMEND];
+    RKObjectManager *objectManager = [self objectManager];
+    [self objectManager:objectManager addResponseDescriptorFromMapping:[MZLModelUser rkObjectMapping] servicePath:serviceUrl];
+    [self getObjects:objectManager atPath:serviceUrl parameters:[pagingParam toDictionary] succBlock:succBlock errorBlock:errorBlock];
+}
+
++ (id)followDarenShortArticleServiceWithFilter:(MZLFilterParam *)filter pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+    NSString *servicePath = [self serviceUrl_v2:MZL_SERVICE_USERS_FOLLOWEES_SHORT_ARTICLES];
+    RKObjectManager *objectManager = [self objectManager];
+    [self objectManager:objectManager addResponseDescriptorFromMapping:[MZLModelShortArticle rkObjectMapping]];
+    NSMutableDictionary *paramDict = [NSMutableDictionary dictionary];
+    [paramDict addEntriesFromDictionary:[pagingParam toDictionary]];
+    if (! filter) {
+        filter = [[MZLFilterParam alloc] init];
+    }
+    [paramDict addEntriesFromDictionary:[filter toDictionaryWithDistanceRequired]];
+    return [self getObjects:objectManager atPath:servicePath parameters:paramDict succBlock:succBlock errorBlock:errorBlock];
+}
 
 ///** 启动时发送一条消息到服务端，方便统计 */
 //+ (void)heartbeatOnAppStartup {

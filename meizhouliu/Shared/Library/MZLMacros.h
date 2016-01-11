@@ -63,6 +63,7 @@
 #define MZL_IVERSION_CHOICE_IGNORE @"忽略"
 #define MZL_IVERSION_CHOICE_REMIND @"等会儿再说"
 //MZLTableViewController
+#define MZL_NO_ATTENTION @"您还未关注任何人哦"
 #define MZL_TABLEVIEW_FOOTER_NO_RECORD @"当前没有记录可以显示"
 #define MZL_TABLEVIEW_FOOTER_NO_MORE_RECORD @"没有更多记录可以显示"
 #define MZL_TABLEVIEW_FOOTER_REFRESH @"正在加载更多精彩内容..."

@@ -59,6 +59,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *authorName;
 @property (weak, nonatomic) IBOutlet UITableView *tvComments;
 
+@property (nonatomic, weak) UIButton *attentionBtn;
 @property (nonatomic, weak) UIAlertView *alert;
 
 @end
@@ -94,6 +95,39 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    //刷新关注按钮的状态
+    [self getAttentionStatus];
+}
+
+- (void)getAttentionStatus {
+    
+    if (![MZLSharedData isAppUserLogined]) {
+        return;
+    }
+    
+    MZLModelShortArticle *shortArticle = self.shortArticle;
+    __weak MZLShortArticleDetailVC *weaSelf = self;
+    [MZLServices attentionStatesForCurrentUser:shortArticle.author succBlock:^(NSArray *models) {
+        if (models && models.count > 0) {
+            shortArticle.author.isAttentionForCurrentUser = 1;
+            if (shortArticle.author.identifier == weaSelf.shortArticle.author.identifier) {
+                [weaSelf toggleAttention:shortArticle.author.isAttentionForCurrentUser];
+            }
+        }else {
+            shortArticle.author.isAttentionForCurrentUser = 0;
+            if (shortArticle.author.identifier == weaSelf.shortArticle.author.identifier) {
+                [weaSelf toggleAttention:shortArticle.author.isAttentionForCurrentUser];
+            }
+        }
+        
+    } errorBlock:^(NSError *error) {
+        MZLLog(@"erroe = %@",error);
+    }];
+}
+
+- (void)toggleAttention:(BOOL)flag {
+    UIImage *upImage = flag ? [UIImage imageNamed:@"attention_xiangqingye_cancel"] : [UIImage imageNamed:@"attention_xiangqingye"];
+    [self.attentionBtn setImage:upImage forState:UIControlStateNormal];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -210,6 +244,23 @@
     [self loadModels];
 }
 
+- (void)addAttention {
+    [MZLServices addAttentionForShortArticleUser:self.shortArticle.author succBlock:^(NSArray *models) {
+        //
+    } errorBlock:^(NSError *error) {
+        //
+    }];
+}
+
+- (void)removeAttention {
+    MZLModelShortArticle *shortArticle = self.shortArticle;
+    [MZLServices removeAttentionForShortArticleUser:shortArticle.author succBlock:^(NSArray *models) {
+        //
+    } errorBlock:^(NSError *error) {
+        //
+    }];
+}
+
 - (void)addUp {
     [MZLServices addUpForShortArticle:self.shortArticle succBlock:^(NSArray *models) {
         // ignore
@@ -271,17 +322,16 @@
 #pragma mark - init UI
 
 - (void)initUI {
-#pragma mark - 到时这里加关注按钮
-    //    if (self.shortArticle.goodsCount > 0) {
-    //        UIView *goodsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-    //        [goodsView addTapGestureRecognizer:self action:@selector(onGoodsViewClicked:)];
-    //        UILabel *lblGoodsCount = [goodsView createSubViewLabelWithFontSize:12 textColor:@"999999".co_toHexColor];
-    //        [lblGoodsCount co_rightCenterYParentWithWidth:COInvalidCons height:COInvalidCons];
-    //        UIImageView *lblGoodsImage = [goodsView createSubViewImageViewWithImageNamed:@"Short_Article_List_Style2_Goods"];
-    //        [[lblGoodsImage co_rightFromLeftOfView:lblGoodsCount offset:4] co_centerYParent];
-    //        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:goodsView];
-    //        lblGoodsCount.text = INT_TO_STR(self.shortArticle.goodsCount);
-    //    }
+    
+    UIButton *attentionBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 21)];
+    [attentionBtn setImage:[UIImage imageNamed:@"attention_xiangqingye"] forState:UIControlStateNormal];
+    [attentionBtn addTarget:self action:@selector(onAttentionClicked:) forControlEvents:UIControlEventTouchUpInside];
+    self.attentionBtn = attentionBtn;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:attentionBtn];
+    if ([MZLSharedData appUserId] == self.shortArticle.author.identifier) {
+        self.attentionBtn.hidden = YES;
+    }
+    [self toggleAttentionStatus];
     
     [self initAuthor];
     [self initTableView];
@@ -536,6 +586,18 @@
 - (void)toggleUpStatus {
     [self toggleUpImage:self.shortArticle.isUpForCurrentUser];
     [self updateLbl:self.upsLbl withCount:self.shortArticle.upsCount];
+}
+
+- (void)toggleAttentionStatus {
+    [self toggleAttentionImage:self.shortArticle.author.isAttentionForCurrentUser];
+}
+
+- (void)toggleAttentionImage:(BOOL)flag {
+    if (flag) {
+        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_xiangqingye_cancel"] forState:UIControlStateNormal];
+    }else {
+        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_xiangqingye"] forState:UIControlStateNormal];
+    }
 }
 
 - (void)updateLbl:(UILabel *)label withCount:(NSInteger)count {
@@ -815,6 +877,23 @@
     loc.name = self.shortArticle.location.locationName;
     loc.identifier = self.shortArticle.location.identifier;
     return loc;
+}
+
+- (void)onAttentionClicked:(UITapGestureRecognizer *)tap {
+    if (![MZLSharedData isAppUserLogined]) {
+        [UIAlertView showAlertMessage:@"请先登入"];
+        return;
+    }
+    
+    if (self.shortArticle.author.isAttentionForCurrentUser) {
+        self.shortArticle.author.isAttentionForCurrentUser = NO;
+        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_xiangqingye"] forState:UIControlStateNormal];
+        [self removeAttention];
+    }else{
+        self.shortArticle.author.isAttentionForCurrentUser = YES;
+        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_xiangqingye_cancel"] forState:UIControlStateNormal];
+        [self addAttention];
+    }
 }
 
 - (void)onGoodsViewClicked:(UITapGestureRecognizer *)tap {

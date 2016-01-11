@@ -24,6 +24,17 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *consSegmentTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *consSegmentHeight;
 
+@property (weak, nonatomic) IBOutlet UIView *textVIew;
+
+@property (weak, nonatomic) IBOutlet UIImageView *headIcon;
+@property (weak, nonatomic) IBOutlet UILabel *nameLbl;
+@property (weak, nonatomic) IBOutlet UILabel *attentionLbl;
+@property (weak, nonatomic) IBOutlet UILabel *attentionCountLbl;
+@property (weak, nonatomic) IBOutlet UILabel *fensiLbl;
+@property (weak, nonatomic) IBOutlet UILabel *fensiCountLbl;
+@property (weak, nonatomic) IBOutlet UILabel *introdutionLbl;
+
+
 
 //- (void)refreshMyFavoriteData;
 

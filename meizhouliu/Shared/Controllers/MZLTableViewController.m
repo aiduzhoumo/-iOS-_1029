@@ -537,6 +537,50 @@
     return _tv.superview;
 }
 
+- (UIView *)noAttentionRecordView {
+    UIView *noAttentionView = [[UIView alloc] init];
+    UIView *superView = [self noRecordViewSuperView];
+    if (_tv.superview == superView) {
+        [superView insertSubview:noAttentionView aboveSubview:_tv];
+    }else {
+        [superView insertSubview:noAttentionView atIndex:0];
+    }
+    _noRecordView = noAttentionView;
+    
+    UIView *imageView = [self imageViewWithImageNamed:@"attention_sad" size:CGSizeMake(95, 95) superView:noAttentionView];
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(noAttentionView).offset(-84);
+        make.centerX.mas_equalTo(noAttentionView);
+        
+    }];
+    UIView *labelView = [self noAttentionRecordLabelView:noAttentionView];
+    [labelView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(imageView.mas_bottom).offset(12);
+        make.left.right.mas_equalTo(noAttentionView);
+    }];
+    //这里还要加一个按钮，进入推荐达人列表
+    UIView *lookForDaRen = [self imageViewWithImageNamed:@"lookforTuiJianDaren" size:CGSizeMake(114, 30) superView:superView];
+    [lookForDaRen mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(labelView.mas_bottom).offset(20);
+        make.centerX.mas_equalTo(noAttentionView);
+    }];
+    [lookForDaRen addTapGestureRecognizer:self action:@selector(toTuiJianDaren)];
+    
+    [noAttentionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(superView);
+        // UIScrollView的right无法attach? 用width代替
+        make.width.mas_equalTo(superView.bounds.size.width);
+        make.centerY.mas_equalTo(noAttentionView.superview);
+        // 自动计算高度
+        make.bottom.mas_equalTo(labelView);
+    }];
+    return noAttentionView;
+}
+
+- (void)toTuiJianDaren {
+    [self toTuiJianDarenViewController];
+}
+
 - (UIView *)noRecordView {
     UIView *noRecordView = [[UIView alloc] init];
 //    noRecordView.backgroundColor = [UIColor greenColor];
@@ -586,6 +630,37 @@
 
 - (NSArray *)noRecordTexts {
     return @[MZL_TABLEVIEW_FOOTER_NO_RECORD];
+}
+
+- (UIView *)noAttentionRecordLabelView:(UIView *)superView {
+    UIView *labelView = [[UIView alloc] init];
+    //    labelView.backgroundColor = [UIColor orangeColor];
+    [superView addSubview:labelView];
+    UILabel *preLabel;//
+    UILabel *lbl = [[UILabel alloc] init];
+    lbl.numberOfLines = 1;
+    lbl.textAlignment = NSTextAlignmentCenter;
+    lbl.font = MZL_FONT(15.0);
+    lbl.textColor = colorWithHexString(@"#999999");
+    lbl.text = MZL_NO_ATTENTION;
+    [labelView addSubview:lbl];
+    [lbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(labelView);
+        CGFloat offset = NO_RECORD_VIEW_V_SPACING;
+        if (preLabel) {
+            make.top.mas_equalTo(preLabel.mas_bottom).offset(offset);
+        } else {
+            make.top.mas_equalTo(labelView.mas_top).offset(offset);
+        }
+    }];
+    preLabel = lbl;
+    
+    [labelView mas_makeConstraints:^(MASConstraintMaker *make) {
+        // 对齐最后一个label，自动计算高度
+        make.bottom.mas_equalTo(preLabel);
+    }];
+    return labelView;
+
 }
 
 - (UIView *)noRecordLabelView:(UIView *)superView {
@@ -774,7 +849,7 @@
         [params addObject:errorBlock];
         // 如果该方法存在参数（len >2, 0为方法拥者，1为方法名)
         if (methodParamLen > 2) {
-            for (int i = 2; i < methodParamLen; i++) {
+            for (int i = 2; i < methodParamLen ; i++) {
                 id param = params[i - 2];
                 [invocation setArgument:&param atIndex:i];
             }

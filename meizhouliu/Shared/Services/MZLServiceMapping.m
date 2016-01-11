@@ -33,6 +33,7 @@
 #import "MZLModelUserInfoDetail.h"
 #import "MZLImageUploadResponse.h"
 #import "MZLBindPhoneResponse.h"
+#import "MZLTuiJianDaren.h"
 
 #define ID_MAPPING @"id":@"identifier"
 #define TAGS_MAPPING @"tags_str":@"tags"
@@ -379,8 +380,11 @@
              ID_MAPPING,
              @"nickname":   @"nickName",
              @"level"   :   @"level",
-             @"bind"    :   @"bind"
 //             @"phone"   :   @"phone"
+             @"intro": @"introduction",
+             @"bind" : @"bind",
+             @"followers_count" : @"followers_count",
+             @"followees_count" : @"followees_count"
              };
 }
 
@@ -448,7 +452,9 @@
              @"level":       @"level",
              @"sex":       @"sex",
              @"intro": @"introduction",
-             @"bind" : @"bind"
+             @"bind" : @"bind",
+             @"followers_count" : @"followers_count",
+             @"followees_count" : @"followees_count"
 //             @"phone": @"phone"
              };
 }
@@ -482,6 +488,15 @@
     [result addAttributeMappingsFromArray:@[@"error", @"message"]];
     [result addPropertyMapping:[self relMappingToKeyPath:@"messages" fromAttr:@"messages" withMapping:[self messagesResponseObjectMapping]]];
     [result addPropertyMapping:[self relMappingToKeyPath:@"photo" fromAttr:@"image" withMapping:[self imageObjectMapping]]];
+    return result;
+}
+
++ (RKObjectMapping *)tuijianDarenObjectMapping {
+    RKObjectMapping *result = [RKObjectMapping mappingForClass:[MZLTuiJianDaren class]];
+    [result addAttributeMappingsFromDictionary:[self authorDetailMapping]];
+    [result addPropertyMappingsFromArray:[self authorRelationMappings]];
+    [result addRelationshipMappingWithSourceKeyPath:@"articles" mapping:[self articleObjectMapping]];
+    [result addRelationshipMappingWithSourceKeyPath:@"cover" mapping:[self imageObjectMapping]];
     return result;
 }
 

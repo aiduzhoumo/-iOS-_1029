@@ -216,6 +216,16 @@
 
 #pragma mark - filter delegate
 
+- (void)hideFilterView {
+    if (_filterView) {
+        [_filterView hide];
+    }
+    _filterViewDisappearTimeStamp = [NSDate date];
+}
+- (void)showFilterView {
+    [_filterView showWithDelegate:self];
+}
+
 - (void)onFilterOptionsShown {
 //    [self toggleStatusForFilters:YES];
 }

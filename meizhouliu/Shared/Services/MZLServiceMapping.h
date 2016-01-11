@@ -44,4 +44,7 @@
 + (RKObjectMapping *)dummyObjectMapping;
 
 + (RKObjectMapping *)userBindPhoneObjectMapping;
+
++ (RKObjectMapping *)tuijianDarenObjectMapping;
+
 @end

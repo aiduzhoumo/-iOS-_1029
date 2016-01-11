@@ -119,7 +119,6 @@
     MZLPagingSvcParam *pageSvc = [[MZLPagingSvcParam alloc] init];
     pageSvc.pageIndex = 1;
     [MZLServices locationGoodsService:self.locationParam pagingParam:pageSvc succBlock:nil errorBlock:nil];
-//    [self hideProgressIndicator];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModels:) name:@"goodsModel" object:nil];
 }
 

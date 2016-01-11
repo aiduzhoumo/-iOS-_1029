@@ -10,6 +10,8 @@
 
 @class MZLModelUser;
 
+typedef void (^feriendListClick)(MZLModelUser *user);
+
 @interface MZLAuthorHeader : UIView
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgAuthorHeader;
@@ -20,6 +22,15 @@
 @property (weak, nonatomic) IBOutlet UIView *vwBottom;
 @property (weak, nonatomic) IBOutlet UILabel *lblAuthorArticleTitle;
 
+@property (weak, nonatomic) IBOutlet UILabel *attention;
+@property (weak, nonatomic) IBOutlet UILabel *attentionLable;
+@property (weak, nonatomic) IBOutlet UILabel *fensi;
+@property (weak, nonatomic) IBOutlet UILabel *fensiLable;
+@property (weak, nonatomic) IBOutlet UIButton *attentionBtn;
+
+@property (nonatomic, copy) feriendListClick clickBlcok;
+
+@property (nonatomic, strong) MZLModelUser *user;
 
 - (void)initWithAuthorInfo:(MZLModelUser *)author;
 

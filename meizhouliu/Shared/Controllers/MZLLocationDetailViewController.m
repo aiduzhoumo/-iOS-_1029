@@ -140,6 +140,7 @@
     [self showNetworkProgressIndicator];
     [self refreshFavorData];
     [MZLServices locationDetailService:self.locationParam.identifier succBlock:^(NSArray *models) {
+    
         [self onSvcSuccess:models];
     } errorBlock:^(NSError *error) {
         [self onNetworkError:error];

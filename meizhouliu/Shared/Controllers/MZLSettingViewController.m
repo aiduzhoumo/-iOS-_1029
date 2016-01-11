@@ -75,6 +75,9 @@
         [MZLServices userInfoServiceWithSuccBlock:^(NSArray *models) {
             [self hideProgressIndicator];
             _userDetail = ((MZLUserDetailResponse *)models[0]).user;
+            MZLAppUser *appUser = [MZLSharedData appUser];
+            appUser.user = ((MZLUserDetailResponse *)models[0]).user;
+            [appUser saveInPreference];
             [self initInternal];
         } errorBlock:^(NSError *error) {
             [self onNetworkError];
