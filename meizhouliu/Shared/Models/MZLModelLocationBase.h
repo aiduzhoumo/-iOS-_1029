@@ -12,6 +12,8 @@
 
 @interface MZLModelLocationBase : MZLModelObject
 
+@property (nonatomic, assign) NSInteger identifier;
+
 @property (nonatomic, assign) CGFloat latitude;
 @property (nonatomic, assign) CGFloat longitude;
 @property (nonatomic, copy) NSString *name;

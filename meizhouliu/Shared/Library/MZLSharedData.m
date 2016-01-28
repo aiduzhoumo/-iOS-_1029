@@ -78,6 +78,8 @@ static NSArray *_mzlFilterOptions;
     [COPreferences archiveUserPreference:filterOptions forKey:MZL_KEY_CACHED_FILTER_OPTIONS];
 }
 
+
+
 #pragma mark - login/logout related
 
 static NSString *_appMachineId;
@@ -158,7 +160,6 @@ static MZLAppUser *_mzlAppUser;
     return [COPreferences getUserPreference:MZL_KEY_CACHED_DATETIME_REMIND_LOGIN];
 }
 
-<<<<<<< HEAD
 #pragma mark - apservice registrationID
 + (void)setAPserviceRegistrationID:(NSString *)registrationID {
     [COPreferences setUserPreference:registrationID forKey:@"APserviceRegistrationID"];
@@ -176,8 +177,6 @@ static MZLAppUser *_mzlAppUser;
    return [COPreferences getUserPreference:@"duzhoumousertoken"];
 }
 
-=======
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 #pragma mark - device token for notification
 
 + (NSString *)deviceTokenForNotification {
@@ -503,4 +502,20 @@ static NSDictionary *_info;
     }
 }
 
++ (void)loadAppUserBindInfoFromCache {
+
+
+}
+
++ (void)setApnsInfoForNotification:(NSDictionary *)info {
+    [COPreferences setUserPreference:info forKey:@"JPushInfo"];
+}
+
++ (NSDictionary *)getApnsInfoForNotification {
+   return [COPreferences getUserPreference:@"JPushInfo"];
+}
+
++ (void)removeApnsinfoForNotification {
+    [COPreferences removeUserPreference:@"JPushInfo"];
+}
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NSObject+CORestKitMapping.h"
+#import "MZLModelUser.h"
 
 @class MZLMessagesResponse;
 

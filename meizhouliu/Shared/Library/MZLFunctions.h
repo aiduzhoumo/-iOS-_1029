@@ -36,6 +36,7 @@ MKCoordinateSpan coordinateSpanAmongPoints(CLLocationCoordinate2D curPoint, NSAr
 NSDate* dateFromString(NSString *str);
 NSDate* yesterday();
 NSURL *webUrl(NSString *url);
+NSURL *webDuZhouMoUrl(NSString *url);
 
 #pragma mark - identify bundle identifier;
 BOOL isMZLProdApp();

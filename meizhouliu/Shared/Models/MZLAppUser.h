@@ -17,12 +17,16 @@
 /** 跟后台绑定的user */
 @property (nonatomic, strong) MZLModelUser *user;
 
+@property (nonatomic, copy) NSString *duzhoumoToken;
+
 @property (nonatomic, copy) NSString *tokenFrom3rdParty;
 @property (nonatomic, copy) NSString *openIdFrom3rdParty;
 @property (nonatomic, copy) NSString *imageUrlFrom3rdParty;
 @property (nonatomic, copy) NSString *nickNameFrom3rdParty;
 @property (nonatomic, copy) NSDate *expirationDateFrom3rdParty;
 @property (nonatomic, readonly) NSString *expirationFrom3rdParty;
+
+@property (nonatomic, assign) BOOL isBindPhone;
 
 @property (nonatomic, readonly) BOOL isLogined;
 @property (nonatomic, assign) MZLLoginType loginType;

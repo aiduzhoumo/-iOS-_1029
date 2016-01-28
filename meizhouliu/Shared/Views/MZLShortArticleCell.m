@@ -60,6 +60,7 @@ typedef enum : NSInteger {
 @property (nonatomic, weak) IBOutlet UIView *bg;
 @property (nonatomic, weak) IBOutlet UIView *leftView;
 @property (nonatomic, weak) IBOutlet UIView *rightView;
+@property (weak, nonatomic) IBOutlet UIView *topView;
 @property (nonatomic, weak) UIView *photoView;
 
 @property (nonatomic, weak) UIImageView *authorImage;
@@ -145,10 +146,7 @@ typedef enum : NSInteger {
     [bg addTapGestureRecognizer:self action:@selector(toShortArticleDetail)];
     UIView *leftView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, 0, COInvalidCons) width:LEFT_VIEW_WIDTH height:COInvalidCons];
     self.leftView = leftView;
-<<<<<<< HEAD
     
-=======
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
     UIView *rightView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(0, COInvalidCons, 0, 0)];
     self.rightView = rightView;
     [rightView co_leftFromRightOfView:leftView offset:0];
@@ -365,12 +363,8 @@ typedef enum : NSInteger {
 }
 
 - (void)initNameDateView {
-<<<<<<< HEAD
 
      UIView *nameDateView = [[self.rightView createSubView] co_insetsParent:UIEdgeInsetsMake(9, 0, COInvalidCons, 0) width:COInvalidCons height:18.0];
-=======
-    UIView *nameDateView = [[self.rightView createSubView] co_insetsParent:UIEdgeInsetsMake(9, 0, COInvalidCons, 0) width:COInvalidCons height:18.0];
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
     if ([self isModeCalcHeight]) {
         return;
     }
@@ -874,7 +868,6 @@ typedef enum : NSInteger {
 
 @implementation MZLShortArticleCellAuthor
 
-<<<<<<< HEAD
 - (void)initInternal {
     UIView *bg = [[self.contentView createSubView] co_offsetParent:CELL_MARGIN];
     [bg addTapGestureRecognizer:self action:@selector(toShortArticleDetail)];
@@ -970,8 +963,6 @@ typedef enum : NSInteger {
     self.dateLbl = dateLbl;
 }
 
-=======
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 @end
 
 @implementation MZLShortArticleCellLocation
@@ -993,7 +984,6 @@ typedef enum : NSInteger {
 
 @implementation MZLShortArticleCellMy
 
-<<<<<<< HEAD
 - (void)initInternal {
     UIView *bg = [[self.contentView createSubView] co_offsetParent:CELL_MARGIN];
     [bg addTapGestureRecognizer:self action:@selector(toShortArticleDetail)];
@@ -1083,8 +1073,6 @@ typedef enum : NSInteger {
     self.dateLbl = dateLbl;
 }
 
-=======
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 - (void)initFunctionViewModules {
     [super initFunctionViewModules];
     UIView *deleteView = [self createImageLblView:self.functionView imageName:@"Short_Article_DeleteArticle"];

@@ -27,12 +27,9 @@
 #import "MZLAppNotices.h"
 #import <IBMessageCenter.h>
 #import "MZLShortArticleCell.h"
-<<<<<<< HEAD
 #import "MZLFeriendListViewController.h"
 #import "MZLUserDetailResponse.h"
 #import "MZLAuthorDetailViewController.h"
-=======
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 
 #import "MZLLoginViewController.h"
 #import "MZLTabBarViewController.h"
@@ -56,15 +53,12 @@
     MZLMyNormalFavoriteHeaderView *_headV;
 }
 
-<<<<<<< HEAD
 @property (nonatomic, weak) UIView *tempView;
 
 @property (nonatomic, weak) UIView *headerView;
 
 @property (nonatomic, strong) MZLModelUser *user;
 
-=======
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 @end
 
 @implementation MZLMyFavoriteViewController
@@ -92,6 +86,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     if ([MZLSharedData hasApsInfo]) {
         [self launchToNoticeDetail];
     } else {
@@ -101,12 +96,9 @@
             [self refreshViewData];
         }
     }
-<<<<<<< HEAD
     
     //得到用户信息
     [self getUserInfo];
-=======
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 }
 
 - (void)didReceiveMemoryWarning
@@ -146,19 +138,11 @@
     
     _tv = self.tvMy;
     _tv.backgroundColor = [UIColor clearColor];
-<<<<<<< HEAD
 
-=======
-    [self adjustTableViewBottomInset:self.tabBarController.tabBar.height scrollIndicatorBottomInset:self.tabBarController.tabBar.height];
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
     [_tv removeUnnecessarySeparators];
     _tv.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     [_tv setSeparatorColor:MZL_SEPARATORS_BG_COLOR()];
     
-<<<<<<< HEAD
-=======
-//    [self onLoginStatusChanged];
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 }
 
 - (void)updateHeadBarUI {
@@ -172,12 +156,16 @@
         _headV = [MZLMyNormalFavoriteHeaderView normalFavoriteHeaderViewWithSize:window.bounds.size];
         _tv.tableHeaderView = _headV;
     }
-<<<<<<< HEAD
     _headV.delegate = self;
-=======
-    _headView.delegate = self;
-    [self.vwTopBar addSubview:_headView];
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
+}
+
+#pragma mark - to AttentionFensi View
+- (void)toAttentionView:(UITapGestureRecognizer *)tap {
+
+    MZLFeriendListViewController *feriendList = [MZL_MAIN_STORYBOARD() instantiateViewControllerWithIdentifier:@"MZLFeriendListViewController"];
+    feriendList.user = self.user;
+    feriendList.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:feriendList animated:YES];
 }
 
 #pragma mark - login status
@@ -593,10 +581,11 @@
         _tv.contentInset = insets;
         [_tv setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     } else {
-        insets.top = 0;
-        _tv.contentInset = insets;
-        _tv.separatorColor = @"D8D8D8".co_toHexColor;
-        [_tv setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+#pragma mark - 暂时隐藏,以免页面乱（不知这里干嘛用的）
+//        insets.top = 0;
+//        _tv.contentInset = insets;
+//        _tv.separatorColor = @"D8D8D8".co_toHexColor;
+//        [_tv setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     }
     [self refreshWhenViewIsVisible];
 }

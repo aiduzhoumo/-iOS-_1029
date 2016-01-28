@@ -9,19 +9,19 @@
 #import "MZLAppUser.h"
 #import "MZLModelImage.h"
 
+
 @implementation MZLAppUser
 
 - (BOOL)isLogined {
-<<<<<<< HEAD
         
     if (![self.user.bind isEqualToString:@"true"]) {
         return NO;
     }
-=======
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
     return (self.user && self.token);
 }
 
+
+//&& (self.user.phone.length != 0)
 - (NSString *)expirationFrom3rdParty {
     if (self.expirationDateFrom3rdParty) {
         NSString *expiresIn = [NSString stringWithFormat:@"%f", [self.expirationDateFrom3rdParty timeIntervalSinceNow]];
@@ -41,6 +41,8 @@
 #define KEY_USER_NICKNAME @"KEY_USER_NICKNAME"
 //#define KEY_USER_IMAGE_URL @"KEY_USER_IMAGE_URL"
 #define KEY_USER_LEVEL @"KEY_USER_LEVEL"
+#define KEY_USER_PHONE @"KEY_USER_PHONE"
+#define KEY_USER_BIND @"KEY_USER_BIND"
 
 #define KEY_USER_TOKEN @"KEY_USER_TOKEN"
 #define KEY_USER_REFRESH_TOKEN @"KEY_USER_REFRESH_TOKEN"
@@ -64,6 +66,8 @@
         
         self.loginType = [[aDecoder decodeObjectForKey:KEY_USER_LOGIN_TYPE] integerValue];
         
+//        self.isBindPhone = [[aDecoder decodeObjectForKey:KEY_USER_BIND_PHONE] integerValue];
+        
         MZLModelAccessToken *token = [[MZLModelAccessToken alloc] init];
         token.token = [aDecoder decodeObjectForKey:KEY_USER_TOKEN];
         token.refreshToken = [aDecoder decodeObjectForKey:KEY_USER_REFRESH_TOKEN];
@@ -72,7 +76,11 @@
         MZLModelUser *user = [[MZLModelUser alloc] init];
         user.identifier = [[aDecoder decodeObjectForKey:KEY_USER_ID] integerValue];
         user.nickName = [aDecoder decodeObjectForKey:KEY_USER_NICKNAME];
+        user.phone = [aDecoder decodeObjectForKey:KEY_USER_PHONE];
+        user.bind = [aDecoder decodeObjectForKey:KEY_USER_BIND];
         user.level = [[aDecoder decodeObjectForKey:KEY_USER_LEVEL] integerValue];
+               
+//        user
 //        self.user.headerImage = [[MZLModelImage alloc] init];
 //        self.user.headerImage.fileUrl = [aDecoder decodeObjectForKey:KEY_USER_IMAGE_URL];
         
@@ -94,6 +102,8 @@
     
     [aCoder encodeObject:@(self.loginType) forKey:KEY_USER_LOGIN_TYPE];
     
+//    [aCoder encodeObject:@(self.isBindPhone) forKey:KEY_USER_BIND_PHONE];
+    
     [aCoder encodeObject:self.token.token forKey:KEY_USER_TOKEN];
     [aCoder encodeObject:self.token.refreshToken forKey:KEY_USER_REFRESH_TOKEN];
     [aCoder encodeObject:self.token.expiresAt forKey:KEY_USER_EXPIRATION];
@@ -101,6 +111,8 @@
     [aCoder encodeObject:@(self.user.identifier) forKey:KEY_USER_ID];
     [aCoder encodeObject:self.user.nickName forKey:KEY_USER_NICKNAME];
     [aCoder encodeObject:@(self.user.level) forKey:KEY_USER_LEVEL];
+    [aCoder encodeObject:self.user.bind forKey:KEY_USER_BIND];
+    [aCoder encodeObject:self.user.phone forKey:KEY_USER_PHONE];
 //    [aCoder encodeObject:self.user.headerImage.fileUrl forKey:KEY_USER_IMAGE_URL];
     
 }

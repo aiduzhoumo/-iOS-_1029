@@ -21,7 +21,6 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnLoginSetting;
 
-<<<<<<< HEAD
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *consSegmentTop;
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *consSegmentHeight;
 //
@@ -35,10 +34,6 @@
 //@property (weak, nonatomic) IBOutlet UILabel *fensiCountLbl;
 //@property (weak, nonatomic) IBOutlet UILabel *introdutionLbl;
 
-=======
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *consSegmentTop;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *consSegmentHeight;
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 
 
 //- (void)refreshMyFavoriteData;

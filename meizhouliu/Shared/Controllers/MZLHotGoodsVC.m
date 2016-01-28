@@ -62,11 +62,10 @@
 #pragma mark - override
 
 - (BOOL)_canLoadMore {
-    return YES;
+    return NO;
 }
 
 - (void)_loadModels {
-<<<<<<< HEAD
     [self reset];
     
     [self geo];
@@ -115,13 +114,8 @@
     [self hideProgressIndicator];
 }
 
-=======
-    [self invokeService:@selector(hotGoodsService:succBlock:errorBlock:) params:@[[self pagingParamFromModels]]];
-}
-
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 - (void)_loadMore {
-    [self invokeLoadMoreService:@selector(hotGoodsService:succBlock:errorBlock:) params:@[[self pagingParamFromModels]]];
+//    [self invokeLoadMoreService:@selector(hotGoodsService:succBlock:errorBlock:) params:@[[self pagingParamFromModels]]];
 }
 
 - (void)mzl_onWillBecomeTabVisibleController {
@@ -144,7 +138,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MZLModelGoods *goods = (MZLModelGoods *)(_models[indexPath.row]);
-<<<<<<< HEAD
     NSString *nstring = goods.goodsUrl;
     NSArray *array = [nstring componentsSeparatedByString:@"$"];
     NSString *url = [array objectAtIndex:0];
@@ -155,9 +148,6 @@
 }
 - (void)dealloc {
     MZLLog(@"热门商品页面消失");
-=======
-    [self performSegueWithIdentifier:MZL_SEGUE_TOGOODSDETAIL sender:goods.goodsUrl];
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 }
 
 @end

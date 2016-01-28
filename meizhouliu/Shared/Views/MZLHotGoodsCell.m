@@ -9,7 +9,7 @@
 #import "MZLHotGoodsCell.h"
 #import "UIImageView+MZLNetwork.h"
 #import "NSString+MZLImageURL.h"
-
+#import "UIImageView+WebCache.h"
 #import "MZLMockData.h"
 #import "MZLModelGoods.h"
 
@@ -43,7 +43,9 @@
 - (void)updateWithGoods:(MZLModelGoods *)goods {
     self.lblPrice.text = INT_TO_STR(goods.price);
     self.lblTitle.text = goods.title;
-    [self.imgGoods loadImageFromURL:goods.coverImg.fileUrl placeholderImageName:nil mode:MZL_IMAGE_MODE_SCALED callbackOnImageLoaded:nil];
+    [self.imgGoods sd_setImageWithURL:[NSURL URLWithString:goods.imageUrl] placeholderImage:nil];
+   
+//    [self.imgGoods loadImageFromURL:goods.coverImg.fileUrl placeholderImageName:nil mode:MZL_IMAGE_MODE_SCALED callbackOnImageLoaded:nil];
 }
 
 + (CGFloat)cellHeigth {

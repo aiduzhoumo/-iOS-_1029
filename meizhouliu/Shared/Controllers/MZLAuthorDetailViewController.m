@@ -22,11 +22,8 @@
 #import "MZLShortArticleCell.h"
 #import "UIViewController+MZLShortArticle.h"
 #import "MZLModelUser.h"
-<<<<<<< HEAD
 #import "MZLFeriendListViewController.h"
 #import "View+MASAdditions.h"
-=======
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 
 
 @interface MZLAuthorDetailViewController ()<MZLAuthorHeaderShowProgressIndicatorDelegate> {
@@ -59,7 +56,6 @@
     self.tvAuthor.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tvAuthor.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     [self loadAuthorDetail];
-<<<<<<< HEAD
     
 }
 
@@ -73,8 +69,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     self.m = 1;
-=======
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 }
 
 - (void)didReceiveMemoryWarning
@@ -150,9 +144,9 @@
 }
 
 - (void)initUI {
+    _authorDetail.isAttentionForCurrentUser = self.authorParam.isAttention;
     if ([_authorDetail isSignedAuthor]) { // 签约作者
         self.navigationItem.title = MZL_AUTHOR_IS_SIGNED_WRITER;
-<<<<<<< HEAD
         MZLAuthorHeader *headerView = (MZLAuthorHeader *)[MZLSignedAuthorHeader signedAuthorHeader:_authorDetail];
         headerView.delegate = self;
         self.tvAuthor.tableHeaderView = headerView;
@@ -173,12 +167,6 @@
             feriendList.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:feriendList animated:YES];
         };
-=======
-        self.tvAuthor.tableHeaderView = [MZLSignedAuthorHeader signedAuthorHeader:_authorDetail];
-    } else {
-        self.navigationItem.title = MZL_AUTHOR_NOT_SIGNED_WRITER;
-        self.tvAuthor.tableHeaderView = [MZLNormalAuthorHeader normalAuthorHeader:_authorDetail];
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
     }
     self.view.backgroundColor = MZL_BG_COLOR();
 }

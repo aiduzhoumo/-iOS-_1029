@@ -10,6 +10,8 @@
 #import "UIImageView+MZLNetwork.h"
 #import "MobClick.h"
 #import "MZLModelUser.h"
+#import "MZLServices.h"
+#import "MZLFeriendListViewController.h"
 
 @implementation MZLAuthorHeader
 
@@ -23,6 +25,8 @@
 }
 
 - (void)initWithAuthorInfo:(MZLModelUser *)author {
+    self.user = author;
+    
     [self.imgAuthorHeader toRoundShape];
     [self.imgAuthorHeader loadAuthorImageFromURL:author.photoUrl];
     
@@ -49,7 +53,6 @@
     } else {
         self.lblDescriptions.text = author.introduction;
     }
-<<<<<<< HEAD
     
     [self.attention addTapGestureRecognizer:self action:@selector(toFeriendList:)];
     [self.fensi addTapGestureRecognizer:self action:@selector(toFeriendList:)];
@@ -72,17 +75,12 @@
 - (void)toFeriendList:(UITapGestureRecognizer *)tap {
     MZLModelUser *user = _user;
     self.clickBlcok(user);
-=======
-//    self.lblDescriptions.text = @"很长很长很长很长很长很长很长的很长很长很长很长很长很长很长的告白哟很长很长很长很长很长很长很长的很长很长很长很长很长很长很长的告白哟很长很长很长很长很长很长很长的很长很长很长很长很长很长很长的告白哟";
-    self.lblAuthorArticleTitle.text = [NSString stringWithFormat:@"%@ 去过", author.name];
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 }
 
 -(void)imgAuthorHeader:(UITapGestureRecognizer *)recognizer {
     [MobClick event:@"clickAuthorDetailAuthorHeader"];
 }
 
-<<<<<<< HEAD
 - (void)toggleAttentionStatus {
     
     NSArray *arr = [MZLSharedData attentionIdsArr];
@@ -164,7 +162,7 @@
         }
     }];
 }
-=======
->>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 
 @end
+
+
