@@ -13,6 +13,5 @@
 - (BOOL)verifyNickName:(UITextField *)txt;
 - (BOOL)verifyPassword:(UITextField *)txt;
 - (BOOL)verifyEmail:(UITextField *)txt;
-- (BOOL)verifyPhone:(UITextField *)phone;
 
 @end

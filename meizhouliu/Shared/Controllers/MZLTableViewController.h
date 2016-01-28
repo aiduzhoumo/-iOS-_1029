@@ -78,7 +78,6 @@
 @interface MZLTableViewController (ProtectedForNoRecordView)
 
 /** return nil to not have no record view */
-- (UIView *)noAttentionRecordView;
 - (UIView *)noRecordView;
 /** 默认为tv的superView */
 - (UIView *)noRecordViewSuperView;

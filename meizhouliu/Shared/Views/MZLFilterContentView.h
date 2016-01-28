@@ -14,10 +14,6 @@
 - (void)onFilterOptionsModified;
 
 @optional
-
-- (void)hideFilterView;
-- (void)showFilterView;
-
 - (void)onFilterOptionsShown;
 - (void)onFilterOptionsHidden;
 - (void)onFilterOptionsWillShow;

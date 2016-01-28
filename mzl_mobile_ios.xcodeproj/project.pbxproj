@@ -50,6 +50,7 @@
 		1BDE39531A480BBF002C1F86 /* MZLDescendantsParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDE39521A480BBF002C1F86 /* MZLDescendantsParam.m */; };
 		1BDE39561A48173A002C1F86 /* MZLModelRelatedLocationExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDE39551A48173A002C1F86 /* MZLModelRelatedLocationExt.m */; };
 		1BEA57511A7106C7009A3868 /* MZLShortArticleResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEA57501A7106C7009A3868 /* MZLShortArticleResponse.m */; };
+<<<<<<< HEAD
 		7846BDB41C3CEFB700688B98 /* MZLMyNormalFavoriteHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7846BDB31C3CEFB700688B98 /* MZLMyNormalFavoriteHeaderView.m */; };
 		7846BDB61C3CEFE500688B98 /* MZLMyNormalFavoriteHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7846BDB51C3CEFE500688B98 /* MZLMyNormalFavoriteHeaderView.xib */; };
 		7846BDBA1C3D25B300688B98 /* MZLFeriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7846BDB91C3D25B300688B98 /* MZLFeriendListViewController.m */; };
@@ -115,6 +116,8 @@
 		78F32E0C1C0558E3008ECF78 /* MZLVerifyCodeSvcParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F32E0B1C0558E3008ECF78 /* MZLVerifyCodeSvcParam.m */; };
 		78F900911BFD7B6A00429A2A /* MZLPhoneRegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F900901BFD7B6A00429A2A /* MZLPhoneRegViewController.m */; };
 		78FF94431C0431BD0062120A /* MZLPhoneRegNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78FF94421C0431BD0062120A /* MZLPhoneRegNameViewController.m */; };
+=======
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 		844382011BE0D00D00DF1C7E /* QQConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844381DB1BE0D00D00DF1C7E /* QQConnection.framework */; };
 		844382021BE0D00D00DF1C7E /* QZoneConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844381DC1BE0D00D00DF1C7E /* QZoneConnection.framework */; };
 		844382031BE0D00D00DF1C7E /* SinaWeiboConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844381DD1BE0D00D00DF1C7E /* SinaWeiboConnection.framework */; };
@@ -566,6 +569,7 @@
 		1BDE39551A48173A002C1F86 /* MZLModelRelatedLocationExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLModelRelatedLocationExt.m; sourceTree = "<group>"; };
 		1BEA574F1A7106C7009A3868 /* MZLShortArticleResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLShortArticleResponse.h; sourceTree = "<group>"; };
 		1BEA57501A7106C7009A3868 /* MZLShortArticleResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLShortArticleResponse.m; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		7846BDB21C3CEFB700688B98 /* MZLMyNormalFavoriteHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLMyNormalFavoriteHeaderView.h; sourceTree = "<group>"; };
 		7846BDB31C3CEFB700688B98 /* MZLMyNormalFavoriteHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLMyNormalFavoriteHeaderView.m; sourceTree = "<group>"; };
 		7846BDB51C3CEFE500688B98 /* MZLMyNormalFavoriteHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MZLMyNormalFavoriteHeaderView.xib; sourceTree = "<group>"; };
@@ -689,6 +693,8 @@
 		78F900901BFD7B6A00429A2A /* MZLPhoneRegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLPhoneRegViewController.m; sourceTree = "<group>"; };
 		78FF94411C0431BD0062120A /* MZLPhoneRegNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLPhoneRegNameViewController.h; sourceTree = "<group>"; };
 		78FF94421C0431BD0062120A /* MZLPhoneRegNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLPhoneRegNameViewController.m; sourceTree = "<group>"; };
+=======
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 		79A770220297C32F7E1E7330 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		844381DB1BE0D00D00DF1C7E /* QQConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QQConnection.framework; sourceTree = "<group>"; };
 		844381DC1BE0D00D00DF1C7E /* QZoneConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QZoneConnection.framework; sourceTree = "<group>"; };
@@ -1352,8 +1358,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				78F1ED581C16E33500189C62 /* CoreFoundation.framework in Frameworks */,
-				78F1ED561C16E32000189C62 /* CFNetwork.framework in Frameworks */,
 				846440411BCC922A00B9DA5D /* libUMessage_Sdk_1.2.0.a in Frameworks */,
 				8443820C1BE0D00D00DF1C7E /* libWeiboSDK.a in Frameworks */,
 				DCC283951A64E0950001FAF1 /* AssetsLibrary.framework in Frameworks */,
@@ -1380,7 +1384,6 @@
 				844382021BE0D00D00DF1C7E /* QZoneConnection.framework in Frameworks */,
 				E54DA432193EF5AF0034DB23 /* libz.dylib in Frameworks */,
 				E5432590190F9E4800C1AA9E /* MessageUI.framework in Frameworks */,
-				78F1ED5C1C16E37300189C62 /* libPushSDK-1.8.8.a in Frameworks */,
 				E543258C190F9E3600C1AA9E /* libstdc++.dylib in Frameworks */,
 				E5432588190F9E2100C1AA9E /* libz.1.2.5.dylib in Frameworks */,
 				E5432586190F9E1900C1AA9E /* libicucore.dylib in Frameworks */,
@@ -1499,8 +1502,6 @@
 				DCFAF6EA1A77EBF20048FEC2 /* MZLModelShortArticleUp.m */,
 				DC0920141A8218F9003A14CD /* MZLModelShortArticleComment.h */,
 				DC0920151A8218F9003A14CD /* MZLModelShortArticleComment.m */,
-				7868F22D1C3FD20900E3C360 /* MZLShortArticlesModel.h */,
-				7868F22E1C3FD20900E3C360 /* MZLShortArticlesModel.m */,
 			);
 			name = ShortArticle;
 			sourceTree = "<group>";
@@ -1526,142 +1527,6 @@
 				1B77FFB61A43D6A200CF8E30 /* NSObject+UmengNotification.m */,
 			);
 			path = UmengPush;
-			sourceTree = "<group>";
-		};
-		7846BDB71C3D24B900688B98 /* feriendList */ = {
-			isa = PBXGroup;
-			children = (
-				7846BDB81C3D25B300688B98 /* MZLFeriendListViewController.h */,
-				7846BDB91C3D25B300688B98 /* MZLFeriendListViewController.m */,
-				784E58901C3E114500E1FEF8 /* MZLAttentionListViewController.h */,
-				784E58911C3E114500E1FEF8 /* MZLAttentionListViewController.m */,
-				784E58931C3E115500E1FEF8 /* MZLFensiListViewController.h */,
-				784E58941C3E115500E1FEF8 /* MZLFensiListViewController.m */,
-				784E58961C3E59D600E1FEF8 /* MZLFeriendListCell.h */,
-				784E58971C3E59D600E1FEF8 /* MZLFeriendListCell.m */,
-				784E58981C3E59D600E1FEF8 /* MZLFeriendListCell.xib */,
-			);
-			name = feriendList;
-			sourceTree = "<group>";
-		};
-		7895AE361C0B05C7006686FA /* mailLogin */ = {
-			isa = PBXGroup;
-			children = (
-				7895AE371C0B074D006686FA /* MZLMailLoginView.h */,
-				7895AE381C0B074D006686FA /* MZLMailLoginView.m */,
-				7895AE3A1C0B0762006686FA /* MZLMailLoginView.xib */,
-			);
-			name = mailLogin;
-			sourceTree = "<group>";
-		};
-		7895AE3C1C0B2849006686FA /* bindPhoneNum */ = {
-			isa = PBXGroup;
-			children = (
-				7895AE3D1C0B286E006686FA /* MZLBindPhoneViewController.h */,
-				7895AE3E1C0B286E006686FA /* MZLBindPhoneViewController.m */,
-			);
-			name = bindPhoneNum;
-			sourceTree = "<group>";
-		};
-		78CB3B951C071A0800126D05 /* forgetPassW */ = {
-			isa = PBXGroup;
-			children = (
-				78CB3B971C071AD000126D05 /* MZLForgetPWByPhoneViewController.h */,
-				78CB3B981C071AD000126D05 /* MZLForgetPWByPhoneViewController.m */,
-				78EB81481C084BC3009342A1 /* MZLModifyPassWordViewController.h */,
-				78EB81491C084BC3009342A1 /* MZLModifyPassWordViewController.m */,
-				78EB81451C083C7B009342A1 /* MZLChooseModeViewController.h */,
-				78EB81461C083C7B009342A1 /* MZLChooseModeViewController.m */,
-				78EB814B1C084C03009342A1 /* MZLForgetPWByMailViewController.h */,
-				78EB814C1C084C03009342A1 /* MZLForgetPWByMailViewController.m */,
-				78EB814E1C084C54009342A1 /* MZLModifyPWByMailViewController.h */,
-				78EB814F1C084C54009342A1 /* MZLModifyPWByMailViewController.m */,
-			);
-			name = forgetPassW;
-			sourceTree = "<group>";
-		};
-		78DDAAC71C2CEA17005D6C3A /* SDWebimage */ = {
-			isa = PBXGroup;
-			children = (
-				78DDAAC81C2CEA17005D6C3A /* MKAnnotationView+WebCache.h */,
-				78DDAAC91C2CEA17005D6C3A /* MKAnnotationView+WebCache.m */,
-				78DDAACA1C2CEA17005D6C3A /* NSData+ImageContentType.h */,
-				78DDAACB1C2CEA17005D6C3A /* NSData+ImageContentType.m */,
-				78DDAACC1C2CEA17005D6C3A /* SDImageCache.h */,
-				78DDAACD1C2CEA17005D6C3A /* SDImageCache.m */,
-				78DDAACE1C2CEA17005D6C3A /* SDWebImageCompat.h */,
-				78DDAACF1C2CEA17005D6C3A /* SDWebImageCompat.m */,
-				78DDAAD01C2CEA17005D6C3A /* SDWebImageDecoder.h */,
-				78DDAAD11C2CEA17005D6C3A /* SDWebImageDecoder.m */,
-				78DDAAD21C2CEA17005D6C3A /* SDWebImageDownloader.h */,
-				78DDAAD31C2CEA17005D6C3A /* SDWebImageDownloader.m */,
-				78DDAAD41C2CEA17005D6C3A /* SDWebImageDownloaderOperation.h */,
-				78DDAAD51C2CEA17005D6C3A /* SDWebImageDownloaderOperation.m */,
-				78DDAAD61C2CEA17005D6C3A /* SDWebImageManager.h */,
-				78DDAAD71C2CEA17005D6C3A /* SDWebImageManager.m */,
-				78DDAAD81C2CEA17005D6C3A /* SDWebImageOperation.h */,
-				78DDAAD91C2CEA17005D6C3A /* SDWebImagePrefetcher.h */,
-				78DDAADA1C2CEA17005D6C3A /* SDWebImagePrefetcher.m */,
-				78DDAADB1C2CEA17005D6C3A /* UIButton+WebCache.h */,
-				78DDAADC1C2CEA17005D6C3A /* UIButton+WebCache.m */,
-				78DDAADD1C2CEA17005D6C3A /* UIImage+GIF.h */,
-				78DDAADE1C2CEA17005D6C3A /* UIImage+GIF.m */,
-				78DDAADF1C2CEA17005D6C3A /* UIImage+MultiFormat.h */,
-				78DDAAE01C2CEA17005D6C3A /* UIImage+MultiFormat.m */,
-				78DDAAE11C2CEA17005D6C3A /* UIImage+WebP.h */,
-				78DDAAE21C2CEA17005D6C3A /* UIImage+WebP.m */,
-				78DDAAE31C2CEA17005D6C3A /* UIImageView+HighlightedWebCache.h */,
-				78DDAAE41C2CEA17005D6C3A /* UIImageView+HighlightedWebCache.m */,
-				78DDAAE51C2CEA17005D6C3A /* UIImageView+WebCache.h */,
-				78DDAAE61C2CEA17005D6C3A /* UIImageView+WebCache.m */,
-				78DDAAE71C2CEA17005D6C3A /* UIView+WebCacheOperation.h */,
-				78DDAAE81C2CEA17005D6C3A /* UIView+WebCacheOperation.m */,
-			);
-			path = SDWebimage;
-			sourceTree = "<group>";
-		};
-		78DDAAF91C2CEF57005D6C3A /* MJRefresh */ = {
-			isa = PBXGroup;
-			children = (
-				78DDAAFA1C2CEF57005D6C3A /* MJRefresh.bundle */,
-				78DDAAFB1C2CEF57005D6C3A /* MJRefresh.h */,
-				78DDAAFC1C2CEF57005D6C3A /* MJRefreshBaseView.h */,
-				78DDAAFD1C2CEF57005D6C3A /* MJRefreshBaseView.m */,
-				78DDAAFE1C2CEF57005D6C3A /* MJRefreshConst.h */,
-				78DDAAFF1C2CEF57005D6C3A /* MJRefreshConst.m */,
-				78DDAB001C2CEF57005D6C3A /* MJRefreshFooterView.h */,
-				78DDAB011C2CEF57005D6C3A /* MJRefreshFooterView.m */,
-				78DDAB021C2CEF57005D6C3A /* MJRefreshHeaderView.h */,
-				78DDAB031C2CEF57005D6C3A /* MJRefreshHeaderView.m */,
-				78DDAB041C2CEF57005D6C3A /* UIScrollView+MJExtension.h */,
-				78DDAB051C2CEF57005D6C3A /* UIScrollView+MJExtension.m */,
-				78DDAB061C2CEF57005D6C3A /* UIScrollView+MJRefresh.h */,
-				78DDAB071C2CEF57005D6C3A /* UIScrollView+MJRefresh.m */,
-				78DDAB081C2CEF57005D6C3A /* UIView+MJExtension.h */,
-				78DDAB091C2CEF57005D6C3A /* UIView+MJExtension.m */,
-			);
-			path = MJRefresh;
-			sourceTree = "<group>";
-		};
-		78EE2FDC1C3504A9009A74C5 /* TuiJianDaren */ = {
-			isa = PBXGroup;
-			children = (
-				78EE2FE01C350569009A74C5 /* MZLTuiJianDarenViewController.h */,
-				78EE2FE11C350569009A74C5 /* MZLTuiJianDarenViewController.m */,
-				78EE2FE61C3505D2009A74C5 /* MZLTuiJianDarenCell.h */,
-				78EE2FE71C3505D2009A74C5 /* MZLTuiJianDarenCell.m */,
-				78EE2FE81C3505D2009A74C5 /* MZLTuiJianDarenCell.xib */,
-			);
-			name = TuiJianDaren;
-			sourceTree = "<group>";
-		};
-		78F1ED591C16E37300189C62 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				78F1ED5A1C16E37300189C62 /* APService.h */,
-				78F1ED5B1C16E37300189C62 /* libPushSDK-1.8.8.a */,
-			);
-			path = lib;
 			sourceTree = "<group>";
 		};
 		844381D91BE0D00D00DF1C7E /* ShareSDK */ = {
@@ -1921,16 +1786,12 @@
 				E503B31F19988D58003F04DB /* Register */,
 				DCC231AA190A4B2900F181B0 /* MZLPagingSvcParam.h */,
 				DCC231AB190A4B2900F181B0 /* MZLPagingSvcParam.m */,
-				78EE40491C2BA29F002A128F /* MZLNEWPageingSvcParam.h */,
-				78EE404A1C2BA29F002A128F /* MZLNEWPageingSvcParam.m */,
 				DC3FA84318FE24E300A14FD1 /* MZLArticleListSvcParam.h */,
 				DC3FA84418FE24E300A14FD1 /* MZLArticleListSvcParam.m */,
 				DC2A12551915E1A30045B300 /* MZLChildLocationsSvcParam.h */,
 				DC2A12561915E1A30045B300 /* MZLChildLocationsSvcParam.m */,
 				E5487A2E1989FF6800AACB75 /* MZLLoginSvcParam.h */,
 				E5487A2F1989FF6800AACB75 /* MZLLoginSvcParam.m */,
-				7885BA181C05EBEA00A49658 /* MZLPhoneLoginSvcParam.h */,
-				7885BA191C05EBEA00A49658 /* MZLPhoneLoginSvcParam.m */,
 				DCDA780619C033C100D3E576 /* MZLFilterParam.h */,
 				DCDA780719C033C100D3E576 /* MZLFilterParam.m */,
 				DCDA780919C0369F00D3E576 /* MZLSvcParamWithPaging.h */,
@@ -1941,10 +1802,6 @@
 				1BDE39521A480BBF002C1F86 /* MZLDescendantsParam.m */,
 				1BA2CEAA1A5A70B70049C190 /* MZLSurroundingLocSvcParam.h */,
 				1BA2CEAB1A5A70B70049C190 /* MZLSurroundingLocSvcParam.m */,
-				78F32E071C055293008ECF78 /* MZLGetCodeSvcParam.h */,
-				78F32E081C055293008ECF78 /* MZLGetCodeSvcParam.m */,
-				78F32E0A1C0558E3008ECF78 /* MZLVerifyCodeSvcParam.h */,
-				78F32E0B1C0558E3008ECF78 /* MZLVerifyCodeSvcParam.m */,
 			);
 			name = Input;
 			sourceTree = "<group>";
@@ -1985,8 +1842,6 @@
 		DC48901A18EBE2870043D412 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				78F1ED571C16E33500189C62 /* CoreFoundation.framework */,
-				78F1ED551C16E32000189C62 /* CFNetwork.framework */,
 				DCF6B9231AEF7B2D00E613A5 /* GPUImage.framework */,
 				DCF6B9241AEF7B2D00E613A5 /* TuSDK.framework */,
 				DCC283941A64E0950001FAF1 /* AssetsLibrary.framework */,
@@ -2033,7 +1888,6 @@
 				DC48902718EBE2870043D412 /* main.m */,
 				DC48902318EBE2870043D412 /* mzl_mobile_ios-Info.plist */,
 				DC48902918EBE2870043D412 /* mzl_mobile_ios-Prefix.pch */,
-				78F1ED5D1C16E3A100189C62 /* PushConfig.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2071,8 +1925,6 @@
 				1B2E1A5F19B804BC0063641F /* MZLNoticeResponse.m */,
 				E5AA8D1D1988A43B00675C89 /* MZLRegLoginResponse.h */,
 				E5AA8D1E1988A43B00675C89 /* MZLRegLoginResponse.m */,
-				78644F191C1071400081CD4E /* MZLBindPhoneResponse.h */,
-				78644F1A1C1071400081CD4E /* MZLBindPhoneResponse.m */,
 				DCB3B563194AF3D80093F3BA /* MZLSelectedArticleListResponse.h */,
 				DCB3B564194AF3D80093F3BA /* MZLSelectedArticleListResponse.m */,
 				E5B4E073198F91AF0053A1EF /* MZLServiceResponseDetail.h */,
@@ -2091,8 +1943,6 @@
 				DC2A125C191649A90045B300 /* MZLUserFavoredArticleResponse.m */,
 				DCADC7BC1908B95B0083B00E /* MZLUserLocPrefResponse.h */,
 				DCADC7BD1908B95B0083B00E /* MZLUserLocPrefResponse.m */,
-				7868F22A1C3FB28600E3C360 /* MZLTuiJianDarenResponse.h */,
-				7868F22B1C3FB28600E3C360 /* MZLTuiJianDarenResponse.m */,
 			);
 			name = Response;
 			sourceTree = "<group>";
@@ -2329,9 +2179,6 @@
 		DCAAE3C018F3A870002C593B /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
-				78DDAAF91C2CEF57005D6C3A /* MJRefresh */,
-				78DDAAC71C2CEA17005D6C3A /* SDWebimage */,
-				78F1ED591C16E37300189C62 /* lib */,
 				844381D91BE0D00D00DF1C7E /* ShareSDK */,
 				84814B921BB3CCC90037D2CE /* UMAnalytics_Sdk_3.5.17 */,
 				1BD7D0161A42B79B007498A8 /* UmengPush */,
@@ -2389,9 +2236,6 @@
 		DCBE063C18EE61A300AAB840 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				7846BDB71C3D24B900688B98 /* feriendList */,
-				78EE2FDC1C3504A9009A74C5 /* TuiJianDaren */,
-				7895AE3C1C0B2849006686FA /* bindPhoneNum */,
 				DC953D4C197E3DAF00A9B67D /* ArticleDetail */,
 				DCD212CF19AF0612003BB633 /* Base */,
 				DCF374C4195BC30800B3D514 /* Home */,
@@ -2411,7 +2255,6 @@
 				DC07ABF01947F97200355EEB /* MZLTabBarViewController.h */,
 				DC07ABF11947F97200355EEB /* MZLTabBarViewController.m */,
 				DCE157F8199312A700533A2D /* RegLogin */,
-				78CB3B951C071A0800126D05 /* forgetPassW */,
 				DCD212CE19AE625B003BB633 /* Settings */,
 				DCAED8441A511B10004DA3B6 /* ShortArticle */,
 			);
@@ -2454,8 +2297,6 @@
 				DC75E4F7193312FB0043BEB6 /* MZLModelArticleDetail.m */,
 				DC9FA5B618FB789D006DBAAD /* MZLModelAuthor.h */,
 				DC9FA5B718FB789D006DBAAD /* MZLModelAuthor.m */,
-				7868F2271C3FAAE700E3C360 /* MZLTuiJianDaren.h */,
-				7868F2281C3FAAE700E3C360 /* MZLTuiJianDaren.m */,
 				DCC231AD190A566700F181B0 /* MZLModelAuthorDetail.h */,
 				DCC231AE190A566700F181B0 /* MZLModelAuthorDetail.m */,
 				DCD212A219AB114E003BB633 /* MZLModelComment.h */,
@@ -2526,8 +2367,6 @@
 				DC76507E199E82A700D1DB04 /* UIViewController+MZLValidation.m */,
 				DC43555D19713600006CCFCD /* UIViewController+ScrollToRefresh.h */,
 				DC43555E19713600006CCFCD /* UIViewController+ScrollToRefresh.m */,
-				785A45751C0C2B1800B8D821 /* CountdownButtonByTime.h */,
-				785A45761C0C2B1800B8D821 /* CountdownButtonByTime.m */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -2535,7 +2374,6 @@
 		DCBE064018EE61A300AAB840 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7895AE361C0B05C7006686FA /* mailLogin */,
 				DCF115D61A59386C000BB6E0 /* ShortArticle */,
 				DCEE41F51A2570E4009BA815 /* TableViewCell */,
 				1B2E52AD1A199AAA007718FF /* Filter UI 2.0 */,
@@ -2874,20 +2712,23 @@
 			children = (
 				E5EBB3A7197E7957004B1133 /* MZLLoginViewController.h */,
 				E5EBB3A8197E7957004B1133 /* MZLLoginViewController.m */,
-				78EE6B671C09E8540046D026 /* MZLLoginByMailViewController.h */,
-				78EE6B681C09E8540046D026 /* MZLLoginByMailViewController.m */,
 				E58E8ED91991DF7B008079F3 /* MZLRegModifyNameViewController.h */,
 				E58E8EDA1991DF7B008079F3 /* MZLRegModifyNameViewController.m */,
-				78E7B7C11C10395C00968E8A /* MZLModifyNameByPhoneViewController.h */,
-				78E7B7C21C10395C00968E8A /* MZLModifyNameByPhoneViewController.m */,
 				E58E8ED61991DF5D008079F3 /* MZLRegViewController.h */,
 				E58E8ED71991DF5D008079F3 /* MZLRegViewController.m */,
 				DCE157FF1993247B00533A2D /* UIViewController+MZLRegLoginCommon.h */,
 				DCE158001993247B00533A2D /* UIViewController+MZLRegLoginCommon.m */,
+<<<<<<< HEAD
 				78F9008F1BFD7B6A00429A2A /* MZLPhoneRegViewController.h */,
 				78F900901BFD7B6A00429A2A /* MZLPhoneRegViewController.m */,
 				78FF94411C0431BD0062120A /* MZLPhoneRegNameViewController.h */,
 				78FF94421C0431BD0062120A /* MZLPhoneRegNameViewController.m */,
+=======
+				F3EC2C231C044982008B8403 /* MZLNEWLogViewController.h */,
+				F3EC2C241C044982008B8403 /* MZLNEWLogViewController.m */,
+				F3EC2C261C044E9E008B8403 /* MZLOldLogViewController.h */,
+				F3EC2C271C044E9E008B8403 /* MZLOldLogViewController.m */,
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 			);
 			name = RegLogin;
 			sourceTree = "<group>";
@@ -2996,6 +2837,7 @@
 				DCA1BF9F1ABFC187005DFD89 /* MZLHomeViewController.m */,
 				DC083D681AE4CC630005A2F7 /* MZLHotGoodsVC.h */,
 				DC083D691AE4CC630005A2F7 /* MZLHotGoodsVC.m */,
+<<<<<<< HEAD
 				786929A81C4D0A9E006BC13C /* MZLMyFavoriteHeaderView.h */,
 				786929A91C4D0A9E006BC13C /* MZLMyFavoriteHeaderView.m */,
 				7846BDB21C3CEFB700688B98 /* MZLMyNormalFavoriteHeaderView.h */,
@@ -3004,6 +2846,8 @@
 				786929A01C4CF516006BC13C /* MZLMyAuthorFavoriteHeaderView.h */,
 				786929A11C4CF516006BC13C /* MZLMyAuthorFavoriteHeaderView.m */,
 				786929AB1C4D0C0A006BC13C /* MZLMyAuthorFavoriteHeaderView.xib */,
+=======
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -3120,8 +2964,6 @@
 			children = (
 				E5487A3A198A083100AACB75 /* MZLRegisterBaseSvcParam.h */,
 				E5487A3B198A083100AACB75 /* MZLRegisterBaseSvcParam.m */,
-				785D1CD81BFEFD7D00959334 /* MZLRegisterPhoneSvcParam.h */,
-				785D1CD91BFEFD7D00959334 /* MZLRegisterPhoneSvcParam.m */,
 				E503B316199874EE003F04DB /* MZLRegisterNormalSvcParam.h */,
 				E503B317199874EE003F04DB /* MZLRegisterNormalSvcParam.m */,
 				E503B31C19988C1D003F04DB /* MZLRegisterSinaWeiboSvcParam.h */,
@@ -3266,17 +3108,18 @@
 				E5884CB9199C52AA00CF26AE /* MZLTableViewHeadViewForSetting.xib in Resources */,
 				DC9FA5D218FBD92C006DBAAD /* img_def@2x.png in Resources */,
 				8443820B1BE0D00D00DF1C7E /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
-				784E589A1C3E59D600E1FEF8 /* MZLFeriendListCell.xib in Resources */,
 				DC4445F919B8470A0097BF81 /* MZLFilterBar.xib in Resources */,
 				844382101BE0D00D00DF1C7E /* ShareSDKFlatShareViewUI.bundle in Resources */,
-				78DDAB0A1C2CEF57005D6C3A /* MJRefresh.bundle in Resources */,
 				DCFF9E7F1907ADA90098D620 /* Main_iPhone.storyboard in Resources */,
 				1BCA27F719AD79B000B62D54 /* MZLCommentBar.xib in Resources */,
 				DC5E7A4119370E960017BEF6 /* MZLNormalAuthorHeader.xib in Resources */,
 				DCB3B560194A9DBD0093F3BA /* all_cities.txt in Resources */,
 				DC07ABEF1947EDBE00355EEB /* MZLTabBar.xib in Resources */,
 				E5884CC4199C899900CF26AE /* MZLTableViewFooterViewForSetting.xib in Resources */,
+<<<<<<< HEAD
 				7846BDB61C3CEFE500688B98 /* MZLMyNormalFavoriteHeaderView.xib in Resources */,
+=======
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 				8443820D1BE0D00D00DF1C7E /* WeiboSDK.bundle in Resources */,
 				DCF6B92B1AEF7BF200E613A5 /* TuSDK.strings in Resources */,
 				844382061BE0D00D00DF1C7E /* ShareSDKLocalizable.strings in Resources */,
@@ -3285,7 +3128,6 @@
 				DC9B8939192B4CEE00CF1467 /* MZLRouteCell.xib in Resources */,
 				DCFF9E7D1907AD9C0098D620 /* Main_iPad.storyboard in Resources */,
 				DCAED8431A511AAA004DA3B6 /* ShortArticle.storyboard in Resources */,
-				78F1ED5E1C16E3A100189C62 /* PushConfig.plist in Resources */,
 				DC94C27E1A6F476800E8A74A /* Test.storyboard in Resources */,
 				E5E153E4192A0E6D0099421D /* iRate.bundle in Resources */,
 				DCD2129A19AAD9F4003BB633 /* SBPickerSelector.xib in Resources */,
@@ -3296,14 +3138,12 @@
 				DC5E7A4919372EDE0017BEF6 /* MZLSignedAuthorHeader.xib in Resources */,
 				844382081BE0D00D00DF1C7E /* Resource.bundle in Resources */,
 				DC9B893E192C4ABE00CF1467 /* MZLSelectedRouteCell.xib in Resources */,
-				7895AE3B1C0B0762006686FA /* MZLMailLoginView.xib in Resources */,
 				DC60FB0A19CC157A0046E105 /* unicode_to_hanyu_pinyin.txt in Resources */,
 				DCFDB98D19E9496F0006426F /* all_locations.txt in Resources */,
 				DCC231A9190A443800F181B0 /* MZLLocationItemCell.xib in Resources */,
 				DC8CD7C0192096E1007AC4B5 /* MZLArticleDetailNavVwController.xib in Resources */,
 				DC11DDB519C95EA200B820FF /* ModelController.storyboard in Resources */,
 				1BAD3B191A319E1900495CF6 /* MZLGoodsItemCell.xib in Resources */,
-				78EE2FEA1C3505D2009A74C5 /* MZLTuiJianDarenCell.xib in Resources */,
 				DC94C2741A6CD4AA00E8A74A /* MZLLocationDetailGoodsCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3357,51 +3197,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC0920191A821D21003A14CD /* MZLShortArticleCommentResponse.m in Sources */,
-				78EE2FE91C3505D2009A74C5 /* MZLTuiJianDarenCell.m in Sources */,
 				E5884CC2199C88E700CF26AE /* MZLTableViewFooterViewForSetting.m in Sources */,
 				DCD2129919AAD9F4003BB633 /* SBPickerSelector.m in Sources */,
 				DC5E7A3F19370E830017BEF6 /* MZLNormalAuthorHeader.m in Sources */,
-				78DDAAEF1C2CEA17005D6C3A /* SDWebImageDownloaderOperation.m in Sources */,
-				78DDAAEC1C2CEA17005D6C3A /* SDWebImageCompat.m in Sources */,
 				DC0920161A8218F9003A14CD /* MZLModelShortArticleComment.m in Sources */,
 				E5884CCF199CA6CD00CF26AE /* MZLSettingItemCell.m in Sources */,
 				E58E8ED81991DF5D008079F3 /* MZLRegViewController.m in Sources */,
 				DCD2129119AAD9F4003BB633 /* UIView+COAdditions.m in Sources */,
-				78F900911BFD7B6A00429A2A /* MZLPhoneRegViewController.m in Sources */,
 				DCD2128519AAD9F4003BB633 /* NSInvocation+COAdditions.m in Sources */,
 				DC8EB4E21AA857690073B9BC /* MZLServices+Utils.m in Sources */,
 				E5E153F0192CBCA40099421D /* iVersion.m in Sources */,
-				78DDAAF21C2CEA17005D6C3A /* UIButton+WebCache.m in Sources */,
 				E5EBB3A9197E7957004B1133 /* MZLLoginViewController.m in Sources */,
 				E503B318199874EE003F04DB /* MZLRegisterNormalSvcParam.m in Sources */,
 				E5487A301989FF6800AACB75 /* MZLLoginSvcParam.m in Sources */,
 				DCFC567819B5995E006FCFD6 /* MZLModelFilterType.m in Sources */,
 				DC5E944E18FCD78B00B2032F /* MZLLocationListViewController.m in Sources */,
 				DC3112D419E8D2C100CC3E5A /* FMDatabasePool.m in Sources */,
-				78EE404B1C2BA29F002A128F /* MZLNEWPageingSvcParam.m in Sources */,
 				DCA1BFA01ABFC187005DFD89 /* MZLHomeViewController.m in Sources */,
 				E5B965C6199A08CE00995028 /* MZLMyNormalTopBar.m in Sources */,
 				1B7BCB501A1C915900106165 /* MZLFilterItemWithLabel.m in Sources */,
 				DC3FA84B18FE31C100A14FD1 /* UIViewController+MZLAdditions.m in Sources */,
 				1B7BCB4D1A1C4AB600106165 /* MZLFilterFeatureSectionView.m in Sources */,
 				DC48902C18EBE2870043D412 /* MZLAppDelegate.m in Sources */,
-				7868F2291C3FAAE700E3C360 /* MZLTuiJianDaren.m in Sources */,
-				78DDAAF61C2CEA17005D6C3A /* UIImageView+HighlightedWebCache.m in Sources */,
 				DCE2AA031A83336500936125 /* MZLLocationInfoViewController.m in Sources */,
 				DC76507F199E82A700D1DB04 /* UIViewController+MZLValidation.m in Sources */,
 				DCAAE3D218F3C299002C593B /* UIAlertView+MZLAdditions.m in Sources */,
-				7895AE391C0B074D006686FA /* MZLMailLoginView.m in Sources */,
 				DC26FF78199B0595009F87AF /* MZLRegister3rdPartySvcParam.m in Sources */,
-				78DDAAF01C2CEA17005D6C3A /* SDWebImageManager.m in Sources */,
 				DCD2129219AAD9F4003BB633 /* UIViewController+COAdditions.m in Sources */,
-				78FF94431C0431BD0062120A /* MZLPhoneRegNameViewController.m in Sources */,
 				DCC283811A5ED37F0001FAF1 /* COKeyValuePair.m in Sources */,
 				DCC283981A656E200001FAF1 /* MZLShortArticlePhotoScrollEditView.m in Sources */,
 				DCEE41F41A24876F009BA815 /* MZLPersonalizedViewController.m in Sources */,
 				1B2E1A5919B443B60063641F /* MZLNotificationItemTableViewCell.m in Sources */,
 				DCD212C319AC87CE003BB633 /* CORestKitMappingExtension.m in Sources */,
 				DC3582D31A67B4AF00EF4105 /* MZLModelShortArticle.m in Sources */,
-				78EB814D1C084C03009342A1 /* MZLForgetPWByMailViewController.m in Sources */,
 				1B942F011A8245450064A0E9 /* ParallaxHeaderView.m in Sources */,
 				DCD212A419AB114E003BB633 /* MZLModelComment.m in Sources */,
 				788E5C9F1C4DE75C00088DC2 /* MZLModityNameViewController.m in Sources */,
@@ -3411,7 +3239,6 @@
 				DCA20C4F18FFB0FB00B699CE /* MZLTableViewCellForNoResult.m in Sources */,
 				1B76EDC419A47E82002D4E84 /* MZLImageGalleryViewController.m in Sources */,
 				E503B31B1998750A003F04DB /* MZLRegisterTencentQqSvcParam.m in Sources */,
-				78DDAAED1C2CEA17005D6C3A /* SDWebImageDecoder.m in Sources */,
 				DC0EBD211900CF0100D9248D /* UIView+WeView.m in Sources */,
 				E569B39E1961329C00BB097A /* MZLCarouselView.m in Sources */,
 				DC75E4FE193324EF0043BEB6 /* MZLModelLocationExt.m in Sources */,
@@ -3419,7 +3246,6 @@
 				DCDA780B19C0369F00D3E576 /* MZLSvcParamWithPaging.m in Sources */,
 				DC46C67E19414F5900A917B1 /* MZLModelTagType.m in Sources */,
 				DCC231A8190A443800F181B0 /* MZLLocationItemCell.m in Sources */,
-				7868F22C1C3FB28600E3C360 /* MZLTuiJianDarenResponse.m in Sources */,
 				E5487A3F198A375600AACB75 /* MZLModelAccessToken.m in Sources */,
 				DCD2129D19AAD9F4003BB633 /* UIImage+BlurredFrame.m in Sources */,
 				DCDA77F919C0019C00D3E576 /* MZLFilterSectionDistanceView.m in Sources */,
@@ -3433,21 +3259,17 @@
 				DCD2128819AAD9F4003BB633 /* NSString+COAddition.m in Sources */,
 				DCD2128A19AAD9F4003BB633 /* NSString+COValidation.m in Sources */,
 				DC0EBD3419066DF500D9248D /* MZLLocationMapViewController.m in Sources */,
-				78E7B7C31C10395C00968E8A /* MZLModifyNameByPhoneViewController.m in Sources */,
-				78DDAB0B1C2CEF57005D6C3A /* MJRefreshBaseView.m in Sources */,
 				DCB3B565194AF3D80093F3BA /* MZLSelectedArticleListResponse.m in Sources */,
 				DCFF9E71190766C60098D620 /* MZLDummyIPhoneView.m in Sources */,
 				1BDE39531A480BBF002C1F86 /* MZLDescendantsParam.m in Sources */,
 				DCC2838D1A5EDAA80001FAF1 /* MZLShortArticlePhotoItem.m in Sources */,
 				DCD2128F19AAD9F4003BB633 /* UILabel+COAdditions.m in Sources */,
-				78DDAAF31C2CEA17005D6C3A /* UIImage+GIF.m in Sources */,
 				DC58B1EA1A09ECB100BE6F01 /* MZLNavViewFeature.m in Sources */,
 				E503B31E19988C1D003F04DB /* MZLRegisterSinaWeiboSvcParam.m in Sources */,
 				DC6DEB6318F6834B003174E4 /* UITableView+MZLAdditions.m in Sources */,
 				DC9B893D192C4ABE00CF1467 /* MZLSelectedRouteCell.m in Sources */,
 				DCA1142A1A3E849600C429D5 /* MZLFilterDistanceView.m in Sources */,
 				DC9B8930192ABD7600CF1467 /* JDStatusBarView.m in Sources */,
-				78DDAAF71C2CEA17005D6C3A /* UIImageView+WebCache.m in Sources */,
 				DC3112D219E8D2C100CC3E5A /* FMDatabase.m in Sources */,
 				1B76EDC119A47CB0002D4E84 /* PTImageAlbumViewController.m in Sources */,
 				E5EDE5A7199CD47A00C3D3EF /* MZLPasswordTableViewCell.m in Sources */,
@@ -3455,20 +3277,21 @@
 				E5487A3C198A083100AACB75 /* MZLRegisterBaseSvcParam.m in Sources */,
 				1B2E52B01A199AEB007718FF /* MZLFilterContentView.m in Sources */,
 				1BAD3B111A319CD400495CF6 /* MZLGoodsListViewController.m in Sources */,
-				78DDAAF81C2CEA17005D6C3A /* UIView+WebCacheOperation.m in Sources */,
 				DC083D6D1AE4CE810005A2F7 /* MZLHotGoodsCell.m in Sources */,
 				DCD2128419AAD9F4003BB633 /* NSArray+COAdditions.m in Sources */,
 				DCFAF6F41A7B35DA0048FEC2 /* UIViewController+MZLShortArticle.m in Sources */,
 				E5884CB7199C527800CF26AE /* MZLTableViewHeaderViewForSetting.m in Sources */,
 				E58E8EDB1991DF7B008079F3 /* MZLRegModifyNameViewController.m in Sources */,
+<<<<<<< HEAD
 				7846BDB41C3CEFB700688B98 /* MZLMyNormalFavoriteHeaderView.m in Sources */,
+=======
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 				DC97DC6E19A5D8890031D901 /* MZLUserDetailResponse.m in Sources */,
 				DCFC567B19B599ED006FCFD6 /* MZLModelFilterItem.m in Sources */,
 				E5487A42198A497400AACB75 /* MZLModelUser.m in Sources */,
 				DC2A12571915E1A30045B300 /* MZLChildLocationsSvcParam.m in Sources */,
 				DC8C704319FF3E6B0042F03F /* MZLNavViewPeople.m in Sources */,
 				DCEE41F91A2571C7009BA815 /* MZLPersonalizedItemCell.m in Sources */,
-				78EB814A1C084BC3009342A1 /* MZLModifyPassWordViewController.m in Sources */,
 				DC18985A18FF6D9E008843B5 /* MZLMyFavoriteViewController.m in Sources */,
 				DC9FA5CD18FBD81C006DBAAD /* UIImageView+MZLNetwork.m in Sources */,
 				DCD212BD19AC851C003BB633 /* NSObject+CODictionaryParameter.m in Sources */,
@@ -3478,9 +3301,7 @@
 				DC75E501193431BA0043BEB6 /* MZLLocationRouteInfo.m in Sources */,
 				DC037E681977C710005C163D /* MZLArticleCommentViewController.m in Sources */,
 				DCD212D219AF07E3003BB633 /* MZLTableViewController+ScrollExtension.m in Sources */,
-				785A45771C0C2B1800B8D821 /* CountdownButtonByTime.m in Sources */,
 				E5B4E075198F91AF0053A1EF /* MZLServiceResponseDetail.m in Sources */,
-				78EB81471C083C7B009342A1 /* MZLChooseModeViewController.m in Sources */,
 				1BA2CEA81A5A6A630049C190 /* MZLModelSurroundingLocations.m in Sources */,
 				DC8CD7BF192096E1007AC4B5 /* MZLArticleDetailNavVwController.m in Sources */,
 				DC3112D619E8D2C100CC3E5A /* FMResultSet.m in Sources */,
@@ -3492,28 +3313,22 @@
 				DC3112D319E8D2C100CC3E5A /* FMDatabaseAdditions.m in Sources */,
 				DCE2AA001A82229C00936125 /* MZLShortArticleDetailVC.m in Sources */,
 				DCD2128D19AAD9F4003BB633 /* UIImage+COAdditions.m in Sources */,
-				78DDAAF51C2CEA17005D6C3A /* UIImage+WebP.m in Sources */,
 				DC60FB0619CC157A0046E105 /* HanyuPinyinOutputFormat.m in Sources */,
 				DCA1BFA31ABFE266005DFD89 /* UIViewController+MZLLocationSupport.m in Sources */,
 				E5884CBF199C593500CF26AE /* MZLSettingViewController.m in Sources */,
 				1B2E1A6619B97B9A0063641F /* MZLAppNotices.m in Sources */,
 				DCDA780519C0159400D3E576 /* MZLFilterScrollView.m in Sources */,
 				DC11DDB819C95FBE00B820FF /* MZLBaseViewController+CityList.m in Sources */,
-				78F32E0C1C0558E3008ECF78 /* MZLVerifyCodeSvcParam.m in Sources */,
 				1B4332C21A1AF1D200D9C23E /* MZLFilterItemWithImage.m in Sources */,
 				DC3FA84118FDFA7100A14FD1 /* MZLServiceMapping.m in Sources */,
 				DCA8BF3A198F5BD70091F8AE /* UIViewController+MZLModelPresentation.m in Sources */,
 				DC07ABED1947EDA500355EEB /* MZLTabBar.m in Sources */,
 				DC8EB4D71AA836490073B9BC /* NSString+MZLImageURL.m in Sources */,
-				78DDAB0F1C2CEF57005D6C3A /* UIScrollView+MJExtension.m in Sources */,
 				DCD8A14B1A892F0100CAB28F /* MZLShortArticleCommentCell.m in Sources */,
 				DCAAE3D818F3CF0B002C593B /* MZLArticleListViewController.m in Sources */,
 				DC9FA5AF18FB74CD006DBAAD /* MZLModelObject.m in Sources */,
-				7846BDBA1C3D25B300688B98 /* MZLFeriendListViewController.m in Sources */,
 				DC57FBE319E8DD1800BBF1AB /* MZLSysLocationLocalStore.m in Sources */,
-				78644F1B1C1071400081CD4E /* MZLBindPhoneResponse.m in Sources */,
 				DCD2129419AAD9F4003BB633 /* UIViewController+COTextFieldDelegate.m in Sources */,
-				78DDAAEB1C2CEA17005D6C3A /* SDImageCache.m in Sources */,
 				DC9FA5B818FB789D006DBAAD /* MZLModelAuthor.m in Sources */,
 				DCD2128C19AAD9F4003BB633 /* UIBarButtonItem+COAdditions.m in Sources */,
 				1B7BCB461A1C3D9100106165 /* MZLFilterSectionBaseView.m in Sources */,
@@ -3536,7 +3351,6 @@
 				DC6AB42E19D2A53D00A08E99 /* Reachability.m in Sources */,
 				DCD2128719AAD9F4003BB633 /* NSObject+COAssociation.m in Sources */,
 				DCAED84A1A511D64004DA3B6 /* MZLShortArticleChooseLocVC.m in Sources */,
-				78DDAB101C2CEF57005D6C3A /* UIScrollView+MJRefresh.m in Sources */,
 				DC75E4FB1933211A0043BEB6 /* MZLModelRouteInfo.m in Sources */,
 				DC524E2E192DDFC100C01342 /* MZLRouteAnnotation.m in Sources */,
 				DC3112D119E8D2C100CC3E5A /* YTKKeyValueStore.m in Sources */,
@@ -3555,11 +3369,9 @@
 				DC17969B1AE9250D00D12B2A /* MZLAMapSearchDelegateForService.m in Sources */,
 				DCFF9E7B19079D1A0098D620 /* MZLModelUserLocationPref.m in Sources */,
 				DC4445F319B6F42A0097BF81 /* UITableViewCell+MZLAddition.m in Sources */,
-				78DDAAEA1C2CEA17005D6C3A /* NSData+ImageContentType.m in Sources */,
 				DC0F18B91A4A967900A707AC /* MZLServiceOperation.m in Sources */,
 				E5884CDB199CAFF600CF26AE /* MZLIntroductionItemCell.m in Sources */,
 				DCD2129C19AAD9F4003BB633 /* pinyin.m in Sources */,
-				78EB81501C084C54009342A1 /* MZLModifyPWByMailViewController.m in Sources */,
 				DC99BFA2190E016C00DBF2F7 /* MZLRecommendLocationItemCell.m in Sources */,
 				DC2655791940427400AE9400 /* MZLLocDetailHeaderAddressView.m in Sources */,
 				DCCF0A6D1A763FD200C40227 /* MZLModelLocationDesp.m in Sources */,
@@ -3573,13 +3385,11 @@
 				DC60FB0919CC157A0046E105 /* PinyinHelper.m in Sources */,
 				DCD212C619AC980B003BB633 /* MZLCommentResponse.m in Sources */,
 				DCF6B9221AEF3D2F00E613A5 /* MZLLocResponse.m in Sources */,
-				7885BA1A1C05EBEA00A49658 /* MZLPhoneLoginSvcParam.m in Sources */,
 				1B77FFB71A43D6A200CF8E30 /* NSObject+UmengNotification.m in Sources */,
 				DC3FA84518FE24E300A14FD1 /* MZLArticleListSvcParam.m in Sources */,
 				DC931FC41950250400EE6564 /* MZLiVersionDelegate.m in Sources */,
 				1B76EDBF19A47CB0002D4E84 /* PT_NetworkPhotoAlbumViewController.m in Sources */,
 				DC0920101A8067E1003A14CD /* MZLShortArticleProgressView.m in Sources */,
-				78EE2FE21C350569009A74C5 /* MZLTuiJianDarenViewController.m in Sources */,
 				DCEE41EB1A231068009BA815 /* MZLExploreViewController.m in Sources */,
 				DCD8A1501A89DA4600CAB28F /* MZLMockData.m in Sources */,
 				DCC283831A5ED37F0001FAF1 /* COPreferences.m in Sources */,
@@ -3597,23 +3407,18 @@
 				DCE132C319A0C85300F845C9 /* MZLImageUploadResponse.m in Sources */,
 				DC6DEB5F18F67E1F003174E4 /* MZLArticleItemTableViewCell.m in Sources */,
 				DCE158011993247B00533A2D /* UIViewController+MZLRegLoginCommon.m in Sources */,
-				78DDAB0E1C2CEF57005D6C3A /* MJRefreshHeaderView.m in Sources */,
-				78DDAAF11C2CEA17005D6C3A /* SDWebImagePrefetcher.m in Sources */,
 				1BDE39561A48173A002C1F86 /* MZLModelRelatedLocationExt.m in Sources */,
 				DCFD7FB81925E7D900FD6D91 /* MZLLocationHeaderView.m in Sources */,
 				DCC231A4190A05CC00F181B0 /* MZLModelLocationBase.m in Sources */,
 				DC60FB1519CD1AB20046E105 /* COStringWithPinYin.m in Sources */,
 				1BBB705C1A357DFC0074A647 /* MZLModelGoods.m in Sources */,
-				78DDAB111C2CEF57005D6C3A /* UIView+MJExtension.m in Sources */,
 				DCA114231A39F5EF00C429D5 /* UIScrollView+COAddition.m in Sources */,
 				DC8C704019FE41620042F03F /* MZLInitNavViewController.m in Sources */,
 				1B0F910E19CAB2BE001CBFD8 /* MZLAuthorCoverPickerViewController.m in Sources */,
 				DC9FA5B218FB7654006DBAAD /* MZLModelArticle.m in Sources */,
 				DC94C2731A6CD4AA00E8A74A /* MZLLocationDetailGoodsCell.m in Sources */,
-				7868F22F1C3FD20900E3C360 /* MZLShortArticlesModel.m in Sources */,
 				DC5E7A4419372E130017BEF6 /* MZLAuthorHeader.m in Sources */,
 				DCDA77FA19C0019C00D3E576 /* MZLFilterSectionView.m in Sources */,
-				78CB3B991C071AD000126D05 /* MZLForgetPWByPhoneViewController.m in Sources */,
 				DCFD7FBD1925E89600FD6D91 /* MZLLocationHeaderInfo.m in Sources */,
 				DC9FA5DA18FBEBA8006DBAAD /* UIView+MZLAdditions.m in Sources */,
 				DC33517D190E95EC00219E3D /* UITableView+MZLHeaderFooterView.m in Sources */,
@@ -3629,18 +3434,15 @@
 				DCA114261A3AE3B000C429D5 /* MZLModelTagDesp.m in Sources */,
 				DCDA77FB19C0019C00D3E576 /* MZLFilterSectionOptionView.m in Sources */,
 				DC9B8938192B4CEE00CF1467 /* MZLRouteCell.m in Sources */,
-				784E58921C3E114500E1FEF8 /* MZLAttentionListViewController.m in Sources */,
 				DCC283871A5ED3F80001FAF1 /* COAssets.m in Sources */,
 				DCD212A119AADD26003BB633 /* UIViewController+COScroll.m in Sources */,
 				E5EDE5B8199E028300C3D3EF /* MZLModelUserInfoDetail.m in Sources */,
-				785D1CDA1BFEFD7D00959334 /* MZLRegisterPhoneSvcParam.m in Sources */,
 				DC7F2D40195A6FD00095CDA5 /* MZLLocationDelegate.m in Sources */,
 				E5B965BF199A04A300995028 /* MZLMyAuthorTopBar.m in Sources */,
 				DC0EBD311906086600D9248D /* MZLAuthorDetailViewController.m in Sources */,
 				1B8C98D21A4131F9009D5C16 /* MZLModelGoodsDetail.m in Sources */,
 				DCA1142D1A3EB56700C429D5 /* MZLPersonalizedFilterContentView.m in Sources */,
 				DC0EBD1A1900CF0100D9248D /* WeViewBlockLayout.m in Sources */,
-				78F32E091C055293008ECF78 /* MZLGetCodeSvcParam.m in Sources */,
 				DCC686F6199A0E9400EFDA29 /* MZLAppUser.m in Sources */,
 				DC5E945818FD434800B2032F /* MZLServices.m in Sources */,
 				DC5E7A31193583060017BEF6 /* MZLServiceResponseObject.m in Sources */,
@@ -3650,7 +3452,6 @@
 				1B61DC351A514D6300B47F7A /* MZLShortArticleChooseLocItemCell.m in Sources */,
 				DC43555F19713600006CCFCD /* UIViewController+ScrollToRefresh.m in Sources */,
 				DC0EBD201900CF0100D9248D /* WeViewStackLayout.m in Sources */,
-				78DDAAEE1C2CEA17005D6C3A /* SDWebImageDownloader.m in Sources */,
 				DC0EBD371906741400D9248D /* MZLModelLocationDetail.m in Sources */,
 				DCC231AC190A4B2900F181B0 /* MZLPagingSvcParam.m in Sources */,
 				DC60FB0E19CC29F60046E105 /* NSString+COPinYin4ObjcAddition.m in Sources */,
@@ -3659,15 +3460,17 @@
 				DCFC567119B56C7D006FCFD6 /* NSError+CONetwork.m in Sources */,
 				DC4445FF19B876320097BF81 /* UIView+CODrawing.m in Sources */,
 				DC0EBD1C1900CF0100D9248D /* WeViewGridLayout.m in Sources */,
-				78DDAB0D1C2CEF57005D6C3A /* MJRefreshFooterView.m in Sources */,
 				DC4445F019B6EE2F0097BF81 /* UITableViewCell+COAddition.m in Sources */,
-				784E58991C3E59D600E1FEF8 /* MZLFeriendListCell.m in Sources */,
 				DC2A125A191635690045B300 /* MZLModelUserFavoredArticle.m in Sources */,
 				DC736B70196B9AFD00D6ACF2 /* MZLLocListResponse.m in Sources */,
 				1B229EDD1A67AE2B00F56705 /* MZLShortArticleTagItem.m in Sources */,
 				DC60FB0519CC157A0046E105 /* ChineseToPinyinResource.m in Sources */,
 				DCD2128619AAD9F4003BB633 /* NSObject+COAdditions.m in Sources */,
+<<<<<<< HEAD
 				784E58951C3E115500E1FEF8 /* MZLFensiListViewController.m in Sources */,
+=======
+				F3EC2C281C044E9E008B8403 /* MZLOldLogViewController.m in Sources */,
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 				1B8CB70219CC039600341C47 /* MZLAuthorCoverCollectionViewCell.m in Sources */,
 				DCBCACFA1AD4C9850033A0D5 /* MZLShortArticleCellBase.m in Sources */,
 				DCC283821A5ED37F0001FAF1 /* COCache.m in Sources */,
@@ -3685,7 +3488,6 @@
 				DC72FC701AAEDFA200129580 /* MZLHighlightedControl.m in Sources */,
 				DCAED8471A511D19004DA3B6 /* MZLShortArticleViewController.m in Sources */,
 				DCF115DD1A5A7EF7000BB6E0 /* FXBlurView.m in Sources */,
-				78DDAAE91C2CEA17005D6C3A /* MKAnnotationView+WebCache.m in Sources */,
 				84DF6E3A1BDB46B6005DB5F4 /* MZLAgreementViewController.m in Sources */,
 				1B229EDC1A67AE2B00F56705 /* MZLShortArticleCustomTagItem.m in Sources */,
 				786929AA1C4D0A9E006BC13C /* MZLMyFavoriteHeaderView.m in Sources */,
@@ -3695,15 +3497,12 @@
 				DCFC568119B5B8FD006FCFD6 /* MGSwipeButton.m in Sources */,
 				DCD2F5D91AC52F7C003AB9FB /* MZLShortArticleCellStyle2.m in Sources */,
 				DC0EBD1D1900CF0100D9248D /* WeViewLayout.m in Sources */,
-				78EE6B691C09E8540046D026 /* MZLLoginByMailViewController.m in Sources */,
-				7895AE3F1C0B286E006686FA /* MZLBindPhoneViewController.m in Sources */,
 				DCD212B719AC7D90003BB633 /* CODictionaryParameterExtension.m in Sources */,
 				DC26557419401EFF00AE9400 /* MZLLocDetailTableFooterView.m in Sources */,
 				E5884CD5199CADEE00CF26AE /* MZLIntroductionViewController.m in Sources */,
 				DCD2129B19AAD9F4003BB633 /* UIView+MBProgressHUDAdditions.m in Sources */,
 				DCFF9E78190782ED0098D620 /* MZLModelImage.m in Sources */,
 				DC18DEB51A90D81800C7C7FB /* UIImageView+COAddition.m in Sources */,
-				78DDAB0C1C2CEF57005D6C3A /* MJRefreshConst.m in Sources */,
 				E5C069D61908ACA60094C001 /* MZLMapAnnotation.m in Sources */,
 				DCFE023D19FDEC7A009428FC /* UIScrollView+MZLAddition.m in Sources */,
 				DC9FA5BE18FBB14E006DBAAD /* MZLResources.m in Sources */,
@@ -3718,7 +3517,6 @@
 				DCF374C7195BC34400B3D514 /* MZLSystemArticleListViewController.m in Sources */,
 				788E5CA21C4DE92A00088DC2 /* MZLModityNameCell.m in Sources */,
 				DC0EBD1F1900CF0100D9248D /* WeViewLinearLayout.m in Sources */,
-				78DDAAF41C2CEA17005D6C3A /* UIImage+MultiFormat.m in Sources */,
 				DC9B892F192ABD7600CF1467 /* JDStatusBarStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3813,7 +3611,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "c7a53676-ca19-469a-9d5c-c3c1a5f64400";
+				PROVISIONING_PROFILE = "1b2ec766-5524-45fb-8f0a-1014189deff0";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3847,7 +3645,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PROVISIONING_PROFILE = "c7a53676-ca19-469a-9d5c-c3c1a5f64400";
+				PROVISIONING_PROFILE = "1b2ec766-5524-45fb-8f0a-1014189deff0";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -3889,7 +3687,6 @@
 					"$(PROJECT_DIR)/meizhouliu/3rdParty/UMAnalytics_Sdk_3.5.17",
 					"$(PROJECT_DIR)/meizhouliu/3rdParty/ShareSDK/extends/SinaWeiboSDK",
 					"$(PROJECT_DIR)/meizhouliu/3rdParty/ShareSDK/extends/WeChatSDK",
-					"$(PROJECT_DIR)/meizhouliu/3rdParty/lib",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -3914,7 +3711,7 @@
 					UIKit,
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.adhoc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.ios;
 				PRODUCT_NAME = mzl_mobile_ios;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3958,7 +3755,6 @@
 					"$(PROJECT_DIR)/meizhouliu/3rdParty/UMAnalytics_Sdk_3.5.17",
 					"$(PROJECT_DIR)/meizhouliu/3rdParty/ShareSDK/extends/SinaWeiboSDK",
 					"$(PROJECT_DIR)/meizhouliu/3rdParty/ShareSDK/extends/WeChatSDK",
-					"$(PROJECT_DIR)/meizhouliu/3rdParty/lib",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -3983,7 +3779,7 @@
 					UIKit,
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.adhoc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.ios;
 				PRODUCT_NAME = mzl_mobile_ios;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

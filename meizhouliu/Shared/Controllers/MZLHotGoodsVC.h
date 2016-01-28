@@ -10,6 +10,4 @@
 
 @interface MZLHotGoodsVC : MZLTableViewController
 
-@property (nonatomic, strong) MZLModelLocationBase *locationParam;
-
 @end

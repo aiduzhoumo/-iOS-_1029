@@ -33,10 +33,3 @@
 #import "COHeader.h"
 
 #import "MZLHeader.h"
-
-//打印日志
-#ifdef DEBUG // 调试状态, 打开LOG功能
-#define MZLLog(...) NSLog(__VA_ARGS__)
-#else // 发布状态, 关闭LOG功能
-#define MZLLog(...)
-#endif

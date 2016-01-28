@@ -12,6 +12,7 @@
 
 @interface MZLSharedData : NSObject
 
+<<<<<<< HEAD
 #pragma mark - apservice registrationID
 + (void)setAPserviceRegistrationID:(NSString *)registrationID;
 + (NSString *)apsericeregistrationID;
@@ -20,6 +21,8 @@
 + (void)setAppDuZhouMoUserToken:(NSString *)string;
 + (NSString *)appDuZhouMoToken;
 
+=======
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 #pragma mark - tags config
 
 + (NSArray *)allTagTypes;
@@ -122,6 +125,7 @@
 + (NSDictionary *)apsInfo;
 + (void)setApnsInfo:(NSDictionary *)info;
 
+<<<<<<< HEAD
 + (void)setApnsInfoForNotification:(NSDictionary *)info;
 + (NSDictionary *)getApnsInfoForNotification;
 + (void)removeApnsinfoForNotification;
@@ -134,6 +138,8 @@
 + (void)addIdIntoAttentionIds:(NSString *)Id;
 + (void)addIdArrayIntoAttentionIds:(NSArray *)IdArr;
 + (void)removeAllIdsFromAttentionIds;
+=======
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 //#pragma mark - misc settings
 //
 //+ (BOOL)shouldPopupFiltersOnAppStartup;
@@ -144,7 +150,5 @@
 //+ (void)setAppNotices:(MZLAppNotices *)notices;
 //+ (void)loadNoticesFromCache;
 //+ (void)clearAppNotices;
-
-+ (void)loadAppUserBindInfoFromCache;
 
 @end

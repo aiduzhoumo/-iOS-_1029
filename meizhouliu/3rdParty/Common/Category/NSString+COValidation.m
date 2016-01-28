@@ -30,17 +30,9 @@
     return [self isValidViaRegExp:check];
 }
 
-- (BOOL)isValidPhone {
-    NSString * check = @"^1(?:3[0-9]|4[57]|5[0-9]|8[0-9]|7[0678])\\d{8}$";
-    return [self isValidViaRegExp:check];
-}
-
 - (BOOL)isValidViaRegExp:(NSString *)regExp {
     NSPredicate *regTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@", regExp];
     return [regTest evaluateWithObject:self];
 }
-
-
-
 
 @end

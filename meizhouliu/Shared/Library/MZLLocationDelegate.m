@@ -168,8 +168,6 @@ static MZLLocationDelegate *_sharedInstance;
         return;
     }
     [self onLocationError];
-
 }
-
 
 @end

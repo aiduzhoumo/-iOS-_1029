@@ -10,6 +10,7 @@
 
 @class MZLModelUser;
 
+<<<<<<< HEAD
 @protocol MZLAuthorHeaderShowProgressIndicatorDelegate <NSObject>
 - (void)showProgressIndicatorAlertViewOnAuthorDetailVC;
 - (void)hideProgressIndicatorAlertViewOnAuthorDetailVC:(BOOL)isSuccess;
@@ -17,6 +18,8 @@
 
 typedef void (^feriendListClick)(MZLModelUser *user);
 
+=======
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 @interface MZLAuthorHeader : UIView
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgAuthorHeader;
@@ -27,6 +30,7 @@ typedef void (^feriendListClick)(MZLModelUser *user);
 @property (weak, nonatomic) IBOutlet UIView *vwBottom;
 @property (weak, nonatomic) IBOutlet UILabel *lblAuthorArticleTitle;
 
+<<<<<<< HEAD
 @property (weak, nonatomic) IBOutlet UILabel *attention;
 @property (weak, nonatomic) IBOutlet UILabel *attentionLable;
 @property (weak, nonatomic) IBOutlet UILabel *fensi;
@@ -37,6 +41,8 @@ typedef void (^feriendListClick)(MZLModelUser *user);
 @property (nonatomic, copy) feriendListClick clickBlcok;
 
 @property (nonatomic, strong) MZLModelUser *user;
+=======
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 
 - (void)initWithAuthorInfo:(MZLModelUser *)author;
 

@@ -11,7 +11,7 @@
 
 @class MZLModelLocationBase;
 
-@interface MZLLocationGoodsViewController : MZLTableViewController <UITableViewDataSource,UITableViewDelegate>
+@interface MZLLocationGoodsViewController : MZLTableViewController
 
 @property (nonatomic, strong) MZLModelLocationBase *locationParam;
 

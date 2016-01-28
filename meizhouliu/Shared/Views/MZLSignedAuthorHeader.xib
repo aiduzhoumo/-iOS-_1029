@@ -1,60 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MZLSignedAuthorHeader">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="614"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="579"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="otM-Ls-Ghu" userLabel="imgBg">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="541"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="541" id="VM5-p3-ult"/>
+                        <constraint firstAttribute="height" constant="504" id="VM5-p3-ult"/>
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7SS-kG-Lnb" userLabel="vwBg">
-                    <rect key="frame" x="0.0" y="271" width="320" height="270"/>
+                    <rect key="frame" x="0.0" y="314" width="320" height="190"/>
                     <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aO-hf-YSt" userLabel="lblAuthorName">
+                            <rect key="frame" x="133" y="20" width="80" height="24"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Author_HeadPortraitBg" translatesAutoresizingMaskIntoConstraints="NO" id="87n-vo-Lrz" userLabel="imgAuthorHeaderBg">
-                            <rect key="frame" x="105" y="-30" width="110" height="110"/>
+                            <rect key="frame" x="8" y="-30" width="110" height="110"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="110" id="CzD-fi-9uf"/>
-                                <constraint firstAttribute="width" constant="110" id="eSu-Ka-MQN"/>
+                                <constraint firstAttribute="height" constant="110" id="DOE-GX-iKd"/>
+                                <constraint firstAttribute="width" constant="110" id="RKR-eh-YTt"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="情侣、浪漫、咖啡" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H1d-aV-QFD" userLabel="lblAuthorAreas">
-                            <rect key="frame" x="69" y="133" width="238" height="15"/>
+                            <rect key="frame" x="69" y="92" width="238" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Author_Areas" translatesAutoresizingMaskIntoConstraints="NO" id="Ere-Ct-2f3" userLabel="imgAuthorAreas">
-                            <rect key="frame" x="13" y="133" width="41" height="13"/>
+                            <rect key="frame" x="13" y="92" width="41" height="13"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="13" id="OWc-ha-C6V"/>
                                 <constraint firstAttribute="width" constant="41" id="SHi-I9-1Sh"/>
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Author_Description" translatesAutoresizingMaskIntoConstraints="NO" id="pdN-S4-Cpk" userLabel="imgAuthorDescriptions">
-                            <rect key="frame" x="13" y="163" width="41" height="13"/>
+                            <rect key="frame" x="13" y="121" width="41" height="13"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="41" id="FFT-Se-Mal"/>
                                 <constraint firstAttribute="height" constant="13" id="evU-uo-Ab9"/>
                             </constraints>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aGR-df-BMW" userLabel="imgAuthorHeader">
-                            <rect key="frame" x="115" y="-20" width="90" height="90"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="90" id="40h-iN-7um"/>
-                                <constraint firstAttribute="width" constant="90" id="lH5-vq-gDa"/>
-                            </constraints>
-                        </imageView>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="梦想家，又是实现者" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="238" translatesAutoresizingMaskIntoConstraints="NO" id="n7Y-UG-xCc" userLabel="lblAuthorDescriptions">
-                            <rect key="frame" x="69" y="163" width="238" height="15"/>
+                            <rect key="frame" x="69" y="121" width="238" height="14.5"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="45" id="GMj-rh-nfb"/>
                                 <constraint firstAttribute="width" constant="238" id="xz7-BV-TcI"/>
@@ -62,6 +61,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="highlightedColor"/>
                         </label>
+<<<<<<< HEAD
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aO-hf-YSt" userLabel="lblAuthorName">
                             <rect key="frame" x="120" y="94" width="80" height="24"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
@@ -111,52 +111,52 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="32" id="3Ni-mz-phJ"/>
                                 <constraint firstAttribute="height" constant="21" id="zwI-EA-LR4"/>
+=======
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aGR-df-BMW" userLabel="imgAuthorHeader">
+                            <rect key="frame" x="18" y="-20" width="90" height="90"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="90" id="Wqb-R7-q0W"/>
+                                <constraint firstAttribute="width" constant="90" id="zAc-gX-uXY"/>
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="cBI-Rf-y2H" firstAttribute="leading" secondItem="8J0-jh-TLc" secondAttribute="trailing" id="0Ff-FX-U6z"/>
-                        <constraint firstAttribute="height" constant="270" id="2Bb-Eh-pYJ"/>
-                        <constraint firstItem="aGR-df-BMW" firstAttribute="leading" secondItem="ECx-Xt-IfP" secondAttribute="trailing" constant="16" id="2eO-wZ-col"/>
-                        <constraint firstItem="1aO-hf-YSt" firstAttribute="top" secondItem="87n-vo-Lrz" secondAttribute="bottom" constant="14" id="2gy-gW-jon"/>
+                        <constraint firstAttribute="height" constant="190" id="2Bb-Eh-pYJ"/>
                         <constraint firstItem="n7Y-UG-xCc" firstAttribute="top" secondItem="H1d-aV-QFD" secondAttribute="bottom" constant="15" id="3QZ-8r-qOo"/>
                         <constraint firstItem="H1d-aV-QFD" firstAttribute="leading" secondItem="Ere-Ct-2f3" secondAttribute="trailing" constant="15" id="44p-Rj-VzP"/>
-                        <constraint firstItem="87n-vo-Lrz" firstAttribute="centerX" secondItem="7SS-kG-Lnb" secondAttribute="centerX" id="49K-kd-XaD"/>
                         <constraint firstItem="n7Y-UG-xCc" firstAttribute="width" secondItem="H1d-aV-QFD" secondAttribute="width" id="5Gw-S7-vnt"/>
-                        <constraint firstItem="dMu-Ku-azT" firstAttribute="top" secondItem="n7Y-UG-xCc" secondAttribute="bottom" constant="34" id="8Cm-Jx-4cs"/>
+                        <constraint firstItem="aGR-df-BMW" firstAttribute="top" secondItem="7SS-kG-Lnb" secondAttribute="top" constant="-20" id="5f4-h7-YYB"/>
                         <constraint firstItem="Ere-Ct-2f3" firstAttribute="top" secondItem="H1d-aV-QFD" secondAttribute="top" id="AS8-sb-AuM"/>
-                        <constraint firstItem="cBI-Rf-y2H" firstAttribute="top" secondItem="7SS-kG-Lnb" secondAttribute="top" constant="28" id="C9V-9H-MVm"/>
-                        <constraint firstItem="8J0-jh-TLc" firstAttribute="top" secondItem="7SS-kG-Lnb" secondAttribute="top" constant="28" id="CkN-ZK-Sgd"/>
-                        <constraint firstItem="87n-vo-Lrz" firstAttribute="top" secondItem="7SS-kG-Lnb" secondAttribute="top" constant="-30" id="Ddu-LO-o75"/>
+                        <constraint firstItem="1aO-hf-YSt" firstAttribute="top" secondItem="7SS-kG-Lnb" secondAttribute="top" constant="20" id="E0n-Ge-Za9"/>
+                        <constraint firstItem="aGR-df-BMW" firstAttribute="leading" secondItem="7SS-kG-Lnb" secondAttribute="leading" constant="18" id="FLM-F2-RdL"/>
+                        <constraint firstItem="87n-vo-Lrz" firstAttribute="top" secondItem="7SS-kG-Lnb" secondAttribute="top" constant="-30" id="I4A-qj-JnH"/>
                         <constraint firstItem="n7Y-UG-xCc" firstAttribute="top" secondItem="pdN-S4-Cpk" secondAttribute="top" id="NtH-9y-6Ff"/>
-                        <constraint firstItem="aGR-df-BMW" firstAttribute="centerX" secondItem="7SS-kG-Lnb" secondAttribute="centerX" id="T6s-AC-IYu"/>
                         <constraint firstItem="Ere-Ct-2f3" firstAttribute="leading" secondItem="pdN-S4-Cpk" secondAttribute="leading" id="Vo0-Ov-Wrr"/>
+                        <constraint firstItem="Ere-Ct-2f3" firstAttribute="top" secondItem="87n-vo-Lrz" secondAttribute="bottom" constant="12" id="XA0-YQ-Nkj"/>
                         <constraint firstItem="Ere-Ct-2f3" firstAttribute="leading" secondItem="7SS-kG-Lnb" secondAttribute="leading" constant="13" id="Z9r-Lq-63q"/>
-                        <constraint firstItem="H1d-aV-QFD" firstAttribute="top" secondItem="1aO-hf-YSt" secondAttribute="bottom" constant="15" id="e9A-3U-aLr"/>
                         <constraint firstItem="n7Y-UG-xCc" firstAttribute="leading" secondItem="pdN-S4-Cpk" secondAttribute="trailing" constant="15" id="fmR-ES-cmq"/>
-                        <constraint firstItem="aGR-df-BMW" firstAttribute="top" secondItem="7SS-kG-Lnb" secondAttribute="top" constant="-20" id="iO8-7I-sHL"/>
-                        <constraint firstItem="ECx-Xt-IfP" firstAttribute="top" secondItem="7SS-kG-Lnb" secondAttribute="top" constant="28" id="kep-nW-fqI"/>
-                        <constraint firstItem="1aO-hf-YSt" firstAttribute="centerX" secondItem="7SS-kG-Lnb" secondAttribute="centerX" id="lNK-aF-rqj"/>
-                        <constraint firstItem="dMu-Ku-azT" firstAttribute="centerX" secondItem="7SS-kG-Lnb" secondAttribute="centerX" id="nTQ-4d-Gqc"/>
-                        <constraint firstItem="8J0-jh-TLc" firstAttribute="leading" secondItem="87n-vo-Lrz" secondAttribute="trailing" constant="14" id="piu-FW-zK0"/>
-                        <constraint firstItem="nY5-FS-Zne" firstAttribute="top" secondItem="7SS-kG-Lnb" secondAttribute="top" constant="28" id="sol-Ui-Lgn"/>
-                        <constraint firstItem="ECx-Xt-IfP" firstAttribute="leading" secondItem="nY5-FS-Zne" secondAttribute="trailing" id="vWo-Zf-Lgh"/>
+                        <constraint firstItem="1aO-hf-YSt" firstAttribute="leading" secondItem="7SS-kG-Lnb" secondAttribute="leading" constant="133" id="g4B-uT-4OE"/>
+                        <constraint firstItem="1aO-hf-YSt" firstAttribute="leading" secondItem="87n-vo-Lrz" secondAttribute="trailing" constant="15" id="v0x-2R-DZN"/>
                     </constraints>
                 </view>
+<<<<<<< HEAD
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ofe-Kj-Uon" userLabel="imgSeparator">
                     <rect key="frame" x="0.0" y="539" width="320" height="10"/>
                     <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+=======
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Author_Separator" translatesAutoresizingMaskIntoConstraints="NO" id="Ofe-Kj-Uon" userLabel="imgSeparator">
+                    <rect key="frame" x="0.0" y="504" width="320" height="10"/>
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
                     <constraints>
                         <constraint firstAttribute="height" constant="10" id="qkR-M1-2M4"/>
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1QO-vu-dEa" userLabel="vwBottom">
-                    <rect key="frame" x="0.0" y="549" width="320" height="65"/>
+                    <rect key="frame" x="0.0" y="514" width="320" height="65"/>
                     <subviews>
+<<<<<<< HEAD
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ilq-fH-Lma">
                             <rect key="frame" x="0.0" y="64" width="320" height="1"/>
                             <color key="backgroundColor" red="0.86274509803921573" green="0.8666666666666667" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
@@ -192,15 +192,28 @@
                                 <constraint firstAttribute="trailing" secondItem="B9F-VK-NQy" secondAttribute="trailing" constant="8" id="kxc-Dg-ovI"/>
                             </constraints>
                         </view>
+=======
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者 的 玩法攻略" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B9F-VK-NQy" userLabel="lblAuthorPlayDesp">
+                            <rect key="frame" x="100" y="23" width="121" height="19.5"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="Ilq-fH-Lma" firstAttribute="leading" secondItem="1QO-vu-dEa" secondAttribute="leading" id="Hzp-lD-hv1"/>
                         <constraint firstAttribute="trailing" secondItem="Ilq-fH-Lma" secondAttribute="trailing" id="IJg-sG-gFu"/>
                         <constraint firstAttribute="height" constant="65" id="REt-hZ-yWV"/>
+<<<<<<< HEAD
                         <constraint firstAttribute="bottom" secondItem="Ilq-fH-Lma" secondAttribute="bottom" id="S1H-FI-Mi9"/>
                         <constraint firstItem="Yk7-kM-Kzv" firstAttribute="top" secondItem="1QO-vu-dEa" secondAttribute="top" constant="14" id="hnU-2p-lbT"/>
                         <constraint firstItem="Yk7-kM-Kzv" firstAttribute="centerX" secondItem="1QO-vu-dEa" secondAttribute="centerX" id="n5L-8a-8za"/>
+=======
+                        <constraint firstAttribute="centerX" secondItem="B9F-VK-NQy" secondAttribute="centerX" id="ZTh-is-Ocn"/>
+                        <constraint firstAttribute="centerY" secondItem="B9F-VK-NQy" secondAttribute="centerY" id="hdV-Nw-404"/>
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
                     </constraints>
                 </view>
             </subviews>
@@ -211,21 +224,16 @@
                 <constraint firstItem="otM-Ls-Ghu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6Lp-WG-PVN"/>
                 <constraint firstItem="Ofe-Kj-Uon" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FOw-5N-eUu"/>
                 <constraint firstAttribute="bottom" secondItem="1QO-vu-dEa" secondAttribute="bottom" id="GCC-yQ-x2q"/>
-                <constraint firstItem="1QO-vu-dEa" firstAttribute="top" secondItem="Ofe-Kj-Uon" secondAttribute="bottom" id="NOk-GS-xWx"/>
                 <constraint firstItem="7SS-kG-Lnb" firstAttribute="bottom" secondItem="otM-Ls-Ghu" secondAttribute="bottom" id="a42-Av-6um"/>
                 <constraint firstItem="otM-Ls-Ghu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="aFm-UV-O3D"/>
                 <constraint firstItem="7SS-kG-Lnb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bhN-mp-kaF"/>
+                <constraint firstItem="Ofe-Kj-Uon" firstAttribute="top" secondItem="7SS-kG-Lnb" secondAttribute="bottom" id="jjG-F5-Vpk"/>
                 <constraint firstAttribute="trailing" secondItem="otM-Ls-Ghu" secondAttribute="trailing" id="m3t-TW-w6B"/>
                 <constraint firstItem="1QO-vu-dEa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="twG-CV-gTi"/>
                 <constraint firstAttribute="trailing" secondItem="Ofe-Kj-Uon" secondAttribute="trailing" id="zib-NN-MjE"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="attention" destination="nY5-FS-Zne" id="JKc-vo-khw"/>
-                <outlet property="attentionBtn" destination="dMu-Ku-azT" id="Jni-Ak-75Q"/>
-                <outlet property="attentionLable" destination="ECx-Xt-IfP" id="ty9-tw-B0J"/>
-                <outlet property="fensi" destination="8J0-jh-TLc" id="zPK-Bh-92n"/>
-                <outlet property="fensiLable" destination="cBI-Rf-y2H" id="Vkz-Pp-b2o"/>
                 <outlet property="imgAuthorHeader" destination="aGR-df-BMW" id="wzQ-jZ-qgP"/>
                 <outlet property="imgCover" destination="otM-Ls-Ghu" id="I1O-je-LKp"/>
                 <outlet property="lblAreas" destination="H1d-aV-QFD" id="lSj-7b-Rh4"/>
@@ -235,14 +243,22 @@
                 <outlet property="vwBg" destination="7SS-kG-Lnb" id="0DK-wt-3hk"/>
                 <outlet property="vwBottom" destination="1QO-vu-dEa" id="vQ2-8Y-ChM"/>
             </connections>
-            <point key="canvasLocation" x="396" y="434"/>
         </view>
     </objects>
     <resources>
         <image name="Author_Areas" width="82" height="26"/>
         <image name="Author_Description" width="82" height="26"/>
         <image name="Author_HeadPortraitBg" width="220" height="220"/>
+<<<<<<< HEAD
         <image name="attention_darenye" width="240" height="56"/>
         <image name="iconfont-wenjian" width="28" height="33"/>
+=======
+        <image name="Author_Separator" width="640" height="20"/>
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

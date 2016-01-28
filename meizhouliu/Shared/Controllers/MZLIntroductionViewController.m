@@ -232,7 +232,6 @@
         self.userDetail.introduction = @"";
     }
     [self showWorkInProgressIndicator];
-
     [MZLServices modifyUserInfo:self.userDetail succBlock:^(NSArray *models) {
         [self hideProgressIndicator];
         MZLServiceResponseObject *response = models[0];
@@ -246,7 +245,6 @@
     } errorBlock:^(NSError *error) {
         [self onPostError:error];
     }];
-    
 }
 
 @end

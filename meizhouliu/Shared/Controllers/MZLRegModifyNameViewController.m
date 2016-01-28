@@ -15,9 +15,6 @@
 #import "MZLSharedData.h"
 #import "MZLAppUser.h"
 #import "UIImageView+MZLNetwork.h"
-#import "MZLRegLoginResponse.h"
-#import "TalkingDataAppCpa.h"
-#import "IBAlertView.h"
 
 @interface MZLRegModifyNameViewController ()
 
@@ -144,6 +141,7 @@
     } errorBlock:^(NSError *error) {
         [self onRegError];
     }];
+    
 }
 
 - (void)regWithSinaWeibo {
@@ -164,42 +162,6 @@
     } errorBlock:^(NSError *error) {
         [self onRegError];
     }];
-}
-
-
-- (void)handleRegResponse:(MZLRegLoginResponse *)response type:(MZLLoginType)type {
-    [self hideProgressIndicator:NO]; // no animation, no delay
-    if (response.error == MZL_SVC_RESPONSE_CODE_SUCCESS) {
-        
-        [self saveUserAndToken:response];
-        
-//        if (![response.user.bind isEqualToString:@"true"]) {
-//            self.token = response.accessToken.token;
-//            [self performSegueWithIdentifier:MZL_SEGUE_TOBINDPHONE sender:nil];
-//            return ;
-//        }
-        
-        [self onLogined:type];
-    
-        [UIAlertView showAlertMessage:@"注册成功，但自动登录失败，请稍后手动登录！"];
-        __weak UIViewController *controller = [self fromController];
-        [self dismissCurrentViewController:^{
-            if (controller) {
-                [controller dismissCurrentViewController:nil animatedFlag:YES];
-            }
-        } animatedFlag:YES];
-        [TalkingDataAppCpa onRegister:response.accessToken.token];
-    } else if (response.error == MZL_RL_RCODE_GENERAL_ERROR) { // 错误码-1
-        [UIAlertView showAlertMessage:response.errorMessage];
-    } else if (response.error == MZL_RL_RCODE_TOKEN_NOTACCQUIRED) { // server端token获取失败
-        [IBAlertView showAlertWithTitle:nil message:@"注册成功，但自动登录失败，请稍后手动登录！" dismissTitle:MZL_MSG_OK dismissBlock:^{
-            [self dismissCurrentViewController];
-        }];
-    } else if (! isEmptyString(response.errorMessage)) { // 其它server返回的错误
-        [UIAlertView showAlertMessage:response.errorMessage];
-    } else { // 不明错误
-        [self onRegErrorWithCode:ERROR_CODE_LOGIN_FAILED];
-    }
 }
 
 @end

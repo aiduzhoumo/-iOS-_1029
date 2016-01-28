@@ -8,16 +8,6 @@
 
 #import "MZLModelUser.h"
 #import "MZLModelAuthor.h"
-#import "MZLModelShortArticle.h"
-#import "MZLShortArticlesModel.h"
-
-@interface MZLModelUser ()
-{
-    BOOL _isAttention;
-}
-
-@property (nonatomic, copy) NSString *photoOrder;
-@end
 
 @implementation MZLModelUser
 
@@ -38,18 +28,6 @@
     return self.nickName;
 }
 
-- (NSString *)phone {
-    return _phone;
-}
-
-- (BOOL)isAttentionForCurrentUser {
-    return _isAttention;
-}
-
-- (void)setIsAttentionForCurrentUser:(BOOL)isAttentionForCurrentUser {
-    _isAttention = isAttentionForCurrentUser;
-}
-
 #pragma mark - restkit mapping
 
 + (NSMutableArray *)attrArray {
@@ -57,20 +35,15 @@
 }
 
 + (NSMutableDictionary *)attributeDictionary {
-    return [[[[[[[super attributeDictionary]
+    return [[[[super attributeDictionary]
             fromPath:@"nickname"    toProperty:@"nickName"]
-            fromPath:@"phone"       toProperty:@"phone"]
             fromPath:@"intro"       toProperty:@"introduction"]
-            fromPath:@"tags_str"    toProperty:@"tags"]
-            fromPath:@"followers_count"            toProperty:@"followers_count"]
-            fromPath:@"followees_count"            toProperty:@"followees_count"];
-    
+            fromPath:@"tags_str"    toProperty:@"tags"];
 }
 
 + (void)addRelationMapping:(RKObjectMapping *)mapping {
     [mapping addRelationFromPath:@"photo" toProperty:@"headerImage" withMapping:[MZLModelImage rkObjectMapping]];
     [mapping addRelationFromPath:@"cover" toProperty:@"cover" withMapping:[MZLModelImage rkObjectMapping]];
-    [mapping addRelationFromPath:@"short_articles" toProperty:@"short_articles" withMapping:[MZLShortArticlesModel rkObjectMapping]];
 }
 
 - (MZLModelAuthor *)toAuthor {
@@ -78,8 +51,6 @@
     author.identifier = self.identifier;
     author.name = self.nickName;
     author.photo = self.headerImage;
-    author.phone = self.phone;
-    author.isAttention = _isAttention;
     return author;
 }
 

@@ -34,9 +34,6 @@
 #define MZL_SEGUE_NOTICEDETAIL @"toNoticeDetail"
 #define MZL_SEGUE_TOPOINAV @"toPOINav"
 #define MZL_SEGUE_TOREG @"toReg"
-#define MZL_SEGUE_TOPHONEREG @"toPhoneReg"
-//#define MZL_SEGUE_TOPHONEREGNAME @"toPhoneRegName"
-#define MZL_SEGUE_TOBINDPHONE @"toBindPhone"
 #define MZL_SEGUE_TOGOODSDETAIL @"toGoodsDetail"
 
 #define MZL_MSG_ALERT_VIEW_TITLE @"提示"
@@ -63,7 +60,6 @@
 #define MZL_IVERSION_CHOICE_IGNORE @"忽略"
 #define MZL_IVERSION_CHOICE_REMIND @"等会儿再说"
 //MZLTableViewController
-#define MZL_NO_ATTENTION @"您还未关注任何人哦"
 #define MZL_TABLEVIEW_FOOTER_NO_RECORD @"当前没有记录可以显示"
 #define MZL_TABLEVIEW_FOOTER_NO_MORE_RECORD @"没有更多记录可以显示"
 #define MZL_TABLEVIEW_FOOTER_REFRESH @"正在加载更多精彩内容..."
@@ -200,12 +196,11 @@
 #define MZL_BASE_SCREEN_WIDTH 320.0
 #define MZL_BASE_SCREEN_HEIGHT 480.0
 
-//#define MZL_BASE_URL @"http://meizhouliu.com"
+#define MZL_BASE_URL @"http://meizhouliu.com"
 
 typedef NS_ENUM(NSInteger, MZLLoginType) {
     MZLLoginTypeNormal      = 0,
     MZLLoginTypeSinaWeibo   = 1,
     MZLLoginTypeQQ          = 2,
-    MZLLoginTypeWeiXin          = 3,
-    MZLLoginTypePhone           = 4
+    MZLLoginTypeWeiXin          = 3
 };

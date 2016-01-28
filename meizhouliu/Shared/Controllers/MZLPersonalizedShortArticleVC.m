@@ -13,6 +13,7 @@
 #import "MZLServices.h"
 //#import "MZLShortArticleCell.h"
 #import "MZLShortArticleCellStyle2.h"
+<<<<<<< HEAD
 #import "MZLModelArticle.h"
 #import "MZLModelNotice.h"
 #import "MZLModelShortArticle.h"
@@ -24,11 +25,14 @@
 #import "MZLLoginViewController.h"
 #import "MZLTabBarViewController.h"
 #import "COPreferences.h"
+=======
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 
 @interface MZLPersonalizedShortArticleVC () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tvPerShortArticle;
 
+<<<<<<< HEAD
 @property (nonatomic, weak) UIButton *hotBtn;
 @property (nonatomic, weak) UIButton *attentionBtn;
 @property (nonatomic, weak) UIView *btnBottomView;
@@ -38,12 +42,15 @@
 
 //记录pop回来的时候会刷新数据
 @property (nonatomic, assign) int m;
+=======
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 @end
 
 @implementation MZLPersonalizedShortArticleVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+<<<<<<< HEAD
     
     self.isHot = YES;
     self.m = 0;
@@ -122,6 +129,14 @@
     }
     [self.navigationController pushViewController:vc animated:YES];
 }
+=======
+    // Do any additional setup after loading the view.
+}
+
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//}
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -129,15 +144,9 @@
 }
 
 /*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+#pragma mark - Navigation
 
+<<<<<<< HEAD
 #pragma mark - apns
 - (void)getIntoAppFromApns {
     NSDictionary *userInfo = [MZLSharedData getApnsInfoForNotification];
@@ -207,8 +216,16 @@
     [self reset];
     [self showNetworkProgressIndicator];
     [self loadModels];
+=======
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 }
+*/
 
+<<<<<<< HEAD
 - (void)AttentionListCheck {
     // 必须先登录
     if (! [MZLSharedData isAppUserLogined]) {
@@ -327,6 +344,8 @@
 - (NSArray *)footerPullToRefreshViewText {
     return @[MZL_TABLEVIEW_FOOTER_PULL_TO_REFRESH];
 }
+=======
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 
 #pragma mark - protected override
 
@@ -335,7 +354,7 @@
 }
 
 - (void)_mzl_homeInternalInit {
-//    self.title = @"玩法";
+    self.title = @"玩法";
     _tv = self.tvPerShortArticle;
     _tv.backgroundColor = @"EFEFF4".co_toHexColor;
     _tv.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -474,11 +493,7 @@
     if (! params) {
         return;
     }
-    if (self.isHot) {
-        [self invokeService:@selector(personalizeShortArticleServiceWithFilter:pagingParam:succBlock:errorBlock:) params:params];
-    }else {
-        [self invokeService:@selector(followDarenShortArticleServiceWithFilter:pagingParam:succBlock:errorBlock:) params:params];
-    }
+    [self invokeService:@selector(personalizeShortArticleServiceWithFilter:pagingParam:succBlock:errorBlock:) params:params];
 }
 
 - (void)_loadModelsWithFilters:(MZLFilterParam *)filter {
@@ -486,12 +501,7 @@
     if (! params) {
         return;
     }
-    if (self.isHot) {
-        [self invokeService:@selector(personalizeShortArticleServiceWithFilter:pagingParam:succBlock:errorBlock:) params:params];
-    }else {
-        [self invokeService:@selector(followDarenShortArticleServiceWithFilter:pagingParam:succBlock:errorBlock:) params:params];
-    }
-    
+    [self invokeService:@selector(personalizeShortArticleServiceWithFilter:pagingParam:succBlock:errorBlock:) params:params];
 }
 
 #pragma mark - protected for load more
@@ -505,13 +515,7 @@
     if (! params) {
         return;
     }
-    if (self.isHot) {
-        [self invokeLoadMoreService:@selector(personalizeShortArticleServiceWithFilter:pagingParam:succBlock:errorBlock:) params:params];
-    }else {
-        [self invokeLoadMoreService:@selector(followDarenShortArticleServiceWithFilter:pagingParam:succBlock:errorBlock:) params:params];
-
-    }
-    
+    [self invokeLoadMoreService:@selector(personalizeShortArticleServiceWithFilter:pagingParam:succBlock:errorBlock:) params:params];
 }
 
 - (void)_loadMoreWithFilters:(MZLFilterParam *)filter {
@@ -519,12 +523,7 @@
     if (! params) {
         return;
     }
-    if (self.isHot) {
-        [self invokeLoadMoreService:@selector(personalizeShortArticleServiceWithFilter:pagingParam:succBlock:errorBlock:) params:params];
-    }else {
-        [self invokeLoadMoreService:@selector(followDarenShortArticleServiceWithFilter:pagingParam:succBlock:errorBlock:) params:params];
-    }
-    
+    [self invokeLoadMoreService:@selector(personalizeShortArticleServiceWithFilter:pagingParam:succBlock:errorBlock:) params:params];
 }
 
 #pragma mark - table view data source

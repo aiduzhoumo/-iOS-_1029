@@ -99,7 +99,6 @@
         MZLRegLoginResponse *result = ((MZLRegLoginResponse *)models[0]);
         [self handleRegResponse:result type:MZLLoginTypeNormal];
     } errorBlock:^(NSError *error) {
-        
         [self onRegError];
     }];
 }

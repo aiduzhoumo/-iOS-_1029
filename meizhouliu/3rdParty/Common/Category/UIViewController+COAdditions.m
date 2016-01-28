@@ -23,14 +23,10 @@
 }
 
 - (void)dismissCurrentViewController:(CO_BLOCK_VOID)completion animatedFlag:(BOOL)animatedFlag {
-    
     if (self.navigationController) {
         [self.navigationController popViewControllerAnimated:animatedFlag];
-        
     } else {
-        
         [self.presentingViewController dismissViewControllerAnimated:animatedFlag completion:^{
-                        
             if (completion) {
                 completion();
             }
@@ -38,6 +34,7 @@
     }
 }
 
+<<<<<<< HEAD
 - (void)dismissMailCurrentViewController:(CO_BLOCK_VOID)completion animatedFlag:(BOOL)animatedFlag {
     
     [self.presentingViewController.navigationController dismissViewControllerAnimated:animatedFlag completion:^{
@@ -55,6 +52,8 @@
 
 }
 
+=======
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 - (BOOL)co_isVisible {
     // check isViewLoaded first to avoid accidently loading the view
     return [self isViewLoaded] && self.view.window;

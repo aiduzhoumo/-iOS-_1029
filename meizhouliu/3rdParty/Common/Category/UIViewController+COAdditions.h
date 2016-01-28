@@ -14,7 +14,6 @@
 - (void)dismissCurrentViewController;
 - (void)dismissCurrentViewController:(CO_BLOCK_VOID)completion;
 - (void)dismissCurrentViewController:(CO_BLOCK_VOID)completion animatedFlag:(BOOL)animatedFlag;
-- (void)dismissMailCurrentViewController:(CO_BLOCK_VOID)completion animatedFlag:(BOOL)animatedFlag;
 
 - (BOOL)co_isVisible;
 

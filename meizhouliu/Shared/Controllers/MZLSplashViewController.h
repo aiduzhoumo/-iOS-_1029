@@ -13,5 +13,4 @@
 
 @interface MZLSplashViewController : MZLBaseViewController
 
-
 @end

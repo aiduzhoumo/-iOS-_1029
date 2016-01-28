@@ -27,7 +27,7 @@
 #define TAG_INFO_VIEW_LBL_NUMBER 8
 
 #define TAG_LOC_DESP_VIEW_AUTHOR_IMAGE 101
-#define TAG_LOC_DESP_VIEW_AUTHOR_NAME 102
+#define TAG_LOC_DESP_VIEW_AUTHOR_NAME 102    
 #define TAG_LOC_DESP_VIEW_ARTICLE_CONTENT 103
 
 
@@ -59,19 +59,19 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
+
     // Configure the view for the selected state
 }
 
 #pragma mark - UI for cover
 
 - (void)initCoverView {
-    //    [self.imgLocCover addTapGestureRecognizer:self action:@selector(onImgCoverClicked)];
+//    [self.imgLocCover addTapGestureRecognizer:self action:@selector(onImgCoverClicked)];
     
     self.consCoverHeight.constant = [MZLPersonalizedItemCell coverImageHeight];
     
     UIView *bottomView = [self.vwCover createSubView];
-    //    bottomView.userInteractionEnabled = NO;
+//    bottomView.userInteractionEnabled = NO;
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.and.bottom.mas_equalTo(bottomView.superview);
         make.height.mas_equalTo(200);
@@ -84,31 +84,28 @@
     }];
     
     UIView *bottomContent = [[bottomView createSubView] co_insetsParent:UIEdgeInsetsMake(0, 16, 16, 16)];
-    
+
     UIView *infoView = [[bottomContent createSubView] co_insetsParent:UIEdgeInsetsMake(COInvalidCons, 0, 0, 0)];
     UILabel *articleLbl = [infoView createSubViewLabelWithFontSize:12 textColor:[UIColor whiteColor]];
     UIImageView *articleIcon = [infoView createSubViewImageViewWithImageNamed:@"Personalized_Articles"];
-    
-    //    UILabel *productLbl = [infoView createSubViewLabelWithFontSize:12 textColor:[UIColor whiteColor]];
-    //    UIImageView *productIcon = [infoView createSubViewImageViewWithImageNamed:@"Personalized_Goods"];
+    UILabel *productLbl = [infoView createSubViewLabelWithFontSize:12 textColor:[UIColor whiteColor]];
+    UIImageView *productIcon = [infoView createSubViewImageViewWithImageNamed:@"Personalized_Goods"];
     
     [articleLbl co_rightCenterYParentWithWidth:COInvalidCons height:COInvalidCons];
     // 确定infoView的上边界
     [articleIcon co_insetsParent:UIEdgeInsetsMake(0, COInvalidCons, 0, COInvalidCons) width:16 height:16];
     [articleIcon co_rightFromLeftOfView:articleLbl offset:6];
-    
-    //    [[productLbl co_centerYParent] co_rightFromLeftOfView:articleIcon offset:24];
-    //    [productIcon co_insetsParent:UIEdgeInsetsMake(COInvalidCons, COInvalidCons, 0, COInvalidCons) width:16 height:16];
-    //    [productIcon co_rightFromLeftOfView:productLbl offset:6];
+    [[productLbl co_centerYParent] co_rightFromLeftOfView:articleIcon offset:24];
+    [productIcon co_insetsParent:UIEdgeInsetsMake(COInvalidCons, COInvalidCons, 0, COInvalidCons) width:16 height:16];
+    [productIcon co_rightFromLeftOfView:productLbl offset:6];
     
     UILabel *parentLocationLbl = [infoView createSubViewLabelWithFontSize:11 textColor:[UIColor whiteColor]];
     [parentLocationLbl co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, COInvalidCons)];
     _parentLocationLbl = parentLocationLbl;
     _articleCountLbl = articleLbl;
+    _productLbl = productLbl;
     _articleCountIcon = articleIcon;
-    
-    //    _productLbl = productLbl;
-    //    _productIcon = productIcon;
+    _productIcon = productIcon;
     
     UILabel *nameLbl = [bottomContent createSubViewLabelWithFontSize:18 textColor:[UIColor whiteColor]];
     [nameLbl co_insetsParent:UIEdgeInsetsMake(COInvalidCons, 0, COInvalidCons, COInvalidCons)];
@@ -144,7 +141,7 @@
     UIScrollView *locDespScroll = [[UIScrollView alloc] init];
     _locDespScroll = locDespScroll;
     [_locDespContentView addSubview:locDespScroll];
-    //    [locDespScroll co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, COInvalidCons) width:SCROLL_PAGE_WIDTH height:SCROLL_HEIGHT];
+//    [locDespScroll co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, COInvalidCons) width:SCROLL_PAGE_WIDTH height:SCROLL_HEIGHT];
     [locDespScroll co_withinParent];
     locDespScroll.scrollsToTop = NO;
     NSInteger locDespCount = MAX_LOC_DESP_COUNT;
@@ -439,8 +436,7 @@
     _nameLbl.text = self.location.name;
     [self updateLocParent];
     [self updateLbl:_articleCountLbl image:_articleCountIcon withCount:self.location.shortArticleCount];
-#pragma mark - 隐藏目的地tab的小购物袋功能
-    //    [self updateLbl:_productLbl image:_productIcon withCount:self.location.productsCount];
+    [self updateLbl:_productLbl image:_productIcon withCount:self.location.productsCount];
     [self loadLocationCoverImage];
     [self updateLocDespAndPaging];
 }

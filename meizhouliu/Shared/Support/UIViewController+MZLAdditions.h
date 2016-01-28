@@ -36,7 +36,6 @@
 - (NSString *)imageNameForFavoredArticle:(MZLModelUserFavoredArticle *)userFavoredArticle;
 
 - (void)popupLoginFrom:(NSInteger)from executionBlockWhenDismissed:(CO_BLOCK_VOID)executionBlockWhenDismissed;
-- (void)popupMailLoginFrom:(NSInteger)from executionBlockWhenDismissed:(CO_BLOCK_VOID)executionBlockWhenDismissed;
 
 - (BOOL)isTopViewControllerIfInNav;
 

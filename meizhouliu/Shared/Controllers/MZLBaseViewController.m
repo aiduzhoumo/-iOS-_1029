@@ -18,7 +18,6 @@
 #import "MZLShortArticleDetailVC.h"
 #import "MZLModelShortArticle.h"
 #import "MZLModelAuthor.h"
-#import "MZLTuiJianDarenViewController.h"
 
 // in hours
 #define REFRESH_INTERVAL_IN_HOURS 12
@@ -256,11 +255,6 @@
     vcShortArticle.popupCommentOnViewAppear = flag;
     vcShortArticle.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vcShortArticle animated:YES];
-}
-
-- (void)toTuiJianDarenViewController {
-    MZLTuiJianDarenViewController *tuijian = [MZL_MAIN_STORYBOARD()instantiateViewControllerWithIdentifier:NSStringFromClass([MZLTuiJianDarenViewController class])];
-    [self.navigationController pushViewController:tuijian animated:YES];
 }
 
 #pragma mark - ID for statistics

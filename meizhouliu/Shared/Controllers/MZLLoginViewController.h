@@ -25,28 +25,19 @@ BOOL shouldPopupLogin();
 
 @property (weak, nonatomic) IBOutlet UIView *vwContent;
 @property (weak, nonatomic) IBOutlet UIImageView *imgUser;
-@property (weak, nonatomic) IBOutlet UITextField *phoneNumTF;
-
+@property (weak, nonatomic) IBOutlet UITextField *txtUser;
 @property (weak, nonatomic) IBOutlet UIView *sepUser;
 @property (weak, nonatomic) IBOutlet UIImageView *imgPwd;
-@property (weak, nonatomic) IBOutlet UITextField *passWordTF;
-
+@property (weak, nonatomic) IBOutlet UITextField *txtPwd;
 @property (weak, nonatomic) IBOutlet UIView *sepPwd;
 @property (weak, nonatomic) IBOutlet UIView *vw3rdPartyLogin;
 @property (weak, nonatomic) IBOutlet UIButton *btnLogin;
-
+@property (weak, nonatomic) IBOutlet UIButton *btnRegNormal;
 @property (weak, nonatomic) IBOutlet UIButton *btnFavDirect;
 @property (weak, nonatomic) IBOutlet UIView *statusBar;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *conVwContentTop;
-
-@property (weak, nonatomic) IBOutlet UIButton *freePhoneReg;
-@property (weak, nonatomic) IBOutlet UIButton *forgetPassW;
-
-- (IBAction)loginByMail:(id)sender;
-
-@property (copy, nonatomic) NSString *token;
 
 @property (nonatomic, assign) MZLLoginPopupFrom popupFrom;
 @property (nonatomic, copy) CO_BLOCK_VOID executionBlockWhenDismissed;

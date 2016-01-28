@@ -16,7 +16,5 @@
 @property (nonatomic, strong) MZLModelImage *photo;
 
 @property(nonatomic, readonly) NSString *photoUrl;
-@property (nonatomic,copy) NSString *phone;
 
-@property (nonatomic, assign) BOOL isAttention;
 @end

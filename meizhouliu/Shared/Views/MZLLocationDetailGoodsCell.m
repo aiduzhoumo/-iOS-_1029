@@ -9,7 +9,6 @@
 #import "MZLLocationDetailGoodsCell.h"
 #import "MZLModelGoods.h"
 #import "UIImageView+MZLNetwork.h"
-#import "UIImageView+WebCache.h"
 
 @interface MZLLocationDetailGoodsCell () {
     
@@ -54,8 +53,7 @@
 
 - (void)updateWithModel:(MZLModelGoods *)model {
     self.lblDetail.text = model.title;
-    [self.goodsImage sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:[UIImage imageNamed:@"Default_Loc_Small"]];
-//    [self.goodsImage loadSmallLocationImageFromURL:model.imageUrl];
+    [self.goodsImage loadSmallLocationImageFromURL:model.coverImg.fileUrl];
     self.lblSold.hidden = YES;
 //    self.lblSold.text = [NSString stringWithFormat:@"已售%d", model.sold];
     self.vwPrice.hidden = (model.price <= 0);

@@ -40,5 +40,5 @@
 - (void)toLocationDetailLocations:(MZLModelLocationBase *)location;
 - (void)toShortArticleDetailWithShortArticle:(MZLModelShortArticle *)shortArticle;
 - (void)toShortArticleDetailWithShortArticle:(MZLModelShortArticle *)shortArticle commentFlag:(BOOL)flag;
-- (void)toTuiJianDarenViewController;
+
 @end

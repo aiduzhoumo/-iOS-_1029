@@ -56,7 +56,6 @@ static const NSInteger numberOfSections = 3;
      Pass the selected object to the new view controller.
 }
 */
-
 - (void)initInternal {
     [self.vwCollection setDelegate:self];
     [self.vwCollection setBackgroundColor:MZL_BG_COLOR()];

@@ -13,24 +13,26 @@
 typedef void(^ MZL_SVC_SUCC_BLOCK)(NSArray *models);
 typedef void(^ MZL_SVC_ERR_BLOCK)(NSError *error);
 
+<<<<<<< HEAD
 typedef void(^ MZL_SVC_REDIRECT_SUCC_BLOCK)(NSDictionary *models);
 typedef void(^ MZL_SVC_REDIRECT_ERR_BLOCK)(NSError *error);
 
 @class MZLArticleListSvcParam, MZLChildLocationsSvcParam, MZLPagingSvcParam, MZLModelArticle, MZLRegisterNormalSvcParam,MZLRegisterPhoneSvcParam,MZLRegisterSinaWeiboSvcParam, MZLRegisterTencentQqSvcParam, MZLLoginSvcParam, MZLModelUser, MZLModelUserInfoDetail, MZLModelUserLocationPref, MZLModelUserFavoredArticle, MZLModelComment, MZLModelNotice, MZLFilterParam, MZLModelImage, MZLModelLocation, MZLPersonalizeSvcParam, MZLDescendantsParam, MZLSurroundingLocSvcParam, MZLModelShortArticle, MZLModelShortArticleComment, MZLModelAuthor, MZLRegister3rdPartySvcParam, MZLRegisterBaseSvcParam, MZLModelSurroundingLocations, MZLGetCodeSvcParam, MZLVerifyCodeSvcParam, MZLPhoneLoginSvcParam;
 
+=======
+@class MZLArticleListSvcParam, MZLChildLocationsSvcParam, MZLPagingSvcParam, MZLModelArticle, MZLRegisterNormalSvcParam,MZLRegisterSinaWeiboSvcParam, MZLRegisterTencentQqSvcParam, MZLLoginSvcParam, MZLModelUser, MZLModelUserInfoDetail, MZLModelUserLocationPref, MZLModelUserFavoredArticle, MZLModelComment, MZLModelNotice, MZLFilterParam, MZLModelImage, MZLModelLocation, MZLPersonalizeSvcParam, MZLDescendantsParam, MZLSurroundingLocSvcParam, MZLModelShortArticle, MZLModelShortArticleComment, MZLModelAuthor, MZLRegister3rdPartySvcParam, MZLRegisterBaseSvcParam, MZLModelSurroundingLocations;
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 
 @interface MZLServices : NSObject
 
 + (NSString *)versionPlistUrl;
 
 + (void)registerByNormalService:(MZLRegisterNormalSvcParam *)param succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
-+ (void)registerByPhoneService:(MZLRegisterPhoneSvcParam *)param succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)registerBySinaWeiboService:(MZLRegisterSinaWeiboSvcParam *)param succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)registerByTencentQqService:(MZLRegisterTencentQqSvcParam *)param succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)registerByWeixinService:(MZLRegister3rdPartySvcParam *)param succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)registerServiceWithType:(MZLLoginType)type param:(MZLRegisterBaseSvcParam *)param succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)loginByNormalService:(MZLLoginSvcParam *)param succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
-+ (void)loginByPhoneNumService:(MZLPhoneLoginSvcParam *)param succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)loginByWeiXinServiceWithOpenId:(NSString *)openId succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)loginBySinaWeiboServiceWithOpenId:(NSString *)openId succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)loginByTencentQqServiceWithOpenId:(NSString *)openId succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
@@ -61,8 +63,12 @@ typedef void(^ MZL_SVC_REDIRECT_ERR_BLOCK)(NSError *error);
 + (void)locationPhotosService:(NSInteger)locationId succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (id)locationPhotosService:(MZLModelLocationBase *)location pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)isLocationFavoredService:(MZLModelLocationBase *)location succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+<<<<<<< HEAD
 //+ (id)locationGoodsService:(MZLModelLocationBase *)location pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)locationGoodsService:(MZLModelLocationBase *)location pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_REDIRECT_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_REDIRECT_ERR_BLOCK)errorBlock;
+=======
++ (id)locationGoodsService:(MZLModelLocationBase *)location pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 
 + (id)favoredLocationsWithPagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)removeFavoredLocation:(MZLModelUserLocationPref *)favoredLocation succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
@@ -76,9 +82,7 @@ typedef void(^ MZL_SVC_REDIRECT_ERR_BLOCK)(NSError *error);
 + (void)uploadUserImageService:(UIImage *)image succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)userInfoServiceWithSuccBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)modifyPasswordWithOldPassword:(NSString *)oldPassword newPassword:(NSString *)newPassword succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
-+ (void)bindPhoneWithToken:(NSString *)token phone:(NSString *)phone code:(NSString *)code succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)modifyUserInfo:(MZLModelUserInfoDetail *)user succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
-+ (void)modifyPasswordWithNewPassword:(NSString *)newPassword phone:(NSString *)phone code:(NSString *)code succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 
 #pragma mark - comments related
 + (void)commentForArticle:(MZLModelArticle *)article pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
@@ -135,8 +139,12 @@ typedef void(^ MZL_SVC_REDIRECT_ERR_BLOCK)(NSError *error);
 
 + (BOOL)hasGoodsFlagWithArticle:(MZLModelArticle *)arg1;
 + (void)goodsInArticle:(MZLModelArticle *)article succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+<<<<<<< HEAD
 //+ (void)hotGoodsService:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)hotGoodsServiceWithLon:(CGFloat)lon lat:(CGFloat)lat succBlock:(MZL_SVC_REDIRECT_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_REDIRECT_ERR_BLOCK)errorBlock;
+=======
++ (void)hotGoodsService:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 
 #pragma mark - short articles
 
@@ -175,6 +183,7 @@ typedef void(^ MZL_SVC_REDIRECT_ERR_BLOCK)(NSError *error);
 /* 举报玩法 */
 + (void)reportForShortArticle:(MZLModelShortArticle *)shortArticle succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 
+<<<<<<< HEAD
 #pragma mark - user get code
 + (void)getSecCode:(MZLGetCodeSvcParam *)secCodeParams succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 #pragma mark - verify code
@@ -217,4 +226,6 @@ typedef void(^ MZL_SVC_REDIRECT_ERR_BLOCK)(NSError *error);
 + (void)modifyUserName:(MZLModelUserInfoDetail *)user WithNewName:(NSString *)newName SuccBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 
 
+=======
+>>>>>>> parent of d1afe84... Merge branch 'mzl_FJbranch'
 @end
