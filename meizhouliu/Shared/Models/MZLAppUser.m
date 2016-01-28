@@ -13,9 +13,7 @@
 @implementation MZLAppUser
 
 - (BOOL)isLogined {
-    
-//    NSLog(@"self.user.bind = == == %@",self.user.bind);
-    
+        
     if (![self.user.bind isEqualToString:@"true"]) {
         return NO;
     }
@@ -34,7 +32,7 @@
 }
 
 - (BOOL)isLoginFrom3rdParty {
-    return self.loginType == MZLLoginTypeQQ || self.loginType == MZLLoginTypeSinaWeibo;
+    return self.loginType == MZLLoginTypeQQ || self.loginType == MZLLoginTypeSinaWeibo || self.loginType == MZLLoginTypeWeiXin;
 }
 
 #pragma mark - NSCoding protocol

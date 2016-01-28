@@ -61,7 +61,7 @@
     for (UILabel *lbl in @[self.lblName, self.lblComment]) {
         lbl.textColor = @"434343".co_toHexColor;
     }
-    self.lblName.preferredMaxLayoutWidth = CO_SCREEN_WIDTH - 66 - CELL_H_MARGIN - 10 - WIDTH_LBL_DATE;
+    self.lblName.preferredMaxLayoutWidth = CO_SCREEN_WIDTH - 66 - CELL_H_MARGIN - 10 - WIDTH_LBL_DATE ;
     self.lblComment.preferredMaxLayoutWidth = CO_SCREEN_WIDTH - 66 - CELL_H_MARGIN;
     self.lblDate.textColor = @"B0B0B0".co_toHexColor;
     self.lblDate.textAlignment = NSTextAlignmentRight;
@@ -93,12 +93,19 @@
 - (void)updateWithComment:(MZLModelShortArticleComment *)comment {
     self.model = comment;
     [self.imgAuthor loadAuthorImageFromURL:comment.user.headerImage.fileUrl];
+    
     if (comment.user) {
         self.lblName.text = comment.user.nickName;
     } else {
         self.lblName.text = @"匿名用户";
     }
-    self.lblComment.text = comment.content;
+    
+    if (comment.reply_user) {
+        self.lblComment.text = [NSString stringWithFormat:@"回复%@的评论:%@",comment.reply_user.nickName,comment.content];
+    }else{
+        self.lblComment.text = comment.content;
+    }
+    
     self.lblDate.text = comment.publishedTimeStr;
     if (! [MZLShortArticleCommentCell shouldShowFunctionForModel:comment]) {
         [self.vwFunction co_updateHeight:1];

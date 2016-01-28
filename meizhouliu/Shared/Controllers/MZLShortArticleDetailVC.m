@@ -38,6 +38,17 @@
 
 //#define OBSERVE_KEY_FRAME @"frame"
 
+typedef enum {
+    MZLShortArticleDetailActionSheetReport,
+    MZLShortArticleDetailActionSheetCommentReply
+} MZLShortArticleDetailActionSheet;
+
+typedef enum {
+    MZLShortArticleCommentStateFromAdd,
+    MZLShortArticleCommentStateFromReply
+} MZLShortArticleCommentState;
+
+
 @interface MZLShortArticleDetailVC () <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate,UIAlertViewDelegate,UIActionSheetDelegate> {
     __weak COKeyboardToolbar *_toolbar;
     UIView *_commentBarBg;
@@ -45,8 +56,14 @@
     __weak UITextView *_commentTextView;
     __weak UIButton *_sendBtn;
     __weak UIWebView *_adWebView;
+    __weak UILabel *_placeHolderLbl;
     //    __weak COKeyboardToolbar *_placeholderBar;
 }
+
+@property (nonatomic, assign) MZLShortArticleDetailActionSheet sheetModel;
+@property (nonatomic, assign) MZLShortArticleCommentState commentState;
+
+@property (nonatomic, strong) MZLModelShortArticleComment *comment;
 
 @property (nonatomic, weak) UILabel *commentLbl;
 @property (nonatomic, weak) UILabel *upsLbl;
@@ -62,12 +79,15 @@
 @property (nonatomic, weak) UIButton *attentionBtn;
 @property (nonatomic, weak) UIAlertView *alert;
 
+@property (nonatomic, assign) NSInteger commentRow;
+
 @end
 
 @implementation MZLShortArticleDetailVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     // 以短文有没有图片判断是否需要取详细
     if (self.shortArticle.photos.count == 0) {
@@ -97,6 +117,7 @@
     [super viewWillAppear:animated];
     //刷新关注按钮的状态
     [self getAttentionStatus];
+  
 }
 
 - (void)getAttentionStatus {
@@ -105,24 +126,19 @@
         return;
     }
     
-    MZLModelShortArticle *shortArticle = self.shortArticle;
-    __weak MZLShortArticleDetailVC *weaSelf = self;
-    [MZLServices attentionStatesForCurrentUser:shortArticle.author succBlock:^(NSArray *models) {
-        if (models && models.count > 0) {
-            shortArticle.author.isAttentionForCurrentUser = 1;
-            if (shortArticle.author.identifier == weaSelf.shortArticle.author.identifier) {
-                [weaSelf toggleAttention:shortArticle.author.isAttentionForCurrentUser];
-            }
+    NSArray *arr = [MZLSharedData attentionIdsArr];
+    NSString *s = [NSString stringWithFormat:@"%ld",self.shortArticle.author.identifier];
+    for (NSString *str in arr) {
+        if ([s isEqualToString:str]) {
+            self.shortArticle.author.isAttentionForCurrentUser = YES;
+            [self toggleAttention:1];
+            return;
         }else {
-            shortArticle.author.isAttentionForCurrentUser = 0;
-            if (shortArticle.author.identifier == weaSelf.shortArticle.author.identifier) {
-                [weaSelf toggleAttention:shortArticle.author.isAttentionForCurrentUser];
-            }
+            self.shortArticle.author.isAttentionForCurrentUser = NO;
+            [self toggleAttention:0];
         }
-        
-    } errorBlock:^(NSError *error) {
-        MZLLog(@"erroe = %@",error);
-    }];
+
+    }
 }
 
 - (void)toggleAttention:(BOOL)flag {
@@ -174,23 +190,46 @@
 
 #pragma mark - override
 
+//- (void)_loadModels {
+//    [self hideProgressIndicator:NO];
+//    MZLPagingSvcParam *pagingParam = [self pagingParamFromModels];
+//    [self invokeService:@selector(commentsForShortArticle:pagingParam:succBlock:errorBlock:) params:@[self.shortArticle, pagingParam]];
+//}
+
 - (void)_loadModels {
     [self hideProgressIndicator:NO];
-    MZLPagingSvcParam *pagingParam = [self pagingParamFromModels];
-    [self invokeService:@selector(commentsForShortArticle:pagingParam:succBlock:errorBlock:) params:@[self.shortArticle, pagingParam]];
+    [self invokeService:@selector(newCommentsForShortArticle:succBlock:errorBlock:) params:@[self.shortArticle]];
 }
 
-- (void)_loadMore {
-    MZLPagingSvcParam *pagingParam = [self pagingParamFromModels];
-    [self invokeLoadMoreService:@selector(commentsForShortArticle:pagingParam:succBlock:errorBlock:) params:@[self.shortArticle, pagingParam]];
-}
+//- (void)_loadMore {
+//    MZLPagingSvcParam *pagingParam = [self pagingParamFromModels];
+//    [self invokeLoadMoreService:@selector(commentsForShortArticle:pagingParam:succBlock:errorBlock:) params:@[self.shortArticle, pagingParam]];
+//}
 
 - (void)_onLoadSuccBlock:(NSArray *)modelsFromSvc {
     if (self.scrollToTheFirstComment) {
         self.scrollToTheFirstComment = NO;
         dispatch_async(dispatch_get_main_queue(), ^{
             if (_models.count > 0) {
+                
                 [_tv scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            }
+        });
+    }
+    if (self.scrollToTheSpecificComment) {
+        self.scrollToTheSpecificComment = NO;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (_models.count > 0 ) {
+                 NSInteger i = 0;
+                for (MZLModelShortArticleComment *commment in _models) {
+                    if (commment.identifier == self.commentIdentifier) {
+                        self.commentRow = i;
+                        break;
+                    }
+                    i++;
+                }
+                
+                [_tv scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.commentRow inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
             }
         });
     }
@@ -245,19 +284,29 @@
 }
 
 - (void)addAttention {
+    [self showWorkInProgressIndicator];
+    __weak MZLShortArticleDetailVC *weakSelf = self;
     [MZLServices addAttentionForShortArticleUser:self.shortArticle.author succBlock:^(NSArray *models) {
-        //
+        [MZLSharedData addIdIntoAttentionIds:[NSString stringWithFormat:@"%ld",weakSelf.shortArticle.author.identifier]];
+        weakSelf.shortArticle.author.isAttentionForCurrentUser = YES;
+        [weakSelf toggleAttentionStatus];
+        [weakSelf hideProgressIndicator];
     } errorBlock:^(NSError *error) {
-        //
+        [weakSelf onNetworkError];
     }];
 }
 
 - (void)removeAttention {
+    [self showWorkInProgressIndicator];
+    __weak MZLShortArticleDetailVC *weakSelf = self;
     MZLModelShortArticle *shortArticle = self.shortArticle;
     [MZLServices removeAttentionForShortArticleUser:shortArticle.author succBlock:^(NSArray *models) {
-        //
+        [MZLSharedData removeIdFromAttentionIds:[NSString stringWithFormat:@"%ld",weakSelf.shortArticle.author.identifier]];
+        weakSelf.shortArticle.author.isAttentionForCurrentUser = NO;
+        [weakSelf toggleAttentionStatus];
+        [weakSelf hideProgressIndicator];
     } errorBlock:^(NSError *error) {
-        //
+        [weakSelf onNetworkError];
     }];
 }
 
@@ -283,19 +332,39 @@
 - (void)_postComment:(NSString *)content {
     MZLModelShortArticleComment *comment = [[MZLModelShortArticleComment alloc] init];
     comment.content = content;
+    comment.user_nickname = self.comment.user.name;
+    comment.reply_id =[NSString stringWithFormat:@"%ld",self.comment.identifier];
     
     [self toggleSendBtnState:NO];
     
-    [MZLServices addComment:comment forShortArticle:self.shortArticle succBlock:^(NSArray *models) {
-        [self onCommentStatusModified:ADD_COMMENT];
+    if (self.commentState == MZLShortArticleCommentStateFromReply) {
         [self toggleSendBtnState:YES];
-        [self clearAndhideCommentBar];
-        self.scrollToTheFirstComment = YES;
-        [self loadModels];
-    } errorBlock:^(NSError *error) {
-        [self toggleSendBtnState:YES];
-        [UIAlertView showAlertMessage:@"发送评论失败，请稍候再试！"];
-    }];
+        [MZLServices replyComment:comment forShortArticle:self.shortArticle succBlock:^(NSArray *models) {
+            //
+            NSLog(@"%@",models);
+            [self onCommentStatusModified:ADD_COMMENT];
+            [self toggleSendBtnState:YES];
+            [self clearAndhideCommentBar];
+            self.scrollToTheFirstComment = YES;
+            [self loadModels];
+        } errorBlock:^(NSError *error) {
+            [self toggleSendBtnState:YES];
+            [UIAlertView showAlertMessage:@"发送评论失败，请稍候再试！"];
+        }];
+        
+    }else {
+        [MZLServices addComment:comment forShortArticle:self.shortArticle succBlock:^(NSArray *models) {
+            NSLog(@"%@",models);
+            [self onCommentStatusModified:ADD_COMMENT];
+            [self toggleSendBtnState:YES];
+            [self clearAndhideCommentBar];
+            self.scrollToTheFirstComment = YES;
+            [self loadModels];
+        } errorBlock:^(NSError *error) {
+            [self toggleSendBtnState:YES];
+            [UIAlertView showAlertMessage:@"发送评论失败，请稍候再试！"];
+        }];
+    }
 }
 
 - (void)deleteComment:(MZLModelShortArticleComment *)comment {
@@ -331,7 +400,7 @@
     if ([MZLSharedData appUserId] == self.shortArticle.author.identifier) {
         self.attentionBtn.hidden = YES;
     }
-    [self toggleAttentionStatus];
+//    [self toggleAttentionStatus];
     
     [self initAuthor];
     [self initTableView];
@@ -417,7 +486,14 @@
     textView.delegate = self;
     //    textView.scrollEnabled = NO;
     UILabel *placeHolderLbl = [textViewContainer createSubViewLabelWithFontSize:fontSize textColor:@"D8D8D8".co_toHexColor];
-    placeHolderLbl.text = @"添加评论";
+
+//    if ([self checkCommentFromState]) {
+//        placeHolderLbl.text = @"添加评论";
+//    } else {
+//        placeHolderLbl.text = @"回复评论";
+//    }
+    
+    _placeHolderLbl = placeHolderLbl;
     [placeHolderLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(textView).offset(6);
     }];
@@ -447,9 +523,10 @@
 }
 
 - (void)clearAndhideCommentBar {
-    [_commentTextView resignFirstResponder];
+    
     _commentTextView.text = @"";
     [self textViewDidChange:_commentTextView];
+    [_commentTextView resignFirstResponder];
 }
 
 - (void)toggleCommentBarBg:(BOOL)flag {
@@ -470,7 +547,11 @@
 #pragma mark - text view delegate (comment bar)
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    [textView co_hidePlaceholderLabel];
+    if (self.commentState == MZLShortArticleCommentStateFromReply) {
+        _placeHolderLbl.text = @"回复评论";
+    } else {
+        _placeHolderLbl.text = @"添加评论";
+    }
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
@@ -482,6 +563,7 @@
         _sendBtn.enabled = NO;
         [_sendBtn setTitleColor:SEND_BTN_NO_TEXT_COLOR forState:UIControlStateNormal];
     } else {
+        [textView co_hidePlaceholderLabel];
         _sendBtn.enabled = YES;
         [_sendBtn setTitleColor:SEND_BTN_TEXT_COLOR forState:UIControlStateNormal];
     }
@@ -852,6 +934,17 @@
     return comment.canEdit;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    MZLModelShortArticleComment *comment = _models[indexPath.row];
+    self.comment = comment;
+    
+    UIActionSheet *reportSheet=[[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"回复该评论", nil];
+    reportSheet.delegate=self;
+    self.sheetModel = MZLShortArticleDetailActionSheetCommentReply;
+    [reportSheet showInView:self.view];
+}
+
 #pragma mark - keyboard events
 
 - (void)co_onKeyboardWillChangeFrame:(NSNotification *)noti kbBeginFrame:(CGRect)kbBeginFrame kbEndFrame:(CGRect)kbEndFrame {
@@ -886,12 +979,8 @@
     }
     
     if (self.shortArticle.author.isAttentionForCurrentUser) {
-        self.shortArticle.author.isAttentionForCurrentUser = NO;
-        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_xiangqingye"] forState:UIControlStateNormal];
         [self removeAttention];
     }else{
-        self.shortArticle.author.isAttentionForCurrentUser = YES;
-        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_xiangqingye_cancel"] forState:UIControlStateNormal];
         [self addAttention];
     }
 }
@@ -937,6 +1026,7 @@
         [self popupLoginFrom:MZLLoginPopupFromComment executionBlockWhenDismissed:nil];
         return;
     }
+    self.commentState = MZLShortArticleCommentStateFromAdd;
     [_commentTextView becomeFirstResponder];
 }
 
@@ -966,15 +1056,29 @@
 {
     UIActionSheet *reportSheet=[[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"举报", nil];
     reportSheet.delegate=self;
+    self.sheetModel = MZLShortArticleDetailActionSheetReport;
     [reportSheet showInView:self.view];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex ==0)
-    {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:@"确定举报这篇玩法？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"举报", nil];
-        [alert show];
+    if (self.sheetModel == MZLShortArticleDetailActionSheetReport) {
+        if(buttonIndex == 0)
+        {
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:@"确定举报这篇玩法？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"举报", nil];
+            [alert show];
+        }
+    }
+    if (self.sheetModel == MZLShortArticleDetailActionSheetCommentReply) {
+        if (buttonIndex == 0) {
+            if (shouldPopupLogin()) {
+                [self popupLoginFrom:MZLLoginPopupFromComment executionBlockWhenDismissed:nil];
+                return;
+            }
+            self.commentState = MZLShortArticleCommentStateFromReply;
+            [_commentTextView becomeFirstResponder];
+
+        }
     }
 }
 
@@ -1026,5 +1130,20 @@
         [bottomBar co_animateToY:self.view.height completionBlock:completionBlock];
     }
 }
+
+//#pragma mark popVc
+//- (void)backToParent {
+//    if (self.tabBarController && self.navigationController) {
+//        
+//        
+//        [self.navigationController popToViewController:<#(nonnull UIViewController *)#> animated:<#(BOOL)#>];
+////        [MobClick event:@"globalClickBackspace"];
+//        return;
+//    }
+//    if (self.presentingViewController) {
+//        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+//    }
+//
+//}
 
 @end

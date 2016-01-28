@@ -240,11 +240,11 @@ NSString *co_getTimeDiffString(NSTimeInterval timestamp) {
     unsigned int unitFlag = NSDayCalendarUnit | NSHourCalendarUnit |NSMinuteCalendarUnit;
     NSDateComponents *gap = [cal components:unitFlag fromDate:today toDate:todate options:0]; // compute time diff
     if (ABS([gap day]) > 0) {
-        return [NSString stringWithFormat:@"%d天前", ABS([gap day])];
+        return [NSString stringWithFormat:@"%ld天前", ABS([gap day])];
     } else if (ABS([gap hour]) > 0) {
-        return [NSString stringWithFormat:@"%d小时前", ABS([gap hour])];
+        return [NSString stringWithFormat:@"%ld小时前", ABS([gap hour])];
     } else if (ABS([gap minute]) > 0){
-        return [NSString stringWithFormat:@"%d分钟前",  ABS([gap minute])];
+        return [NSString stringWithFormat:@"%ld分钟前",  ABS([gap minute])];
     } else {
         return @"刚刚";
     }

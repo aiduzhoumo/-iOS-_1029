@@ -70,7 +70,6 @@
         [self hideProgressIndicator:NO];
         
         if(result.error == MZL_SVC_RESPONSE_CODE_SUCCESS) {
-            NSLog(@"获取三方注册验证码成功");
             
             [CountdownButtonByTime countdownButton:_getCodeBtn time:59];
             

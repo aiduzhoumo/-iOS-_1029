@@ -18,12 +18,23 @@
     if (! content) {
         content = @"";
     }
+    NSString *user_nickname = self.user_nickname;
+    if (! user_nickname) {
+        user_nickname = @"";
+    }
+    NSString *reply_id = self.reply_id;
+    if (! reply_id) {
+        reply_id = @"";
+    }
     [dict setKey:@"comment[content]" strValue:content];
+    [dict setKey:@"comment[user_nickname]" strValue:user_nickname];
+    [dict setKey:@"comment[reply_id]" strValue:reply_id];
     return dict;
 }
 
 + (void)addRelationMapping:(RKObjectMapping *)mapping {
     [mapping addRelationFromPath:@"user" toProperty:@"user" withMapping:[MZLModelUser rkObjectMapping]];
+    [mapping addRelationFromPath:@"reply_user" toProperty:@"reply_user" withMapping:[MZLModelUser rkObjectMapping]];
 }
 
 + (NSMutableArray *)attrArray {

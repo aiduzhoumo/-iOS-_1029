@@ -17,4 +17,7 @@
 + (void)archiveUserPreference:(id<NSCoding>)data forKey:(NSString *)key;
 + (id)getCodedUserPreference:(NSString *)key;
 
++ (void)setAttentionUserId:(id)value forKey:(NSString *)key;
++ (id)getAttentionUserId:(NSString *)key;
++ (void)removeAttentionUserId:(NSString *)key;
 @end

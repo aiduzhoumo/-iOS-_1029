@@ -128,7 +128,7 @@
             [self hideProgressIndicator:NO];
             
             if(result.error == MZL_SVC_RESPONSE_CODE_SUCCESS) {
-                NSLog(@"获取手机注册验证码成功");
+//                NSLog(@"获取手机注册验证码成功");
                 
                 [CountdownButtonByTime countdownButton:_getSecCodeBtn time:59];
 
@@ -148,22 +148,11 @@
         
     }
      
-}
-
-//else if (result.error == MZL_RL_RCODE_TOKEN_NOTACCQUIRED) { // server端token获取失败
-////                [self onLoginErrorWithCode:ERROR_CODE_SERVER_TOKEN_ISSUE];
-//                [UIAlertView showAlertMessage:@"网络繁忙"];
-//            } else if (! isEmptyString(result.errorMessage)) { // 其它server返回的错误
-//                [UIAlertView showAlertMessage:result.errorMessage];
-//            } else { // 不明错误
-////                [self onLoginErrorWithCode:ERROR_CODE_LOGIN_FAILED];
-//                [UIAlertView showAlertMessage:@"网络繁忙"];
-//            }
-         
+}  
          
 - (void)dealloc {
      
-     NSLog(@"页面销毁了");
+//     NSLog(@"页面销毁了");
 }
  
 - (IBAction)nextStep:(id)sender {

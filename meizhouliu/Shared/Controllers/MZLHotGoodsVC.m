@@ -11,8 +11,9 @@
 #import "MZLServices.h"
 #import "MZLModelGoods.h"
 #import "MZLGoodsDetailViewController.h"
+#import <AMapSearchKit/AMapSearchAPI.h>
 
-@interface MZLHotGoodsVC () {
+@interface MZLHotGoodsVC ()<AMapSearchDelegate> {
     
 }
 
@@ -66,18 +67,40 @@
 
 - (void)_loadModels {
     [self reset];
-//    [self invokeService:@selector(hotGoodsService:succBlock:errorBlock:) params:@[[self pagingParamFromModels]]];
-
-    [MZLServices hotGoodsServiceTEXT:self.locationParam succBlock:nil errorBlock:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModels:) name:@"hotGoodsModel" object:nil];
+    
+    [self geo];
 }
 
-- (void)getModels:(NSNotification *)notif {
-    NSDictionary *responsDic = (NSDictionary *)notif.object;
+- (void)geo {
     
-//    MZLLog(@"%@",responsDic);
+    
+    AMapGeocodeSearchRequest *regeoRequest = [[AMapGeocodeSearchRequest alloc] init];
+    regeoRequest.searchType = AMapSearchType_Geocode;
+    regeoRequest.address = [MZLSharedData selectedCity];
+    
+    AMapSearchAPI *api = [MZLSharedData aMapSearch];
+    api.delegate = self;
+    [api AMapGeocodeSearch:regeoRequest];
+
+}
+
+#pragma mark - amapDelegate 
+- (void)onGeocodeSearchDone:(AMapGeocodeSearchRequest *)request response:(AMapGeocodeSearchResponse *)response
+{
+    AMapGeocode *geocode = response.geocodes[0];
+    CGFloat longitude =  geocode.location.longitude;
+    CGFloat latitude = geocode.location.latitude;
+    
+    [MZLServices hotGoodsServiceWithLon:longitude lat:latitude succBlock:^(NSDictionary *models) {
+        [self getModels:models];
+    } errorBlock:^(NSError *error) {
+        [self onNetworkError];
+    }];
+}
+
+- (void)getModels:(NSDictionary *)responsDic {
+    
     if([[responsDic objectForKey:@"IsSuccess"] intValue] == 1){
-//        MZLLog(@"*********有数据了**********");
         NSArray *goodsArr = [[responsDic objectForKey:@"Res"] objectForKey:@"list"];
         NSMutableArray *modelArr = [NSMutableArray array];
         for (NSDictionary *dict in goodsArr) {
@@ -85,17 +108,11 @@
             [modelArr addObject:goods];
         }
         _models = [NSMutableArray arrayWithArray:modelArr];
-        MZLLog(@"_model = %@",_models);
         [_tv reloadData];
     }
-//    else if([[responsDic objectForKey:@"IsSuccess"] intValue] == 0){
-//        MZLLog(@"*********没有取到数据NONONONONONONONONONO**********");
-//        [_tv removeUnnecessarySeparators];
-//        [self noRecordView];
-//    }
+    
     [self hideProgressIndicator];
 }
-
 
 - (void)_loadMore {
 //    [self invokeLoadMoreService:@selector(hotGoodsService:succBlock:errorBlock:) params:@[[self pagingParamFromModels]]];
@@ -130,8 +147,7 @@
     [self performSegueWithIdentifier:MZL_SEGUE_TOGOODSDETAIL sender:newGoodsUrl];
 }
 - (void)dealloc {
-//    MZLLog(@"页面销毁，通知也要移除");
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    MZLLog(@"热门商品页面消失");
 }
 
 @end

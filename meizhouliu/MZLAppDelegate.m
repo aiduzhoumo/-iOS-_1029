@@ -74,18 +74,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-//    if (launchOptions != nil) {
-//        NSDictionary *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-//        if (notification != nil) { 
-//            [MZLSharedData setApnsInfo:notification];
-//        }
-//    }
-   
+    
     NSDictionary *userinfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    _userinfoTest = userinfo;
-//    [self co_registerNotification];
-       
+    if (userinfo != nil) {
+        _userinfoTest = userinfo;
+    }
+    
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         //可以添加自定义categories
         [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
@@ -107,7 +101,6 @@
     
     [self servicesOnStartup];
     
-//    [MZLDummyObject test];
     return YES;
 }
 
@@ -116,10 +109,18 @@
     // Required
     [APService registerDeviceToken:deviceToken];
     
-    //向服务器进行注册
-    [MZLServices registerJpushWithUser];
-//    NSLog(@"[APService registrationID]== %@",[APService registrationID]);
+    NSLog(@"%@",[APService registrationID]);
+    
+    //第一次进app进行注册
+    if (![MZLSharedData apsericeregistrationID]) {
+        [MZLSharedData setAPserviceRegistrationID:[APService registrationID]];
+    
+        //向服务器进行注册
+        [MZLServices registerJpushWithUser];
+    }
+
 }
+
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
@@ -137,6 +138,7 @@
     
     if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
         _shouldInvokeEventsWhenActive = NO;
+        
         if(userInfo != nil) {
             UIViewController *vc = [self currentVisibleViewController];
             UIStoryboard *sb = MZL_MAIN_STORYBOARD();
@@ -157,12 +159,18 @@
                 targetVc = vcNoticeDetail;
             }
             else if ([[userInfo valueForKey:@"short_article"] valueForKey:@"id"]) {
+                
                 MZLModelShortArticle *shortArticle = [[MZLModelShortArticle alloc] init];
                 shortArticle.identifier = [[[userInfo valueForKey:@"short_article"] valueForKey:@"id"] intValue];
                 MZLShortArticleDetailVC *vcShortArticle = [MZL_SHORT_ARTICLE_STORYBOARD() instantiateViewControllerWithIdentifier:NSStringFromClass([MZLShortArticleDetailVC class])];
                 vcShortArticle.shortArticle = shortArticle;
                 vcShortArticle.popupCommentOnViewAppear = NO;
                 vcShortArticle.hidesBottomBarWhenPushed = YES;
+                if ([[userInfo valueForKey:@"anchor"] valueForKey:@"short_articles_comment"]) {
+                    vcShortArticle.scrollToTheSpecificComment = YES;
+                    NSString *temp = [[userInfo valueForKey:@"anchor"] valueForKey:@"short_articles_comment"];
+                    vcShortArticle.commentIdentifier = [temp integerValue];
+                }
                 targetVc = vcShortArticle;
             }
             if (targetVc) {
@@ -173,98 +181,65 @@
         if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
             
         _shouldInvokeEventsWhenActive = NO;
-        if(userInfo != nil) {
             
+        if(userInfo != nil) {
+            UIViewController *vc = [self currentVisibleViewController];
+            UIStoryboard *sb = MZL_MAIN_STORYBOARD();
+            UIViewController *targetVc;
             if ([[userInfo valueForKey:@"article"] valueForKey:@"id"]) {
-             
-                NSString *n = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
                 
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:n preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                    
-                }];
-                UIAlertAction *other = [UIAlertAction actionWithTitle:@"查看" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    
-                    UIViewController *vc = [self currentVisibleViewController];
-                    UIStoryboard *sb = MZL_MAIN_STORYBOARD();
-                    UIViewController *targetVc;
-                    
+                 NSString *alert = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+                __block UIViewController *weakTargetVc = targetVc;
+                [UIAlertView showChoiceMessage:alert okBlock:^{
                     MZLModelArticle *article = [[MZLModelArticle alloc] init];
                     article.identifier = [[[userInfo valueForKey:@"article"] valueForKey:@"id"] intValue];
+
                     MZLArticleDetailViewController * vcArticleDetail = (MZLArticleDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLArticleDetailViewController class])];
                     vcArticleDetail.articleParam = article;
-                    targetVc = vcArticleDetail;
+                    weakTargetVc = vcArticleDetail;
                     
-                    if (targetVc) {
-                        [vc mzl_pushViewController:targetVc];
+                    if (weakTargetVc) {
+                        [vc mzl_pushViewController:weakTargetVc];
                     }
                 }];
                 
-                [alert addAction:cancel];
-                [alert addAction:other];
-                
-                [self.currentVisibleViewController presentViewController:alert animated:YES completion:nil];
-                
             }else if([[userInfo valueForKey:@"notice"] valueForKey:@"id"]) {
                 
-                NSString *n = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
-                
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:n preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                    
-                }];
-                UIAlertAction *other = [UIAlertAction actionWithTitle:@"查看" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    
-                    UIViewController *vc = [self currentVisibleViewController];
-                    UIStoryboard *sb = MZL_MAIN_STORYBOARD();
-                    UIViewController *targetVc;
-                    
+                NSString *alert = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+                __block UIViewController *weakTargetVc = targetVc;
+                [UIAlertView showChoiceMessage:alert okBlock:^{
                     MZLModelNotice *notice = [[MZLModelNotice alloc] init];
                     notice.identifier = [[[userInfo valueForKey:@"notice"] valueForKey:@"id"] intValue];
                     MZLNoticeDetailViewController * vcNoticeDetail = (MZLNoticeDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLNoticeDetailViewController class])];
                     vcNoticeDetail.noticeParam = notice;
-                    targetVc = vcNoticeDetail;
+                    weakTargetVc = vcNoticeDetail;
                     
-                    if (targetVc) {
-                        [vc mzl_pushViewController:targetVc];
+                    if (weakTargetVc) {
+                        [vc mzl_pushViewController:weakTargetVc];
                     }
                 }];
                 
-                [alert addAction:cancel];
-                [alert addAction:other];
-                
-                [self.currentVisibleViewController presentViewController:alert animated:YES completion:nil];
             }else if([[userInfo valueForKey:@"short_article"] valueForKey:@"id"]) {
-                NSString *n = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
-                
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:n preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                    
-                }];
-                UIAlertAction *other = [UIAlertAction actionWithTitle:@"查看" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    
-                    UIViewController *vc = [self currentVisibleViewController];
-//                    UIStoryboard *sb = MZL_MAIN_STORYBOARD();
-                    UIViewController *targetVc;
-                    
+                NSString *alert = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+                __block UIViewController *weakTargetVc = targetVc;
+                [UIAlertView showChoiceMessage:alert okBlock:^{
                     MZLModelShortArticle *shortArticle = [[MZLModelShortArticle alloc] init];
                     shortArticle.identifier = [[[userInfo valueForKey:@"short_article"] valueForKey:@"id"] intValue];
                     MZLShortArticleDetailVC *vcShortArticle = [MZL_SHORT_ARTICLE_STORYBOARD() instantiateViewControllerWithIdentifier:NSStringFromClass([MZLShortArticleDetailVC class])];
                     vcShortArticle.shortArticle = shortArticle;
                     vcShortArticle.popupCommentOnViewAppear = NO;
                     vcShortArticle.hidesBottomBarWhenPushed = YES;
-                    targetVc = vcShortArticle;
+                    if ([[userInfo valueForKey:@"anchor"] valueForKey:@"short_articles_comment"]) {
+                        vcShortArticle.scrollToTheSpecificComment = YES;
+                        NSString *temp = [[userInfo valueForKey:@"anchor"] valueForKey:@"short_articles_comment"];
+                        vcShortArticle.commentIdentifier = [temp integerValue];
+                    }
+                    weakTargetVc = vcShortArticle;
                     
-                    if (targetVc) {
-                        [vc mzl_pushViewController:targetVc];
+                    if (weakTargetVc) {
+                        [vc mzl_pushViewController:weakTargetVc];
                     }
                 }];
-                
-                [alert addAction:cancel];
-                [alert addAction:other];
-                
-                [self.currentVisibleViewController presentViewController:alert animated:YES completion:nil];
-
             }
         }
     }

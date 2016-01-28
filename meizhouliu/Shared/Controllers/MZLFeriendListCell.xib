@@ -28,15 +28,16 @@
                             <constraint firstAttribute="width" constant="160" id="Jad-oL-red"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7g-ji-dAS">
-                        <rect key="frame" x="265" y="16" width="80" height="32"/>
+                        <rect key="frame" x="265" y="17" width="80" height="28"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="32" id="9Vi-0A-7AX"/>
+                            <constraint firstAttribute="height" constant="28" id="9Vi-0A-7AX"/>
                             <constraint firstAttribute="width" constant="80" id="hi3-LH-Wjw"/>
                         </constraints>
+                        <state key="normal" image="attention_shouye"/>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w82-qU-dAD">
                         <rect key="frame" x="70" y="64" width="292" height="1"/>
@@ -50,7 +51,7 @@
                     <constraint firstItem="4p4-ax-MbJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="7EE-Tf-uiD"/>
                     <constraint firstAttribute="trailing" secondItem="F7g-ji-dAS" secondAttribute="trailing" constant="17" id="7ow-9v-UZs"/>
                     <constraint firstAttribute="trailing" secondItem="w82-qU-dAD" secondAttribute="trailing" id="8II-Qo-bK8"/>
-                    <constraint firstItem="F7g-ji-dAS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="C13-Yc-Tzp"/>
+                    <constraint firstItem="F7g-ji-dAS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="C13-Yc-Tzp"/>
                     <constraint firstAttribute="bottom" secondItem="w82-qU-dAD" secondAttribute="bottom" id="HQx-vx-x9w"/>
                     <constraint firstItem="w82-qU-dAD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="70" id="QtS-Za-fFz"/>
                     <constraint firstItem="4p4-ax-MbJ" firstAttribute="leading" secondItem="I1p-OQ-INY" secondAttribute="trailing" constant="17" id="h8h-sc-MHt"/>
@@ -66,4 +67,7 @@
             <point key="canvasLocation" x="310" y="378.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="attention_shouye" width="160" height="56"/>
+    </resources>
 </document>

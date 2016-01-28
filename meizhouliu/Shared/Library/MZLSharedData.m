@@ -160,6 +160,14 @@ static MZLAppUser *_mzlAppUser;
     return [COPreferences getUserPreference:MZL_KEY_CACHED_DATETIME_REMIND_LOGIN];
 }
 
+#pragma mark - apservice registrationID
++ (void)setAPserviceRegistrationID:(NSString *)registrationID {
+    [COPreferences setUserPreference:registrationID forKey:@"APserviceRegistrationID"];
+}
++ (NSString *)apsericeregistrationID {
+   return [COPreferences getUserPreference:@"APserviceRegistrationID"];
+}
+
 #pragma mark -duzoumoToken
 + (void)setAppDuZhouMoUserToken:(NSString *)string {
     [COPreferences setUserPreference:string forKey:@"duzhoumousertoken"];
@@ -232,6 +240,47 @@ static NSDictionary *_cityPinyinDict;
     });
 }
 
+#pragma mark - attentionUserId
+static NSArray *_attentionUserIds;
++ (NSArray *)attentionIdsArr {
+    return _attentionUserIds;
+}
++ (void)setAttentionIdsArr:(NSArray *)attentionIdsArr {
+    _attentionUserIds = attentionIdsArr;
+}
++ (void)removeIdFromAttentionIds:(NSString *)Id {
+    NSMutableArray *tempArr = [NSMutableArray arrayWithArray:_attentionUserIds];
+    [tempArr removeObject:Id];
+    _attentionUserIds = tempArr;
+}
++ (void)addIdIntoAttentionIds:(NSString *)Id {
+    NSMutableArray *tempArr = [NSMutableArray arrayWithArray:_attentionUserIds];
+    [tempArr addObject:Id];
+    _attentionUserIds = tempArr;
+}
++ (void)addIdArrayIntoAttentionIds:(NSArray *)IdArr{
+    NSMutableArray *tempArr = [NSMutableArray arrayWithArray:_attentionUserIds];
+    
+    for (int i = 0 ; i<IdArr.count; i++) {
+        NSString *tempArrString = nil;
+        NSString *IdArrString = [IdArr objectAtIndex:i];
+        for (int j = 0 ; j<tempArr.count; j++) {
+            tempArrString = [tempArr objectAtIndex:j];
+            if ([IdArrString isEqualToString:tempArrString]) {
+                break;
+            }
+        }
+        if (tempArrString != nil) {
+            [tempArr removeObject:tempArrString];
+        }
+    }
+    
+    [tempArr addObjectsFromArray:IdArr];
+    _attentionUserIds = tempArr;
+}
++ (void)removeAllIdsFromAttentionIds {
+    _attentionUserIds = nil;
+}
 #pragma mark - location info related
 
 static MZLLocationInfo *_currentLocation;

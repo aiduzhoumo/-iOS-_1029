@@ -42,10 +42,6 @@
     _tv.contentInset = UIEdgeInsetsMake(MZL_TOP_BAR_HEIGHT, insets.left, MZL_TAB_BAR_HEIGHT, insets.right);
     _tv.scrollIndicatorInsets = _tv.contentInset;
     [self loadGoods];
-    // Do any additional setup after loading the view.
-    
-//    NSLog(@"%ld",_models.count);
-//    [self setUpRefresh:_tv];
     
 }
 
@@ -62,8 +58,12 @@
     }else {
     MZLPagingSvcParam *pageSvc = [[MZLPagingSvcParam alloc] init];
     pageSvc.pageIndex = _i;
-//    NSLog(@"%ld",pageSvc.pageIndex);
-   [MZLServices locationGoodsService:self.locationParam pagingParam:pageSvc succBlock:nil errorBlock:nil];
+
+    [MZLServices locationGoodsService:self.locationParam pagingParam:pageSvc succBlock:^(NSDictionary *models) {
+        [self getModels:models];
+    } errorBlock:^(NSError *error) {
+        [self onNetworkError];
+    }];
     //停止加载
     [_tv footerEndRefreshing];
     }
@@ -96,35 +96,36 @@
 
 #pragma mark - override
 
-- (BOOL)_canLoadMore {
-    return YES;
-}
-
-- (void)_loadMore {
-    [self invokeLoadMoreService:@selector(locationGoodsService:pagingParam:succBlock:errorBlock:) params:@[self.locationParam, [self pagingParamFromModels]]];
+//- (BOOL)_canLoadMore {
+//    return YES;
+//}
+//
+//- (void)_loadMore {
+//    [self invokeLoadMoreService:@selector(locationGoodsService:pagingParam:succBlock:errorBlock:) params:@[self.locationParam, [self pagingParamFromModels]]];
 //    MZLLog(@"加载更多");
-}
-
-- (UIView *)footerSpacingView {
-    UIView *view = [super footerSpacingView];
-    [view createTopSepView];
-    return view;
-}
+//}
+//
+//- (UIView *)footerSpacingView {
+//    UIView *view = [super footerSpacingView];
+//    [view createTopSepView];
+//    return view;
+//}
 
 #pragma mark - service
 
 - (void)loadGoods {
     [self showNetworkProgressIndicator];
-//    [self loadModels:@selector(locationGoodsService:pagingParam:succBlock:errorBlock:) params:@[self.locationParam, [self pagingParamFromModels]]];
+
     MZLPagingSvcParam *pageSvc = [[MZLPagingSvcParam alloc] init];
     pageSvc.pageIndex = 1;
-    [MZLServices locationGoodsService:self.locationParam pagingParam:pageSvc succBlock:nil errorBlock:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModels:) name:@"goodsModel" object:nil];
+    [MZLServices locationGoodsService:self.locationParam pagingParam:pageSvc succBlock:^(NSDictionary *models) {
+        [self getModels:models];
+    } errorBlock:^(NSError *error) {
+        [self onNetworkError];
+    }];
 }
 
-- (void)getModels:(NSNotification *)notif {
-    NSDictionary *responsDic = (NSDictionary *)notif.object;
-    
+- (void)getModels:(NSDictionary *)responsDic {
     if([[responsDic objectForKey:@"IsSuccess"] intValue] == 1){
         NSString *count = [[responsDic objectForKey:@"Res"] objectForKey:@"pageCount"];
         self.pageCount = [count intValue];
@@ -141,20 +142,19 @@
         [_models addObjectsFromArray:modelArr];
         [_tv reloadData];
         
-//        MZLLog(@"%ld",_models.count);
         if (_models.count > 0) {
-             [self setUpRefresh:_tv];
+            [self setUpRefresh:_tv];
         }
-       
+        
     }else if([[responsDic objectForKey:@"IsSuccess"] intValue] == 0){
         [_tv removeUnnecessarySeparators];
         [self noRecordView];
     }
-//    MZLLog(@"_model = %@",_models);
     
     [self hideProgressIndicator];
 }
 
+#pragma mark - tableview dataSource and delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -182,22 +182,6 @@
     [self.parentViewController performSegueWithIdentifier:MZL_SEGUE_TOGOODSDETAIL sender:newGoodsUrl];
 }
 
-#pragma mark - table view data source
-
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return _models.count;
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    MZLLocationDetailGoodsCell *cell = [tableView dequeueReusableTableViewCell:MZL_LD_GOODS_CELL_REUSE_ID];
-//    [cell updateWithModel:_models[indexPath.row]];
-//    return cell;
-//}
-//
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    MZLModelGoods *goods = (MZLModelGoods *)(_models[indexPath.row]);
-//    [self.parentViewController performSegueWithIdentifier:MZL_SEGUE_TOGOODSDETAIL sender:goods.goodsUrl];
-//}
 
 #pragma mark - table view delegate
 
@@ -206,8 +190,7 @@
 }
 
 - (void)dealloc {
-//    MZLLog(@"页面销毁，通知也要移除");
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    MZLLog(@"目的商品页面销毁，通知也要移除");
 }
 
 @end

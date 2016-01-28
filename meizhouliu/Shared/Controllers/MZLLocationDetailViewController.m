@@ -126,14 +126,14 @@
 #pragma mark - service related
 
 - (void)loadGoodsData {
-    MZLPagingSvcParam *param = [MZLPagingSvcParam pagingSvcParamWithPageIndex:1 fetchCount:5];
-    [MZLServices locationGoodsService:self.locationParam pagingParam:param succBlock:^(NSArray *models) {
-        if (models.count > 0) {
-            [self showGoodsTab];
-        }
-    } errorBlock:^(NSError *error) {
-        // ignore
-    }];
+//    MZLPagingSvcParam *param = [MZLPagingSvcParam pagingSvcParamWithPageIndex:1 fetchCount:5];
+//    [MZLServices locationGoodsService:self.locationParam pagingParam:param succBlock:^(NSArray *models) {
+//        if (models.count > 0) {
+//            [self showGoodsTab];
+//        }
+//    } errorBlock:^(NSError *error) {
+//        // ignore
+//    }];
 }
 
 - (void)refreshData {

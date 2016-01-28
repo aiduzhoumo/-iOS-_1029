@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MZLTuiJianDarenCellShowOrHideNetworkProgressIndicatorDelegate <NSObject>
+- (void)showNetworkProgressIndicatorOnTuijianVc;
+- (void)hideNetworkProgressIndicatorOnTuijianVc:(BOOL)isSuccess;
+@end
+
 @class MZLModelUser;
 @interface MZLTuiJianDarenCell : UITableViewCell
 
@@ -19,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageTwo;
 @property (weak, nonatomic) IBOutlet UIImageView *imageThree;
 
+@property (nonatomic, weak) id<MZLTuiJianDarenCellShowOrHideNetworkProgressIndicatorDelegate> delegate;
 @property (nonatomic, strong) MZLModelUser *user;
 
 - (void)initWithInfo:(MZLModelUser *)user;

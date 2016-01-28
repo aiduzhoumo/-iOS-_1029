@@ -51,7 +51,6 @@
         [self hideProgressIndicator:NO];
         if (result.error == MZL_SVC_RESPONSE_CODE_SUCCESS) {
             //获取成功
-            NSLog(@"获取短信验证码成功。。。绑定手机号使用的");
             [CountdownButtonByTime countdownButton:_getSecCodeBtn time:59];
             
             

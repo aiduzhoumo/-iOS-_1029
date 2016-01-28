@@ -57,9 +57,9 @@
 //        NSLog(@"%@", error);
 //    }];
     [MZLServices locationPersonalizeServiceWithLocation:location filter:nil succBlock:^(NSArray *models) {
-        NSLog(@"%@", @(models.count));
+//        NSLog(@"%@", @(models.count));
     } errorBlock:^(NSError *error) {
-        NSLog(@"%@", error);
+//        NSLog(@"%@", error);
     }];
     
 }

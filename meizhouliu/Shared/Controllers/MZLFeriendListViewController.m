@@ -105,6 +105,8 @@ typedef void(^ MZL_SVC_TEXT_BLOCK)(MZLModelUser *user);
         make.centerX.mas_equalTo(leftLbl.mas_centerX);
     }];
     _indicatorCentenXCons = constraints[0];
+    UIView *bottomView = [[[headerTabCenter createSubView] co_bottomParent] co_width:CO_SCREEN_WIDTH height:1.0];
+    bottomView.backgroundColor = @"D8D8D8".co_toHexColor;
     leftLbl.tag = TAG_ATTENTION_LIST;
     rightLbl.tag = TAG_FENSI_LIST;
     [leftLbl addTapGestureRecognizer:self action:@selector(onTitleLableClick:)];

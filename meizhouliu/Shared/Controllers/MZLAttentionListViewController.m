@@ -13,7 +13,7 @@
 #import "MZLModelUser.h"
 #import "MZLModelAuthor.h"
 
-@interface MZLAttentionListViewController ()
+@interface MZLAttentionListViewController ()<MZLFeriendListCellShowOrHideNetworkProgressIndicatorDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *attentionListTableView;
 @end
@@ -26,7 +26,7 @@
     self.attentionListTableView.separatorStyle = UITableViewCellSelectionStyleNone;
 
     _tv = self.attentionListTableView;
-    _tv.backgroundColor = MZL_BG_COLOR();
+    _tv.backgroundColor = MZL_COLOR_WHITE_FFFFFF();
     
     _tv.dataSource = self;
     _tv.delegate = self;
@@ -67,13 +67,43 @@
     [self loadModels];
 }
 
+#pragma mark - 重写取得数据后的方法
+- (void)handModelsToOtherService:(NSArray *)modelsFromSvc {
+    
+    if (![MZLSharedData isAppUserLogined]) {
+        [self hideProgressIndicator];
+        [_tv reloadData];
+        return;
+    }
+    
+    NSMutableString *mutStr = [[NSMutableString alloc] init];
+    for (MZLModelUser *user in modelsFromSvc) {
+        NSString *s = [NSString stringWithFormat:@"%ld",user.identifier];
+        [mutStr appendFormat:@"%@,",s];
+    }
+    
+    [MZLServices fitterOfAttentionForUser:mutStr SuccBlock:^(NSArray *models) {
+        
+        NSMutableArray *mutArr = [NSMutableArray array];
+        for (NSNumber *n in models) {
+            [mutArr addObject:[NSString stringWithFormat:@"%@",n]];
+        }
+        
+        [MZLSharedData addIdArrayIntoAttentionIds:mutArr];
+        
+        [self hideProgressIndicator];
+        [_tv reloadData];
+    } errorBlobk:^(NSError *error) {
+        [self onNetworkError];
+    }];
+}
+
 #pragma mark - table data source and delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"%@",_models);
     return _models.count;
 }
 
@@ -83,6 +113,9 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"MZLFeriendListCell" owner:nil options:nil] lastObject];
     }
+    
+    cell.delegate = self;
+    
     [cell initWithFeriendListInfo:_models[indexPath.row]];
 
     return cell;
@@ -100,6 +133,19 @@
     [self.navigationController pushViewController:vcAuthor animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+}
+
+#pragma mark - MZLFeriendListCellShowOrHideNetworkProgressIndicatorDelegate
+- (void)showNetworkProgressIndicatorOnFeriendVC {
+    [self showNetworkProgressIndicator];
+}
+- (void)hideNetworkProgressIndicatorOnFeriendVC:(BOOL)isSuccess {
+    if (isSuccess == 1) {
+        [self hideProgressIndicator];
+    }else {
+        [self hideProgressIndicator];
+        [self onNetworkError];
+    }
 }
 
 /*

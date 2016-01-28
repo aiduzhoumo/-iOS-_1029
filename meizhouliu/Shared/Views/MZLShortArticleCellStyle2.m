@@ -507,16 +507,6 @@ typedef enum : NSInteger {
         [self toggleUp:self.shortArticle.isUpForCurrentUser];
         [self updateBtn:self.upsBtn withCount:self.shortArticle.upsCount];
         
-//        [self getAttentionStatus];
-//        [self updateBtn:self.gouwuBtn withCount:self.shortArticle.goodsCount];
-        
-        //        if (self.shortArticle.goodsCount > 0) {
-        //            self.goodsView.hidden = NO;
-        //            self.goodsLbl.text = INT_TO_STR(self.shortArticle.goodsCount);
-        //        } else {
-        //            self.goodsView.hidden = YES;
-        //        }
-        
         if ([self needsGetUpStatusForCurrentUser]) {
             [self getUpStatus];
         }
@@ -625,18 +615,14 @@ typedef enum : NSInteger {
 
 #pragma mark - attention
 - (void)toAttention {
-    
     if (![MZLSharedData isAppUserLogined]) {
         [UIAlertView showAlertMessage:@"请先登入"];
     }else{
         if (self.shortArticle.author.isAttentionForCurrentUser) {
-            self.shortArticle.author.isAttentionForCurrentUser = NO;
             [self removeAttention];
         }else {
-            self.shortArticle.author.isAttentionForCurrentUser = YES;
             [self addAttention];
         }
-        [self toggleAttentionStatus];
     }
 }
 
@@ -650,38 +636,57 @@ typedef enum : NSInteger {
 }
 
 - (void)addAttention {
+    [self.ownerController showNetworkProgressIndicator];
+    __weak MZLShortArticleCellStyle2 *weakSelf = self;
     [MZLServices addAttentionForShortArticleUser:self.shortArticle.author succBlock:^(NSArray *models) {
-        //
+        weakSelf.shortArticle.author.isAttentionForCurrentUser = YES;
+        [MZLSharedData addIdIntoAttentionIds:[NSString stringWithFormat:@"%ld",weakSelf.shortArticle.author.identifier]];
+        [weakSelf toggleAttentionStatus];
+        [weakSelf.ownerController hideProgressIndicator];
     } errorBlock:^(NSError *error) {
-        //
+        [weakSelf.ownerController onNetworkError];
     }];
 }
 
 - (void)removeAttention {
+    [self.ownerController showNetworkProgressIndicator];
+    __weak MZLShortArticleCellStyle2 *weakSelf = self;
     [MZLServices removeAttentionForShortArticleUser:self.shortArticle.author succBlock:^(NSArray *models) {
+        weakSelf.shortArticle.author.isAttentionForCurrentUser = NO;
+        [MZLSharedData removeIdFromAttentionIds:[NSString stringWithFormat:@"%ld",weakSelf.shortArticle.author.identifier]];
+        [weakSelf toggleAttentionStatus];
+        [weakSelf.ownerController hideProgressIndicator];
     } errorBlock:^(NSError *error) {
+        [weakSelf.ownerController onNetworkError];
     }];
 }
 
 - (void)getAttentionStatus {
-    MZLModelShortArticle *shortArticle = self.shortArticle;
-    __weak MZLShortArticleCellStyle2 *weaSelf = self;
-    [MZLServices attentionStatesForCurrentUser:shortArticle.author succBlock:^(NSArray *models) {
-        if (models && models.count > 0) {
-            shortArticle.author.isAttentionForCurrentUser = 1;
-            if (shortArticle.author.identifier == weaSelf.shortArticle.author.identifier) {
-                [weaSelf toggleAttention:shortArticle.author.isAttentionForCurrentUser];
-            }
+    
+    //不应该是每个cell取一次数据，而是从已关注的人Id中进行比对
+    NSArray *idsArr = [MZLSharedData attentionIdsArr];
+    
+    //如果数组长度为0,说明没有关注任何人
+    if (idsArr.count == 0) {
+        self.shortArticle.author.isAttentionForCurrentUser = 0;
+        [self toggleAttention:0];
+        return;
+    }
+    
+    for (NSString *str in idsArr) {
+        NSInteger i = self.shortArticle.author.identifier;
+        NSString *s = [NSString stringWithFormat:@"%ld",i];
+        NSString *st = [NSString stringWithFormat:@"%@",str];
+                
+        if ([s isEqualToString:st]) {
+            self.shortArticle.author.isAttentionForCurrentUser = 1;
+            [self toggleAttention:1];
+            return;
         }else {
-            shortArticle.author.isAttentionForCurrentUser = 0;
-            if (shortArticle.author.identifier == weaSelf.shortArticle.author.identifier) {
-                [weaSelf toggleAttention:shortArticle.author.isAttentionForCurrentUser];
-            }
+            self.shortArticle.author.isAttentionForCurrentUser = 0;
+            [self toggleAttention:0];
         }
-        
-    } errorBlock:^(NSError *error) {
-        MZLLog(@"erroe = %@",error);
-    }];
+    }
 }
 
 

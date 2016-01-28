@@ -27,12 +27,14 @@
 #import "MZLAppNotices.h"
 #import <IBMessageCenter.h>
 #import "MZLShortArticleCell.h"
-#import "MZLMyFavoriteHeaderView.h"
 #import "MZLFeriendListViewController.h"
 #import "MZLUserDetailResponse.h"
+#import "MZLAuthorDetailViewController.h"
 
 #import "MZLLoginViewController.h"
 #import "MZLTabBarViewController.h"
+#import "MZLMyNormalFavoriteHeaderView.h"
+#import "MZLMyAuthorFavoriteHeaderView.h"
 
 #import "UIViewController+MZLShortArticle.h"
 #import "UIView+MZLAdditions.h"
@@ -41,18 +43,17 @@
 #define STATUS_NOT_LOGINED 0
 #define STATUS_LOGINED 1
 
-
-//#define SEGUE_TOLOGIN @"toLogin"
-
-#define SEGUE_TOLOGIN @"toLog"
+#define SEGUE_TOLOGIN @"toLogin"
 #define SEGUE_TOSETTING @"toSetting"
 
-@interface MZLMyFavoriteViewController () <MZLMyTopBarDelegate> {
-    MZLMyNormalTopBar *_headView;
+@interface MZLMyFavoriteViewController () <MZLMyFavoriteHeaderViewDelegate> {
     NSInteger segmentedAtindex;
     NSInteger _loginStatus;
     BOOL _refreshFlag;
+    MZLMyNormalFavoriteHeaderView *_headV;
 }
+
+@property (nonatomic, weak) UIView *tempView;
 
 @property (nonatomic, weak) UIView *headerView;
 
@@ -77,6 +78,7 @@
     // Do any additional setup after loading the view.
     _loginStatus = STATUS_UNKNOWN;
     [self initUI];
+//    [self getUserInfo];
     // 需要根据login status生成header bar，否则有通知消息时无法跳转通知tab
     [self checkLoginStatus];
     [self registerNotifications];
@@ -95,43 +97,8 @@
         }
     }
     
-    //取得用户信息，进行设置
-   
-    if ([MZLSharedData isAppUserLogined]) {
-//        MZLModelUser *user = [MZLSharedData appUser].user;
-        
-        __weak MZLModelUser *user = self.user;
-        [MZLServices userInfoServiceWithSuccBlock:^(NSArray *models) {
-            NSLog(@"%@",models[0]);
-            MZLUserDetailResponse *user = (MZLUserDetailResponse *)models[0];
-            self.user = user.user;
-            [self refreshMyHeaderView];
-        } errorBlock:^(NSError *error) {
-            NSLog(@"%@",error);
-        }];
-        
-        
-    }else{
-        self.headIcon.image = [UIImage imageNamed:@"DefaultUserHeader"];
-        self.nameLbl.text = @"您还没登入";
-        self.attentionCountLbl.text = @"0";
-        self.fensiCountLbl.text = @"0";
-        self.introdutionLbl.text = @"个人简介:您还未登入,请登入后查看";
-    }
-    
-}
-
-- (void)refreshMyHeaderView {
-    [self.headIcon toRoundShape];
-    [self.headIcon loadAuthorImageFromURL:_user.photoUrl];
-    self.nameLbl.text = _user.nickName;
-    self.attentionCountLbl.text = _user.followees_count;
-    [self.attentionCountLbl addTapGestureRecognizer:self action:@selector(toAttentionView:)];
-    [self.attentionLbl addTapGestureRecognizer:self action:@selector(toAttentionView:)];
-    self.fensiCountLbl.text = _user.followers_count;
-    [self.fensiCountLbl addTapGestureRecognizer:self action:@selector(toAttentionView:)];
-    [self.fensiLbl addTapGestureRecognizer:self action:@selector(toAttentionView:)];
-    self.introdutionLbl.text = [NSString stringWithFormat:@"个人简介:%@",_user.introduction];
+    //得到用户信息
+    [self getUserInfo];
 }
 
 - (void)didReceiveMemoryWarning
@@ -140,8 +107,30 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    //移除tempview，以免从别的页面进来，页面会乱
+    if (self.tempView) {
+        [self.tempView removeFromSuperview];
+    }
+}
+
 - (void)dealloc {
     [IBMessageCenter removeMessageListenersForTarget:self];
+}
+
+- (void)getUserInfo {
+    if ([MZLSharedData isAppUserLogined]) {
+        __weak MZLMyFavoriteViewController *weakSelf = self;
+        [MZLServices userInfoServiceWithSuccBlock:^(NSArray *models) {
+            MZLUserDetailResponse *user = (MZLUserDetailResponse *)models[0];
+            weakSelf.user = user.user;
+            [_headV updateUserInfo:weakSelf.user];
+        } errorBlock:^(NSError *error) {
+            [UIAlertView showAlertMessage:@"获取用户资料失败！"];
+        }];
+    }
 }
 
 - (void)initUI {
@@ -149,31 +138,25 @@
     
     _tv = self.tvMy;
     _tv.backgroundColor = [UIColor clearColor];
-//    [self adjustTableViewBottomInset:self.tabBarController.tabBar.height scrollIndicatorBottomInset:self.tabBarController.tabBar.height];
-    [self adjustTableViewBottomInset:0.0 scrollIndicatorBottomInset:0.0];
+
     [_tv removeUnnecessarySeparators];
+    _tv.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     [_tv setSeparatorColor:MZL_SEPARATORS_BG_COLOR()];
     
-//    self.headerView = [MZLMyFavoriteHeaderView myFavoriteHeaderViewInstance];
-//    _tv.tableHeaderView = self.headerView;
-    
-    _tv.tableHeaderView = self.textVIew;
-    
-//    [self onLoginStatusChanged];
 }
 
 - (void)updateHeadBarUI {
-    [_headView removeFromSuperview];
+    
     UIWindow *window = globalWindow();
     //初始化顶部TAB BAR
     if (_loginStatus == STATUS_LOGINED) {
-        _headView = [MZLMyAuthorTopBar tabBarInstance:window.bounds.size];
+        _headV = [MZLMyAuthorFavoriteHeaderView authorFavoriteHeaderViewWithSize:window.bounds.size];
+        _tv.tableHeaderView = _headV;
     } else {
-        _headView = [MZLMyNormalTopBar tabBarInstance:window.bounds.size];
+        _headV = [MZLMyNormalFavoriteHeaderView normalFavoriteHeaderViewWithSize:window.bounds.size];
+        _tv.tableHeaderView = _headV;
     }
-    _headView.delegate = self;
-    
-    [self.vwTopBar addSubview:_headView];
+    _headV.delegate = self;
 }
 
 #pragma mark - to AttentionFensi View
@@ -212,8 +195,8 @@
     }
 }
 
--  (void)refreshAppMessageCount {
-    [((MZLMyNormalTopBar *)_headView) updateUnreadCount];
+- (void)refreshAppMessageCount {
+    [(MZLMyFavoriteHeaderView *)_headV updateUnreadCount];
 }
 
 #pragma mark - notifications and listeners
@@ -370,6 +353,40 @@
     }
 }
 
+- (void)createNoRecordView {
+    
+    UIView *tempView = [[UIView alloc] initWithFrame:CGRectMake(0, 200, [UIScreen mainScreen].bounds.size.width,  200)];
+    self.tempView = tempView;
+    [_tv addSubview:tempView];
+//    tempView.backgroundColor = [UIColor greenColor];
+    
+    UIView *noRecordView = [[UIView alloc] init];
+//    noRecordView.backgroundColor = [UIColor redColor];
+    [tempView addSubview:noRecordView];
+    
+    UIView *imageView = [self noRecordImageView:noRecordView];
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(noRecordView);
+        make.centerX.mas_equalTo(noRecordView);
+    }];
+    UIView *labelView = [self noRecordLabelView:noRecordView];
+    [labelView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(imageView.mas_bottom).offset(3);
+        make.left.right.mas_equalTo(noRecordView);
+    }];
+    [noRecordView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(tempView);
+        // UIScrollView的right无法attach? 用width代替
+        make.width.mas_equalTo(tempView.bounds.size.width);
+        make.centerY.mas_equalTo(noRecordView.superview);
+        // 自动计算高度
+        make.bottom.mas_equalTo(labelView);
+    }];
+
+    
+    _tv.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+}
+
 - (void)refreshWhenViewIsVisible {
     if ([self isVisible]) {
         [self refreshViewData];
@@ -439,6 +456,14 @@
     return nil;
 }
 
+#pragma mark - toAuthorDetail
+- (void)onHeaderClick:(UITapGestureRecognizer *)tap {
+        MZLAuthorDetailViewController *vcAuthor = [MZL_MAIN_STORYBOARD() instantiateViewControllerWithIdentifier:NSStringFromClass([MZLAuthorDetailViewController class])];
+        MZLModelUser *user = _user;
+        MZLModelAuthor *author = [user toAuthor];
+        vcAuthor.authorParam = author;
+        [self.navigationController pushViewController:vcAuthor animated:YES];
+}
 
 #pragma mark - table view delegate
 
@@ -519,11 +544,37 @@
     [self toTabWithIndex:tabIndex];
 }
 
+#pragma mark - MZLMyFavoriteViewDelegate
+- (void)onMyFavoriteHeaderViewTopBarSelected:(NSInteger)tabIndex {
+    [self toTabWithIndex:tabIndex];
+}
+
+- (void)toFeriendListVc {
+    MZLFeriendListViewController *feriendList = [MZL_MAIN_STORYBOARD() instantiateViewControllerWithIdentifier:@"MZLFeriendListViewController"];
+    feriendList.user = self.user;
+    feriendList.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:feriendList animated:YES];
+}
+
+- (void)toAuthorDetailVc {
+    MZLAuthorDetailViewController *vcAuthor = [MZL_MAIN_STORYBOARD() instantiateViewControllerWithIdentifier:NSStringFromClass([MZLAuthorDetailViewController class])];
+    MZLModelUser *user = _user;
+    MZLModelAuthor *author = [user toAuthor];
+    vcAuthor.authorParam = author;
+    [self.navigationController pushViewController:vcAuthor animated:YES];
+}
+
 #pragma mark - misc
 
 - (void)toTabWithIndex:(NSInteger)tabIndex {
+    
+    //移除tempView
+    if (self.tempView) {
+        [self.tempView removeFromSuperview];
+    }
+    
     segmentedAtindex = tabIndex;
-    [_headView onTabSelected:tabIndex];
+    [_headV onTabSelected:tabIndex];
     UIEdgeInsets insets = _tv.contentInset;
     if (tabIndex == MZL_MY_FAVOR_INDEX) {
         insets.top = 5;

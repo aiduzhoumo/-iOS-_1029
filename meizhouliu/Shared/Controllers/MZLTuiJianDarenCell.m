@@ -30,7 +30,7 @@
     
     [self.headerIcon toRoundShape];
     [self.headerIcon loadAuthorImageFromURL:user.photoUrl];
-    [self.headerIcon addTapGestureRecognizer:self action:@selector(toAuthorDetail)];
+//    [self.headerIcon addTapGestureRecognizer:self action:@selector(toAuthorDetail)];
     
     self.nameLbl.text = user.nickName;
     
@@ -41,40 +41,31 @@
         self.attentionBtn.hidden = YES;
     }
     
-    //发请求判断关注状态
-    __weak MZLTuiJianDarenCell *weakSelf = self;
-    [MZLServices attentionStatesForCurrentUser:user succBlock:^(NSArray *models) {
-        if (models && models.count > 0) {
-            user.isAttentionForCurrentUser = 1;
-            [weakSelf toggleAttentionImage:user.isAttentionForCurrentUser];
-        }else {
-            user.isAttentionForCurrentUser = 0;
-            [weakSelf toggleAttentionImage:user.isAttentionForCurrentUser];
-        }
-    } errorBlock:^(NSError *error) {
-        //
-    }];
-    
-    //需要判断有没有被关注过
-    [self toggleAttentionStatus];
     
     NSArray *short_articles = user.short_articles;
     
     MZLShortArticlesModel *model1 = short_articles[0];
-    MZLLog(@"%@",model1.cover.fileUrl);
     [self.imageOne loadSmallLocationImageFromURL:model1.cover.fileUrl];
     MZLShortArticlesModel *model2 = short_articles[1];
-    MZLLog(@"%@",model2.cover.fileUrl);
     [self.imageTwo loadSmallLocationImageFromURL:model2.cover.fileUrl];
     MZLShortArticlesModel *model3 = short_articles[2];
-    MZLLog(@"%@",model3.cover.fileUrl);
     [self.imageThree loadSmallLocationImageFromURL:model3.cover.fileUrl];
     
+    //判断有没有被关注过
+    NSArray *arr = [MZLSharedData attentionIdsArr];
+    NSString *s = [NSString stringWithFormat:@"%ld",user.identifier];
+    for (NSString *str in arr) {
+        if ([s isEqualToString:str]) {
+            user.isAttentionForCurrentUser = YES;
+            [self toggleAttentionImage:1];
+            return;
+        }else {
+            user.isAttentionForCurrentUser = NO;
+            [self toggleAttentionImage:0];
+        }
+    }
 }
 
-- (void)toggleAttentionStatus {
-    [self toggleAttentionImage:self.user.isAttentionForCurrentUser];
-}
 
 - (void)toggleAttentionImage:(BOOL)flag {
     if (flag) {
@@ -96,36 +87,54 @@
         return;
     }
     
+    if ([self.delegate respondsToSelector:@selector(showNetworkProgressIndicatorOnTuijianVc)]) {
+        [self.delegate showNetworkProgressIndicatorOnTuijianVc];
+    }
+    
     if (self.user.isAttentionForCurrentUser) {
         self.user.isAttentionForCurrentUser = NO;
-        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_darenye"] forState:UIControlStateNormal];
+        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_shouye"] forState:UIControlStateNormal];
         [self removeAttention];
         
     }else{
         self.user.isAttentionForCurrentUser = YES;
-        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_cancel_darenye"] forState:UIControlStateNormal];
+        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_shouye_cancel"] forState:UIControlStateNormal];
         [self addAttention];
     }
     
 }
 
 - (void)addAttention {
+    __weak MZLTuiJianDarenCell *weakSelf = self;
     [MZLServices addAttentionForShortArticleUser:self.user succBlock:^(NSArray *models) {
-        //
+        if ([weakSelf.delegate respondsToSelector:@selector(hideNetworkProgressIndicatorOnTuijianVc:)]) {
+            [weakSelf.delegate hideNetworkProgressIndicatorOnTuijianVc:YES];
+        }
+        [MZLSharedData addIdIntoAttentionIds:[NSString stringWithFormat:@"%ld",weakSelf.user.identifier]];
+        weakSelf.user.isAttentionForCurrentUser = 1;
+        [weakSelf toggleAttentionImage:1];
     } errorBlock:^(NSError *error) {
-        //
+        if ([weakSelf.delegate respondsToSelector:@selector(hideNetworkProgressIndicatorOnTuijianVc:)]) {
+            [weakSelf.delegate hideNetworkProgressIndicatorOnTuijianVc:NO];
+        }
     }];
 }
 
 - (void)removeAttention {
-    MZLModelUser *user = self.user;
-    [MZLServices removeAttentionForShortArticleUser:user succBlock:^(NSArray *models) {
-        //
+    __weak MZLTuiJianDarenCell *weakSelf = self;
+    [MZLServices removeAttentionForShortArticleUser:self.user succBlock:^(NSArray *models) {
+        if ([weakSelf.delegate respondsToSelector:@selector(hideNetworkProgressIndicatorOnTuijianVc:)]) {
+            [weakSelf.delegate hideNetworkProgressIndicatorOnTuijianVc:YES];
+        }
+        [MZLSharedData removeIdFromAttentionIds:[NSString stringWithFormat:@"%ld",weakSelf.user.identifier]];
+        weakSelf.user.isAttentionForCurrentUser = NO;
+        [weakSelf toggleAttentionImage:0];
+        
     } errorBlock:^(NSError *error) {
-        //
+        if ([weakSelf.delegate respondsToSelector:@selector(hideNetworkProgressIndicatorOnTuijianVc:)]) {
+            [weakSelf.delegate hideNetworkProgressIndicatorOnTuijianVc:NO];
+        }
     }];
 }
-
-
 
 @end

@@ -13,7 +13,7 @@
 #import "MZLModelUser.h"
 #import "MZLAuthorDetailViewController.h"
 
-@interface MZLFensiListViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface MZLFensiListViewController ()<UITableViewDataSource,UITableViewDelegate,MZLFeriendListCellShowOrHideNetworkProgressIndicatorDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *fensiListTableView;
 
@@ -28,7 +28,7 @@
     _tv = self.fensiListTableView;
     _tv.dataSource = self;
     _tv.delegate = self;
-    _tv.backgroundColor = MZL_BG_COLOR();
+    _tv.backgroundColor = MZL_COLOR_WHITE_FFFFFF();
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -52,7 +52,6 @@
 }
 
 - (void)_loadModels {
-    //    MZLPagingSvcParam *param = [self pagingParamFromModels];
     [self loadModels:@selector(fensiListForUser:WithPagingParam:succBlock:errorBlock:) params:@[self.user,[self pagingParamFromModels]]];
 }
 
@@ -65,6 +64,37 @@
     [self loadModels];
 }
 
+#pragma mark - 重写取得数据后的方法
+- (void)handModelsToOtherService:(NSArray *)modelsFromSvc {
+    
+    if (![MZLSharedData isAppUserLogined]) {
+        [self hideProgressIndicator];
+        [_tv reloadData];
+        return;
+    }
+    
+    NSMutableString *mutStr = [[NSMutableString alloc] init];
+    for (MZLModelUser *user in modelsFromSvc) {
+        NSString *s = [NSString stringWithFormat:@"%ld",user.identifier];
+        [mutStr appendFormat:@"%@,",s];
+    }
+    
+    [MZLServices fitterOfAttentionForUser:mutStr SuccBlock:^(NSArray *models) {
+        
+        NSMutableArray *mutArr = [NSMutableArray array];
+        for (NSNumber *n in models) {
+            [mutArr addObject:[NSString stringWithFormat:@"%@",n]];
+        }
+        
+        [MZLSharedData addIdArrayIntoAttentionIds:mutArr];
+        
+        [self hideProgressIndicator];
+        [_tv reloadData];
+    } errorBlobk:^(NSError *error) {
+        [self onNetworkError];
+    }];
+}
+ 
 #pragma mark - table data source and delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -81,6 +111,8 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"MZLFeriendListCell" owner:nil options:nil] lastObject];
     }
+    
+    cell.delegate = self;
     [cell initWithFeriendListInfo:_models[indexPath.row]];
     return cell;
 }
@@ -99,6 +131,19 @@
 
 }
 
+#pragma mark - MZLFeriendListCellShowOrHideNetworkProgressIndicatorDelegate 
+- (void)showNetworkProgressIndicatorOnFeriendVC {
+    [self showNetworkProgressIndicator];
+}
+
+- (void)hideNetworkProgressIndicatorOnFeriendVC:(BOOL)isSuccess {
+    if (isSuccess == 1) {
+        [self hideProgressIndicator];
+    }else {
+        [self hideProgressIndicator];
+        [self onNetworkError];
+    }
+}
 /*
 #pragma mark - Navigation
 

@@ -14,7 +14,7 @@
 #import "MZLModelAuthor.h"
 #import "MZLModelUser.h"
 
-@interface MZLTuiJianDarenViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface MZLTuiJianDarenViewController ()<UITableViewDataSource,UITableViewDelegate,MZLTuiJianDarenCellShowOrHideNetworkProgressIndicatorDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tuijianTab;
 
@@ -27,8 +27,7 @@
     
     self.title = @"推荐达人";
 
-    
-    [self adjustTableViewInsets];
+//    [self adjustTableViewInsets];
     
     self.tuijianTab.tableHeaderView = nil;
     self.tuijianTab.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -38,8 +37,7 @@
     _tv.dataSource = self;
     _tv.delegate = self;
     
-    
-    [self loadModels];
+//    [self loadModels];
 }
 
 - (NSString *)statsID {
@@ -48,8 +46,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    [self adjustTableViewInsets];
-//    [self loadModels];
+    [self loadModels];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,7 +71,7 @@
 }
 
 - (NSInteger)pageFetchCount {
-    return 3;
+    return 10;
 }
 
 #pragma mark - Table view data source
@@ -84,7 +81,6 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"%ld",_models.count);
     return _models.count;
 }
 
@@ -93,6 +89,8 @@
     if(cell == nil){
         cell = [[[NSBundle mainBundle] loadNibNamed:@"MZLTuiJianDarenCell" owner:nil options:nil] lastObject];
     }
+    
+    cell.delegate = self;
     [cell initWithInfo:_models[indexPath.row]];
     return cell;
 }
@@ -110,6 +108,16 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
-
-
+#pragma mark - MZLTuiJianDarenCellShowOrHideNetworkProgressIndicatorDelegate 
+- (void)showNetworkProgressIndicatorOnTuijianVc {
+    [self showNetworkProgressIndicator];
+}
+- (void)hideNetworkProgressIndicatorOnTuijianVc:(BOOL)isSuccess {
+    if (isSuccess == 1) {
+        [self hideProgressIndicator];
+    }else {
+        [self hideProgressIndicator];
+        [self onNetworkError];
+    }
+}
 @end

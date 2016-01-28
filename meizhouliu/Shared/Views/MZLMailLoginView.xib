@@ -175,6 +175,6 @@
         </view>
     </objects>
     <resources>
-        <image name="nextStepBtn" width="580" height="86"/>
+        <image name="nextStepBtn" width="24" height="24"/>
     </resources>
 </document>

@@ -10,6 +10,11 @@
 
 @class MZLModelUser;
 
+@protocol MZLAuthorHeaderShowProgressIndicatorDelegate <NSObject>
+- (void)showProgressIndicatorAlertViewOnAuthorDetailVC;
+- (void)hideProgressIndicatorAlertViewOnAuthorDetailVC:(BOOL)isSuccess;
+@end
+
 typedef void (^feriendListClick)(MZLModelUser *user);
 
 @interface MZLAuthorHeader : UIView
@@ -28,6 +33,7 @@ typedef void (^feriendListClick)(MZLModelUser *user);
 @property (weak, nonatomic) IBOutlet UILabel *fensiLable;
 @property (weak, nonatomic) IBOutlet UIButton *attentionBtn;
 
+@property (nonatomic, weak) id<MZLAuthorHeaderShowProgressIndicatorDelegate> delegate;
 @property (nonatomic, copy) feriendListClick clickBlcok;
 
 @property (nonatomic, strong) MZLModelUser *user;

@@ -91,13 +91,6 @@
         
         [self dismissMailCurrentViewController:self.executionBlockWhenDismissed animatedFlag:YES];
         
-//        NSArray *controllers = self.navigationController.viewControllers;
-//        for (int i = 0; i< controllers.count ; i++) {
-//            NSLog(@"controllers[%d] == %@",i,controllers[i]);
-//        }
-//        
-//        [self.navigationController popToViewController:self.navigationController.viewControllers[0] animated:YES];
-        
         [TalkingDataAppCpa onLogin:response.accessToken.token];
     } else if (response.error == MZL_RL_RCODE_GENERAL_ERROR) { // 错误码-1
         [UIAlertView showAlertMessage:response.errorMessage];

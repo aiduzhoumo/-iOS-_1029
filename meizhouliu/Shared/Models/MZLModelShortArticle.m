@@ -17,8 +17,6 @@
     /** 仅用来track状态 */
     MZLModelShortArticleUp *_fakeUp;
     BOOL _isUp;
-    
-    
     BOOL _isAttention;
 }
 

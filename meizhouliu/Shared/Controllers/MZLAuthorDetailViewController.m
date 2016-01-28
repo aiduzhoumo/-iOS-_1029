@@ -23,11 +23,14 @@
 #import "UIViewController+MZLShortArticle.h"
 #import "MZLModelUser.h"
 #import "MZLFeriendListViewController.h"
+#import "View+MASAdditions.h"
 
-@interface MZLAuthorDetailViewController () {
+
+@interface MZLAuthorDetailViewController ()<MZLAuthorHeaderShowProgressIndicatorDelegate> {
     MZLModelUser *_authorDetail;
 }
 
+@property (nonatomic, assign) int m;
 @end
 
 @implementation MZLAuthorDetailViewController
@@ -44,6 +47,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.m = 0;
     // Do any additional setup after loading the view.
     _tv = self.tvAuthor;
     self.navigationItem.title = @"";
@@ -52,7 +57,18 @@
     self.tvAuthor.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     [self loadAuthorDetail];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toFeriendList:) name:@"toFeriendList" object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    //应该是要刷新关注按钮的状态的
+    if (self.m != 0) {
+        [self initUI];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    self.m = 1;
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,6 +104,34 @@
     return MZL_SHORT_ARTICLE_PAGE_FETCH_COUNT;
 }
 
+- (void)createNoRecordView {
+    
+    UIView *tempView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,  200)];
+    [_tv.tableFooterView addSubview:tempView];
+    
+    UIView *noRecordView = [[UIView alloc] init];
+    [tempView addSubview:noRecordView];
+    
+    UIView *imageView = [self noRecordImageView:noRecordView];
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(noRecordView);
+        make.centerX.mas_equalTo(noRecordView);
+    }];
+    UIView *labelView = [self noRecordLabelView:noRecordView];
+    [labelView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(imageView.mas_bottom).offset(3);
+        make.left.right.mas_equalTo(noRecordView);
+    }];
+    [noRecordView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(tempView);
+        // UIScrollView的right无法attach? 用width代替
+        make.width.mas_equalTo(tempView.bounds.size.width);
+        make.centerY.mas_equalTo(noRecordView.superview);
+        // 自动计算高度
+        make.bottom.mas_equalTo(labelView);
+    }];
+}
+
 #pragma mark - protected for load
 
 - (void)_loadModels {
@@ -104,16 +148,19 @@
     if ([_authorDetail isSignedAuthor]) { // 签约作者
         self.navigationItem.title = MZL_AUTHOR_IS_SIGNED_WRITER;
         MZLAuthorHeader *headerView = (MZLAuthorHeader *)[MZLSignedAuthorHeader signedAuthorHeader:_authorDetail];
+        headerView.delegate = self;
         self.tvAuthor.tableHeaderView = headerView;
         headerView.clickBlcok = ^(MZLModelUser *user) {
             MZLFeriendListViewController *feriendList = [MZL_MAIN_STORYBOARD() instantiateViewControllerWithIdentifier:@"MZLFeriendListViewController"];
             feriendList.user = user;
             feriendList.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:feriendList animated:YES];        };
+            [self.navigationController pushViewController:feriendList animated:YES];
+        };
     } else {
         self.navigationItem.title = MZL_AUTHOR_NOT_SIGNED_WRITER;
         MZLAuthorHeader *headerView = [MZLNormalAuthorHeader normalAuthorHeader:_authorDetail];
         self.tvAuthor.tableHeaderView = headerView;
+        headerView.delegate = self;
         headerView.clickBlcok = ^(MZLModelUser *user) {
             MZLFeriendListViewController *feriendList = [MZL_MAIN_STORYBOARD() instantiateViewControllerWithIdentifier:@"MZLFeriendListViewController"];
             feriendList.user = user;
@@ -128,6 +175,19 @@
     return @[MZL_AUTHOR_DETAIL_NO_RECORD];
 }
 
+#pragma mark - MZLAuthorHeaderShowProgressIndicatorDelegate
+- (void)showProgressIndicatorAlertViewOnAuthorDetailVC {
+    [self showNetworkProgressIndicator];
+}
+
+- (void)hideProgressIndicatorAlertViewOnAuthorDetailVC:(BOOL)isSuccess {
+    if (isSuccess == 1) {
+        [self hideProgressIndicator];
+    }else {
+        [self hideProgressIndicator];
+        [self onNetworkError];
+    }
+}
 #pragma mark - loading more
 
 - (BOOL)_canLoadMore {
@@ -162,5 +222,7 @@
 //    return [MZLShortArticleCell heightFromType:MZLShortArticleCellTypeAuthor model:_models[indexPath.row]];
     return [MZLShortArticleCell heightForTableView:tableView withType:MZLShortArticleCellTypeAuthor withModel:_models[indexPath.row]];
 }
+
+
 
 @end

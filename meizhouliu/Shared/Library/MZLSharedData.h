@@ -12,6 +12,10 @@
 
 @interface MZLSharedData : NSObject
 
+#pragma mark - apservice registrationID
++ (void)setAPserviceRegistrationID:(NSString *)registrationID;
++ (NSString *)apsericeregistrationID;
+
 #pragma mark -duzoumoToken
 + (void)setAppDuZhouMoUserToken:(NSString *)string;
 + (NSString *)appDuZhouMoToken;
@@ -122,6 +126,14 @@
 + (NSDictionary *)getApnsInfoForNotification;
 + (void)removeApnsinfoForNotification;
 
+
+#pragma mark - attentionUserId 
++ (NSArray *)attentionIdsArr;
++ (void)setAttentionIdsArr:(NSArray *)attentionIdsArr;
++ (void)removeIdFromAttentionIds:(NSString *)Id;
++ (void)addIdIntoAttentionIds:(NSString *)Id;
++ (void)addIdArrayIntoAttentionIds:(NSArray *)IdArr;
++ (void)removeAllIdsFromAttentionIds;
 //#pragma mark - misc settings
 //
 //+ (BOOL)shouldPopupFiltersOnAppStartup;

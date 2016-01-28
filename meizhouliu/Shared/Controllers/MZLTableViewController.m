@@ -377,14 +377,18 @@
 
 - (void)onLoadSuccBlock:(NSArray *)modelsFromSvc {
 //    [self resetRefreshTime];
-    [self hideProgressIndicator];
+//    [self hideProgressIndicator];
     _loading = NO;
     [self handleModelsOnLoad:modelsFromSvc];
     [self createTipViewOnLoadSucc];
     [self _onLoadSuccBlock:modelsFromSvc];
-    [_tv reloadData];
+    [self handModelsToOtherService:modelsFromSvc];
 }
 
+- (void)handModelsToOtherService:(NSArray *)modelsFromSvc {
+    [self hideProgressIndicator];
+    [_tv reloadData];
+}
 - (NSMutableArray *)mapModelsOnLoad:(NSArray *)modelsFromSvc {
     return [NSMutableArray arrayWithArray:modelsFromSvc];
 }

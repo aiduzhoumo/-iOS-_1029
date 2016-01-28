@@ -42,4 +42,19 @@
     return nil;
 }
 
++ (void)setAttentionUserId:(id)value forKey:(NSString *)key {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:value forKey:key];
+    [defaults synchronize];
+}
++ (id)getAttentionUserId:(NSString *)key {
+    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+    return [defaults objectForKey:key];
+}
++ (void)removeAttentionUserId:(NSString *)key {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:key];
+    [defaults synchronize];
+}
+
 @end

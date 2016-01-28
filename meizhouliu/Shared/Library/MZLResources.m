@@ -90,6 +90,10 @@ UIColor *MZL_COLOR_GRAY_7F7F7F() {
     return colorWithHexString(@"#7F7F7F");
 }
 
+UIColor *MZL_COLOR_WHITE_FFFFFF() {
+    return colorWithHexString(@"ffffff");
+}
+
 UIColor *MZL_BG_COLOR() {
     return MZL_COLOR_GRAY_F7F7F7();
 }

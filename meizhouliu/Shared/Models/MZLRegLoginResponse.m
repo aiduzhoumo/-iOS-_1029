@@ -13,6 +13,7 @@
 @implementation MZLRegLoginResponse
 
 - (NSString *)headerImageUrl {
+    
     return self.user.headerImage.fileUrl;
 }
 

@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @class MZLModelUser;
+
+@protocol MZLFeriendListCellShowOrHideNetworkProgressIndicatorDelegate <NSObject>
+- (void)showNetworkProgressIndicatorOnFeriendVC;
+- (void)hideNetworkProgressIndicatorOnFeriendVC:(BOOL)isSuccess;
+@end
+
 @interface MZLFeriendListCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *headerIcon;
@@ -21,6 +26,7 @@
 
 @property (nonatomic, weak) MZLModelUser *user;
 
+@property (nonatomic, weak) id<MZLFeriendListCellShowOrHideNetworkProgressIndicatorDelegate> delegate;
 - (void)initWithFeriendListInfo:(MZLModelUser *)user;
 
 @end

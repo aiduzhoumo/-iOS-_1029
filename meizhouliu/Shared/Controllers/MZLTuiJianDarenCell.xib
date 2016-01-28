@@ -36,7 +36,7 @@
                             <constraint firstAttribute="width" constant="80" id="MgL-vj-Px9"/>
                             <constraint firstAttribute="height" constant="28" id="WR6-34-vEN"/>
                         </constraints>
-                        <state key="normal" image="attention_darenye"/>
+                        <state key="normal" image="attention_shouye"/>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xgb-I8-def" userLabel="Image2">
                         <rect key="frame" x="133" y="59" width="127" height="120"/>
@@ -88,6 +88,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="attention_darenye" width="240" height="56"/>
+        <image name="attention_shouye" width="160" height="56"/>
     </resources>
 </document>

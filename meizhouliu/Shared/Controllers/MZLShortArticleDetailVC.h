@@ -15,6 +15,9 @@
 @property (nonatomic, strong) MZLModelShortArticle *shortArticle;
 @property (nonatomic, assign) BOOL popupCommentOnViewAppear;
 
+@property (nonatomic, assign) BOOL scrollToTheSpecificComment;
+@property (nonatomic, assign) NSInteger commentIdentifier;
+
 - (void)deleteComment:(MZLModelShortArticleComment *)comment;
 
 @end

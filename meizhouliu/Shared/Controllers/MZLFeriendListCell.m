@@ -31,7 +31,7 @@
     
     [self.headerIcon toRoundShape];
     [self.headerIcon loadAuthorImageFromURL:user.photoUrl];
-    [self.headerIcon addTapGestureRecognizer:self action:@selector(toAuthorDetail)];
+//    [self.headerIcon addTapGestureRecognizer:self action:@selector(toAuthorDetail)];
     
     self.nameLbl.text = user.nickName;
     
@@ -40,28 +40,27 @@
     //判断是不是自己
     if (user.identifier == [MZLSharedData appUserId]) {
         self.attentionBtn.hidden = YES;
+    }else {
+        self.attentionBtn.hidden = NO;
     }
     
-    //发请求判断关注状态
-    __weak MZLFeriendListCell *weakSelf = self;
-    [MZLServices attentionStatesForCurrentUser:user succBlock:^(NSArray *models) {
-        if (models && models.count > 0) {
+    //判断关注状态
+    NSArray *idsArr = [MZLSharedData attentionIdsArr];
+    
+    NSInteger i = user.identifier;
+    NSString *s = [NSString stringWithFormat:@"%ld",i];
+    for (NSString *str in idsArr) {
+        NSString *st = [NSString stringWithFormat:@"%@",str];
+        
+        if ([s isEqualToString:st]) {
             user.isAttentionForCurrentUser = 1;
-            [weakSelf toggleAttentionImage:user.isAttentionForCurrentUser];
+            [self toggleAttentionImage:1];
+            return;
         }else {
             user.isAttentionForCurrentUser = 0;
-            [weakSelf toggleAttentionImage:user.isAttentionForCurrentUser];
+            [self toggleAttentionImage:0];
         }
-    } errorBlock:^(NSError *error) {
-        //
-    }];
-    
-    //需要判断有没有被关注过
-//    [self toggleAttentionStatus];
-}
-
-- (void)toggleAttentionStatus {
-    [self toggleAttentionImage:self.user.isAttentionForCurrentUser];
+    }
 }
 
 - (void)toggleAttentionImage:(BOOL)flag {
@@ -77,32 +76,59 @@
 
 - (void)attentionClick:(UITapGestureRecognizer *)tap {
     
+    if (![MZLSharedData isAppUserLogined]) {
+        [UIAlertView showAlertMessage:@"请先登入"];
+        return;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(showNetworkProgressIndicatorOnFeriendVC)]) {
+        [self.delegate showNetworkProgressIndicatorOnFeriendVC];
+    }
+    
     if (self.user.isAttentionForCurrentUser) {
         self.user.isAttentionForCurrentUser = NO;
-        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_darenye"] forState:UIControlStateNormal];
+        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_shouye"] forState:UIControlStateNormal];
         [self removeAttention];
         
     }else{
         self.user.isAttentionForCurrentUser = YES;
-        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_cancel_darenye"] forState:UIControlStateNormal];
+        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_shouye_cancel"] forState:UIControlStateNormal];
         [self addAttention];
     }
 }
 
 - (void)addAttention {
+    __weak MZLFeriendListCell *weakSelf = self;
     [MZLServices addAttentionForShortArticleUser:self.user succBlock:^(NSArray *models) {
-        //
+        if ([weakSelf.delegate respondsToSelector:@selector(hideNetworkProgressIndicatorOnFeriendVC:)]) {
+            [weakSelf.delegate hideNetworkProgressIndicatorOnFeriendVC:YES];
+        }
+        [MZLSharedData addIdIntoAttentionIds:[NSString stringWithFormat:@"%ld",weakSelf.user.identifier]];
+        weakSelf.user.isAttentionForCurrentUser = YES;
+        [weakSelf.attentionBtn setImage:[UIImage imageNamed:@"attention_shouye_cancel"] forState:UIControlStateNormal];
+        
     } errorBlock:^(NSError *error) {
-        //
+        if ([weakSelf.delegate respondsToSelector:@selector(hideNetworkProgressIndicatorOnFeriendVC:)]) {
+            [weakSelf.delegate hideNetworkProgressIndicatorOnFeriendVC:NO];
+        }
     }];
 }
 
 - (void)removeAttention {
-    MZLModelUser *user = self.user;
-    [MZLServices removeAttentionForShortArticleUser:user succBlock:^(NSArray *models) {
-        //
+    __weak MZLFeriendListCell *weakSelf = self;
+    [MZLServices removeAttentionForShortArticleUser:self.user succBlock:^(NSArray *models) {
+        
+        if ([weakSelf.delegate respondsToSelector:@selector(hideNetworkProgressIndicatorOnFeriendVC:)]) {
+            [weakSelf.delegate hideNetworkProgressIndicatorOnFeriendVC:YES];
+        }
+        [MZLSharedData removeIdFromAttentionIds:[NSString stringWithFormat:@"%ld",weakSelf.user.identifier]];
+        weakSelf.user.isAttentionForCurrentUser = NO;
+        [weakSelf.attentionBtn setImage:[UIImage imageNamed:@"attention_shouye"] forState:UIControlStateNormal];
+       
     } errorBlock:^(NSError *error) {
-        //
+        if ([weakSelf.delegate respondsToSelector:@selector(hideNetworkProgressIndicatorOnFeriendVC:)]) {
+            [weakSelf.delegate hideNetworkProgressIndicatorOnFeriendVC:NO];
+        }
     }];
 }
 

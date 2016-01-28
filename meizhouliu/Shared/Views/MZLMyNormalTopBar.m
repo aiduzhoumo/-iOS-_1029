@@ -50,7 +50,7 @@
 
 + (instancetype)tabBarInstance:(CGSize)parentViewSize{
     MZLMyNormalTopBar *result = [[[self class] alloc] init];
-    result.frame = CGRectMake(0, 0, parentViewSize.width, MZLTopBarHeight);
+    result.frame = CGRectMake(0, 150, parentViewSize.width, MZLTopBarHeight);
     [result initInternal];
     return result;
 }

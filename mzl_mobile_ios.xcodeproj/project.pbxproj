@@ -50,8 +50,8 @@
 		1BDE39531A480BBF002C1F86 /* MZLDescendantsParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDE39521A480BBF002C1F86 /* MZLDescendantsParam.m */; };
 		1BDE39561A48173A002C1F86 /* MZLModelRelatedLocationExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDE39551A48173A002C1F86 /* MZLModelRelatedLocationExt.m */; };
 		1BEA57511A7106C7009A3868 /* MZLShortArticleResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEA57501A7106C7009A3868 /* MZLShortArticleResponse.m */; };
-		7846BDB41C3CEFB700688B98 /* MZLMyFavoriteHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7846BDB31C3CEFB700688B98 /* MZLMyFavoriteHeaderView.m */; };
-		7846BDB61C3CEFE500688B98 /* MZLMyFavoriteHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7846BDB51C3CEFE500688B98 /* MZLMyFavoriteHeaderView.xib */; };
+		7846BDB41C3CEFB700688B98 /* MZLMyNormalFavoriteHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7846BDB31C3CEFB700688B98 /* MZLMyNormalFavoriteHeaderView.m */; };
+		7846BDB61C3CEFE500688B98 /* MZLMyNormalFavoriteHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7846BDB51C3CEFE500688B98 /* MZLMyNormalFavoriteHeaderView.xib */; };
 		7846BDBA1C3D25B300688B98 /* MZLFeriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7846BDB91C3D25B300688B98 /* MZLFeriendListViewController.m */; };
 		784E58921C3E114500E1FEF8 /* MZLAttentionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 784E58911C3E114500E1FEF8 /* MZLAttentionListViewController.m */; };
 		784E58951C3E115500E1FEF8 /* MZLFensiListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 784E58941C3E115500E1FEF8 /* MZLFensiListViewController.m */; };
@@ -63,7 +63,12 @@
 		7868F2291C3FAAE700E3C360 /* MZLTuiJianDaren.m in Sources */ = {isa = PBXBuildFile; fileRef = 7868F2281C3FAAE700E3C360 /* MZLTuiJianDaren.m */; };
 		7868F22C1C3FB28600E3C360 /* MZLTuiJianDarenResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7868F22B1C3FB28600E3C360 /* MZLTuiJianDarenResponse.m */; };
 		7868F22F1C3FD20900E3C360 /* MZLShortArticlesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7868F22E1C3FD20900E3C360 /* MZLShortArticlesModel.m */; };
+		786929A21C4CF516006BC13C /* MZLMyAuthorFavoriteHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 786929A11C4CF516006BC13C /* MZLMyAuthorFavoriteHeaderView.m */; };
+		786929AA1C4D0A9E006BC13C /* MZLMyFavoriteHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 786929A91C4D0A9E006BC13C /* MZLMyFavoriteHeaderView.m */; };
+		786929AC1C4D0C0A006BC13C /* MZLMyAuthorFavoriteHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 786929AB1C4D0C0A006BC13C /* MZLMyAuthorFavoriteHeaderView.xib */; };
 		7885BA1A1C05EBEA00A49658 /* MZLPhoneLoginSvcParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 7885BA191C05EBEA00A49658 /* MZLPhoneLoginSvcParam.m */; };
+		788E5C9F1C4DE75C00088DC2 /* MZLModityNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 788E5C9E1C4DE75C00088DC2 /* MZLModityNameViewController.m */; };
+		788E5CA21C4DE92A00088DC2 /* MZLModityNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 788E5CA11C4DE92A00088DC2 /* MZLModityNameCell.m */; };
 		7895AE391C0B074D006686FA /* MZLMailLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7895AE381C0B074D006686FA /* MZLMailLoginView.m */; };
 		7895AE3B1C0B0762006686FA /* MZLMailLoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7895AE3A1C0B0762006686FA /* MZLMailLoginView.xib */; };
 		7895AE3F1C0B286E006686FA /* MZLBindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7895AE3E1C0B286E006686FA /* MZLBindPhoneViewController.m */; };
@@ -462,8 +467,6 @@
 		E5EDE5A4199CC91D00C3D3EF /* MZLTableViewFooterViewForIntro.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDE5A3199CC91D00C3D3EF /* MZLTableViewFooterViewForIntro.m */; };
 		E5EDE5A7199CD47A00C3D3EF /* MZLPasswordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDE5A6199CD47A00C3D3EF /* MZLPasswordTableViewCell.m */; };
 		E5EDE5B8199E028300C3D3EF /* MZLModelUserInfoDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDE5B7199E028300C3D3EF /* MZLModelUserInfoDetail.m */; };
-		F3EC2C251C044982008B8403 /* MZLNEWLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EC2C241C044982008B8403 /* MZLNEWLogViewController.m */; };
-		F3EC2C281C044E9E008B8403 /* MZLOldLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EC2C271C044E9E008B8403 /* MZLOldLogViewController.m */; };
 		FB7CBDC1E70A4BC5BD1085AA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC92BF518AF04D9195561CA5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -563,9 +566,9 @@
 		1BDE39551A48173A002C1F86 /* MZLModelRelatedLocationExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLModelRelatedLocationExt.m; sourceTree = "<group>"; };
 		1BEA574F1A7106C7009A3868 /* MZLShortArticleResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLShortArticleResponse.h; sourceTree = "<group>"; };
 		1BEA57501A7106C7009A3868 /* MZLShortArticleResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLShortArticleResponse.m; sourceTree = "<group>"; };
-		7846BDB21C3CEFB700688B98 /* MZLMyFavoriteHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLMyFavoriteHeaderView.h; sourceTree = "<group>"; };
-		7846BDB31C3CEFB700688B98 /* MZLMyFavoriteHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLMyFavoriteHeaderView.m; sourceTree = "<group>"; };
-		7846BDB51C3CEFE500688B98 /* MZLMyFavoriteHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MZLMyFavoriteHeaderView.xib; sourceTree = "<group>"; };
+		7846BDB21C3CEFB700688B98 /* MZLMyNormalFavoriteHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLMyNormalFavoriteHeaderView.h; sourceTree = "<group>"; };
+		7846BDB31C3CEFB700688B98 /* MZLMyNormalFavoriteHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLMyNormalFavoriteHeaderView.m; sourceTree = "<group>"; };
+		7846BDB51C3CEFE500688B98 /* MZLMyNormalFavoriteHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MZLMyNormalFavoriteHeaderView.xib; sourceTree = "<group>"; };
 		7846BDB81C3D25B300688B98 /* MZLFeriendListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLFeriendListViewController.h; sourceTree = "<group>"; };
 		7846BDB91C3D25B300688B98 /* MZLFeriendListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLFeriendListViewController.m; sourceTree = "<group>"; };
 		784E58901C3E114500E1FEF8 /* MZLAttentionListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLAttentionListViewController.h; sourceTree = "<group>"; };
@@ -587,8 +590,17 @@
 		7868F22B1C3FB28600E3C360 /* MZLTuiJianDarenResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLTuiJianDarenResponse.m; sourceTree = "<group>"; };
 		7868F22D1C3FD20900E3C360 /* MZLShortArticlesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLShortArticlesModel.h; sourceTree = "<group>"; };
 		7868F22E1C3FD20900E3C360 /* MZLShortArticlesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLShortArticlesModel.m; sourceTree = "<group>"; };
+		786929A01C4CF516006BC13C /* MZLMyAuthorFavoriteHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLMyAuthorFavoriteHeaderView.h; sourceTree = "<group>"; };
+		786929A11C4CF516006BC13C /* MZLMyAuthorFavoriteHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLMyAuthorFavoriteHeaderView.m; sourceTree = "<group>"; };
+		786929A81C4D0A9E006BC13C /* MZLMyFavoriteHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLMyFavoriteHeaderView.h; sourceTree = "<group>"; };
+		786929A91C4D0A9E006BC13C /* MZLMyFavoriteHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLMyFavoriteHeaderView.m; sourceTree = "<group>"; };
+		786929AB1C4D0C0A006BC13C /* MZLMyAuthorFavoriteHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MZLMyAuthorFavoriteHeaderView.xib; sourceTree = "<group>"; };
 		7885BA181C05EBEA00A49658 /* MZLPhoneLoginSvcParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLPhoneLoginSvcParam.h; sourceTree = "<group>"; };
 		7885BA191C05EBEA00A49658 /* MZLPhoneLoginSvcParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLPhoneLoginSvcParam.m; sourceTree = "<group>"; };
+		788E5C9D1C4DE75C00088DC2 /* MZLModityNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLModityNameViewController.h; sourceTree = "<group>"; };
+		788E5C9E1C4DE75C00088DC2 /* MZLModityNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLModityNameViewController.m; sourceTree = "<group>"; };
+		788E5CA01C4DE92A00088DC2 /* MZLModityNameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLModityNameCell.h; sourceTree = "<group>"; };
+		788E5CA11C4DE92A00088DC2 /* MZLModityNameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLModityNameCell.m; sourceTree = "<group>"; };
 		7895AE371C0B074D006686FA /* MZLMailLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLMailLoginView.h; sourceTree = "<group>"; };
 		7895AE381C0B074D006686FA /* MZLMailLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLMailLoginView.m; sourceTree = "<group>"; };
 		7895AE3A1C0B0762006686FA /* MZLMailLoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MZLMailLoginView.xib; sourceTree = "<group>"; };
@@ -1332,10 +1344,6 @@
 		E5EDE5A6199CD47A00C3D3EF /* MZLPasswordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLPasswordTableViewCell.m; sourceTree = "<group>"; };
 		E5EDE5B6199E028300C3D3EF /* MZLModelUserInfoDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLModelUserInfoDetail.h; sourceTree = "<group>"; };
 		E5EDE5B7199E028300C3D3EF /* MZLModelUserInfoDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLModelUserInfoDetail.m; sourceTree = "<group>"; };
-		F3EC2C231C044982008B8403 /* MZLNEWLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLNEWLogViewController.h; sourceTree = "<group>"; };
-		F3EC2C241C044982008B8403 /* MZLNEWLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLNEWLogViewController.m; sourceTree = "<group>"; };
-		F3EC2C261C044E9E008B8403 /* MZLOldLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLOldLogViewController.h; sourceTree = "<group>"; };
-		F3EC2C271C044E9E008B8403 /* MZLOldLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLOldLogViewController.m; sourceTree = "<group>"; };
 		FC92BF518AF04D9195561CA5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -2210,6 +2218,8 @@
 				E5884CB5199C527800CF26AE /* MZLTableViewHeaderViewForSetting.h */,
 				E5884CB6199C527800CF26AE /* MZLTableViewHeaderViewForSetting.m */,
 				E5884CB8199C52AA00CF26AE /* MZLTableViewHeadViewForSetting.xib */,
+				788E5CA01C4DE92A00088DC2 /* MZLModityNameCell.h */,
+				788E5CA11C4DE92A00088DC2 /* MZLModityNameCell.m */,
 			);
 			name = UserSettings;
 			sourceTree = "<group>";
@@ -2805,6 +2815,8 @@
 				1B0F910D19CAB2BE001CBFD8 /* MZLAuthorCoverPickerViewController.m */,
 				84DF6E381BDB46B6005DB5F4 /* MZLAgreementViewController.h */,
 				84DF6E391BDB46B6005DB5F4 /* MZLAgreementViewController.m */,
+				788E5C9D1C4DE75C00088DC2 /* MZLModityNameViewController.h */,
+				788E5C9E1C4DE75C00088DC2 /* MZLModityNameViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -2872,17 +2884,10 @@
 				E58E8ED71991DF5D008079F3 /* MZLRegViewController.m */,
 				DCE157FF1993247B00533A2D /* UIViewController+MZLRegLoginCommon.h */,
 				DCE158001993247B00533A2D /* UIViewController+MZLRegLoginCommon.m */,
-<<<<<<< HEAD
-				F3EC2C231C044982008B8403 /* MZLNEWLogViewController.h */,
-				F3EC2C241C044982008B8403 /* MZLNEWLogViewController.m */,
-				F3EC2C261C044E9E008B8403 /* MZLOldLogViewController.h */,
-				F3EC2C271C044E9E008B8403 /* MZLOldLogViewController.m */,
-=======
 				78F9008F1BFD7B6A00429A2A /* MZLPhoneRegViewController.h */,
 				78F900901BFD7B6A00429A2A /* MZLPhoneRegViewController.m */,
 				78FF94411C0431BD0062120A /* MZLPhoneRegNameViewController.h */,
 				78FF94421C0431BD0062120A /* MZLPhoneRegNameViewController.m */,
->>>>>>> mzl_FJbranch
 			);
 			name = RegLogin;
 			sourceTree = "<group>";
@@ -2991,9 +2996,14 @@
 				DCA1BF9F1ABFC187005DFD89 /* MZLHomeViewController.m */,
 				DC083D681AE4CC630005A2F7 /* MZLHotGoodsVC.h */,
 				DC083D691AE4CC630005A2F7 /* MZLHotGoodsVC.m */,
-				7846BDB21C3CEFB700688B98 /* MZLMyFavoriteHeaderView.h */,
-				7846BDB31C3CEFB700688B98 /* MZLMyFavoriteHeaderView.m */,
-				7846BDB51C3CEFE500688B98 /* MZLMyFavoriteHeaderView.xib */,
+				786929A81C4D0A9E006BC13C /* MZLMyFavoriteHeaderView.h */,
+				786929A91C4D0A9E006BC13C /* MZLMyFavoriteHeaderView.m */,
+				7846BDB21C3CEFB700688B98 /* MZLMyNormalFavoriteHeaderView.h */,
+				7846BDB31C3CEFB700688B98 /* MZLMyNormalFavoriteHeaderView.m */,
+				7846BDB51C3CEFE500688B98 /* MZLMyNormalFavoriteHeaderView.xib */,
+				786929A01C4CF516006BC13C /* MZLMyAuthorFavoriteHeaderView.h */,
+				786929A11C4CF516006BC13C /* MZLMyAuthorFavoriteHeaderView.m */,
+				786929AB1C4D0C0A006BC13C /* MZLMyAuthorFavoriteHeaderView.xib */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -3249,6 +3259,7 @@
 				DC48903718EBE2870043D412 /* Images.xcassets in Resources */,
 				DCD8A14C1A892F0100CAB28F /* MZLShortArticleCommentCell.xib in Resources */,
 				DCF6B9291AEF7B7B00E613A5 /* TuSDK.bundle in Resources */,
+				786929AC1C4D0C0A006BC13C /* MZLMyAuthorFavoriteHeaderView.xib in Resources */,
 				DCEE41FA1A2571C7009BA815 /* MZLPersonalizedItemCell.xib in Resources */,
 				DC48902618EBE2870043D412 /* InfoPlist.strings in Resources */,
 				DC26557619401F1200AE9400 /* MZLLocDetailTableFooterView.xib in Resources */,
@@ -3265,7 +3276,7 @@
 				DCB3B560194A9DBD0093F3BA /* all_cities.txt in Resources */,
 				DC07ABEF1947EDBE00355EEB /* MZLTabBar.xib in Resources */,
 				E5884CC4199C899900CF26AE /* MZLTableViewFooterViewForSetting.xib in Resources */,
-				7846BDB61C3CEFE500688B98 /* MZLMyFavoriteHeaderView.xib in Resources */,
+				7846BDB61C3CEFE500688B98 /* MZLMyNormalFavoriteHeaderView.xib in Resources */,
 				8443820D1BE0D00D00DF1C7E /* WeiboSDK.bundle in Resources */,
 				DCF6B92B1AEF7BF200E613A5 /* TuSDK.strings in Resources */,
 				844382061BE0D00D00DF1C7E /* ShareSDKLocalizable.strings in Resources */,
@@ -3393,6 +3404,7 @@
 				78EB814D1C084C03009342A1 /* MZLForgetPWByMailViewController.m in Sources */,
 				1B942F011A8245450064A0E9 /* ParallaxHeaderView.m in Sources */,
 				DCD212A419AB114E003BB633 /* MZLModelComment.m in Sources */,
+				788E5C9F1C4DE75C00088DC2 /* MZLModityNameViewController.m in Sources */,
 				DC58B1ED1A09EF1F00BE6F01 /* MZLNavView.m in Sources */,
 				DCFF9E751907672E0098D620 /* MZLDummyObject.m in Sources */,
 				1B2E1A6019B804BC0063641F /* MZLNoticeResponse.m in Sources */,
@@ -3449,7 +3461,7 @@
 				DCFAF6F41A7B35DA0048FEC2 /* UIViewController+MZLShortArticle.m in Sources */,
 				E5884CB7199C527800CF26AE /* MZLTableViewHeaderViewForSetting.m in Sources */,
 				E58E8EDB1991DF7B008079F3 /* MZLRegModifyNameViewController.m in Sources */,
-				7846BDB41C3CEFB700688B98 /* MZLMyFavoriteHeaderView.m in Sources */,
+				7846BDB41C3CEFB700688B98 /* MZLMyNormalFavoriteHeaderView.m in Sources */,
 				DC97DC6E19A5D8890031D901 /* MZLUserDetailResponse.m in Sources */,
 				DCFC567B19B599ED006FCFD6 /* MZLModelFilterItem.m in Sources */,
 				E5487A42198A497400AACB75 /* MZLModelUser.m in Sources */,
@@ -3633,7 +3645,6 @@
 				DC5E945818FD434800B2032F /* MZLServices.m in Sources */,
 				DC5E7A31193583060017BEF6 /* MZLServiceResponseObject.m in Sources */,
 				DCC231AF190A566700F181B0 /* MZLModelAuthorDetail.m in Sources */,
-				F3EC2C251C044982008B8403 /* MZLNEWLogViewController.m in Sources */,
 				DC0920131A81C691003A14CD /* MZLPersonalizedShortArticleVC.m in Sources */,
 				DCFC567519B5990E006FCFD6 /* MZLModelFilterObject.m in Sources */,
 				1B61DC351A514D6300B47F7A /* MZLShortArticleChooseLocItemCell.m in Sources */,
@@ -3656,11 +3667,7 @@
 				1B229EDD1A67AE2B00F56705 /* MZLShortArticleTagItem.m in Sources */,
 				DC60FB0519CC157A0046E105 /* ChineseToPinyinResource.m in Sources */,
 				DCD2128619AAD9F4003BB633 /* NSObject+COAdditions.m in Sources */,
-<<<<<<< HEAD
-				F3EC2C281C044E9E008B8403 /* MZLOldLogViewController.m in Sources */,
-=======
 				784E58951C3E115500E1FEF8 /* MZLFensiListViewController.m in Sources */,
->>>>>>> mzl_FJbranch
 				1B8CB70219CC039600341C47 /* MZLAuthorCoverCollectionViewCell.m in Sources */,
 				DCBCACFA1AD4C9850033A0D5 /* MZLShortArticleCellBase.m in Sources */,
 				DCC283821A5ED37F0001FAF1 /* COCache.m in Sources */,
@@ -3671,6 +3678,7 @@
 				DCD2128B19AAD9F4003BB633 /* UIAlertView+COAdditions.m in Sources */,
 				1BEA57511A7106C7009A3868 /* MZLShortArticleResponse.m in Sources */,
 				1B2E1A6919BB4BBB0063641F /* MZLNoticeDetailViewController.m in Sources */,
+				786929A21C4CF516006BC13C /* MZLMyAuthorFavoriteHeaderView.m in Sources */,
 				DC953D65197FB31400A9B67D /* UIViewController+MZLAnnotationView.m in Sources */,
 				DCD2128E19AAD9F4003BB633 /* UIImageView+CONetwork.m in Sources */,
 				1B76EDBE19A47CB0002D4E84 /* PT_CaptionedPhotoView.m in Sources */,
@@ -3680,6 +3688,7 @@
 				78DDAAE91C2CEA17005D6C3A /* MKAnnotationView+WebCache.m in Sources */,
 				84DF6E3A1BDB46B6005DB5F4 /* MZLAgreementViewController.m in Sources */,
 				1B229EDC1A67AE2B00F56705 /* MZLShortArticleCustomTagItem.m in Sources */,
+				786929AA1C4D0A9E006BC13C /* MZLMyFavoriteHeaderView.m in Sources */,
 				DC94C2771A6CE4C100E8A74A /* MZLLocationGoodsViewController.m in Sources */,
 				E5E3BB7D1921B8020073DB25 /* WebViewJavascriptBridge.m in Sources */,
 				DC60FB1219CC3B9A0046E105 /* MZLModelSystemLocation.m in Sources */,
@@ -3707,6 +3716,7 @@
 				DC99BFA8190E232A00DBF2F7 /* MZLChildLocationsViewController.m in Sources */,
 				DC3112D519E8D2C100CC3E5A /* FMDatabaseQueue.m in Sources */,
 				DCF374C7195BC34400B3D514 /* MZLSystemArticleListViewController.m in Sources */,
+				788E5CA21C4DE92A00088DC2 /* MZLModityNameCell.m in Sources */,
 				DC0EBD1F1900CF0100D9248D /* WeViewLinearLayout.m in Sources */,
 				78DDAAF41C2CEA17005D6C3A /* UIImage+MultiFormat.m in Sources */,
 				DC9B892F192ABD7600CF1467 /* JDStatusBarStyle.m in Sources */,

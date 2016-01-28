@@ -23,6 +23,7 @@
 #import "UIView+MZLAdditions.h"
 #import "MZLLoginViewController.h"
 #import "MZLTabBarViewController.h"
+#import "COPreferences.h"
 
 @interface MZLPersonalizedShortArticleVC () <UITableViewDataSource, UITableViewDelegate>
 
@@ -34,6 +35,9 @@
 
 //记录当前点击的是不是热门按钮
 @property (nonatomic, assign) BOOL isHot;
+
+//记录pop回来的时候会刷新数据
+@property (nonatomic, assign) int m;
 @end
 
 @implementation MZLPersonalizedShortArticleVC
@@ -42,6 +46,7 @@
     [super viewDidLoad];
     
     self.isHot = YES;
+    self.m = 0;
     
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 160, 44)];
     UIButton *hotBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 44)];
@@ -76,6 +81,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 //    [self hideFilterView];
+    self.m = 1;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -89,11 +95,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //判断是哪个页面(关注页面需要判断有没有模型,关注页面是需要登入的)
-    if(!self.isHot){
-        if (![MZLSharedData isAppUserLogined]) {
-            [self hotArticleCheck];
-        }
+ 
+    //pop回来的时候需要刷新
+    if (self.m != 0) {
+        self.m = 0 ;
+        [self loadModels];
     }
 }
 
@@ -132,10 +138,15 @@
  }
  */
 
-
 #pragma mark - apns
 - (void)getIntoAppFromApns {
     NSDictionary *userInfo = [MZLSharedData getApnsInfoForNotification];
+    [MZLSharedData removeApnsinfoForNotification];
+    
+    if (userInfo == nil) {
+        return;
+    }
+    
     UIStoryboard *sb = MZL_MAIN_STORYBOARD();
     UIViewController *targetVc;
     
@@ -160,11 +171,16 @@
         vcShortArticle.shortArticle = shortArticle;
         vcShortArticle.popupCommentOnViewAppear = NO;
         vcShortArticle.hidesBottomBarWhenPushed = YES;
+        if ([[userInfo valueForKey:@"anchor"] valueForKey:@"short_articles_comment"]) {
+            vcShortArticle.scrollToTheSpecificComment = YES;
+            NSString *temp = [[userInfo valueForKey:@"anchor"] valueForKey:@"short_articles_comment"];
+            vcShortArticle.commentIdentifier = [temp integerValue];
+        }
         targetVc = vcShortArticle;
     }
+   
     if (targetVc) {
         [self mzl_pushViewController:targetVc];
-        [MZLSharedData removeApnsinfoForNotification];
     }
 }
 
@@ -190,7 +206,7 @@
     
     [self reset];
     [self showNetworkProgressIndicator];
-    [self _loadModelsWithoutFilters];
+    [self loadModels];
 }
 
 - (void)AttentionListCheck {
@@ -211,8 +227,7 @@
 
 
 - (void)toAttentionView {
-    //隐藏filterView
-//    [self hideFilterView];
+
     self.isHot = NO;
     [self showNetworkProgressIndicator];
     
@@ -232,7 +247,6 @@
     _attentionBtn.titleLabel.font = MZL_BOLD_FONT(16);
     [_attentionBtn setTitleColor:@"434343".co_toHexColor forState:UIControlStateNormal];
     
-    
     MZLPagingSvcParam *param = [MZLPagingSvcParam pagingSvcParamWithPageIndex:1 fetchCount:10];
     [MZLServices followDaRenListWithPagingParam:param succBlock:^(NSArray *models) {
         
@@ -251,11 +265,11 @@
         [self noAttentionRecordView];
     }else {
     // 刷新页面
-//        [self _loadModelsWithoutFilters];
+        [self loadModels];
         //临时测数据
-        [self hideProgressIndicator];
-        [_tv removeUnnecessarySeparators];
-        [self noAttentionRecordView];
+//        [self hideProgressIndicator];
+//        [_tv removeUnnecessarySeparators];
+//        [self noAttentionRecordView];
     }
 
 }
@@ -327,6 +341,130 @@
     _tv.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_tv removeUnnecessarySeparators];
     [self addCityListDropdownBarButtonItem];
+}
+
+#pragma mark - 取得_models
+- (void)onLoadSuccBlock:(NSArray *)modelsFromSvc {
+    //需要判断有没有登入
+    if (![MZLSharedData isAppUserLogined]) {
+        [self hideProgressIndicator];
+        _loading = NO;
+        [self handleModelsOnLoad:modelsFromSvc];
+        [self createTipViewOnLoadSucc];
+        [self _onLoadSuccBlock:modelsFromSvc];
+        [_tv reloadData];
+    }else {
+//        [self hideProgressIndicator];
+//        _loading = NO;
+        [self handleModelsOnLoad:modelsFromSvc];
+//        [self createTipViewOnLoadSucc];
+        [self _onLoadSuccBlock:modelsFromSvc];
+        //进行判断哪些是被关注过的，在刷新数据
+        [self getAttentionInfosFromModels:modelsFromSvc];
+    }
+}
+
+- (void)getAttentionInfosFromModels:(NSArray *)modelsFromSvc {
+    
+    NSMutableString *mutStr = [NSMutableString string];
+    for (MZLModelShortArticle *s in modelsFromSvc) {
+        NSInteger i = s.author.identifier;
+        [mutStr appendString:[NSString stringWithFormat:@"%ld,",i]];
+    }
+    //进行判断，那些是被关注过的
+    [MZLServices fitterOfAttentionForUser:mutStr SuccBlock:^(NSArray *models) {
+        
+        NSMutableArray *numArr = [NSMutableArray array];
+        for (NSNumber *n in models) {
+            [numArr addObject:[NSString stringWithFormat:@"%@",n]];
+        }
+        
+        //加数组不用set。用add
+        [MZLSharedData addIdArrayIntoAttentionIds:numArr];
+        
+        [self hideProgressIndicator];
+        _loading = NO;
+        [self createTipViewOnLoadSucc];
+        [_tv reloadData];
+    } errorBlobk:^(NSError *error) {
+        [self onNetworkError];
+    }];
+}
+
+- (void)handleModelsOnLoad:(NSArray *)modelsFromSvc {
+    _isMultiSections = NO;
+    _models = [self mapModelsOnLoad:modelsFromSvc];
+    _hasMore = (_models.count >= [self pageFetchCount]);
+}
+
+#pragma mark - 取得更多model
+- (void)onLoadMoreSuccBlock:(NSArray *)modelsFromSvc {
+    if (![MZLSharedData isAppUserLogined]) {
+        [self onLoadMoreFinished];
+        [self handleModelsOnLoadMore:modelsFromSvc];
+        [self createTipViewOnLoadMoreSucc];
+        [self _onLoadMoreSuccBlock:modelsFromSvc];
+        [_tv reloadData];
+    }else{
+        //应该跟以前是不变的，但是刷新_tv必须要在判断以后
+//        [self onLoadMoreFinished];
+        [self handleModelsOnLoadMore:modelsFromSvc];
+        [self createTipViewOnLoadMoreSucc];
+        [self _onLoadMoreSuccBlock:modelsFromSvc];
+        //进行判断哪些是被关注了的
+        [self getAttentionIfonsFromMoreModels:modelsFromSvc];
+    }
+}
+
+- (void)getAttentionIfonsFromMoreModels:(NSArray *)modelsFromSvc {
+    
+    NSMutableString *mutString = [[NSMutableString alloc] init];
+    for (MZLModelShortArticle *s in modelsFromSvc) {
+        NSInteger i = s.author.identifier;
+        [mutString appendString:[NSString stringWithFormat:@"%ld,",i]];
+    }
+    //进行判断，那些是被关注过的
+    [MZLServices fitterOfAttentionForUser:mutString SuccBlock:^(NSArray *models) {
+        
+        NSMutableArray *numArr = [NSMutableArray array];
+        for (NSNumber *n in models) {
+            [numArr addObject:[NSString stringWithFormat:@"%@",n]];
+        }
+        [MZLSharedData addIdArrayIntoAttentionIds:numArr];
+                
+        [self onLoadMoreFinished];
+        [_tv reloadData];
+    } errorBlobk:^(NSError *error) {
+        [self onNetworkError];
+    }];
+
+}
+
+- (void)createTipViewOnLoadMoreSucc {
+    if (_isMultiSections) { // 有多个sections的暂不支持这一操作
+        return;
+    }
+    if ([self canLoadMore]) {
+        [self createFooterPullToRefreshView];
+    } else {
+        [self createFooterSpacingView];
+    }
+}
+
+
+- (void)onLoadMoreFinished {
+    _loadingMore = NO;
+    _loadMoreOp = nil;
+    //    [self resetScrollState];
+}
+
+- (NSArray *)handleModelsOnLoadMore:(NSArray *)modelsFromSvc {
+    NSArray *mappedModels = [self mapModelsOnLoadMore:modelsFromSvc];
+    if (mappedModels.count > 0) {
+        [_models addObjectsFromArray:mappedModels];
+    }
+    _hasMore = mappedModels.count >= [self pageFetchCount];
+    return mappedModels;
 }
 
 #pragma mark - protected for load
@@ -426,8 +564,12 @@
     return @[paramFilter, paramPaging];
 }
 
-- (void)dealloc {
-    
-}
-
 @end
+
+
+
+
+
+
+
+

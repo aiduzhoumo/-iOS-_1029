@@ -70,15 +70,6 @@
 //      [self handleRegResponse:result type:MZLLoginTypePhone];
        [self handleRegPhoneResponse:result type:MZLLoginTypePhone];
         
-        NSLog(@"result = %@",result);
-        
-        NSLog(@"self.fromController = %@",self.fromController);
-        
-//       [self.fromController dismissViewControllerAnimated:YES completion:^{
-//           NSLog(@"页面消失了");
-//       }];
-        
-        
     } errorBlock:^(NSError *error) {
         [self onRegError];
     }];

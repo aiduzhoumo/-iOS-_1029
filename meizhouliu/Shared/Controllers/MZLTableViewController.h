@@ -84,6 +84,7 @@
 - (UIView *)noRecordViewSuperView;
 - (NSArray *)noRecordTexts;
 - (UIImageView *)noRecordImageView:(UIView *)superView;
+- (UIView *)noRecordLabelView:(UIView *)superView;
 
 - (UIImageView *)imageViewWithImageNamed:(NSString *)imageName size:(CGSize)size superView:(UIView *)superView;
 
@@ -105,6 +106,9 @@
 /** return NO to stop super from further processing */
 - (BOOL)_onLoadErrorBlock:(NSError *)error;
 
+//提供一个方法让子类取得model后在进行判断操作(如判断关注状态操作)
+- (void)handModelsToOtherService:(NSArray *)modelsFromSvc;
+- (void)handMoreModelsToOtherService:(NSArray *)modelsFromSvc;
 @end
 
 // load more 暂时只支持单section

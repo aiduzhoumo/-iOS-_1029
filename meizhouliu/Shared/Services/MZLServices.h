@@ -13,6 +13,9 @@
 typedef void(^ MZL_SVC_SUCC_BLOCK)(NSArray *models);
 typedef void(^ MZL_SVC_ERR_BLOCK)(NSError *error);
 
+typedef void(^ MZL_SVC_REDIRECT_SUCC_BLOCK)(NSDictionary *models);
+typedef void(^ MZL_SVC_REDIRECT_ERR_BLOCK)(NSError *error);
+
 @class MZLArticleListSvcParam, MZLChildLocationsSvcParam, MZLPagingSvcParam, MZLModelArticle, MZLRegisterNormalSvcParam,MZLRegisterPhoneSvcParam,MZLRegisterSinaWeiboSvcParam, MZLRegisterTencentQqSvcParam, MZLLoginSvcParam, MZLModelUser, MZLModelUserInfoDetail, MZLModelUserLocationPref, MZLModelUserFavoredArticle, MZLModelComment, MZLModelNotice, MZLFilterParam, MZLModelImage, MZLModelLocation, MZLPersonalizeSvcParam, MZLDescendantsParam, MZLSurroundingLocSvcParam, MZLModelShortArticle, MZLModelShortArticleComment, MZLModelAuthor, MZLRegister3rdPartySvcParam, MZLRegisterBaseSvcParam, MZLModelSurroundingLocations, MZLGetCodeSvcParam, MZLVerifyCodeSvcParam, MZLPhoneLoginSvcParam;
 
 
@@ -59,7 +62,7 @@ typedef void(^ MZL_SVC_ERR_BLOCK)(NSError *error);
 + (id)locationPhotosService:(MZLModelLocationBase *)location pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)isLocationFavoredService:(MZLModelLocationBase *)location succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 //+ (id)locationGoodsService:(MZLModelLocationBase *)location pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
-+ (void)locationGoodsService:(MZLModelLocationBase *)location pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
++ (void)locationGoodsService:(MZLModelLocationBase *)location pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_REDIRECT_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_REDIRECT_ERR_BLOCK)errorBlock;
 
 + (id)favoredLocationsWithPagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)removeFavoredLocation:(MZLModelUserLocationPref *)favoredLocation succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
@@ -132,8 +135,8 @@ typedef void(^ MZL_SVC_ERR_BLOCK)(NSError *error);
 
 + (BOOL)hasGoodsFlagWithArticle:(MZLModelArticle *)arg1;
 + (void)goodsInArticle:(MZLModelArticle *)article succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
-+ (void)hotGoodsService:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
-+ (void)hotGoodsServiceTEXT:(MZLModelLocationBase *)location succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+//+ (void)hotGoodsService:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
++ (void)hotGoodsServiceWithLon:(CGFloat)lon lat:(CGFloat)lat succBlock:(MZL_SVC_REDIRECT_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_REDIRECT_ERR_BLOCK)errorBlock;
 
 #pragma mark - short articles
 
@@ -143,8 +146,11 @@ typedef void(^ MZL_SVC_ERR_BLOCK)(NSError *error);
 + (void)removeUpForShortArticle:(MZLModelShortArticle *)shortArticle succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (id)upStatusForShortArticle:(MZLModelShortArticle *)shortArticle succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)addComment:(MZLModelShortArticleComment *)comment forShortArticle:(MZLModelShortArticle *)shortArticle succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+/** 短文回复评论 */
++ (void)replyComment:(MZLModelShortArticleComment *)comment forShortArticle:(MZLModelShortArticle *)shortArticle succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)removeComment:(MZLModelShortArticleComment *)comment forShortArticle:(MZLModelShortArticle *)shortArticle succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (id)commentsForShortArticle:(MZLModelShortArticle *)shortArticle pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
++ (id)newCommentsForShortArticle:(MZLModelShortArticle *)shortArticle succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (id)authorShortArticleListWithAuthor:(MZLModelAuthor *)author pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (id)authorShortArticleListWithPagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)surroundingLocations:(MZLSurroundingLocSvcParam *)param succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
@@ -200,4 +206,15 @@ typedef void(^ MZL_SVC_ERR_BLOCK)(NSError *error);
 + (void)tuijianDarenWithPagingParam:(MZLPagingSvcParam *)pagingParam SuccBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 /** 关注的文章列表 */
 + (id)followDarenShortArticleServiceWithFilter:(MZLFilterParam *)filter pagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+/** 筛选一些用户的关注情况 */
++ (void)fitterOfAttentionForUser:(NSString *)idArr SuccBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlobk:(MZL_SVC_ERR_BLOCK)errorBlock;
+///** 查看他人粉丝列表 */
+//+ (void)lookOtherUserFollowers:(MZLModelUser *)user SuccBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlobk:(MZL_SVC_ERR_BLOCK)errorBlock;
+///** 查看他人关注列表 */
+//+ (void)lookOtherUserFollowees:(MZLModelUser *)user SuccBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlobk:(MZL_SVC_ERR_BLOCK)errorBlock;
+#pragma mark - modifyUserName
+/** 修改用户昵称 */
++ (void)modifyUserName:(MZLModelUserInfoDetail *)user WithNewName:(NSString *)newName SuccBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+
+
 @end

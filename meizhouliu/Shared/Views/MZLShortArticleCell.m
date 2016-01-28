@@ -147,23 +147,13 @@ typedef enum : NSInteger {
     UIView *leftView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, 0, COInvalidCons) width:LEFT_VIEW_WIDTH height:COInvalidCons];
     self.leftView = leftView;
     
-//    UIView *topView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0) width:COInvalidCons height:26.0];
-//    self.topView = topView;
-//    topView.backgroundColor = [UIColor redColor];
-    
     UIView *rightView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(0, COInvalidCons, 0, 0)];
     self.rightView = rightView;
     [rightView co_leftFromRightOfView:leftView offset:0];
-//    [rightView co_bottomFromTopOfView:topView offset:0];
     
     [self initLeftView];
     [self initRightView];
     
-//    self.backgroundColor = [UIColor greenColor];
-//    self.contentView.backgroundColor = [UIColor redColor];
-//    bg.backgroundColor = [UIColor blueColor];
-//    leftView.backgroundColor = [UIColor purpleColor];
-//    rightView.backgroundColor = [UIColor darkGrayColor];
 }
 
 - (void)initInternalFromNib {
@@ -373,7 +363,7 @@ typedef enum : NSInteger {
 }
 
 - (void)initNameDateView {
-//    UIView *nameDateView = [[self.rightView createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0) width:COInvalidCons height:18.0];
+
      UIView *nameDateView = [[self.rightView createSubView] co_insetsParent:UIEdgeInsetsMake(9, 0, COInvalidCons, 0) width:COInvalidCons height:18.0];
     if ([self isModeCalcHeight]) {
         return;
@@ -881,10 +871,11 @@ typedef enum : NSInteger {
 - (void)initInternal {
     UIView *bg = [[self.contentView createSubView] co_offsetParent:CELL_MARGIN];
     [bg addTapGestureRecognizer:self action:@selector(toShortArticleDetail)];
-    UIView *leftView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, 0, COInvalidCons) width:LEFT_VIEW_WIDTH height:COInvalidCons];
     
     UIView *topView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0) width:COInvalidCons height:26.0];
     self.topView = topView;
+    
+    UIView *leftView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(26.0, 0, 0, COInvalidCons) width:LEFT_VIEW_WIDTH height:COInvalidCons];
     
     UIView *rightView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(26.0, COInvalidCons, 0, 0)];
     self.rightView = rightView;
@@ -894,21 +885,15 @@ typedef enum : NSInteger {
 }
 
 - (void)initRightView{
-    [self initNameDateView];
     [self initAddressView];
     [self initContentView];
     [self initPhotoView];
     [self initTagView];
     [self initPriceView];
+    [self initDateTimeView];
     [self initFunctionView];
 }
 
-- (void)initNameDateView {
-    UIView *nameDateView = [[self.rightView createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0) width:COInvalidCons height:0.0];
-    if ([self isModeCalcHeight]) {
-        return;
-    }
-}
 - (void)initAddressView{
     UIView *addressView = [[self.topView createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0) width:COInvalidCons height:26.0];
     [addressView co_topFromBottomOfPreSiblingWithOffset:12.0];
@@ -927,17 +912,54 @@ typedef enum : NSInteger {
     [addressBtn co_centerYParent];
     [addressBtn addTarget:self action:@selector(toLocationDetail) forControlEvents:UIControlEventTouchUpInside];
     [addressBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_lessThanOrEqualTo(180.0);
+        make.width.mas_lessThanOrEqualTo(200.0);
     }];
     self.addressBtn = addressBtn;
     
     UILabel *distanceLbl = [addressView createSubViewLabelWithFontSize:12 textColor:@"B9B9B9".co_toHexColor];
+    distanceLbl.textAlignment = NSTextAlignmentCenter;
+    distanceLbl.lineBreakMode = NSLineBreakByTruncatingMiddle;
     [[distanceLbl co_bottomParent:5.0] co_leftFromRightOfPreSiblingWithOffset:6.0];
     self.distanceLbl = distanceLbl;
     
-    UILabel *dateLbl = [addressView createSubViewLabelWithFontSize:12 textColor:@"CCCCCC".co_toHexColor];
-    dateLbl.textAlignment = NSTextAlignmentRight;
-    [[dateLbl co_insetsParent:UIEdgeInsetsMake(COInvalidCons, COInvalidCons, 0, 0) width:80 height:COInvalidCons] co_bottomParent:5.0];
+//    UILabel *dateLbl = [addressView createSubViewLabelWithFontSize:11 textColor:@"CCCCCC".co_toHexColor];
+//    dateLbl.textAlignment = NSTextAlignmentRight;
+//    [[dateLbl co_insetsParent:UIEdgeInsetsMake(COInvalidCons, COInvalidCons, 0, 0) width:60 height:COInvalidCons] co_bottomParent:6.0];
+//    self.dateLbl = dateLbl;
+    
+}
+
+- (void)initContentView {
+   UIView *contentView = [[self.rightView createSubView] co_insetsParent:UIEdgeInsetsMake(9, 0, COInvalidCons, 0)];
+    
+    UILabel *contentLbl = [contentView createSubViewLabelWithFontSize:CONTENT_FONT_SIZE textColor:@"434343".co_toHexColor];
+    contentLbl.numberOfLines = CONTENT_MAX_LINES;
+    contentLbl.preferredMaxLayoutWidth = CONTENT_WIDTH;
+    if ([self isLongContentLayout]) {
+        [contentLbl co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0)];
+        UIButton *contentBtn = [contentView createSubViewBtn];
+        [contentBtn setTitle:CONTENT_READ_ALL_TEXT forState:UIControlStateNormal];
+        [contentBtn setTitleColor:@"7AA0C3".co_toHexColor forState:UIControlStateNormal];
+        contentBtn.layer.cornerRadius = 4;
+        contentBtn.layer.borderColor = [@"7AA0C3".co_toHexColor CGColor];
+        contentBtn.layer.borderWidth = 1;
+        contentBtn.titleLabel.font = MZL_FONT(11);
+        [contentBtn co_insetsParent:UIEdgeInsetsMake(COInvalidCons, 0, 0, COInvalidCons) width:54 height:21];
+        [contentBtn co_topFromBottomOfView:contentLbl offset:9];
+        [contentBtn addTarget:self action:@selector(toggleContentStatus:) forControlEvents:UIControlEventTouchUpInside];
+        self.contentBtn = contentBtn;
+    } else {
+        [contentLbl co_withinParent];
+    }
+    self.contentLbl = contentLbl;
+}
+
+- (void)initDateTimeView {
+    UIView *dateView = [self createRightViewSubview:0];
+    // 设置默认高度
+    [dateView co_height:30];
+    UILabel *dateLbl = [dateView createSubViewLabelWithFontSize:11 textColor:@"999999".co_toHexColor];
+    [[dateLbl co_leftParent] co_topParent];
     self.dateLbl = dateLbl;
 }
 
@@ -965,11 +987,11 @@ typedef enum : NSInteger {
 - (void)initInternal {
     UIView *bg = [[self.contentView createSubView] co_offsetParent:CELL_MARGIN];
     [bg addTapGestureRecognizer:self action:@selector(toShortArticleDetail)];
-    UIView *leftView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, 0, COInvalidCons) width:LEFT_VIEW_WIDTH height:COInvalidCons];
-    //    self.leftView = leftView;
     
     UIView *topView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0) width:COInvalidCons height:26.0];
     self.topView = topView;
+    
+    UIView *leftView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(26.0, 0, 0, COInvalidCons) width:LEFT_VIEW_WIDTH height:COInvalidCons];
     
     UIView *rightView = [[bg createSubView] co_insetsParent:UIEdgeInsetsMake(26.0, COInvalidCons, 0, 0)];
     self.rightView = rightView;
@@ -979,21 +1001,15 @@ typedef enum : NSInteger {
 }
 
 - (void)initRightView{
-    [self initNameDateView];
     [self initAddressView];
     [self initContentView];
     [self initPhotoView];
     [self initTagView];
     [self initPriceView];
+    [self initDateTimeView];
     [self initFunctionView];
 }
 
-- (void)initNameDateView {
-    UIView *nameDateView = [[self.rightView createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0) width:COInvalidCons height:0.0];
-    if ([self isModeCalcHeight]) {
-        return;
-    }
-}
 - (void)initAddressView{
     UIView *addressView = [[self.topView createSubView] co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0) width:COInvalidCons height:26.0];
     [addressView co_topFromBottomOfPreSiblingWithOffset:12.0];
@@ -1007,21 +1023,53 @@ typedef enum : NSInteger {
     [addressBtn setImage:[UIImage imageNamed:@"Short_Article_List_Style2_Location"] forState:UIControlStateNormal];
     [addressBtn co_setNormalBgColor:@"64A3DC".co_toHexColor];
     [addressBtn co_setHighlightBgColor: @"4993DB".co_toHexColor];
+    
     [addressBtn co_insetsParent:UIEdgeInsetsMake(COInvalidCons, 0, COInvalidCons, COInvalidCons)];
     [addressBtn co_centerYParent];
     [addressBtn addTarget:self action:@selector(toLocationDetail) forControlEvents:UIControlEventTouchUpInside];
     [addressBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_lessThanOrEqualTo(150.0);
+        make.width.mas_lessThanOrEqualTo(200.0);
     }];
     self.addressBtn = addressBtn;
     
     UILabel *distanceLbl = [addressView createSubViewLabelWithFontSize:12 textColor:@"B9B9B9".co_toHexColor];
+    distanceLbl.textAlignment = NSTextAlignmentCenter;
+    distanceLbl.lineBreakMode = NSLineBreakByTruncatingMiddle;
     [[distanceLbl co_bottomParent:5.0] co_leftFromRightOfPreSiblingWithOffset:6.0];
     self.distanceLbl = distanceLbl;
+}
+
+- (void)initContentView {
+    UIView *contentView = [[self.rightView createSubView] co_insetsParent:UIEdgeInsetsMake(9, 0, COInvalidCons, 0)];
     
-    UILabel *dateLbl = [addressView createSubViewLabelWithFontSize:12 textColor:@"CCCCCC".co_toHexColor];
-    dateLbl.textAlignment = NSTextAlignmentRight;
-    [[dateLbl co_insetsParent:UIEdgeInsetsMake(COInvalidCons, COInvalidCons, 0, 0) width:80 height:COInvalidCons] co_bottomParent:5.0];
+    UILabel *contentLbl = [contentView createSubViewLabelWithFontSize:CONTENT_FONT_SIZE textColor:@"434343".co_toHexColor];
+    contentLbl.numberOfLines = CONTENT_MAX_LINES;
+    contentLbl.preferredMaxLayoutWidth = CONTENT_WIDTH;
+    if ([self isLongContentLayout]) {
+        [contentLbl co_insetsParent:UIEdgeInsetsMake(0, 0, COInvalidCons, 0)];
+        UIButton *contentBtn = [contentView createSubViewBtn];
+        [contentBtn setTitle:CONTENT_READ_ALL_TEXT forState:UIControlStateNormal];
+        [contentBtn setTitleColor:@"7AA0C3".co_toHexColor forState:UIControlStateNormal];
+        contentBtn.layer.cornerRadius = 4;
+        contentBtn.layer.borderColor = [@"7AA0C3".co_toHexColor CGColor];
+        contentBtn.layer.borderWidth = 1;
+        contentBtn.titleLabel.font = MZL_FONT(11);
+        [contentBtn co_insetsParent:UIEdgeInsetsMake(COInvalidCons, 0, 0, COInvalidCons) width:54 height:21];
+        [contentBtn co_topFromBottomOfView:contentLbl offset:9];
+        [contentBtn addTarget:self action:@selector(toggleContentStatus:) forControlEvents:UIControlEventTouchUpInside];
+        self.contentBtn = contentBtn;
+    } else {
+        [contentLbl co_withinParent];
+    }
+    self.contentLbl = contentLbl;
+}
+
+- (void)initDateTimeView {
+    UIView *dateView = [self createRightViewSubview:0];
+    // 设置默认高度
+    [dateView co_height:30];
+    UILabel *dateLbl = [dateView createSubViewLabelWithFontSize:11 textColor:@"999999".co_toHexColor];
+    [[dateLbl co_leftParent] co_topParent];
     self.dateLbl = dateLbl;
 }
 

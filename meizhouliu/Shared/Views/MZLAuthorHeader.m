@@ -24,15 +24,6 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
 - (void)initWithAuthorInfo:(MZLModelUser *)author {
     self.user = author;
     
@@ -41,7 +32,7 @@
     
     [self.imgAuthorHeader addTapGestureRecognizer:self action:@selector(imgAuthorHeader:)];
     
-    self.vwBottom.backgroundColor = MZL_BG_COLOR(); // colorFromRGB(239.0, 239.0, 239.0);
+    self.vwBottom.backgroundColor = [UIColor whiteColor]; // colorFromRGB(239.0, 239.0, 239.0);
     
     for (UILabel *lbl in @[self.lblAuthorName, self.lblAreas, self.lblDescriptions]) {
         lbl.textColor = MZL_COLOR_BLACK_999999();
@@ -62,8 +53,6 @@
     } else {
         self.lblDescriptions.text = author.introduction;
     }
-//    self.lblDescriptions.text = @"很长很长很长很长很长很长很长的很长很长很长很长很长很长很长的告白哟很长很长很长很长很长很长很长的很长很长很长很长很长很长很长的告白哟很长很长很长很长很长很长很长的很长很长很长很长很长很长很长的告白哟";
-//    self.lblAuthorArticleTitle.text = [NSString stringWithFormat:@"%@ 去过", author.name];
     
     [self.attention addTapGestureRecognizer:self action:@selector(toFeriendList:)];
     [self.fensi addTapGestureRecognizer:self action:@selector(toFeriendList:)];
@@ -93,7 +82,20 @@
 }
 
 - (void)toggleAttentionStatus {
-    [self toggleAttentionImage:self.user.isAttentionForCurrentUser];
+    
+    NSArray *arr = [MZLSharedData attentionIdsArr];
+    NSString *s = [NSString stringWithFormat:@"%ld",self.user.identifier];
+    for (NSString *str in arr) {
+        if ([s isEqualToString:str]) {
+            self.user.isAttentionForCurrentUser = YES;
+             [self toggleAttentionImage:self.user.isAttentionForCurrentUser];
+            return;
+        }
+        else {
+            self.user.isAttentionForCurrentUser = NO;
+        }
+        [self toggleAttentionImage:self.user.isAttentionForCurrentUser];
+    }
 }
 
 - (void)toggleAttentionImage:(BOOL)flag {
@@ -110,41 +112,56 @@
         return;
     }
     
+    if ([self.delegate respondsToSelector:@selector(showProgressIndicatorAlertViewOnAuthorDetailVC)]) {
+        [self.delegate showProgressIndicatorAlertViewOnAuthorDetailVC];
+    }
+    
     if (self.user.isAttentionForCurrentUser) {
-        self.user.isAttentionForCurrentUser = NO;
-        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_darenye"] forState:UIControlStateNormal];
         [self removeAttention];
-        self.user.followers_count = [NSString stringWithFormat:@"%d",([self.user.followers_count intValue] - 1)];
-        self.fensiLable.text = self.user.followers_count;
-        
     }else{
-        self.user.isAttentionForCurrentUser = YES;
-        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_cancel_darenye"] forState:UIControlStateNormal];
         [self addAttention];
-        self.user.followers_count = [NSString stringWithFormat:@"%d",([self.user.followers_count intValue] + 1)];
-        self.fensiLable.text = self.user.followers_count;
     }
 
 }
 
 - (void)addAttention {
+    __weak MZLAuthorHeader *weakSelf = self;
     [MZLServices addAttentionForShortArticleUser:self.user succBlock:^(NSArray *models) {
-        //
+        [MZLSharedData addIdIntoAttentionIds:[NSString stringWithFormat:@"%ld",weakSelf.user.identifier]];
+        weakSelf.user.isAttentionForCurrentUser = YES;
+        [weakSelf.attentionBtn setImage:[UIImage imageNamed:@"attention_cancel_darenye"] forState:UIControlStateNormal];
+        weakSelf.user.followers_count = [NSString stringWithFormat:@"%d",([weakSelf.user.followers_count intValue] + 1)];
+        weakSelf.fensiLable.text = weakSelf.user.followers_count;
+        if ([self.delegate respondsToSelector:@selector(hideProgressIndicatorAlertViewOnAuthorDetailVC:)]) {
+            [self.delegate hideProgressIndicatorAlertViewOnAuthorDetailVC:YES];
+        }
     } errorBlock:^(NSError *error) {
-        //
+        if ([self.delegate respondsToSelector:@selector(hideProgressIndicatorAlertViewOnAuthorDetailVC:)]) {
+            [self.delegate hideProgressIndicatorAlertViewOnAuthorDetailVC:NO];
+        }
     }];
 }
 
 - (void)removeAttention {
     MZLModelUser *user = self.user;
+    __weak MZLAuthorHeader *weakSelf = self;
     [MZLServices removeAttentionForShortArticleUser:user succBlock:^(NSArray *models) {
-        //
+        
+        [MZLSharedData removeIdFromAttentionIds:[NSString stringWithFormat:@"%ld",weakSelf.user.identifier]];
+        
+        weakSelf.user.isAttentionForCurrentUser = NO;
+        [weakSelf.attentionBtn setImage:[UIImage imageNamed:@"attention_darenye"] forState:UIControlStateNormal];
+        weakSelf.user.followers_count = [NSString stringWithFormat:@"%d",([weakSelf.user.followers_count intValue] - 1)];
+        weakSelf.fensiLable.text = weakSelf.user.followers_count;
+        if ([self.delegate respondsToSelector:@selector(hideProgressIndicatorAlertViewOnAuthorDetailVC:)]) {
+            [self.delegate hideProgressIndicatorAlertViewOnAuthorDetailVC:YES];
+        }
     } errorBlock:^(NSError *error) {
-        //
+        if ([self.delegate respondsToSelector:@selector(hideProgressIndicatorAlertViewOnAuthorDetailVC:)]) {
+            [self.delegate hideProgressIndicatorAlertViewOnAuthorDetailVC:NO];
+        }
     }];
 }
-
-
 
 @end
 

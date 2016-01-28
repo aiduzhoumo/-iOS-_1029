@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define MZL_IMAGE_MODE_180_180 @"iphone.cut.300.300"
+#define MZL_IMAGE_MODE_180_180 @"iphone.cut.180.180"
 #define MZL_IMAGE_MODE_210_210 @"iphone.cut.210.210"
 #define MZL_IMAGE_MODE_540_366 @"iphone.cut.540.366"
 #define MZL_IMAGE_MODE_580_386 @"iphone.cut.580.386"

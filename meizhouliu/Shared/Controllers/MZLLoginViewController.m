@@ -38,6 +38,8 @@
 #import "MZLBindPhoneViewController.h"
 #import "MZLAppUser.h"
 #import "MZLModifyNameByPhoneViewController.h"
+#import "APService.h"
+#import "NSString+COValidation.h"
 
 #define LOGIN_BTN_TEXT_NORMAL @"登    录"
 #define LOGIN_BTN_TEXT_DISABLED @"登  录  中..."
@@ -79,6 +81,7 @@
     [super viewDidLoad];
     
     [self initInternal];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -510,13 +513,11 @@
     [ShareSDK authWithType:type options:nil result:^(SSAuthState state, id<ICMErrorInfo> error) {
         if (state == SSAuthStateSuccess) {
             id<ISSPlatformCredential> credential = [ShareSDK getCredentialWithType:type];
-<<<<<<< HEAD
-=======
             
->>>>>>> mzl_FJbranch
             if (! credential) {
                 return;
             }
+       
             [self showLoginProgressIndicator];
             
             [self saveUser3rdPartyAuthData:@[[credential uid], [credential token], [credential expired]]];
@@ -532,10 +533,7 @@
 - (void)getUserInfoWithShareType:(ShareType)type {
     [ShareSDK getUserInfoWithType:type authOptions:nil result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error) {
         if (result) {
-<<<<<<< HEAD
-=======
             
->>>>>>> mzl_FJbranch
             [self saveUser3rdPartyNickName:[userInfo nickname] imageUrl:[userInfo profileImage]];
             MZLLoginType loginType = [self loginTypeFromShareType:type];
             [self login:loginType];
@@ -551,7 +549,6 @@
         if (result.error == MZL_RL_RCODE_USER_NOTEXIST) { // openId不存在，注册
             [self reg:type];
         } else {
-            
             [self handleRegLoginResponse:result type:type];
         }
     } errorBlock:^(NSError *error) {
@@ -561,6 +558,12 @@
 
 - (void)reg:(MZLLoginType)type {
     MZLRegister3rdPartySvcParam *params = [MZLRegister3rdPartySvcParam instance];
+    
+    //给昵称做一次判断
+    if(![self judgmentNickName:params.nickName]) {
+        return;
+    }
+    
     [MZLServices registerServiceWithType:type param:params succBlock:^(NSArray *models) {
         MZLRegLoginResponse *result = ((MZLRegLoginResponse *)models[0]);
         [self handle3rdPartyRegResponse:result type:type];
@@ -714,6 +717,11 @@
 
 - (void)saveUser3rdPartyNickName:(NSString *)name imageUrl:(NSString *)imageUrl {
     MZLAppUser *user = [MZLSharedData appUser];
+    
+//    //自己将name及imageUrl转成UTF8类型
+//    user.nickNameFrom3rdParty = [name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    user.imageUrlFrom3rdParty = [imageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
     user.nickNameFrom3rdParty = name;
     user.imageUrlFrom3rdParty = imageUrl;
 }
@@ -754,7 +762,6 @@
         [self saveUserAndToken:response];
         
         if (![response.user.bind isEqualToString:@"true"]) {
-//            [UIAlertView showAlertMessage:@"您的用户未绑定手机号，请绑定后再登录"];
             self.token = response.accessToken.token;
             [self performSegueWithIdentifier:MZL_SEGUE_TOBINDPHONE sender:nil];
             return ;
@@ -826,6 +833,26 @@
 }
 
 
+#pragma mark - 判断昵称用的
+- (BOOL)judgmentNickName:(NSString *)name {
+    NSInteger strLen = [name lengthUsingCustomRule];
+    BOOL isValidLen = strLen >=4 && strLen <= 30;
+    if (! isValidLen) {
+        [self hideProgressIndicator];
+        [UIAlertView showAlertMessage:@"昵称长度为4-30个字符（2-15个汉字）哦!"];
+        return NO;
+    }
+    if (! [self isjudgmentNickname:name]) {
+        [self hideProgressIndicator];
+        [UIAlertView showAlertMessage:@"昵称只支持中英文和数字哦!"];
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)isjudgmentNickname:(NSString *)str {
+    return [str isValidViaRegExp:@"^[\u4e00-\u9fa5_a-zA-Z0-9]+$"];
+}
 
 #pragma mark - login
 
@@ -843,7 +870,7 @@
 
 - (void)dealloc {
 
-    NSLog(@"登入界面消失了");
+    MZLLog(@"登入界面消失了");
 }
 
 
@@ -868,7 +895,7 @@ BOOL shouldRemindLogin() {
 
 BOOL shouldPopupLogin() {
     // 未登录且需要提醒
-    if (! [MZLSharedData isAppUserLogined] && shouldRemindLogin()) {
+    if (! [MZLSharedData isAppUserLogined] &&  shouldRemindLogin()) {
         return YES;
     }
     return NO;
