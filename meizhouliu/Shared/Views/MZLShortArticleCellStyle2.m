@@ -60,6 +60,7 @@ typedef enum : NSInteger {
 @property (nonatomic, weak) UIImageView *authorImage;
 @property (nonatomic, weak) UILabel *nameLbl;
 @property (nonatomic, weak) UILabel *dateLbl;
+@property (nonatomic, weak) UIButton *attentionBtn;
 
 @property (nonatomic, weak) UIImageView *bigPhoto;
 @property (nonatomic, weak) UIScrollView *photoScroll;
@@ -77,13 +78,14 @@ typedef enum : NSInteger {
 @property (nonatomic, weak) UILabel *tagsLbl;
 @property (nonatomic, weak) UILabel *priceLbl;
 
-//@property (nonatomic, weak) UIView *functionView;
+@property (nonatomic, weak) UIView *functionView;
 //@property (nonatomic, weak) UILabel *commentLbl;
 //@property (nonatomic, weak) UILabel *upsLbl;
 @property (nonatomic, weak) UIImageView *upsImage;
 @property (nonatomic, weak) UIButton *commentBtn;
 @property (nonatomic, weak) UIButton *upsBtn;
 @property (nonatomic, weak) UIButton *shareBtn;
+@property (nonatomic, weak) UIButton *gouwuBtn;
 //@property (nonatomic, weak) UIButton *reportBrn;
 @property (nonatomic, weak) UILabel *goodsLbl;
 @property (nonatomic, assign) UIView *goodsView;
@@ -102,7 +104,7 @@ typedef enum : NSInteger {
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -157,21 +159,31 @@ typedef enum : NSInteger {
     topSep.backgroundColor = @"D8D8D8".co_toHexColor;
     
     UIImageView *authorImage = [author createSubViewImageView];
-    CGFloat imageSize = 28.0;
+    CGFloat imageSize = 36.0;
     [[authorImage co_insetsParent:UIEdgeInsetsMake(COInvalidCons, 10, COInvalidCons, COInvalidCons) width:imageSize height:imageSize] co_centerYParent];
     [authorImage co_toRoundShapeWithDiameter:imageSize];
     [authorImage addTapGestureRecognizer:self action:@selector(toAuthorDetail)];
     self.authorImage = authorImage;
     
     UILabel *authorName = [author createSubViewLabelWithFont:MZL_BOLD_FONT(14.0) textColor:@"333333".co_toHexColor];
-    [[authorName co_leftFromRightOfPreSiblingWithOffset:8] co_centerYParent];
+    [[[authorName co_leftFromRightOfPreSiblingWithOffset:8] co_rightParentWithOffset:96] co_centerYParent];
     [authorName addTapGestureRecognizer:self action:@selector(toAuthorDetail)];
     self.nameLbl = authorName;
     
     UILabel *dateTime = [author createSubViewLabelWithFontSize:10 textColor:@"B9B9B9".co_toHexColor];
-    [[dateTime co_rightParentWithOffset:16.0] co_centerYParent];
+    [[dateTime co_leftFromRightOfView:authorImage offset:8] co_bottomParent:5];
     dateTime.hidden = YES;
     self.dateLbl = dateTime;
+    
+    //  关注按钮
+    UIButton *attentionBtn = [author createSubViewBtn];
+    CGFloat attentionH = 28.0;
+    CGFloat attentionW = 80.0;
+    [[attentionBtn co_insetsParent:UIEdgeInsetsMake(COInvalidCons, COInvalidCons, COInvalidCons, 10) width:attentionW height:attentionH] co_centerYParent];
+    [attentionBtn setImage:[UIImage imageNamed:@"attention_shouye"] forState:UIControlStateNormal];
+    [attentionBtn addTarget:self action:@selector(toAttention) forControlEvents:UIControlEventTouchUpInside];
+    self.attentionBtn = attentionBtn;
+    
 }
 
 #pragma mark - UI, photo gallery
@@ -345,6 +357,12 @@ typedef enum : NSInteger {
     [btns addObject:commentBtn];
     self.commentBtn = commentBtn;
     [commentBtn addTarget:self action:@selector(onCommentBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *gouwuBtn = [self functionBtn:functionView imageName:@"Short_Article_List_Style2_gouwu"];
+    [btns addObject:gouwuBtn];
+    self.gouwuBtn = gouwuBtn;
+    [gouwuBtn addTarget:self action:@selector(onGoodsViewClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
     if ([UIViewController mzl_shouldShowShareShortArticleModule]) {
         UIButton *shareBtn = [self functionBtn:functionView imageName:@"Short_Article_List_Style2_Share"];
         self.shareBtn = shareBtn;
@@ -352,28 +370,28 @@ typedef enum : NSInteger {
         [shareBtn addTarget:self action:@selector(onShareBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     
-//    UIButton *reportBrn = [self functionBtn:functionView imageName:@"Short_Article_List_Style2_Share"];
-//    self.reportBrn = reportBrn;
-//    [btns addObject:reportBrn];
-//    [reportBrn addTarget:self action:@selector(onReportBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-
+    //    UIButton *reportBrn = [self functionBtn:functionView imageName:@"Short_Article_List_Style2_Share"];
+    //    self.reportBrn = reportBrn;
+    //    [btns addObject:reportBrn];
+    //    [reportBrn addTarget:self action:@selector(onReportBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
     for (UIButton *btn in btns) {
         [btn co_insetsParent:UIEdgeInsetsMake(0, COInvalidCons, 0, COInvalidCons)];
         [btn co_leftFromRightOfPreSiblingWithOffset:12.0];
     }
     
-    UIView *goodsView = [[functionView createSubView] co_insetsParent:UIEdgeInsetsMake(0, COInvalidCons, 0, 0)];
-    [goodsView addTapGestureRecognizer:self action:@selector(onGoodsViewClicked:)];
-    self.goodsView = goodsView;
-    [goodsView co_leftFromRightOfPreSiblingWithOffset:0.0];
-    UILabel *lblGoodsCount = [goodsView createSubViewLabelWithFontSize:12 textColor:@"999999".co_toHexColor];
-    self.goodsLbl = lblGoodsCount;
-    [lblGoodsCount co_rightCenterYParentWithWidth:COInvalidCons height:COInvalidCons];
-    UILabel *lblGoodsTip = [goodsView createSubViewLabelWithFontSize:12 textColor:@"999999".co_toHexColor];
-    lblGoodsTip.text = @"相关商品";
-    [[lblGoodsTip co_rightFromLeftOfView:lblGoodsCount offset:8] co_centerYParent];
-    UIImageView *lblGoodsImage = [goodsView createSubViewImageViewWithImageNamed:@"Short_Article_List_Style2_Goods"];
-    [[lblGoodsImage co_rightFromLeftOfView:lblGoodsTip offset:4] co_centerYParent];
+    //    UIView *goodsView = [[functionView createSubView] co_insetsParent:UIEdgeInsetsMake(0, COInvalidCons, 0, 0)];
+    //    [goodsView addTapGestureRecognizer:self action:@selector(onGoodsViewClicked:)];
+    //    self.goodsView = goodsView;
+    //    [goodsView co_leftFromRightOfPreSiblingWithOffset:0.0];
+    //    UILabel *lblGoodsCount = [goodsView createSubViewLabelWithFontSize:12 textColor:@"999999".co_toHexColor];
+    //    self.goodsLbl = lblGoodsCount;
+    //    [lblGoodsCount co_rightCenterYParentWithWidth:COInvalidCons height:COInvalidCons];
+    //    UILabel *lblGoodsTip = [goodsView createSubViewLabelWithFontSize:12 textColor:@"999999".co_toHexColor];
+    //    lblGoodsTip.text = @"相关商品";
+    //    [[lblGoodsTip co_rightFromLeftOfView:lblGoodsCount offset:8] co_centerYParent];
+    //    UIImageView *lblGoodsImage = [goodsView createSubViewImageViewWithImageNamed:@"Short_Article_List_Style2_Goods"];
+    //    [[lblGoodsImage co_rightFromLeftOfView:lblGoodsTip offset:4] co_centerYParent];
 }
 
 - (void)onGoodsViewClicked:(UITapGestureRecognizer *)tap {
@@ -412,6 +430,15 @@ typedef enum : NSInteger {
         self.nameLbl.text = self.shortArticle.author.nickName;
         [self.authorImage loadAuthorImageFromURL:self.shortArticle.author.headerImage.fileUrl];
         self.dateLbl.text = self.shortArticle.publishedAtStr;
+
+        if ([MZLSharedData appUserId] == self.shortArticle.author.identifier) {
+            self.attentionBtn.hidden = YES;
+        }
+        if (![MZLSharedData isAppUserLogined]) {
+            [self.attentionBtn setImage:[UIImage imageNamed:@"attention_shouye"] forState:UIControlStateNormal];
+        }else{
+            [self getAttentionStatus];
+        }
     }
 }
 
@@ -479,12 +506,16 @@ typedef enum : NSInteger {
         [self updateBtn:self.commentBtn withCount:self.shortArticle.commentsCount];
         [self toggleUp:self.shortArticle.isUpForCurrentUser];
         [self updateBtn:self.upsBtn withCount:self.shortArticle.upsCount];
-        if (self.shortArticle.goodsCount > 0) {
-            self.goodsView.hidden = NO;
-            self.goodsLbl.text = INT_TO_STR(self.shortArticle.goodsCount);
-        } else {
-            self.goodsView.hidden = YES;
-        }
+        
+//        [self getAttentionStatus];
+//        [self updateBtn:self.gouwuBtn withCount:self.shortArticle.goodsCount];
+        
+        //        if (self.shortArticle.goodsCount > 0) {
+        //            self.goodsView.hidden = NO;
+        //            self.goodsLbl.text = INT_TO_STR(self.shortArticle.goodsCount);
+        //        } else {
+        //            self.goodsView.hidden = YES;
+        //        }
         
         if ([self needsGetUpStatusForCurrentUser]) {
             [self getUpStatus];
@@ -559,6 +590,8 @@ typedef enum : NSInteger {
     [self toggleUpStatus];
 }
 
+
+
 - (void)onCommentBtnClicked:(id)sender {
     if (shouldPopupLogin()) {
         [self.ownerController popupLoginFrom:MZLLoginPopupFromComment executionBlockWhenDismissed:^{
@@ -589,6 +622,68 @@ typedef enum : NSInteger {
 //                                   userInfo:nil
 //                                    repeats:NO];
 //}
+
+#pragma mark - attention
+- (void)toAttention {
+    
+    if (![MZLSharedData isAppUserLogined]) {
+        [UIAlertView showAlertMessage:@"请先登入"];
+    }else{
+        if (self.shortArticle.author.isAttentionForCurrentUser) {
+            self.shortArticle.author.isAttentionForCurrentUser = NO;
+            [self removeAttention];
+        }else {
+            self.shortArticle.author.isAttentionForCurrentUser = YES;
+            [self addAttention];
+        }
+        [self toggleAttentionStatus];
+    }
+}
+
+- (void)toggleAttentionStatus {
+    [self toggleAttention:self.shortArticle.author.isAttentionForCurrentUser];
+    
+}
+- (void)toggleAttention:(BOOL)flag {
+    UIImage *upImage = flag ? [UIImage imageNamed:@"attention_shouye_cancel"] : [UIImage imageNamed:@"attention_shouye"];
+    [self.attentionBtn setImage:upImage forState:UIControlStateNormal];
+}
+
+- (void)addAttention {
+    [MZLServices addAttentionForShortArticleUser:self.shortArticle.author succBlock:^(NSArray *models) {
+        //
+    } errorBlock:^(NSError *error) {
+        //
+    }];
+}
+
+- (void)removeAttention {
+    [MZLServices removeAttentionForShortArticleUser:self.shortArticle.author succBlock:^(NSArray *models) {
+    } errorBlock:^(NSError *error) {
+    }];
+}
+
+- (void)getAttentionStatus {
+    MZLModelShortArticle *shortArticle = self.shortArticle;
+    __weak MZLShortArticleCellStyle2 *weaSelf = self;
+    [MZLServices attentionStatesForCurrentUser:shortArticle.author succBlock:^(NSArray *models) {
+        if (models && models.count > 0) {
+            shortArticle.author.isAttentionForCurrentUser = 1;
+            if (shortArticle.author.identifier == weaSelf.shortArticle.author.identifier) {
+                [weaSelf toggleAttention:shortArticle.author.isAttentionForCurrentUser];
+            }
+        }else {
+            shortArticle.author.isAttentionForCurrentUser = 0;
+            if (shortArticle.author.identifier == weaSelf.shortArticle.author.identifier) {
+                [weaSelf toggleAttention:shortArticle.author.isAttentionForCurrentUser];
+            }
+        }
+        
+    } errorBlock:^(NSError *error) {
+        MZLLog(@"erroe = %@",error);
+    }];
+}
+
 
 #pragma mark - service related
 
@@ -633,6 +728,9 @@ typedef enum : NSInteger {
         // ignore
     }];
 }
+
+
+
 
 #pragma mark - override parent
 

@@ -30,6 +30,8 @@
 @property (nonatomic, assign) NSInteger commentsCount;
 @property (nonatomic, readonly) NSInteger goodsCount;
 
+@property (nonatomic, copy) MZLModelImage *cover;
+
 /** 界面辅助字段，是否展开阅读，用于短文列表 */
 @property (nonatomic, assign) BOOL isViewAll;
 @property (nonatomic, readonly) BOOL needsGetUpStatusForCurrentUser;
@@ -37,6 +39,9 @@
 @property (nonatomic, assign) BOOL isUpForCurrentUser;
 @property (nonatomic, assign) CGFloat cellHeight;
 @property (nonatomic, assign) CGFloat cellHeightUnderViewAll;
+
+///** 界面辅助字段，当前用户是否已关注该短文作者*/
+//@property (nonatomic, assign) BOOL isAttentionForCurrentUser;
 
 - (BOOL)arePhotosUploaded;
 - (NSInteger)countOfUploadedPhotos;

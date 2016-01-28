@@ -40,6 +40,12 @@
 #import "MZLShortArticleDetailVC.h"
 #import "MZLModelShortArticle.h"
 #import <TuSDK/TuSDK.h>
+#import "APService.h"
+#import "IBAlertView.h"
+#import "MZLPersonalizedShortArticleVC.h"
+#import "MZLBaseViewController.h"
+#import "MZLSplashViewController.h"
+#import "MZLTabBarViewController.h"
 
 #import <sys/socket.h>
 #import <sys/sysctl.h>
@@ -48,6 +54,7 @@
 
 @interface MZLAppDelegate () {
     BOOL _shouldInvokeEventsWhenActive;
+    NSDictionary *_userinfoTest;
 }
 
 @end
@@ -68,15 +75,34 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    if (launchOptions != nil) {
-        NSDictionary *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-        if (notification != nil) {
-            [MZLSharedData setApnsInfo:notification];
-        }
+//    if (launchOptions != nil) {
+//        NSDictionary *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+//        if (notification != nil) { 
+//            [MZLSharedData setApnsInfo:notification];
+//        }
+//    }
+   
+    NSDictionary *userinfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    _userinfoTest = userinfo;
+//    [self co_registerNotification];
+       
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        //可以添加自定义categories
+        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                                       UIUserNotificationTypeSound |
+                                                       UIUserNotificationTypeAlert)
+                                           categories:nil];
+    } else {
+        //categories 必须为nil
+        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                       UIRemoteNotificationTypeSound |
+                                                       UIRemoteNotificationTypeAlert)
+                                           categories:nil];
     }
     
-    [self co_registerNotification];
-
+    // Required
+    [APService setupWithOption:launchOptions];
+    
     [self internalInit];
     
     [self servicesOnStartup];
@@ -85,8 +111,169 @@
     return YES;
 }
 
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    // Required
+    [APService registerDeviceToken:deviceToken];
+    
+    //向服务器进行注册
+    [MZLServices registerJpushWithUser];
+//    NSLog(@"[APService registrationID]== %@",[APService registrationID]);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    // Required
+    [APService handleRemoteNotification:userInfo];
+    
+}
+
+#pragma mark - remote notification delegate
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    // IOS 7 Support Required
+   [APService handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+    
+    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
+        _shouldInvokeEventsWhenActive = NO;
+        if(userInfo != nil) {
+            UIViewController *vc = [self currentVisibleViewController];
+            UIStoryboard *sb = MZL_MAIN_STORYBOARD();
+            UIViewController *targetVc;
+
+            if ([[userInfo valueForKey:@"article"] valueForKey:@"id"]) {
+                MZLModelArticle *article = [[MZLModelArticle alloc] init];
+                article.identifier = [[[userInfo valueForKey:@"article"] valueForKey:@"id"] intValue];
+                MZLArticleDetailViewController * vcArticleDetail = (MZLArticleDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLArticleDetailViewController class])];
+                vcArticleDetail.articleParam = article;
+                targetVc = vcArticleDetail;
+            }
+            else if([[userInfo valueForKey:@"notice"] valueForKey:@"id"]) {
+                MZLModelNotice *notice = [[MZLModelNotice alloc] init];
+                notice.identifier = [[[userInfo valueForKey:@"notice"] valueForKey:@"id"] intValue];
+                MZLNoticeDetailViewController * vcNoticeDetail = (MZLNoticeDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLNoticeDetailViewController class])];
+                vcNoticeDetail.noticeParam = notice;
+                targetVc = vcNoticeDetail;
+            }
+            else if ([[userInfo valueForKey:@"short_article"] valueForKey:@"id"]) {
+                MZLModelShortArticle *shortArticle = [[MZLModelShortArticle alloc] init];
+                shortArticle.identifier = [[[userInfo valueForKey:@"short_article"] valueForKey:@"id"] intValue];
+                MZLShortArticleDetailVC *vcShortArticle = [MZL_SHORT_ARTICLE_STORYBOARD() instantiateViewControllerWithIdentifier:NSStringFromClass([MZLShortArticleDetailVC class])];
+                vcShortArticle.shortArticle = shortArticle;
+                vcShortArticle.popupCommentOnViewAppear = NO;
+                vcShortArticle.hidesBottomBarWhenPushed = YES;
+                targetVc = vcShortArticle;
+            }
+            if (targetVc) {
+                [vc mzl_pushViewController:targetVc];
+            }
+        }
+    }
+        if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+            
+        _shouldInvokeEventsWhenActive = NO;
+        if(userInfo != nil) {
+            
+            if ([[userInfo valueForKey:@"article"] valueForKey:@"id"]) {
+             
+                NSString *n = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+                
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:n preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                UIAlertAction *other = [UIAlertAction actionWithTitle:@"查看" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    UIViewController *vc = [self currentVisibleViewController];
+                    UIStoryboard *sb = MZL_MAIN_STORYBOARD();
+                    UIViewController *targetVc;
+                    
+                    MZLModelArticle *article = [[MZLModelArticle alloc] init];
+                    article.identifier = [[[userInfo valueForKey:@"article"] valueForKey:@"id"] intValue];
+                    MZLArticleDetailViewController * vcArticleDetail = (MZLArticleDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLArticleDetailViewController class])];
+                    vcArticleDetail.articleParam = article;
+                    targetVc = vcArticleDetail;
+                    
+                    if (targetVc) {
+                        [vc mzl_pushViewController:targetVc];
+                    }
+                }];
+                
+                [alert addAction:cancel];
+                [alert addAction:other];
+                
+                [self.currentVisibleViewController presentViewController:alert animated:YES completion:nil];
+                
+            }else if([[userInfo valueForKey:@"notice"] valueForKey:@"id"]) {
+                
+                NSString *n = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+                
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:n preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                UIAlertAction *other = [UIAlertAction actionWithTitle:@"查看" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    UIViewController *vc = [self currentVisibleViewController];
+                    UIStoryboard *sb = MZL_MAIN_STORYBOARD();
+                    UIViewController *targetVc;
+                    
+                    MZLModelNotice *notice = [[MZLModelNotice alloc] init];
+                    notice.identifier = [[[userInfo valueForKey:@"notice"] valueForKey:@"id"] intValue];
+                    MZLNoticeDetailViewController * vcNoticeDetail = (MZLNoticeDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLNoticeDetailViewController class])];
+                    vcNoticeDetail.noticeParam = notice;
+                    targetVc = vcNoticeDetail;
+                    
+                    if (targetVc) {
+                        [vc mzl_pushViewController:targetVc];
+                    }
+                }];
+                
+                [alert addAction:cancel];
+                [alert addAction:other];
+                
+                [self.currentVisibleViewController presentViewController:alert animated:YES completion:nil];
+            }else if([[userInfo valueForKey:@"short_article"] valueForKey:@"id"]) {
+                NSString *n = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+                
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:n preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                UIAlertAction *other = [UIAlertAction actionWithTitle:@"查看" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    UIViewController *vc = [self currentVisibleViewController];
+//                    UIStoryboard *sb = MZL_MAIN_STORYBOARD();
+                    UIViewController *targetVc;
+                    
+                    MZLModelShortArticle *shortArticle = [[MZLModelShortArticle alloc] init];
+                    shortArticle.identifier = [[[userInfo valueForKey:@"short_article"] valueForKey:@"id"] intValue];
+                    MZLShortArticleDetailVC *vcShortArticle = [MZL_SHORT_ARTICLE_STORYBOARD() instantiateViewControllerWithIdentifier:NSStringFromClass([MZLShortArticleDetailVC class])];
+                    vcShortArticle.shortArticle = shortArticle;
+                    vcShortArticle.popupCommentOnViewAppear = NO;
+                    vcShortArticle.hidesBottomBarWhenPushed = YES;
+                    targetVc = vcShortArticle;
+                    
+                    if (targetVc) {
+                        [vc mzl_pushViewController:targetVc];
+                    }
+                }];
+                
+                [alert addAction:cancel];
+                [alert addAction:other];
+                
+                [self.currentVisibleViewController presentViewController:alert animated:YES completion:nil];
+
+            }
+        }
+    }
+    
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
@@ -109,6 +296,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
     if (_shouldInvokeEventsWhenActive) {
         _shouldInvokeEventsWhenActive = NO;
         [MZLSharedData startLocationService];
@@ -131,6 +319,7 @@
 }
  */
 
+
 // 重写openURL方法：
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -146,6 +335,7 @@
     if ([self isMeizhouliuSchema:url]) {
         return YES;
     }
+    
     return [ShareSDK handleOpenURL:url
                  sourceApplication:sourceApplication
                         annotation:annotation
@@ -227,10 +417,7 @@
                      qqApiInterfaceCls:[QQApiInterface class]
                        tencentOAuthCls:[TencentOAuth class]];
     
-#warning qq好友应该用这个方法
-//    + (void)connectQQWithAppId:(NSString *)appId qqApiCls:(Class)qqApiCls;
-    
-    
+
     //添加QQ空间应用
     [ShareSDK connectQZoneWithAppKey:@"101141759"
                            appSecret:@"653d3aa85c7322e3fb5f41f4a58807ba"
@@ -238,7 +425,6 @@
                      tencentOAuthCls:[TencentOAuth class]];
 
     
-#warning 自己把下面的代码打开注释了
 //    //添加腾讯微博应用
 //    [ShareSDK connectTencentWeiboWithAppKey:@"801520494"
 //                                  appSecret:@"653d3aa85c7322e3fb5f41f4a58807ba"
@@ -279,6 +465,8 @@
         //设置version标识
         NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         [MobClick setAppVersion:version];
+        
+
 #ifdef MZL_DEBUG
         [MobClick setLogEnabled:YES];
 #endif
@@ -337,6 +525,9 @@
 - (void)servicesOnStartup {
     [self checkAppMessages];
     
+    //注册爱度周末产品的user_token
+    [MZLServices getDuzhoumoUserToken];
+    
     [MZLServices heartbeatOnAppStartup];
     [MZLServices filtersListService];
     [MZLServices keywordsService];
@@ -357,74 +548,33 @@
             MZLAppUser *appUser = [MZLSharedData appUser];
             appUser.user = user;
             [appUser saveInPreference];
+            
         } errorBlock:^(NSError *error) {
             // ignore error...
         }];
     }
 }
 
-#pragma mark - remote notification delegate
+//- (id)initWithCoder:(NSCoder *)aDecoder {
+//    if (self = [super init]) {
+//       [MZLSharedData appUser].user.level = [[aDecoder decodeObjectForKey:@"KEY_USER_LEVEL"] integerValue];
+//    }
+//    return self;
+//}
+//
+//- (void)encodeWithCoder:(NSCoder *)aCoder {
+//     [aCoder encodeObject:@([MZLSharedData appUser].user.level) forKey:@"KEY_USER_LEVEL"];;
+//}
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
-//    [UMessage didReceiveRemoteNotification:userInfo];
-    if([UIApplication sharedApplication].applicationState == UIApplicationStateBackground ||
-       [UIApplication sharedApplication].applicationState == UIApplicationStateInactive) {
-        _shouldInvokeEventsWhenActive = NO;
-        if(userInfo != nil) {
-            UIViewController *vc = [self currentVisibleViewController];
-            UIStoryboard *sb = MZL_MAIN_STORYBOARD();
-            UIViewController *targetVc;
-            //article 不为空，跳转到指定文章
-            if (!isEmptyString([[userInfo valueForKey:@"article"] valueForKey:@"id"])) {
-                MZLModelArticle *article = [[MZLModelArticle alloc] init];
-                article.identifier = [[[userInfo valueForKey:@"article"] valueForKey:@"id"] intValue];
-                MZLArticleDetailViewController * vcArticleDetail = (MZLArticleDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLArticleDetailViewController class])];
-                vcArticleDetail.articleParam = article;
-                targetVc = vcArticleDetail;
-            }
-            //destination 不为空 跳到指定目的地
-            else if(!isEmptyString([[userInfo valueForKey:@"destination"] valueForKey:@"id"])) {
-                MZLModelLocationBase *location = [[MZLModelLocationBase alloc] init];
-                location.identifier = [[[userInfo valueForKey:@"destination"] valueForKey:@"id"] intValue];
-                MZLLocationDetailViewController * vcLocationDetail = (MZLLocationDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLLocationDetailViewController class])];
-                vcLocationDetail.locationParam = location;
-                targetVc = vcLocationDetail;
-            }
-            // 跳转个人通知
-            else if(!isEmptyString([[userInfo valueForKey:@"notice"] valueForKey:@"id"])) {
-                MZLModelNotice *notice = [[MZLModelNotice alloc] init];
-                notice.identifier = [[[userInfo valueForKey:@"notice"] valueForKey:@"id"] intValue];
-                MZLNoticeDetailViewController * vcNoticeDetail = (MZLNoticeDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLNoticeDetailViewController class])];
-                vcNoticeDetail.noticeParam = notice;
-                targetVc = vcNoticeDetail;
-            }
-            // 跳转短文详情
-            else if (!isEmptyString([[[MZLSharedData apsInfo] valueForKey:@"short_article"] valueForKey:@"id"])) {
-                MZLModelShortArticle *shortArticle = [[MZLModelShortArticle alloc] init];
-                shortArticle.identifier = [[[[MZLSharedData apsInfo] valueForKey:@"short_article"] valueForKey:@"id"] intValue];
-                MZLShortArticleDetailVC *vcShortArticle = [MZL_SHORT_ARTICLE_STORYBOARD() instantiateViewControllerWithIdentifier:NSStringFromClass([MZLShortArticleDetailVC class])];
-                vcShortArticle.shortArticle = shortArticle;
-                vcShortArticle.popupCommentOnViewAppear = NO;
-                vcShortArticle.hidesBottomBarWhenPushed = YES;
-                targetVc = vcShortArticle;
-            }
-            if (targetVc) {
-                [vc mzl_pushViewController:targetVc];
-            }
-        }
-    }
-    //call the fetchCompletionHandler as soon as you're finished performing that operation, so the system can accurately estimate its power and data cost
-    completionHandler(UIBackgroundFetchResultNewData);
-}
 
 //获取当前的viewControll
 - (UIViewController *)currentVisibleViewController {
     UIViewController *rootVc = [UIApplication sharedApplication].keyWindow.rootViewController;
     if (! [rootVc.presentedViewController isKindOfClass:[UITabBarController class]]) {
+        [MZLSharedData setApnsInfoForNotification:_userinfoTest];
         return nil;
     }
     UITabBarController *tabBarVc = (UITabBarController *)rootVc.presentedViewController;
-    
     UINavigationController *navVc = (UINavigationController *)tabBarVc.selectedViewController;
     UIViewController *vc = navVc.visibleViewController;
     if (vc.presentedViewController) {
@@ -437,20 +587,21 @@
     return vc;
 }
 
-//- (UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController {
-//    if ([rootViewController isKindOfClass:[UITabBarController class]]) {
-//        UITabBarController* tabBarController = (UITabBarController*)rootViewController;
-//        return [self topViewControllerWithRootViewController:tabBarController.selectedViewController];
-//    } else if ([rootViewController isKindOfClass:[UINavigationController class]]) {
-//        UINavigationController* navigationController = (UINavigationController*)rootViewController;
-//        return [self topViewControllerWithRootViewController:navigationController.visibleViewController];
-//    } else if (rootViewController.presentedViewController) {
-//        UIViewController* presentedViewController = rootViewController.presentedViewController;
-//        return [self topViewControllerWithRootViewController:presentedViewController];
-//    } else {
-//        return rootViewController;
-//    }
-//}
+
+- (UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController {
+    if ([rootViewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController* tabBarController = (UITabBarController*)rootViewController;
+        return [self topViewControllerWithRootViewController:tabBarController.selectedViewController];
+    } else if ([rootViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController* navigationController = (UINavigationController*)rootViewController;
+        return [self topViewControllerWithRootViewController:navigationController.visibleViewController];
+    } else if (rootViewController.presentedViewController) {
+        UIViewController* presentedViewController = rootViewController.presentedViewController;
+        return [self topViewControllerWithRootViewController:presentedViewController];
+    } else {
+        return rootViewController;
+    }
+}
 
 #pragma mark - push notifications delegate
 

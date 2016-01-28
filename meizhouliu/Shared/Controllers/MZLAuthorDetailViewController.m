@@ -22,6 +22,7 @@
 #import "MZLShortArticleCell.h"
 #import "UIViewController+MZLShortArticle.h"
 #import "MZLModelUser.h"
+#import "MZLFeriendListViewController.h"
 
 @interface MZLAuthorDetailViewController () {
     MZLModelUser *_authorDetail;
@@ -50,6 +51,8 @@
     self.tvAuthor.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tvAuthor.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     [self loadAuthorDetail];
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toFeriendList:) name:@"toFeriendList" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,12 +100,26 @@
 }
 
 - (void)initUI {
+    _authorDetail.isAttentionForCurrentUser = self.authorParam.isAttention;
     if ([_authorDetail isSignedAuthor]) { // 签约作者
         self.navigationItem.title = MZL_AUTHOR_IS_SIGNED_WRITER;
-        self.tvAuthor.tableHeaderView = [MZLSignedAuthorHeader signedAuthorHeader:_authorDetail];
+        MZLAuthorHeader *headerView = (MZLAuthorHeader *)[MZLSignedAuthorHeader signedAuthorHeader:_authorDetail];
+        self.tvAuthor.tableHeaderView = headerView;
+        headerView.clickBlcok = ^(MZLModelUser *user) {
+            MZLFeriendListViewController *feriendList = [MZL_MAIN_STORYBOARD() instantiateViewControllerWithIdentifier:@"MZLFeriendListViewController"];
+            feriendList.user = user;
+            feriendList.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:feriendList animated:YES];        };
     } else {
         self.navigationItem.title = MZL_AUTHOR_NOT_SIGNED_WRITER;
-        self.tvAuthor.tableHeaderView = [MZLNormalAuthorHeader normalAuthorHeader:_authorDetail];
+        MZLAuthorHeader *headerView = [MZLNormalAuthorHeader normalAuthorHeader:_authorDetail];
+        self.tvAuthor.tableHeaderView = headerView;
+        headerView.clickBlcok = ^(MZLModelUser *user) {
+            MZLFeriendListViewController *feriendList = [MZL_MAIN_STORYBOARD() instantiateViewControllerWithIdentifier:@"MZLFeriendListViewController"];
+            feriendList.user = user;
+            feriendList.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:feriendList animated:YES];
+        };
     }
     self.view.backgroundColor = MZL_BG_COLOR();
 }

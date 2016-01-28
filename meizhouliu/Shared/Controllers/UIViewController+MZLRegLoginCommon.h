@@ -30,6 +30,7 @@
 #define TAG_TEXT_EMAIL 100
 #define TAG_TEXT_USER 101
 #define TAG_TEXT_PWD 102
+#define TAG_TEXT_PHONENUM 103
 //#define TAG_TEXT_USER_EMAIL 104
 
 #define TEXT_TO_IMAGE_GAP 100
@@ -43,6 +44,8 @@
 
 @interface UIViewController (MZLRegLoginCommon)
 
+@property (nonatomic, copy) NSString *token;
+
 - (BOOL)validateInput;
 
 - (void)initTextFields:(NSArray *)textFields;
@@ -54,6 +57,7 @@
 - (void)onRegError;
 - (void)onRegErrorWithCode:(NSInteger)errorCode;
 - (void)handleRegResponse:(MZLRegLoginResponse *)response type:(MZLLoginType)type;
+- (void)handleRegPhoneResponse:(MZLRegLoginResponse *)response type:(MZLLoginType)type;
 
 - (void)showRegProgressIndicator;
 

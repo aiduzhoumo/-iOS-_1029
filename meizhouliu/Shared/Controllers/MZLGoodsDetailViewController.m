@@ -32,7 +32,8 @@
     self.title = @"相关商品";
     self.webView.backgroundColor = MZL_BG_COLOR();
     self.webView.delegate = self;
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:webUrl(self.goodsUrl)];
+//    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:webUrl(self.goodsUrl)];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:webDuZhouMoUrl(self.goodsUrl)];
     [self.webView loadRequest:request];
 }
 

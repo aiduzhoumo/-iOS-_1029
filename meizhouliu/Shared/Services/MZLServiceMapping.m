@@ -32,6 +32,8 @@
 #import "MZLUserDetailResponse.h"
 #import "MZLModelUserInfoDetail.h"
 #import "MZLImageUploadResponse.h"
+#import "MZLBindPhoneResponse.h"
+#import "MZLTuiJianDaren.h"
 
 #define ID_MAPPING @"id":@"identifier"
 #define TAGS_MAPPING @"tags_str":@"tags"
@@ -377,7 +379,12 @@
     return @{
              ID_MAPPING,
              @"nickname":   @"nickName",
-             @"level"   :   @"level"
+             @"level"   :   @"level",
+//             @"phone"   :   @"phone"
+             @"intro": @"introduction",
+             @"bind" : @"bind",
+             @"followers_count" : @"followers_count",
+             @"followees_count" : @"followees_count"
              };
 }
 
@@ -408,17 +415,31 @@
 }
 
 #pragma mark - userInfo
++ (NSArray *)userInfoBindMappings {
+    NSMutableArray *result = [NSMutableArray array];
+    [result addObject:[self relMappingToKeyPath:@"user" fromAttr:@"user" withMapping:[self userObjectMapping]]];
+    [result addObject:[self relMappingToKeyPath:@"messages" fromAttr:@"messages" withMapping:[self messagesResponseObjectMapping]]];
+    return result;
+}
 + (NSArray *)userInfoMappings {
     NSMutableArray *result = [NSMutableArray array];
     [result addObject:[self relMappingToKeyPath:@"user" fromAttr:@"user" withMapping:[self userObjectMapping]]];
     [result addObject:[self relMappingToKeyPath:@"access_token" fromAttr:@"accessToken" withMapping:[self accessTokenObjectMapping]]];
-    [result addObject:[self relMappingToKeyPath:@"messages" fromAttr:@"messages" withMapping:[self messagesResponseObjectMapping]]];    return result;
+    [result addObject:[self relMappingToKeyPath:@"messages" fromAttr:@"messages" withMapping:[self messagesResponseObjectMapping]]];
+    return result;
 }
 
 + (RKObjectMapping *)userRegLogInObjectMapping {
     RKObjectMapping *result = [RKObjectMapping mappingForClass:[MZLRegLoginResponse class]];
     [result addAttributeMappingsFromArray:@[ @"error",@"message" ]];
     [result addPropertyMappingsFromArray:[self userInfoMappings]];
+    return result;
+}
+
++ (RKObjectMapping *)userBindPhoneObjectMapping {
+    RKObjectMapping *result = [RKObjectMapping mappingForClass:[MZLBindPhoneResponse class]];
+    [result addAttributeMappingsFromArray:@[@"error",@"message"]];
+    [result addPropertyMappingsFromArray:[self userInfoBindMappings]];
     return result;
 }
 
@@ -431,6 +452,10 @@
              @"level":       @"level",
              @"sex":       @"sex",
              @"intro": @"introduction",
+             @"bind" : @"bind",
+             @"followers_count" : @"followers_count",
+             @"followees_count" : @"followees_count"
+//             @"phone": @"phone"
              };
 }
 
@@ -463,6 +488,15 @@
     [result addAttributeMappingsFromArray:@[@"error", @"message"]];
     [result addPropertyMapping:[self relMappingToKeyPath:@"messages" fromAttr:@"messages" withMapping:[self messagesResponseObjectMapping]]];
     [result addPropertyMapping:[self relMappingToKeyPath:@"photo" fromAttr:@"image" withMapping:[self imageObjectMapping]]];
+    return result;
+}
+
++ (RKObjectMapping *)tuijianDarenObjectMapping {
+    RKObjectMapping *result = [RKObjectMapping mappingForClass:[MZLTuiJianDaren class]];
+    [result addAttributeMappingsFromDictionary:[self authorDetailMapping]];
+    [result addPropertyMappingsFromArray:[self authorRelationMappings]];
+    [result addRelationshipMappingWithSourceKeyPath:@"articles" mapping:[self articleObjectMapping]];
+    [result addRelationshipMappingWithSourceKeyPath:@"cover" mapping:[self imageObjectMapping]];
     return result;
 }
 

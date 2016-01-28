@@ -12,6 +12,10 @@
 
 @interface MZLSharedData : NSObject
 
+#pragma mark -duzoumoToken
++ (void)setAppDuZhouMoUserToken:(NSString *)string;
++ (NSString *)appDuZhouMoToken;
+
 #pragma mark - tags config
 
 + (NSArray *)allTagTypes;
@@ -114,6 +118,10 @@
 + (NSDictionary *)apsInfo;
 + (void)setApnsInfo:(NSDictionary *)info;
 
++ (void)setApnsInfoForNotification:(NSDictionary *)info;
++ (NSDictionary *)getApnsInfoForNotification;
++ (void)removeApnsinfoForNotification;
+
 //#pragma mark - misc settings
 //
 //+ (BOOL)shouldPopupFiltersOnAppStartup;
@@ -124,5 +132,7 @@
 //+ (void)setAppNotices:(MZLAppNotices *)notices;
 //+ (void)loadNoticesFromCache;
 //+ (void)clearAppNotices;
+
++ (void)loadAppUserBindInfoFromCache;
 
 @end

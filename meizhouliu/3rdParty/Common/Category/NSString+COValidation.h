@@ -14,7 +14,7 @@
 
 - (BOOL)isAllChineseCharacters;
 - (BOOL)isAllEnglishLetters;
-
+- (BOOL)isValidPhone;
 - (BOOL)co_isAllDigits;
 
 - (BOOL)isValidViaRegExp:(NSString *)regExp;

@@ -16,6 +16,7 @@
 #import "MZLSplashViewController.h"
 #import "MZLModelUserLocationPref.h"
 #import "MZLModelUserFavoredArticle.h"
+#import "MZLLoginByMailViewController.h"
 
 @implementation UIViewController (MZLAdditions)
 
@@ -140,10 +141,22 @@
     [self presentViewController:login animated:YES completion:nil];
 }
 
+#pragma mark - when to pop up login controller
+
+- (void)popupMailLoginFrom:(NSInteger)from executionBlockWhenDismissed:(CO_BLOCK_VOID)executionBlockWhenDismissed {
+    UIStoryboard *storyboard = MZL_MAIN_STORYBOARD();
+    MZLLoginByMailViewController * login = (MZLLoginByMailViewController *) [storyboard instantiateViewControllerWithIdentifier:@"MZLMailLoginViewController"];
+    login.popupFrom = from;
+    login.executionBlockWhenDismissed = executionBlockWhenDismissed;
+    [self presentViewController:login animated:YES completion:nil];
+}
+
+
 #pragma mark - push view controller when notification arrives
 
 - (void)mzl_pushViewController:(UIViewController *)vc {
     // 一般来说，所有的vc都由splashVc模态展示，除非该vc再被其它vc模态展示
+    [UIAlertView showAlertMessage:NSStringFromClass([vc class])];
     if (! [self.presentingViewController isKindOfClass:[MZLSplashViewController class]]) {
         UIViewController *presentingVc = self.presentingViewController;
         __weak UINavigationController *navVc;
@@ -159,8 +172,10 @@
         }];
         return;
     }
+        
     [self.navigationController pushViewController:vc animated:YES];
 }
+
 
 #pragma mark - active from background
 

@@ -8,6 +8,7 @@
 
 #import "MZLSplashViewController.h"
 #import "MZLInitNavViewController.h"
+#import "MZLTabBarViewController.h"
 
 @interface MZLSplashViewController () {
 }
@@ -25,7 +26,7 @@
     }
     return self;
 }
-
+#define MZL_FLAG_LAST_VISITED_VERSION @"MZL_FLAG_LAST_VISITED_VERSION"
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -36,10 +37,16 @@
     } else if(co_isIPhone6PlusScreen()) {
         self.imgLaunch.image = [UIImage imageNamed:@"LaunchImageIphone6+"];
     }
+    
+  
 
 }
 
-#define MZL_FLAG_LAST_VISITED_VERSION @"MZL_FLAG_LAST_VISITED_VERSION"
+- (void)viewWillAppear:(BOOL)animated {
+
+//    [super viewWillAppear:animated];
+    
+}
 
 - (void)viewDidAppear:(BOOL)animated {
     NSString *version = co_bundleVersion();
@@ -57,7 +64,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 #pragma mark - Navigation
  

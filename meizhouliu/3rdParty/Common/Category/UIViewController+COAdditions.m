@@ -23,15 +23,49 @@
 }
 
 - (void)dismissCurrentViewController:(CO_BLOCK_VOID)completion animatedFlag:(BOOL)animatedFlag {
+    
     if (self.navigationController) {
         [self.navigationController popViewControllerAnimated:animatedFlag];
+        
     } else {
+        
         [self.presentingViewController dismissViewControllerAnimated:animatedFlag completion:^{
+                        
             if (completion) {
                 completion();
             }
         }];
     }
+}
+
+- (void)dismissMailCurrentViewController:(CO_BLOCK_VOID)completion animatedFlag:(BOOL)animatedFlag {
+    
+//    UIViewController *rootVc = self.presentingViewController;
+//    
+//    NSLog(@"rootVc = %@",rootVc);
+//    [self dismissModalViewControllerAnimated:YES];
+    
+//    [rootVc dismissViewControllerAnimated:YES completion:^{
+//        NSLog(@"%@",self.presentingViewController);
+//    }];
+    
+    [self.presentingViewController.navigationController dismissViewControllerAnimated:animatedFlag completion:^{
+        
+//        UIViewController *rootVc = self
+        
+        NSLog(@"self.presentingViewController == %@",self.presentingViewController);
+        
+        if (self.presentingViewController.navigationController) {
+            [self.presentingViewController.navigationController popViewControllerAnimated:animatedFlag];
+        } else {
+            [self.presentingViewController dismissViewControllerAnimated:animatedFlag completion:^{
+                if (completion) {
+                    completion();
+                }
+            }];
+        }
+    }];
+
 }
 
 - (BOOL)co_isVisible {

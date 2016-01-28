@@ -27,6 +27,9 @@
 #import "MZLAppNotices.h"
 #import <IBMessageCenter.h>
 #import "MZLShortArticleCell.h"
+#import "MZLMyFavoriteHeaderView.h"
+#import "MZLFeriendListViewController.h"
+#import "MZLUserDetailResponse.h"
 
 #import "MZLLoginViewController.h"
 #import "MZLTabBarViewController.h"
@@ -50,6 +53,10 @@
     NSInteger _loginStatus;
     BOOL _refreshFlag;
 }
+
+@property (nonatomic, weak) UIView *headerView;
+
+@property (nonatomic, strong) MZLModelUser *user;
 
 @end
 
@@ -77,6 +84,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     if ([MZLSharedData hasApsInfo]) {
         [self launchToNoticeDetail];
     } else {
@@ -86,6 +94,44 @@
             [self refreshViewData];
         }
     }
+    
+    //取得用户信息，进行设置
+   
+    if ([MZLSharedData isAppUserLogined]) {
+//        MZLModelUser *user = [MZLSharedData appUser].user;
+        
+        __weak MZLModelUser *user = self.user;
+        [MZLServices userInfoServiceWithSuccBlock:^(NSArray *models) {
+            NSLog(@"%@",models[0]);
+            MZLUserDetailResponse *user = (MZLUserDetailResponse *)models[0];
+            self.user = user.user;
+            [self refreshMyHeaderView];
+        } errorBlock:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
+        
+        
+    }else{
+        self.headIcon.image = [UIImage imageNamed:@"DefaultUserHeader"];
+        self.nameLbl.text = @"您还没登入";
+        self.attentionCountLbl.text = @"0";
+        self.fensiCountLbl.text = @"0";
+        self.introdutionLbl.text = @"个人简介:您还未登入,请登入后查看";
+    }
+    
+}
+
+- (void)refreshMyHeaderView {
+    [self.headIcon toRoundShape];
+    [self.headIcon loadAuthorImageFromURL:_user.photoUrl];
+    self.nameLbl.text = _user.nickName;
+    self.attentionCountLbl.text = _user.followees_count;
+    [self.attentionCountLbl addTapGestureRecognizer:self action:@selector(toAttentionView:)];
+    [self.attentionLbl addTapGestureRecognizer:self action:@selector(toAttentionView:)];
+    self.fensiCountLbl.text = _user.followers_count;
+    [self.fensiCountLbl addTapGestureRecognizer:self action:@selector(toAttentionView:)];
+    [self.fensiLbl addTapGestureRecognizer:self action:@selector(toAttentionView:)];
+    self.introdutionLbl.text = [NSString stringWithFormat:@"个人简介:%@",_user.introduction];
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,9 +149,15 @@
     
     _tv = self.tvMy;
     _tv.backgroundColor = [UIColor clearColor];
-    [self adjustTableViewBottomInset:self.tabBarController.tabBar.height scrollIndicatorBottomInset:self.tabBarController.tabBar.height];
+//    [self adjustTableViewBottomInset:self.tabBarController.tabBar.height scrollIndicatorBottomInset:self.tabBarController.tabBar.height];
+    [self adjustTableViewBottomInset:0.0 scrollIndicatorBottomInset:0.0];
     [_tv removeUnnecessarySeparators];
     [_tv setSeparatorColor:MZL_SEPARATORS_BG_COLOR()];
+    
+//    self.headerView = [MZLMyFavoriteHeaderView myFavoriteHeaderViewInstance];
+//    _tv.tableHeaderView = self.headerView;
+    
+    _tv.tableHeaderView = self.textVIew;
     
 //    [self onLoginStatusChanged];
 }
@@ -120,7 +172,17 @@
         _headView = [MZLMyNormalTopBar tabBarInstance:window.bounds.size];
     }
     _headView.delegate = self;
+    
     [self.vwTopBar addSubview:_headView];
+}
+
+#pragma mark - to AttentionFensi View
+- (void)toAttentionView:(UITapGestureRecognizer *)tap {
+
+    MZLFeriendListViewController *feriendList = [MZL_MAIN_STORYBOARD() instantiateViewControllerWithIdentifier:@"MZLFeriendListViewController"];
+    feriendList.user = self.user;
+    feriendList.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:feriendList animated:YES];
 }
 
 #pragma mark - login status
@@ -468,10 +530,11 @@
         _tv.contentInset = insets;
         [_tv setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     } else {
-        insets.top = 0;
-        _tv.contentInset = insets;
-        _tv.separatorColor = @"D8D8D8".co_toHexColor;
-        [_tv setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+#pragma mark - 暂时隐藏,以免页面乱（不知这里干嘛用的）
+//        insets.top = 0;
+//        _tv.contentInset = insets;
+//        _tv.separatorColor = @"D8D8D8".co_toHexColor;
+//        [_tv setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     }
     [self refreshWhenViewIsVisible];
 }

@@ -45,11 +45,12 @@
     __weak UITextView *_commentTextView;
     __weak UIButton *_sendBtn;
     __weak UIWebView *_adWebView;
-//    __weak COKeyboardToolbar *_placeholderBar;
+    //    __weak COKeyboardToolbar *_placeholderBar;
 }
 
 @property (nonatomic, weak) UILabel *commentLbl;
 @property (nonatomic, weak) UILabel *upsLbl;
+@property (nonatomic, weak) UILabel *buyLbl;
 @property (nonatomic, weak) UIImageView *upsImage;
 
 @property (nonatomic, assign) BOOL scrollToTheFirstComment;
@@ -58,6 +59,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *authorName;
 @property (weak, nonatomic) IBOutlet UITableView *tvComments;
 
+@property (nonatomic, weak) UIButton *attentionBtn;
 @property (nonatomic, weak) UIAlertView *alert;
 
 @end
@@ -93,6 +95,39 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    //刷新关注按钮的状态
+    [self getAttentionStatus];
+}
+
+- (void)getAttentionStatus {
+    
+    if (![MZLSharedData isAppUserLogined]) {
+        return;
+    }
+    
+    MZLModelShortArticle *shortArticle = self.shortArticle;
+    __weak MZLShortArticleDetailVC *weaSelf = self;
+    [MZLServices attentionStatesForCurrentUser:shortArticle.author succBlock:^(NSArray *models) {
+        if (models && models.count > 0) {
+            shortArticle.author.isAttentionForCurrentUser = 1;
+            if (shortArticle.author.identifier == weaSelf.shortArticle.author.identifier) {
+                [weaSelf toggleAttention:shortArticle.author.isAttentionForCurrentUser];
+            }
+        }else {
+            shortArticle.author.isAttentionForCurrentUser = 0;
+            if (shortArticle.author.identifier == weaSelf.shortArticle.author.identifier) {
+                [weaSelf toggleAttention:shortArticle.author.isAttentionForCurrentUser];
+            }
+        }
+        
+    } errorBlock:^(NSError *error) {
+        MZLLog(@"erroe = %@",error);
+    }];
+}
+
+- (void)toggleAttention:(BOOL)flag {
+    UIImage *upImage = flag ? [UIImage imageNamed:@"attention_xiangqingye_cancel"] : [UIImage imageNamed:@"attention_xiangqingye"];
+    [self.attentionBtn setImage:upImage forState:UIControlStateNormal];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -121,14 +156,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (void)initInternal {
     [self co_registerKeyboardNotification];
@@ -209,6 +244,23 @@
     [self loadModels];
 }
 
+- (void)addAttention {
+    [MZLServices addAttentionForShortArticleUser:self.shortArticle.author succBlock:^(NSArray *models) {
+        //
+    } errorBlock:^(NSError *error) {
+        //
+    }];
+}
+
+- (void)removeAttention {
+    MZLModelShortArticle *shortArticle = self.shortArticle;
+    [MZLServices removeAttentionForShortArticleUser:shortArticle.author succBlock:^(NSArray *models) {
+        //
+    } errorBlock:^(NSError *error) {
+        //
+    }];
+}
+
 - (void)addUp {
     [MZLServices addUpForShortArticle:self.shortArticle succBlock:^(NSArray *models) {
         // ignore
@@ -270,16 +322,16 @@
 #pragma mark - init UI
 
 - (void)initUI {
-    if (self.shortArticle.goodsCount > 0) {
-        UIView *goodsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-        [goodsView addTapGestureRecognizer:self action:@selector(onGoodsViewClicked:)];
-        UILabel *lblGoodsCount = [goodsView createSubViewLabelWithFontSize:12 textColor:@"999999".co_toHexColor];
-        [lblGoodsCount co_rightCenterYParentWithWidth:COInvalidCons height:COInvalidCons];
-        UIImageView *lblGoodsImage = [goodsView createSubViewImageViewWithImageNamed:@"Short_Article_List_Style2_Goods"];
-        [[lblGoodsImage co_rightFromLeftOfView:lblGoodsCount offset:4] co_centerYParent];
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:goodsView];
-        lblGoodsCount.text = INT_TO_STR(self.shortArticle.goodsCount);
+    
+    UIButton *attentionBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 21)];
+    [attentionBtn setImage:[UIImage imageNamed:@"attention_xiangqingye"] forState:UIControlStateNormal];
+    [attentionBtn addTarget:self action:@selector(onAttentionClicked:) forControlEvents:UIControlEventTouchUpInside];
+    self.attentionBtn = attentionBtn;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:attentionBtn];
+    if ([MZLSharedData appUserId] == self.shortArticle.author.identifier) {
+        self.attentionBtn.hidden = YES;
     }
+    [self toggleAttentionStatus];
     
     [self initAuthor];
     [self initTableView];
@@ -363,7 +415,7 @@
     textView.font = MZL_FONT(fontSize);
     textView.textColor = @"434343".co_toHexColor;
     textView.delegate = self;
-//    textView.scrollEnabled = NO;
+    //    textView.scrollEnabled = NO;
     UILabel *placeHolderLbl = [textViewContainer createSubViewLabelWithFontSize:fontSize textColor:@"D8D8D8".co_toHexColor];
     placeHolderLbl.text = @"添加评论";
     [placeHolderLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -436,9 +488,9 @@
     CGFloat textViewFittingHeight = [textView co_getFittingHeight];
     CGFloat commentBarFittingHeight = textViewFittingHeight + COMMENT_TOTAL_MARGIN;
     if (commentBarFittingHeight > COMMENT_BAR_MAX_HEIGHT) {
-//        textView.scrollEnabled = YES;
+        //        textView.scrollEnabled = YES;
     } else {
-//        textView.scrollEnabled = NO;
+        //        textView.scrollEnabled = NO;
         if (commentBarFittingHeight != _commentBar.height) {
             CGRect frame = _commentBar.frame;
             CGFloat deltaY = commentBarFittingHeight - frame.size.height;
@@ -470,36 +522,33 @@
     
     UIView *commentView = [self createImageLblView:_toolbar imageName:@"Short_Article_Comment"];
     [commentView co_centerYParent];
-    [commentView co_leftFromRightOfView:upView offset:28];
+    [commentView co_leftFromRightOfView:upView offset:25];
     [commentView addTapGestureRecognizer:self action:@selector(onCommentClicked:)];
     self.commentLbl = commentView.subviews[1];
     [self updateLbl:self.commentLbl withCount:self.shortArticle.commentsCount];
-
     
-#warning 我自己改的
-     if ([UIViewController mzl_shouldShowShareShortArticleModule]) {
-         UIImageView *shareIcon = [_toolbar createSubViewImageViewWithImageNamed:@"Short_Article_Share"];
-         [shareIcon co_centerYParent];
-//         [shareIcon co_rightParentWithOffset:24];
-         [shareIcon co_leftFromRightOfView:commentView offset:28];
-         [shareIcon addTapGestureRecognizer:self action:@selector(share)];
-     }
+    //    if (self.shortArticle.goodsCount > 0) {
+    UIView *lblGoodsImage = [self createImageLblView:_toolbar imageName:@"short_article_gouwu"];
+    [lblGoodsImage co_centerYParent];
+    [lblGoodsImage co_leftFromRightOfView:commentView offset:25];
+    [lblGoodsImage addTapGestureRecognizer:self action:@selector(onGoodsViewClicked:)];
+    self.buyLbl = lblGoodsImage.subviews[1];
+    [self updateLbl:self.buyLbl withCount:self.shortArticle.goodsCount];
+    //    }
     
-
-//        UIImageView *shareIcon = [_toolbar createSubViewImageViewWithImageNamed:@"Short_Article_Share"];
-//        [shareIcon co_centerYParent];
-//        //         [shareIcon co_rightParentWithOffset:24];
-//        [shareIcon co_leftFromRightOfView:commentView offset:28];
-//        [shareIcon addTapGestureRecognizer:self action:@selector(share)];
-//    
-    
-
     UIImageView *report = [_toolbar createSubViewImageViewWithImageNamed:@"Short_Article_Report"];
     [report co_centerYParent];
     [report co_rightParentWithOffset:24];
     [report addTapGestureRecognizer:self action:@selector(onReportBtnClicked:)];
-
     
+#pragma mark - 点赞评论转发的按钮的位置修复
+    if ([UIViewController mzl_shouldShowShareShortArticleModule]) {
+        UIView *shareIcon = [_toolbar createSubViewImageViewWithImageNamed:@"Short_Article_Share"];
+        [shareIcon co_centerYParent];
+        //         [shareIcon co_rightParentWithOffset:24];
+        [shareIcon co_rightFromLeftOfView:report offset:25];
+        [shareIcon addTapGestureRecognizer:self action:@selector(share)];
+    }
 }
 
 - (UIView *)createImageLblView:(UIView *)superview imageName:(NSString *)imageName {
@@ -514,9 +563,9 @@
     [lbl co_centerYParent];
     [lbl co_insetsParent:UIEdgeInsetsMake(COInvalidCons, COInvalidCons, COInvalidCons, 0)];
     [lbl co_leftFromRightOfView:image offset:6];
-//    view.backgroundColor = [UIColor blueColor];
-//    image.backgroundColor = [UIColor orangeColor];
-//    lbl.backgroundColor = [UIColor greenColor];
+    //    view.backgroundColor = [UIColor blueColor];
+    //    image.backgroundColor = [UIColor orangeColor];
+    //    lbl.backgroundColor = [UIColor greenColor];
     return view;
 }
 
@@ -537,6 +586,18 @@
 - (void)toggleUpStatus {
     [self toggleUpImage:self.shortArticle.isUpForCurrentUser];
     [self updateLbl:self.upsLbl withCount:self.shortArticle.upsCount];
+}
+
+- (void)toggleAttentionStatus {
+    [self toggleAttentionImage:self.shortArticle.author.isAttentionForCurrentUser];
+}
+
+- (void)toggleAttentionImage:(BOOL)flag {
+    if (flag) {
+        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_xiangqingye_cancel"] forState:UIControlStateNormal];
+    }else {
+        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_xiangqingye"] forState:UIControlStateNormal];
+    }
 }
 
 - (void)updateLbl:(UILabel *)label withCount:(NSInteger)count {
@@ -571,9 +632,9 @@
     
     self.tvComments.tableHeaderView = tableHeader;
     
-//    tableHeader.backgroundColor = [UIColor blackColor];
-//    wrapper.backgroundColor = [UIColor lightGrayColor];
-//    content.backgroundColor = [UIColor greenColor];
+    //    tableHeader.backgroundColor = [UIColor blackColor];
+    //    wrapper.backgroundColor = [UIColor lightGrayColor];
+    //    content.backgroundColor = [UIColor greenColor];
 }
 
 - (void)initAddress:(UIView *)superview {
@@ -634,14 +695,14 @@
         UIImageView *photo = [photoView createSubViewImageView];
         [photo co_withinParent];
         MZLModelImage *image = photos[0];
-//        [photo loadArticleImageFromURL:image.fileUrl callbackOnImageLoaded:nil];
+        //        [photo loadArticleImageFromURL:image.fileUrl callbackOnImageLoaded:nil];
         [self mzl_loadSingleImageWithImageView:photo fileUrl:image.fileUrl];
     }
     
     [photoView co_height:photoViewHeight];
     [photoView addTapGestureRecognizer:self action:@selector(onPhotoClicked:)];
     
-//    photoView.backgroundColor = [UIColor greenColor];
+    //    photoView.backgroundColor = [UIColor greenColor];
 }
 
 - (void)initTags:(UIView *)superview {
@@ -690,7 +751,7 @@
         [tagsView co_height:0];
     }
     
-//    tagsView.backgroundColor = [UIColor orangeColor];
+    //    tagsView.backgroundColor = [UIColor orangeColor];
 }
 
 - (void)initDateAndConsumption:(UIView *)superview {
@@ -699,10 +760,10 @@
     [view co_topFromBottomOfPreSiblingWithOffset:26];
     [view co_height:20];
     
-//    UIImageView *dateIcon = [view createSubViewImageView];
-//    [[[dateIcon co_leftParent] co_bottomParent] co_width:12.0 height:12.0];
+    //    UIImageView *dateIcon = [view createSubViewImageView];
+    //    [[[dateIcon co_leftParent] co_bottomParent] co_width:12.0 height:12.0];
     UILabel *dateLbl = [view createSubViewLabelWithFontSize:10 textColor:@"CCCCCC".co_toHexColor];
-//    [dateLbl co_leftFromRightOfView:dateIcon offset:4.0];
+    //    [dateLbl co_leftFromRightOfView:dateIcon offset:4.0];
     [dateLbl co_leftParent];
     [dateLbl co_bottomParent];
     dateLbl.text = self.shortArticle.publishedAtStr;
@@ -719,14 +780,14 @@
         [[consumptionLbl2 co_bottomParent] co_rightFromLeftOfView:consumptionLbl offset:2];
     }
     
-//    view.backgroundColor = [UIColor purpleColor];
+    //    view.backgroundColor = [UIColor purpleColor];
     
 }
 
 #pragma mark - table data source and delegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    MZLModelShortArticleComment *comment = [MZLMockData mockShortArticleComment];
+    //    MZLModelShortArticleComment *comment = [MZLMockData mockShortArticleComment];
     MZLModelShortArticleComment *comment = _models[indexPath.row];
     MZLShortArticleCommentCell *cell = [MZLShortArticleCommentCell cellFromModel:comment tableView:tableView];
     cell.ownerController = self;
@@ -734,7 +795,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    MZLModelShortArticleComment *comment = [MZLMockData mockShortArticleComment];
+    //    MZLModelShortArticleComment *comment = [MZLMockData mockShortArticleComment];
     MZLModelShortArticleComment *comment = _models[indexPath.row];
     return [MZLShortArticleCommentCell heightFromModel:comment tableView:tableView];
 }
@@ -816,6 +877,23 @@
     loc.name = self.shortArticle.location.locationName;
     loc.identifier = self.shortArticle.location.identifier;
     return loc;
+}
+
+- (void)onAttentionClicked:(UITapGestureRecognizer *)tap {
+    if (![MZLSharedData isAppUserLogined]) {
+        [UIAlertView showAlertMessage:@"请先登入"];
+        return;
+    }
+    
+    if (self.shortArticle.author.isAttentionForCurrentUser) {
+        self.shortArticle.author.isAttentionForCurrentUser = NO;
+        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_xiangqingye"] forState:UIControlStateNormal];
+        [self removeAttention];
+    }else{
+        self.shortArticle.author.isAttentionForCurrentUser = YES;
+        [self.attentionBtn setImage:[UIImage imageNamed:@"attention_xiangqingye_cancel"] forState:UIControlStateNormal];
+        [self addAttention];
+    }
 }
 
 - (void)onGoodsViewClicked:(UITapGestureRecognizer *)tap {

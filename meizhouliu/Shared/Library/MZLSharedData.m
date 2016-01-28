@@ -78,6 +78,8 @@ static NSArray *_mzlFilterOptions;
     [COPreferences archiveUserPreference:filterOptions forKey:MZL_KEY_CACHED_FILTER_OPTIONS];
 }
 
+
+
 #pragma mark - login/logout related
 
 static NSString *_appMachineId;
@@ -156,6 +158,15 @@ static MZLAppUser *_mzlAppUser;
 
 + (NSDate *)loginRemindDateTime {
     return [COPreferences getUserPreference:MZL_KEY_CACHED_DATETIME_REMIND_LOGIN];
+}
+
+#pragma mark -duzoumoToken
++ (void)setAppDuZhouMoUserToken:(NSString *)string {
+    [COPreferences setUserPreference:string forKey:@"duzhoumousertoken"];
+}
+
++ (NSString *)appDuZhouMoToken {
+   return [COPreferences getUserPreference:@"duzhoumousertoken"];
 }
 
 #pragma mark - device token for notification
@@ -442,4 +453,20 @@ static NSDictionary *_info;
     }
 }
 
++ (void)loadAppUserBindInfoFromCache {
+
+
+}
+
++ (void)setApnsInfoForNotification:(NSDictionary *)info {
+    [COPreferences setUserPreference:info forKey:@"JPushInfo"];
+}
+
++ (NSDictionary *)getApnsInfoForNotification {
+   return [COPreferences getUserPreference:@"JPushInfo"];
+}
+
++ (void)removeApnsinfoForNotification {
+    [COPreferences removeUserPreference:@"JPushInfo"];
+}
 @end

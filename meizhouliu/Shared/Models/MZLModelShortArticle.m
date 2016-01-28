@@ -11,11 +11,15 @@
 #import "MZLModelSurroundingLocations.h"
 #import "MZLModelImage.h"
 #import "NSString+MZLImageURL.h"
+#import "MZLServices.h"
 
 @interface MZLModelShortArticle () {
     /** 仅用来track状态 */
     MZLModelShortArticleUp *_fakeUp;
     BOOL _isUp;
+    
+    
+    BOOL _isAttention;
 }
 
 @property (nonatomic, copy) NSString *photoOrder;
@@ -67,6 +71,15 @@
         _fakeUp = [[MZLModelShortArticleUp alloc] init];
     }
 }
+
+
+//- (BOOL)isAttentionForCurrentUser {
+//    return _isAttention;
+//}
+//
+//- (void)setIsAttentionForCurrentUser:(BOOL)isAttentionForCurrentUser {
+//    _isAttention = isAttentionForCurrentUser;
+//}
 
 - (NSString *)publishedAtStr {
     return dateToString(@"yyyy/MM/dd", [NSDate dateWithTimeIntervalSince1970:self.publishedAt]);
@@ -146,6 +159,7 @@
     [mapping addRelationFromPath:@"user" toProperty:@"author" withMapping:[MZLModelUser rkObjectMapping]];
     [mapping addRelationFromPath:@"destination" toProperty:@"location" withMapping:[MZLModelSurroundingLocations rkObjectMapping]];
     [mapping addRelationFromPath:@"photos" toProperty:@"photos" withMapping:[MZLModelImage rkObjectMapping]];
+//    [mapping addRelationFromPath:@"cover" toProperty:@"cover" withMapping:[MZLModelImage rkObjectMapping]];
 }
 
 @end

@@ -75,6 +75,9 @@
         [MZLServices userInfoServiceWithSuccBlock:^(NSArray *models) {
             [self hideProgressIndicator];
             _userDetail = ((MZLUserDetailResponse *)models[0]).user;
+            MZLAppUser *appUser = [MZLSharedData appUser];
+            appUser.user = ((MZLUserDetailResponse *)models[0]).user;
+            [appUser saveInPreference];
             [self initInternal];
         } errorBlock:^(NSError *error) {
             [self onNetworkError];
@@ -251,6 +254,10 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == actionSheet.destructiveButtonIndex) {
         [MZLSharedData logout];
+        
+        //给服务进行极光注册
+        [MZLServices registerJpushWithUser];
+        
         [self dismissCurrentViewController];
     }
 }
@@ -267,8 +274,14 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)aImage editingInfo:(NSDictionary *)editingInfo {
     [picker dismissModalViewControllerAnimated:YES];
     [self showUpLoadingProgressIndicator];
+<<<<<<< HEAD
     //    11.19 CXN改的
     /*****************************************/
+=======
+    
+//    NSLog(@"%@", NSStringFromCGSize(aImage.size));
+   
+>>>>>>> mzl_FJbranch
     UIImage *image = [self compressAImageWithImage:aImage];
     /*****************************************/
     //

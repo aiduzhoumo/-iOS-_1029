@@ -33,6 +33,7 @@
 + (void)showAlertWithTitle:(NSString *)title message:(NSString *)message dismissTitle:(NSString *)dismissTitle dismissBlock:(void (^)(void))dismissBlock;
 
 + (void)showDismissWithTitle:(NSString *)title message:(NSString *)message dismissBlock:(void (^)(void))dismissBlock;
++ (void)showDetermineWithTitle:(NSString *)title message:(NSString *)message dismissBlock:(void (^)(void))dismissBlock;
 + (void)showDismissWithTitle:(NSString *)title message:(NSString *)message;
 
 @end

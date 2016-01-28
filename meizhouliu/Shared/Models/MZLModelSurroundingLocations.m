@@ -69,7 +69,7 @@
         CLLocation *clLocation = [[CLLocation alloc] initWithLatitude:self.latitude longitude:self.longitude];
         CLLocationDistance distance = ceil([clSharedLocation distanceFromLocation:clLocation] / 1000.0);
         if (distance > 0) {
-            return [NSString stringWithFormat:@"距离%dkm", (NSInteger)distance];
+            return [NSString stringWithFormat:@"距离%ldkm", (NSInteger)distance];
         }
     }
     return @"";
