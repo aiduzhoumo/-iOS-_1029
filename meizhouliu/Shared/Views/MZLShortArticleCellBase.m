@@ -44,6 +44,7 @@
     [IBMessageCenter removeMessageListenersForTarget:self];
     [IBMessageCenter addMessageListener:MZL_NOTIFICATION_SINGLE_SHORT_ARTICLE_UP_STATUS_MODIFIED source:shortArticle target:self action:@selector(_onUpStatusModified)];
     [IBMessageCenter addMessageListener:MZL_NOTIFICATION_SINGLE_SHORT_ARTICLE_COMMENT_STATUS_MODIFIED source:shortArticle target:self action:@selector(_onCommentStatusModified)];
+    [IBMessageCenter addMessageListener:MZL_NOTIFICATION_SINGLE_SHORT_ARTICLE_ATTENTION_MODIFIED source:nil target:self action:@selector(_onAttentionStateModified)];
     _shortArticle = shortArticle;
 }
 
@@ -55,5 +56,7 @@
 - (void)_onCommentStatusModified {
 }
 
+- (void)_onAttentionStateModified {
+}
 
 @end

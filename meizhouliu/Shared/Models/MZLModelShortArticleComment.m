@@ -44,6 +44,7 @@
 + (NSMutableDictionary *)attributeDictionary {
     NSMutableDictionary *dict = [super attributeDictionary];
     [dict fromPath:@"created_at" toProperty:@"publishedAt"];
+    [dict fromPath:@"reply_id" toProperty:@"isCommentOrReply"];
     return dict;
 }
 

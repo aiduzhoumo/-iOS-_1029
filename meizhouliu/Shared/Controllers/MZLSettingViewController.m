@@ -186,11 +186,11 @@
             [cell.imgTitle setImage:[UIImage imageNamed:@"Data"]];
             [cell.lblTitle setText:@"基本资料"];
         } else if (indexPath.row == 2) {
-            [cell.imgTitle setImage:[UIImage imageNamed:@"Password"]];
-            [cell.lblTitle setText:@"修改密码"];
-        } else if (indexPath.row == 3) {
             [cell.imgTitle setImage:[UIImage imageNamed:@"modityName"]];
             [cell.lblTitle setText:@"修改昵称"];
+        } else if (indexPath.row == 3) {
+            [cell.imgTitle setImage:[UIImage imageNamed:@"Password"]];
+            [cell.lblTitle setText:@"修改密码"];
         }
         return cell;
     }else if ([MZLSharedData appUser].user.level == 100 && indexPath.section == 1){

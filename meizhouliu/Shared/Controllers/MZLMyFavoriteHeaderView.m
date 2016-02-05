@@ -219,6 +219,7 @@
 }
 
 - (void)updateUserInfo:(MZLModelUser *)user {
+    
     _user = user;
     
     if (_user) {
@@ -226,11 +227,11 @@
         [self.userHeadIcon addTapGestureRecognizer:self action:@selector(onHeaderClick:)];
         self.userName.text = _user.nickName;
         self.attentionCount.text = _user.followees_count;
-        [self.attentionCount addTapGestureRecognizer:self action:@selector(toAttentionView:)];
-        [self.attentionLbl addTapGestureRecognizer:self action:@selector(toAttentionView:)];
+        [self.attentionCount addTapGestureRecognizer:self action:@selector(toFeriendAttentionListView:)];
+        [self.attentionLbl addTapGestureRecognizer:self action:@selector(toFeriendAttentionListView:)];
         self.fensiCount.text = _user.followers_count;
-        [self.fensiCount addTapGestureRecognizer:self action:@selector(toAttentionView:)];
-        [self.fensiLbl addTapGestureRecognizer:self action:@selector(toAttentionView:)];
+        [self.fensiCount addTapGestureRecognizer:self action:@selector(toFeriendFensiListView:)];
+        [self.fensiLbl addTapGestureRecognizer:self action:@selector(toFeriendFensiListView:)];
         self.userIntroductionLbl.text = [NSString stringWithFormat:@"%@",_user.introduction];
     }
     
@@ -242,9 +243,14 @@
         [self.delegate toAuthorDetailVc];
     }
 }
-- (void)toAttentionView:(UITapGestureRecognizer *)tap {
-    if ([self.delegate respondsToSelector:@selector(toFeriendListVc)]) {
-        [self.delegate toFeriendListVc];
+- (void)toFeriendAttentionListView:(UITapGestureRecognizer *)tap {
+    if ([self.delegate respondsToSelector:@selector(toFeriendListVc:)]) {
+        [self.delegate toFeriendListVc:feriendKindListAttention];
+    }
+}
+- (void)toFeriendFensiListView:(UITapGestureRecognizer *)tap {
+    if ([self.delegate respondsToSelector:@selector(toFeriendListVc:)]) {
+        [self.delegate toFeriendListVc:feriendKindListFensi];
     }
 }
 

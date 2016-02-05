@@ -11,10 +11,17 @@
 
 @class MZLModelUser;
 
+typedef enum : NSInteger {
+    seleFeriendListKindAttention,
+    seleFeriendListKindFensi
+} seleFeriendListKind;
+
 @interface MZLFeriendListViewController : MZLBaseViewController
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 
 @property (nonatomic, strong) MZLModelUser *user;
+
+@property (nonatomic, assign) seleFeriendListKind listKind;
 
 @end

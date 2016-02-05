@@ -36,7 +36,7 @@
 //记录当前点击的是不是热门按钮
 @property (nonatomic, assign) BOOL isHot;
 
-//记录pop回来的时候会刷新数据
+//记录pop回来的时候会刷新数据(不需要了)
 @property (nonatomic, assign) int m;
 @end
 
@@ -45,8 +45,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshAttentionView:) name:@"shouYeAttentionYeMianRefresh" object:nil];
+   
     self.isHot = YES;
-    self.m = 0;
+//    self.m = 0;
     
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 160, 44)];
     UIButton *hotBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 44)];
@@ -81,7 +83,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 //    [self hideFilterView];
-    self.m = 1;
+//    self.m = 1;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -96,11 +98,17 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
  
-    //pop回来的时候需要刷新
-    if (self.m != 0) {
-        self.m = 0 ;
-        [self loadModels];
+    //如果首页是在关注页面时退出登入状态,再显示时应该是要回热门界面的
+    if (![MZLSharedData isAppUserLogined] && (self.isHot == NO)) {
+        [self hotArticleCheck];
     }
+    
+    //pop回来的时候需要刷新（不需要了。其他页面的关注状态直接通知这个页面的）
+//    if (self.m != 0) {
+//        self.m = 0 ;
+//        [self loadModels];
+//    }
+    
 }
 
 - (void)mzl_pushViewController:(UIViewController *)vc {
@@ -121,6 +129,7 @@
         return;
     }
     [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -137,6 +146,11 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+#pragma mark -推荐达人页面返回时刷新页面 
+- (void)refreshAttentionView:(NSNotification *)notifi {
+    [self loadModels];
+}
 
 #pragma mark - apns
 - (void)getIntoAppFromApns {
@@ -171,11 +185,13 @@
         vcShortArticle.shortArticle = shortArticle;
         vcShortArticle.popupCommentOnViewAppear = NO;
         vcShortArticle.hidesBottomBarWhenPushed = YES;
-        if ([[userInfo valueForKey:@"anchor"] valueForKey:@"short_articles_comment"]) {
+    
+        if ([userInfo valueForKey:@"anchor"]) {
             vcShortArticle.scrollToTheSpecificComment = YES;
-            NSString *temp = [[userInfo valueForKey:@"anchor"] valueForKey:@"short_articles_comment"];
+            NSString *temp = [[[userInfo valueForKey:@"anchor"] valueForKey:@"short_articles_comment"] valueForKey:@"id"];
             vcShortArticle.commentIdentifier = [temp integerValue];
         }
+    
         targetVc = vcShortArticle;
     }
    
@@ -188,7 +204,12 @@
 - (void)hotArticleCheck {
     //显示fiterView
     [self showFilterView];
-    self.isHot = YES;
+    
+    if(self.isHot) {
+        return;
+    }else {
+        self.isHot = YES;
+    }
     
     _hotBtn.enabled = NO;
     _attentionBtn.enabled = YES;
@@ -206,6 +227,8 @@
     
     [self reset];
     [self showNetworkProgressIndicator];
+    
+    //热门页面刷新数据
     [self loadModels];
 }
 
@@ -247,32 +270,11 @@
     _attentionBtn.titleLabel.font = MZL_BOLD_FONT(16);
     [_attentionBtn setTitleColor:@"434343".co_toHexColor forState:UIControlStateNormal];
     
-    MZLPagingSvcParam *param = [MZLPagingSvcParam pagingSvcParamWithPageIndex:1 fetchCount:10];
-    [MZLServices followDaRenListWithPagingParam:param succBlock:^(NSArray *models) {
-        
-        [self checkForAttentionList:models];
-        
-    } errorBlock:^(NSError *error) {
-        [self onNetworkError];
-    }];
-
+    //关注页面刷新数据
+    [self loadModels];
+    
 }
 
-- (void)checkForAttentionList:(NSArray *)models {
-    if (models.count == 0) {
-        [self hideProgressIndicator];
-        [_tv removeUnnecessarySeparators];
-        [self noAttentionRecordView];
-    }else {
-    // 刷新页面
-        [self loadModels];
-        //临时测数据
-//        [self hideProgressIndicator];
-//        [_tv removeUnnecessarySeparators];
-//        [self noAttentionRecordView];
-    }
-
-}
 
 #pragma mark - 原版搬过来,解决models为0,显示有按钮的recordView
 - (void)createTipViewOnLoadSucc {
@@ -451,7 +453,6 @@
     }
 }
 
-
 - (void)onLoadMoreFinished {
     _loadingMore = NO;
     _loadMoreOp = nil;
@@ -477,6 +478,12 @@
     if (self.isHot) {
         [self invokeService:@selector(personalizeShortArticleServiceWithFilter:pagingParam:succBlock:errorBlock:) params:params];
     }else {
+        
+        //如果没登入就没必要刷新了关注的文章页面了
+        if (![MZLSharedData isAppUserLogined]) {
+            return;
+        }
+        
         [self invokeService:@selector(followDarenShortArticleServiceWithFilter:pagingParam:succBlock:errorBlock:) params:params];
     }
 }
@@ -562,6 +569,11 @@
         paramPaging = [self pagingParamFromModels];
     }
     return @[paramFilter, paramPaging];
+}
+
+- (void)dealloc {
+    //首页是不会走这个dealloc方法的,通知的移除需要另想办法
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

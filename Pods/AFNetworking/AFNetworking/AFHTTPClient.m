@@ -141,7 +141,7 @@ NSString * AFQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSS
 
     }
     [mutablePairs addObject:@"f=ios"];
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [mutablePairs addObject:[NSString stringWithFormat:@"version=%@",version]];
 
     return [mutablePairs componentsJoinedByString:@"&"];

@@ -150,8 +150,13 @@
         MZLAuthorHeader *headerView = (MZLAuthorHeader *)[MZLSignedAuthorHeader signedAuthorHeader:_authorDetail];
         headerView.delegate = self;
         self.tvAuthor.tableHeaderView = headerView;
-        headerView.clickBlcok = ^(MZLModelUser *user) {
+        headerView.clickBlcok = ^(MZLModelUser *user,feriendListKind listKind) {
             MZLFeriendListViewController *feriendList = [MZL_MAIN_STORYBOARD() instantiateViewControllerWithIdentifier:@"MZLFeriendListViewController"];
+            if (listKind == feriendListKindAttention) {
+                feriendList.listKind = seleFeriendListKindAttention;
+            }else if (listKind == feriendListKindFensi){
+                feriendList.listKind = seleFeriendListKindFensi;
+            }
             feriendList.user = user;
             feriendList.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:feriendList animated:YES];
@@ -161,8 +166,13 @@
         MZLAuthorHeader *headerView = [MZLNormalAuthorHeader normalAuthorHeader:_authorDetail];
         self.tvAuthor.tableHeaderView = headerView;
         headerView.delegate = self;
-        headerView.clickBlcok = ^(MZLModelUser *user) {
+        headerView.clickBlcok = ^(MZLModelUser *user,feriendListKind listKind) {
             MZLFeriendListViewController *feriendList = [MZL_MAIN_STORYBOARD() instantiateViewControllerWithIdentifier:@"MZLFeriendListViewController"];
+            if (listKind == feriendListKindAttention) {
+                feriendList.listKind = seleFeriendListKindAttention;
+            }else if (listKind == feriendListKindFensi){
+                feriendList.listKind = seleFeriendListKindFensi;
+            }
             feriendList.user = user;
             feriendList.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:feriendList animated:YES];
@@ -222,7 +232,6 @@
 //    return [MZLShortArticleCell heightFromType:MZLShortArticleCellTypeAuthor model:_models[indexPath.row]];
     return [MZLShortArticleCell heightForTableView:tableView withType:MZLShortArticleCellTypeAuthor withModel:_models[indexPath.row]];
 }
-
 
 
 @end

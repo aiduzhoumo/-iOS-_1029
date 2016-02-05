@@ -31,13 +31,12 @@
     _tv.dataSource = self;
     _tv.delegate = self;
 
-    [self loadModels];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self adjustTableViewInsets];
-    [self loadModels];
+//    [self loadModels];
 }
 
 - (void)didReceiveMemoryWarning {

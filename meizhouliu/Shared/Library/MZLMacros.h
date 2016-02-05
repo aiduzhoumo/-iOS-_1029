@@ -96,6 +96,8 @@
 //#define MZL_NO_MORE_FAVOURTE_LOCATIONS @"没有更多了哦～"
 #define MZL_MSG_DEFAULT_SHARE_LOCATION @"原来这里有这么多有趣的玩法，周末有地方玩咯！"
 
+#define MZL_NOTIFICATION_SINGLE_SHORT_ARTICLE_ATTENTION_MODIFIED @"attentionStateModified"
+
 #define MZL_REUSEID_ARTICLECELL @"MZLArticleItemTableViewCell"
 #define MZL_REUSEID_LOCATIONCELL @"MZLLocationItemCell"
 #define MZL_REUSEID_NORESULTCELL @"MZLTableViewCellForNoResult"

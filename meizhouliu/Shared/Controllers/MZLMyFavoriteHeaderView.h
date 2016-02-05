@@ -16,10 +16,15 @@
 
 @class MZLModelUser;
 
+typedef enum :NSInteger {
+    feriendKindListAttention,
+    feriendKindListFensi
+} feriendKindList;
+
 @protocol MZLMyFavoriteHeaderViewDelegate <NSObject>
 - (void)onMyFavoriteHeaderViewTopBarSelected:(NSInteger)tabIndex;
 - (void)toAuthorDetailVc;
-- (void)toFeriendListVc;
+- (void)toFeriendListVc:(feriendKindList)kindList;
 @end
 
 @interface MZLMyFavoriteHeaderView : UIView
@@ -33,6 +38,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *userIntroductionLbl;
 
 @property (weak, nonatomic) IBOutlet UIView *topVIew;
+
+@property (nonatomic, assign) feriendKindList kindList;
 
 @property (nonatomic, weak) MZLModelUser *user;
 

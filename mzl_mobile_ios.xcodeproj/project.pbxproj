@@ -3914,7 +3914,7 @@
 					UIKit,
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.adhoc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.ios;
 				PRODUCT_NAME = mzl_mobile_ios;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3983,7 +3983,7 @@
 					UIKit,
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.adhoc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meizhouliu.ios;
 				PRODUCT_NAME = mzl_mobile_ios;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

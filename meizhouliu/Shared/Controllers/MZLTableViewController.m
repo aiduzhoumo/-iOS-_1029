@@ -543,6 +543,7 @@
 
 - (UIView *)noAttentionRecordView {
     UIView *noAttentionView = [[UIView alloc] init];
+    
     UIView *superView = [self noRecordViewSuperView];
     if (_tv.superview == superView) {
         [superView insertSubview:noAttentionView aboveSubview:_tv];
@@ -551,12 +552,13 @@
     }
     _noRecordView = noAttentionView;
     
-    UIView *imageView = [self imageViewWithImageNamed:@"attention_sad" size:CGSizeMake(95, 95) superView:noAttentionView];
+    UIView *imageView = [self imageViewWithImageNamed:@"attention_sad" size:CGSizeMake(85, 85) superView:noAttentionView];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(noAttentionView).offset(-84);
         make.centerX.mas_equalTo(noAttentionView);
         
     }];
+    
     UIView *labelView = [self noAttentionRecordLabelView:noAttentionView];
     [labelView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(imageView.mas_bottom).offset(12);

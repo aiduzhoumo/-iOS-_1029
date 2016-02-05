@@ -56,8 +56,10 @@ typedef void(^ MZL_SVC_TEXT_BLOCK)(MZLModelUser *user);
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (!_selectedChildVC) {
+    if (self.listKind == seleFeriendListKindAttention) {
         [self switchToChildVCWithTag:TAG_ATTENTION_LIST];
+    }else if (self.listKind == seleFeriendListKindFensi){
+        [self switchToChildVCWithTag:TAG_FENSI_LIST];
     }
 }
 
@@ -154,6 +156,7 @@ typedef void(^ MZL_SVC_TEXT_BLOCK)(MZLModelUser *user);
     if (toVc == _selectedChildVC) {
         return;
     }
+    self.listKind = (tag == TAG_ATTENTION_LIST) ? seleFeriendListKindAttention : seleFeriendListKindFensi;
     _selectedChildVC = toVc;
     [self mzl_flipToChildViewController:_selectedChildVC inView:_contentView];
     [_selectedChildVC mzl_onWillBecomeTabVisibleController];

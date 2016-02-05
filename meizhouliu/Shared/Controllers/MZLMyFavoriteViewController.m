@@ -127,6 +127,7 @@
             MZLUserDetailResponse *user = (MZLUserDetailResponse *)models[0];
             weakSelf.user = user.user;
             [_headV updateUserInfo:weakSelf.user];
+            
         } errorBlock:^(NSError *error) {
             [UIAlertView showAlertMessage:@"获取用户资料失败！"];
         }];
@@ -549,8 +550,13 @@
     [self toTabWithIndex:tabIndex];
 }
 
-- (void)toFeriendListVc {
+- (void)toFeriendListVc:(feriendKindList)kindlist {
     MZLFeriendListViewController *feriendList = [MZL_MAIN_STORYBOARD() instantiateViewControllerWithIdentifier:@"MZLFeriendListViewController"];
+    if (kindlist == feriendKindListAttention) {
+        feriendList.listKind = seleFeriendListKindAttention;
+    }else if (kindlist == feriendKindListFensi) {
+        feriendList.listKind = seleFeriendListKindFensi;
+    }
     feriendList.user = self.user;
     feriendList.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:feriendList animated:YES];

@@ -23,6 +23,8 @@
 #import "MZLLoginViewController.h"
 #import "MZLServices.h"
 #import "MZLShortArticleUpResponse.h"
+#import "MZLTabBarViewController.h"
+#import "MZLPersonalizedShortArticleVC.h"
 
 #define ReuseId_SinglePhotoShortContent @"ReuseId_SinglePhotoShortContent"
 #define ReuseId_MultiPhotosShortContent @"ReuseId_MultiPhotosShortContent"
@@ -430,10 +432,15 @@ typedef enum : NSInteger {
         self.nameLbl.text = self.shortArticle.author.nickName;
         [self.authorImage loadAuthorImageFromURL:self.shortArticle.author.headerImage.fileUrl];
         self.dateLbl.text = self.shortArticle.publishedAtStr;
-
+        
+        //判断是不是自己
         if ([MZLSharedData appUserId] == self.shortArticle.author.identifier) {
             self.attentionBtn.hidden = YES;
+        }else {
+            self.attentionBtn.hidden = NO;
         }
+        
+        
         if (![MZLSharedData isAppUserLogined]) {
             [self.attentionBtn setImage:[UIImage imageNamed:@"attention_shouye"] forState:UIControlStateNormal];
         }else{
@@ -616,7 +623,16 @@ typedef enum : NSInteger {
 #pragma mark - attention
 - (void)toAttention {
     if (![MZLSharedData isAppUserLogined]) {
-        [UIAlertView showAlertMessage:@"请先登入"];
+        
+        MZLTabBarViewController *tabVC = (MZLTabBarViewController *)self.ownerController.tabBarController;
+        [tabVC showMzlTabBar:NO animatedFlag:NO];
+        __weak MZLShortArticleCellStyle2 *weakSelf = self;
+        [self.ownerController popupLoginFrom:MZLLoginPopupFromShortArticle executionBlockWhenDismissed:^{
+            if ([MZLSharedData isAppUserLogined]) {
+                [weakSelf toAttention];
+            }
+        }];
+        
     }else{
         if (self.shortArticle.author.isAttentionForCurrentUser) {
             [self removeAttention];
@@ -745,6 +761,10 @@ typedef enum : NSInteger {
 
 - (void)_onCommentStatusModified {
     [self updateFunctionView];
+}
+
+- (void)_onAttentionStateModified {
+    [self getAttentionStatus];
 }
 
 #pragma mark - public methods

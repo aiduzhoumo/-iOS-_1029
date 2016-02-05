@@ -10,12 +10,17 @@
 
 @class MZLModelUser;
 
+typedef enum :NSInteger {
+    feriendListKindAttention,
+    feriendListKindFensi
+} feriendListKind;
+
 @protocol MZLAuthorHeaderShowProgressIndicatorDelegate <NSObject>
 - (void)showProgressIndicatorAlertViewOnAuthorDetailVC;
 - (void)hideProgressIndicatorAlertViewOnAuthorDetailVC:(BOOL)isSuccess;
 @end
 
-typedef void (^feriendListClick)(MZLModelUser *user);
+typedef void (^feriendListClick)(MZLModelUser *user,feriendListKind listKind);
 
 @interface MZLAuthorHeader : UIView
 
@@ -35,6 +40,8 @@ typedef void (^feriendListClick)(MZLModelUser *user);
 
 @property (nonatomic, weak) id<MZLAuthorHeaderShowProgressIndicatorDelegate> delegate;
 @property (nonatomic, copy) feriendListClick clickBlcok;
+
+@property (nonatomic, assign) feriendListKind listKind;
 
 @property (nonatomic, strong) MZLModelUser *user;
 

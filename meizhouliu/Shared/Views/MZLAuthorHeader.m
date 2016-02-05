@@ -12,6 +12,7 @@
 #import "MZLModelUser.h"
 #import "MZLServices.h"
 #import "MZLFeriendListViewController.h"
+#import <IBMessageCenter.h>
 
 @implementation MZLAuthorHeader
 
@@ -54,10 +55,10 @@
         self.lblDescriptions.text = author.introduction;
     }
     
-    [self.attention addTapGestureRecognizer:self action:@selector(toFeriendList:)];
-    [self.fensi addTapGestureRecognizer:self action:@selector(toFeriendList:)];
-    [self.attentionLable addTapGestureRecognizer:self action:@selector(toFeriendList:)];
-    [self.fensiLable addTapGestureRecognizer:self action:@selector(toFeriendList:)];
+    [self.attention addTapGestureRecognizer:self action:@selector(toFeriendAttentionList:)];
+    [self.fensi addTapGestureRecognizer:self action:@selector(toFeriendFensiList:)];
+    [self.attentionLable addTapGestureRecognizer:self action:@selector(toFeriendAttentionList:)];
+    [self.fensiLable addTapGestureRecognizer:self action:@selector(toFeriendFensiList:)];
 
     self.attentionLable.text = author.followees_count;
     self.fensiLable.text = author.followers_count;
@@ -72,9 +73,14 @@
     
 }
 
-- (void)toFeriendList:(UITapGestureRecognizer *)tap {
+- (void)toFeriendAttentionList:(UITapGestureRecognizer *)tap {
     MZLModelUser *user = _user;
-    self.clickBlcok(user);
+    self.clickBlcok(user,feriendListKindAttention);
+}
+
+- (void)toFeriendFensiList:(UITapGestureRecognizer *)tap {
+    MZLModelUser *user = _user;
+    self.clickBlcok(user,feriendListKindFensi);
 }
 
 -(void)imgAuthorHeader:(UITapGestureRecognizer *)recognizer {
@@ -135,6 +141,9 @@
         if ([self.delegate respondsToSelector:@selector(hideProgressIndicatorAlertViewOnAuthorDetailVC:)]) {
             [self.delegate hideProgressIndicatorAlertViewOnAuthorDetailVC:YES];
         }
+        
+        [IBMessageCenter sendMessageNamed:MZL_NOTIFICATION_SINGLE_SHORT_ARTICLE_ATTENTION_MODIFIED forSource:nil];
+        
     } errorBlock:^(NSError *error) {
         if ([self.delegate respondsToSelector:@selector(hideProgressIndicatorAlertViewOnAuthorDetailVC:)]) {
             [self.delegate hideProgressIndicatorAlertViewOnAuthorDetailVC:NO];
@@ -156,6 +165,9 @@
         if ([self.delegate respondsToSelector:@selector(hideProgressIndicatorAlertViewOnAuthorDetailVC:)]) {
             [self.delegate hideProgressIndicatorAlertViewOnAuthorDetailVC:YES];
         }
+        
+        [IBMessageCenter sendMessageNamed:MZL_NOTIFICATION_SINGLE_SHORT_ARTICLE_ATTENTION_MODIFIED forSource:nil];
+        
     } errorBlock:^(NSError *error) {
         if ([self.delegate respondsToSelector:@selector(hideProgressIndicatorAlertViewOnAuthorDetailVC:)]) {
             [self.delegate hideProgressIndicatorAlertViewOnAuthorDetailVC:NO];

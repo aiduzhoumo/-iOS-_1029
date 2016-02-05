@@ -102,9 +102,20 @@
     
     if (comment.reply_user) {
         self.lblComment.text = [NSString stringWithFormat:@"回复%@的评论:%@",comment.reply_user.nickName,comment.content];
-    }else{
+    }else {
         self.lblComment.text = comment.content;
     }
+    
+    //加了个字段进行判断匿名用户的问题
+//    if (comment.isCommentOrReply) {
+//        if (comment.reply_user) {
+//            self.lblComment.text = [NSString stringWithFormat:@"回复%@的评论:%@",comment.reply_user.nickName,comment.content];
+//        }else{
+//            self.lblComment.text = [NSString stringWithFormat:@"回复匿名用户的评论:%@",comment.content];
+//        }
+//    }else {
+//        self.lblComment.text = comment.content;
+//    }
     
     self.lblDate.text = comment.publishedTimeStr;
     if (! [MZLShortArticleCommentCell shouldShowFunctionForModel:comment]) {
