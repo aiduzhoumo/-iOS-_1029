@@ -13,7 +13,7 @@ typedef enum : NSInteger {
     SELECTED
 } MZLPhotoItemState;
 
-@class ALAsset, MZLModelImage;
+@class ALAsset, MZLModelImage, MZLModelImageToUPaiYun;
 
 @interface MZLPhotoItem : NSObject
 
@@ -22,6 +22,7 @@ typedef enum : NSInteger {
 @property (nonatomic, assign) MZLPhotoItemState state;
 /** being set, this photo has been already uploaded */
 @property (nonatomic, strong) MZLModelImage *uploadedImage;
+@property (nonatomic, strong) MZLModelImageToUPaiYun *uploadUpaiYunImage;
 /** image returned from TuSDK */
 @property (nonatomic, strong) UIImage *tuSDKEditedImage;
 /** image that has been handled (resized, apply filters) */
@@ -30,6 +31,8 @@ typedef enum : NSInteger {
 @property (nonatomic, readonly) BOOL isSelected;
 @property (nonatomic, readonly) NSDate *assetDate;
 @property (nonatomic, readonly) NSString *assetUrl;
+
+@property (nonatomic, copy) NSString *imageName;
 
 + (instancetype)instanceWithAsset:(ALAsset *)asset;
 + (NSArray *)sortWithAssetDate:(NSArray *)array;

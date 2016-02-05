@@ -81,9 +81,6 @@ typedef enum {
 
 @property (nonatomic, assign) NSInteger commentRow;
 
-//临时的字符串用于回复时显示
-@property (nonatomic, copy) NSString *tempName;
-
 @end
 
 @implementation MZLShortArticleDetailVC
@@ -294,9 +291,6 @@ typedef enum {
         weakSelf.shortArticle.author.isAttentionForCurrentUser = YES;
         [weakSelf toggleAttentionStatus];
         [weakSelf hideProgressIndicator];
-        
-        [IBMessageCenter sendMessageNamed:MZL_NOTIFICATION_SINGLE_SHORT_ARTICLE_ATTENTION_MODIFIED forSource:nil];
-        
     } errorBlock:^(NSError *error) {
         [weakSelf onNetworkError];
     }];
@@ -311,9 +305,6 @@ typedef enum {
         weakSelf.shortArticle.author.isAttentionForCurrentUser = NO;
         [weakSelf toggleAttentionStatus];
         [weakSelf hideProgressIndicator];
-        
-         [IBMessageCenter sendMessageNamed:MZL_NOTIFICATION_SINGLE_SHORT_ARTICLE_ATTENTION_MODIFIED forSource:nil];
-        
     } errorBlock:^(NSError *error) {
         [weakSelf onNetworkError];
     }];
@@ -350,7 +341,7 @@ typedef enum {
         [self toggleSendBtnState:YES];
         [MZLServices replyComment:comment forShortArticle:self.shortArticle succBlock:^(NSArray *models) {
             //
-            MZLLog(@"%@",models);
+            NSLog(@"%@",models);
             [self onCommentStatusModified:ADD_COMMENT];
             [self toggleSendBtnState:YES];
             [self clearAndhideCommentBar];
@@ -363,7 +354,7 @@ typedef enum {
         
     }else {
         [MZLServices addComment:comment forShortArticle:self.shortArticle succBlock:^(NSArray *models) {
-            MZLLog(@"%@",models);
+            NSLog(@"%@",models);
             [self onCommentStatusModified:ADD_COMMENT];
             [self toggleSendBtnState:YES];
             [self clearAndhideCommentBar];
@@ -557,7 +548,7 @@ typedef enum {
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     if (self.commentState == MZLShortArticleCommentStateFromReply) {
-        _placeHolderLbl.text = [NSString stringWithFormat:@"回复%@评论:",self.tempName];
+        _placeHolderLbl.text = @"回复评论";
     } else {
         _placeHolderLbl.text = @"添加评论";
     }
@@ -947,12 +938,6 @@ typedef enum {
     
     MZLModelShortArticleComment *comment = _models[indexPath.row];
     self.comment = comment;
-    if (comment.user.nickName) {
-        self.tempName = comment.user.nickName;
-    }else {
-        self.tempName = @"匿名用户";
-    }
-   
     
     UIActionSheet *reportSheet=[[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"回复该评论", nil];
     reportSheet.delegate=self;

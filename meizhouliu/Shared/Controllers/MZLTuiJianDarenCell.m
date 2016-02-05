@@ -39,8 +39,6 @@
     //判断是不是自己
     if (user.identifier == [MZLSharedData appUserId]) {
         self.attentionBtn.hidden = YES;
-    }else {
-        self.attentionBtn.hidden = NO;
     }
     
     
@@ -72,9 +70,6 @@
 - (void)toggleAttentionImage:(BOOL)flag {
     if (flag) {
         [self.attentionBtn setImage:[UIImage imageNamed:@"attention_shouye_cancel"] forState:UIControlStateNormal];
-        //这里说明按钮的状态变了,需要首页进行刷新
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"shouYeAttentionYeMianRefresh" object:nil];
-        
     }else {
         [self.attentionBtn setImage:[UIImage imageNamed:@"attention_shouye"] forState:UIControlStateNormal];
     }
@@ -118,10 +113,6 @@
         [MZLSharedData addIdIntoAttentionIds:[NSString stringWithFormat:@"%ld",weakSelf.user.identifier]];
         weakSelf.user.isAttentionForCurrentUser = 1;
         [weakSelf toggleAttentionImage:1];
-        
-        //这里需要通知首页进行刷新页面（改变图片已经通知了）
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"shouYeAttentionYeMianRefresh" object:nil];
-        
     } errorBlock:^(NSError *error) {
         if ([weakSelf.delegate respondsToSelector:@selector(hideNetworkProgressIndicatorOnTuijianVc:)]) {
             [weakSelf.delegate hideNetworkProgressIndicatorOnTuijianVc:NO];
@@ -138,9 +129,6 @@
         [MZLSharedData removeIdFromAttentionIds:[NSString stringWithFormat:@"%ld",weakSelf.user.identifier]];
         weakSelf.user.isAttentionForCurrentUser = NO;
         [weakSelf toggleAttentionImage:0];
-        
-        //这里也需要通知首页进行刷新页面
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"shouYeAttentionYeMianRefresh" object:nil];
         
     } errorBlock:^(NSError *error) {
         if ([weakSelf.delegate respondsToSelector:@selector(hideNetworkProgressIndicatorOnTuijianVc:)]) {

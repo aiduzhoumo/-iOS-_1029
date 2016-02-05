@@ -11,6 +11,7 @@
 #import "MZLModelImage.h"
 #import "MZLModelUser.h"
 #import "MZLModelShortArticleUp.h"
+#import "MZLModelImageToUPaiYun.h"
 
 @interface MZLModelShortArticle : MZLModelObject
 

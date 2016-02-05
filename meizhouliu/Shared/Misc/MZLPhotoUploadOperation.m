@@ -14,6 +14,7 @@
 #import "UIImage+COAdditions.h"
 #import "MZLServices.h"
 #import "MZLImageUploadResponse.h"
+#import "MZLImageUpLoadToUPaiYunResponse.h"
 
 #define MAX_ERROR_RETRY_TIMES 1
 
@@ -37,40 +38,54 @@
         _delegate = delegate;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             UIImage *srcImage = self.photo.tuSDKEditedImage;
+            NSString *imageName = self.photo.imageName;
+            MZLLog(@"imageName ************   %@",imageName);
             if (! srcImage) { // 照片没被编辑过，取原始图片
                 srcImage = [COAssets co_fullScreenImageFromAsset:self.photo.asset];
             }
             // scale
             UIImage *scaledImage = [srcImage co_resizeWithMaxWidth:CO_IPHONE6_PLUS_SCREEN_WIDTH maxHeight:CO_IPHONE6_PLUS_SCREEN_HEIGHT widthHasPriority:YES];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self uploadPhoto:scaledImage];
+//                [self uploadPhoto:scaledImage];
+                [self uploadPhoto:scaledImage imageName:imageName];
+                
             });
         });
     }
 }
 
-- (void)uploadPhoto:(UIImage *)image {
+- (void)uploadPhoto:(UIImage *)image imageName:(NSString *)imageName {
     if (_cancelled) {
         return;
-    }
-    _internal = [MZLServices uploadPhoto:image succBlock:^(NSArray *models) {
-        MZLImageUploadResponse *response = models[0];
-        [self onUploadSucc:response];
+    }                                                     
+    [MZLServices toGetupyun_configAndImageID:image iamgeName:imageName succBlock:^(NSArray *models) {
+        MZLLog(@"上传成功 *** models ===== %@",models);
+        MZLImageUpLoadToUPaiYunResponse *response = models[0];
+        [self onUploadSucc:response image:image imageName:imageName];
     } errorBlock:^(NSError *error) {
-        [self onUploadFailed:error image:image];
+        MZLLog(@"上传失败 *** error ==== %@",error);
+        //重新上传
+        [self uploadPhoto:image imageName:imageName];
     }];
 }
 
-- (void)onUploadSucc:(MZLImageUploadResponse *)response {
-    self.photo.uploadedImage = response.image;
-    if (_delegate && [_delegate respondsToSelector:@selector(onPhotoUploadSucceed:)]) {
-        [_delegate onPhotoUploadSucceed:self];
-    }
+- (void)onUploadSucc:(MZLImageUpLoadToUPaiYunResponse *)response image:(UIImage *)image imageName:(NSString *)imageName{
+    self.photo.uploadUpaiYunImage = response.image;
+    
+    _internal = [MZLServices uploadPhotoToUPaiYun:image imageName:imageName imageUpToUPaiYunResponse:response succBlock:^{
+        if (_delegate && [_delegate respondsToSelector:@selector(onPhotoUploadSucceed:)]) {
+            [_delegate onPhotoUploadSucceed:self];
+        }
+    } errorBlock:^(NSError *error) {
+        [self onUploadFailed:error image:image imageName:imageName];
+    }];
+    
 }
 
-- (void)onUploadFailed:(NSError *)error image:(UIImage *)image {
+- (void)onUploadFailed:(NSError *)error image:(UIImage *)image imageName:(NSString *)imageName {
     if (_retryTimes ++ < MAX_ERROR_RETRY_TIMES) {
-        [self uploadPhoto:image];
+        //        [self uploadPhoto:image];
+        [self uploadPhoto:image imageName:imageName];
         return;
     }
     if (_delegate && [_delegate respondsToSelector:@selector(onPhotoUploadFailed:)]) {

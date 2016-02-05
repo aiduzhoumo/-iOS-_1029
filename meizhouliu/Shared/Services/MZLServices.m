@@ -64,6 +64,7 @@
 #import "MZLVerifyCodeSvcParam.h"
 #import "MZLPhoneLoginSvcParam.h"
 #import "APService.h"
+#import "MZLImageUpLoadToUPaiYunResponse.h"
 
 #define MZL_SERVICE_REGISTER @"users/register"
 #define MZL_SERVICE_REGISTER_PHONE @"users/register/phone"
@@ -166,6 +167,7 @@
 #define MZL_SERVICE_APP_HEARTBEAT @"users/open_app"
 
 #define MZL_SERVICE_UPLOAD_PHOTO @"photos"
+#define MZL_SERVICE_UPLOAD_PHOTO_ClOUD @"photos/cloud"
 
 #define MZL_SERVICE_PERSONALIZE @"personalize"
 #define MZL_SERVICE_PERSONALIZE_CITIES @"personalize/cities"
@@ -322,7 +324,7 @@
     return result;
 }
 + (RKObjectManager *)objectManagerTEST {
-    RKObjectManager *result = [self objectManager:@"http://json.duzhoumo.com/api/idzm/normalproductlist.json"];
+    RKObjectManager *result = [self objectManager:@"http://v0.ftp.upyun.com"];
     [self addErrorMappingForObjectManager:result];
     return result;
 }
@@ -493,6 +495,7 @@
     };
     [self runBlockOnNetworkOK:postBlock];
 }
+
 
 + (void)postObject:(RKObjectManager *)objectManager atPath:(NSString *)servicePath parameters:(NSDictionary *)params succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
     [self postObject:objectManager object:params atPath:servicePath parameters:params succBlock:succBlock errorBlock:errorBlock];
@@ -1237,6 +1240,7 @@
     } errorBlock:^(NSError *error) {
         // ignore for the current
     } ];
+    
 }
 
 + (void)cityListService {
@@ -1623,6 +1627,7 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [self handleParameters:dict];
     NSData *data = UIImageJPEGRepresentation(image, 1.0);
+    
     RKObjectManager *om = [self objectManager];
     [om addResponseDescriptor:[self responseDescriptor:[MZLServiceMapping imageUploadResponseObjectMapping] servicePath:nil]];
     NSMutableURLRequest *request = [om multipartFormRequestWithObject:dict
@@ -1636,6 +1641,7 @@
                                                                         mimeType:@"image/jpeg"];
                                                 
                                             }];
+    
     RKObjectRequestOperation *operation = [om objectRequestOperationWithRequest:request
                                                                         success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
                                                                             succBlock([mappingResult array]);
@@ -1645,6 +1651,52 @@
     
     [om enqueueObjectRequestOperation:operation];
     return operation;
+}
+
+/** 上传图片UpaiYun */
++ (id)uploadPhotoToUPaiYun:(UIImage *)image imageName:(NSString *)imageName imageUpToUPaiYunResponse:(MZLImageUpLoadToUPaiYunResponse *)response succBlock:(MZL_SVC_SUCC_NULL_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+    
+    NSData *data = UIImageJPEGRepresentation(image, 1.0);
+    
+    NSString *policy = response.config.policy;
+    NSString *signature = response.config.signature;
+    NSString *path = response.image.path;
+    NSString *bucket = response.bucket;
+    
+    NSDictionary *dic = @{@"policy":policy,@"signature":signature};
+
+    RKObjectManager *manager = [self objectManager:[NSString stringWithFormat:@"http://v0.api.upyun.com/%@",bucket]];
+    [manager addResponseDescriptor:[self responseDescriptor:[MZLServiceMapping imageUploadResponseObjectMapping] servicePath:nil]];
+    NSMutableURLRequest *request = [manager multipartFormRequestWithObject:dic
+                                                                    method:RKRequestMethodPOST
+                                                                      path:path
+                                                                parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                                                                    [formData appendPartWithFileData:data name:@"file"                                                                                            fileName:imageName mimeType:@"image/jpeg/png"];
+                                                                }];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        MZLLog(@"operation ===  %@ **** responseObject ==== %@",operation,responseObject);
+        succBlock();
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        MZLLog(@"%@",error);
+        errorBlock(error);
+    }];
+    
+    [manager.operationQueue addOperation:operation];
+    
+    return operation;
+}
+
+/** 将图片名传给服务器获取UpaiYun的upyun_config及图片id */
++ (void)toGetupyun_configAndImageID:(UIImage *)image iamgeName:(NSString *)imageName succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock {
+    NSString *servicePath = [self servicePath:MZL_SERVICE_UPLOAD_PHOTO_ClOUD];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [self handleParameters:dict];
+    [dict setObject:imageName forKey:@"file_name"];
+    RKObjectManager *om = [self objectManager];
+    [om addResponseDescriptor:[self responseDescriptor:[MZLServiceMapping imageUploadToUPaiYunResponseObjectMapping] servicePath:servicePath]];
+    [self postObject:om atPath:servicePath parameters:dict succBlock:succBlock errorBlock:errorBlock];
 }
 
 

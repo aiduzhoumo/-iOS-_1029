@@ -214,7 +214,7 @@ static double const kAnimationDuration = 0.3;
 
 - (void)onPhotoUploadFailed {
     //照片上传失败 清除model中的photos 如果正在请求显示错误消息
-    self.model.photos  = [NSArray array];
+    self.model.photos = [NSArray array];
     if (isPosting) {
         [self onPostFailed];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kAnimationDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -665,8 +665,8 @@ static double const kAnimationDuration = 0.3;
         self.tagTextField.text = nil; //如果没有自定义标签 显示placeholder
     } else {
         self.tagTextField.text = CO_CHAR_ZERO_WIDTH_SPACE;
-    }
-}
+
+    }}
 
 #pragma mark - delete custom tag
 

@@ -20,8 +20,6 @@
 @property (nonatomic, copy) NSString *user_nickname;
 @property (nonatomic, copy) NSString *reply_id;
 
-@property (nonatomic, copy) NSString *isCommentOrReply;
-
 /** if the user who posts the comment is the current logined user, this comment can be edited */
 @property (nonatomic, readonly) BOOL canEdit;
 

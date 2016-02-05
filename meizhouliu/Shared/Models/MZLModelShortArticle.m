@@ -12,6 +12,7 @@
 #import "MZLModelImage.h"
 #import "NSString+MZLImageURL.h"
 #import "MZLServices.h"
+#import "MZLModelImageToUPaiYun.h"
 
 @interface MZLModelShortArticle () {
     /** 仅用来track状态 */
@@ -48,7 +49,8 @@
 - (MZLModelImage *)firstPhoto {
     id item = self.photos[0];
     if ([item isKindOfClass:[MZLPhotoItem class]]) {
-        return ((MZLPhotoItem *)item).uploadedImage;
+//        return ((MZLPhotoItem *)item).uploadedImage;
+        return ((MZLPhotoItem *)item).uploadUpaiYunImage;
     } else if ([item isKindOfClass:[MZLModelImage class]]) {
         return self.sortedPhotos[0];
     }
@@ -130,8 +132,11 @@
     }
     
     NSMutableArray *photoIds = [NSMutableArray array];
+//    [self.photos each:^(id object) {
+//        [photoIds addObject:@(((MZLPhotoItem *)object).uploadedImage.identifier)];
+//    }];
     [self.photos each:^(id object) {
-        [photoIds addObject:@(((MZLPhotoItem *)object).uploadedImage.identifier)];
+        [photoIds addObject:@(((MZLPhotoItem *)object).uploadUpaiYunImage.identifier)];
     }];
     [dict setKey:@"short_article[photo_order]" strValue:[photoIds join:@","]];
     

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "meizhouliu/Shared/Controllers/MZLPersonalizedShortArticleVC.m"
-            timestampString = "476351651.470057"
+            timestampString = "475755695.472132"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "600"
-            endingLineNumber = "600">
+            startingLineNumber = "590"
+            endingLineNumber = "590">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -104,6 +104,166 @@
             startingLineNumber = "157"
             endingLineNumber = "157"
             landmarkName = "-initUI"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "meizhouliu/Shared/Controllers/MZLShortArticleTagsVC.m"
+            timestampString = "475835240.181123"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
+            landmarkName = "-_postShortArticle"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "meizhouliu/Shared/Controllers/MZLShortArticleTagsVC.m"
+            timestampString = "475835240.43356"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
+            landmarkName = "-_postShortArticle"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "meizhouliu/Shared/Controllers/MZLShortArticleTagsVC.m"
+            timestampString = "476175890.196004"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "-invokeShortArticleService"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MZLShortArticleTagsVC invokeShortArticleService]"
+                  moduleName = "mzl_mobile_ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mzl_jfang/Desktop/%E7%89%88%E6%9C%AC%E4%BB%A3%E7%A0%81/3.5.1/3.5.1%E7%BC%96%E5%86%99%E7%89%88%E6%9C%AC/2.4%E4%BB%A3%E7%A0%81/3.5.1%E4%B8%8A%E4%BC%A0UPaiYun%E6%9A%82%E6%97%B6%E6%88%90%E5%8A%9F/meizhouliu/Shared/Controllers/MZLShortArticleTagsVC.m"
+                  timestampString = "476258304.592489"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "27">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__50-[MZLShortArticleTagsVC invokeShortArticleService]_block_invoke"
+                  moduleName = "mzl_mobile_ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mzl_jfang/Desktop/%E7%89%88%E6%9C%AC%E4%BB%A3%E7%A0%81/3.5.1/3.5.1%E7%BC%96%E5%86%99%E7%89%88%E6%9C%AC/2.4%E4%BB%A3%E7%A0%81/3.5.1%E4%B8%8A%E4%BC%A0UPaiYun%E6%9A%82%E6%97%B6%E6%88%90%E5%8A%9F/meizhouliu/Shared/Controllers/MZLShortArticleTagsVC.m"
+                  timestampString = "476258304.593278"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "meizhouliu/Shared/Controllers/MZLShortArticleTagsVC.m"
+            timestampString = "476257239.573511"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
+            landmarkName = "-toPost"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "meizhouliu/Shared/Controllers/MZLShortArticleTagsVC.m"
+            timestampString = "476257239.889535"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
+            landmarkName = "-toPost"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "meizhouliu/Shared/Views/MZLShortArticleProgressView.m"
+            timestampString = "476257738.756279"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
+            landmarkName = "-onClicked"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "meizhouliu/Shared/Views/MZLShortArticleProgressView.m"
+            timestampString = "476257741.700479"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
+            landmarkName = "-dummyHandler"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "meizhouliu/Shared/Views/MZLShortArticleProgressView.m"
+            timestampString = "476258307.611747"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "-hide"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -39,6 +39,8 @@
 
 + (RKObjectMapping *)userInfoObjectMapping;
 
++ (RKObjectMapping *)imageUploadToUPaiYunResponseObjectMapping;
+
 + (RKObjectMapping *)imageUploadResponseObjectMapping;
 
 + (RKObjectMapping *)dummyObjectMapping;

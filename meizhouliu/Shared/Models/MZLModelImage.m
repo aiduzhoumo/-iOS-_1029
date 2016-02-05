@@ -11,7 +11,8 @@
 @implementation MZLModelImage
 
 + (NSMutableDictionary *)attributeDictionary {
-    return [[super attributeDictionary] fromPath:@"file_url" toProperty:@"fileUrl"];
+    return [[super attributeDictionary]
+             fromPath:@"file_url" toProperty:@"fileUrl"];
 }
 
 @end

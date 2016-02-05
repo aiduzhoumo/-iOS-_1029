@@ -28,6 +28,10 @@
     MZLPhotoItem *result = [[MZLPhotoItem alloc] init];
     result.asset = asset;
     result.state = UNSELECTED;
+    ALAssetRepresentation *representation = [asset defaultRepresentation];
+    NSString *fileName = [representation filename];
+    result.imageName = fileName;
+    MZLLog(@"fileName ===  %@",fileName);
     return result;
 }
 
@@ -46,11 +50,19 @@
 }
 
 - (BOOL)isPhotoUploaded {
-    return self.uploadedImage != nil;
+    return self.uploadUpaiYunImage != nil;
 }
 
 - (void)resetUpload {
-    self.uploadedImage = nil;
+    self.uploadUpaiYunImage = nil;
 }
+
+//- (BOOL)isPhotoUploaded {
+//    return self.uploadedImage != nil;
+//}
+//
+//- (void)resetUpload {
+//    self.uploadedImage = nil;
+//}
 
 @end

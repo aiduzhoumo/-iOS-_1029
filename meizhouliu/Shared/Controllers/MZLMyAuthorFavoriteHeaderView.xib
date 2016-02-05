@@ -65,7 +65,7 @@
                                 <constraint firstAttribute="width" constant="30" id="6hs-cE-vCb"/>
                                 <constraint firstAttribute="height" constant="18" id="Arr-sQ-vOS"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="粉丝" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccO-xu-7GR">
@@ -84,7 +84,7 @@
                                 <constraint firstAttribute="width" constant="30" id="c5N-Bh-vaG"/>
                                 <constraint firstAttribute="height" constant="18" id="kpf-HW-AiR"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>

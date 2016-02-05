@@ -176,78 +176,77 @@
             }
         }
     }
-    
-    //暂时不在前台时展现UIAlertView(会莫名其妙的跳到MZLSplashVC)
-//    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
-//            
-//        _shouldInvokeEventsWhenActive = NO;
-//            
-//        if(userInfo != nil) {
-//            UIViewController *vc = [self currentVisibleViewController];
-//            UIStoryboard *sb = MZL_MAIN_STORYBOARD();
-//            UIViewController *targetVc;
-//            if ([[userInfo valueForKey:@"article"] valueForKey:@"id"]) {
-//                
-//                 NSString *alert = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
-//                __block UIViewController *weakTargetVc = targetVc;
-//                [UIAlertView showChoiceMessage:alert okBlock:^{
-//                    MZLModelArticle *article = [[MZLModelArticle alloc] init];
-//                    article.identifier = [[[userInfo valueForKey:@"article"] valueForKey:@"id"] intValue];
-//
-//                    MZLArticleDetailViewController * vcArticleDetail = (MZLArticleDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLArticleDetailViewController class])];
-//                    vcArticleDetail.articleParam = article;
-//                    weakTargetVc = vcArticleDetail;
-//                    
-//                    if (weakTargetVc) {
-//                        [vc mzl_pushViewController:weakTargetVc];
-//                    }
-//                }];
-//                
-//            }else if([[userInfo valueForKey:@"notice"] valueForKey:@"id"]) {
-//                
-//                NSString *alert = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
-//                __block UIViewController *weakTargetVc = targetVc;
-//                [UIAlertView showChoiceMessage:alert okBlock:^{
-//                    MZLModelNotice *notice = [[MZLModelNotice alloc] init];
-//                    notice.identifier = [[[userInfo valueForKey:@"notice"] valueForKey:@"id"] intValue];
-//                    MZLNoticeDetailViewController * vcNoticeDetail = (MZLNoticeDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLNoticeDetailViewController class])];
-//                    vcNoticeDetail.noticeParam = notice;
-//                    weakTargetVc = vcNoticeDetail;
-//                    
-//                    if (weakTargetVc) {
-//                        [vc mzl_pushViewController:weakTargetVc];
-//                    }
-//                }];
-//                
-//            }else if([[userInfo valueForKey:@"short_article"] valueForKey:@"id"]) {
-//                NSString *alert = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
-//                __block UIViewController *weakTargetVc = targetVc;
-//                [UIAlertView showChoiceMessage:alert okBlock:^{
-//                    MZLModelShortArticle *shortArticle = [[MZLModelShortArticle alloc] init];
-//                    shortArticle.identifier = [[[userInfo valueForKey:@"short_article"] valueForKey:@"id"] intValue];
-//                    MZLShortArticleDetailVC *vcShortArticle = [MZL_SHORT_ARTICLE_STORYBOARD() instantiateViewControllerWithIdentifier:NSStringFromClass([MZLShortArticleDetailVC class])];
-//                    vcShortArticle.shortArticle = shortArticle;
-//                    vcShortArticle.popupCommentOnViewAppear = NO;
-//                    vcShortArticle.hidesBottomBarWhenPushed = YES;
-//                    if ([[userInfo valueForKey:@"anchor"] valueForKey:@"short_articles_comment"]) {
-//                        vcShortArticle.scrollToTheSpecificComment = YES;
-//                        NSString *temp = [[[userInfo valueForKey:@"anchor"] valueForKey:@"short_articles_comment"] valueForKey:@"id"];
-//                        vcShortArticle.commentIdentifier = [temp integerValue];
-//                    }
-//                    weakTargetVc = vcShortArticle;
-//                    
-//                    if (weakTargetVc) {
-//                        [vc mzl_pushViewController:weakTargetVc];
-//                    }
-//                }];
-//            }
-//        }
-//    }
+        if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+            
+        _shouldInvokeEventsWhenActive = NO;
+            
+        if(userInfo != nil) {
+            UIViewController *vc = [self currentVisibleViewController];
+            UIStoryboard *sb = MZL_MAIN_STORYBOARD();
+            UIViewController *targetVc;
+            if ([[userInfo valueForKey:@"article"] valueForKey:@"id"]) {
+                
+                 NSString *alert = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+                __block UIViewController *weakTargetVc = targetVc;
+                [UIAlertView showChoiceMessage:alert okBlock:^{
+                    MZLModelArticle *article = [[MZLModelArticle alloc] init];
+                    article.identifier = [[[userInfo valueForKey:@"article"] valueForKey:@"id"] intValue];
+
+                    MZLArticleDetailViewController * vcArticleDetail = (MZLArticleDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLArticleDetailViewController class])];
+                    vcArticleDetail.articleParam = article;
+                    weakTargetVc = vcArticleDetail;
+                    
+                    if (weakTargetVc) {
+                        [vc mzl_pushViewController:weakTargetVc];
+                    }
+                }];
+                
+            }else if([[userInfo valueForKey:@"notice"] valueForKey:@"id"]) {
+                
+                NSString *alert = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+                __block UIViewController *weakTargetVc = targetVc;
+                [UIAlertView showChoiceMessage:alert okBlock:^{
+                    MZLModelNotice *notice = [[MZLModelNotice alloc] init];
+                    notice.identifier = [[[userInfo valueForKey:@"notice"] valueForKey:@"id"] intValue];
+                    MZLNoticeDetailViewController * vcNoticeDetail = (MZLNoticeDetailViewController *) [sb instantiateViewControllerWithIdentifier:NSStringFromClass([MZLNoticeDetailViewController class])];
+                    vcNoticeDetail.noticeParam = notice;
+                    weakTargetVc = vcNoticeDetail;
+                    
+                    if (weakTargetVc) {
+                        [vc mzl_pushViewController:weakTargetVc];
+                    }
+                }];
+                
+            }else if([[userInfo valueForKey:@"short_article"] valueForKey:@"id"]) {
+                NSString *alert = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+                __block UIViewController *weakTargetVc = targetVc;
+                [UIAlertView showChoiceMessage:alert okBlock:^{
+                    MZLModelShortArticle *shortArticle = [[MZLModelShortArticle alloc] init];
+                    shortArticle.identifier = [[[userInfo valueForKey:@"short_article"] valueForKey:@"id"] intValue];
+                    MZLShortArticleDetailVC *vcShortArticle = [MZL_SHORT_ARTICLE_STORYBOARD() instantiateViewControllerWithIdentifier:NSStringFromClass([MZLShortArticleDetailVC class])];
+                    vcShortArticle.shortArticle = shortArticle;
+                    vcShortArticle.popupCommentOnViewAppear = NO;
+                    vcShortArticle.hidesBottomBarWhenPushed = YES;
+                    if ([[userInfo valueForKey:@"anchor"] valueForKey:@"short_articles_comment"]) {
+                        vcShortArticle.scrollToTheSpecificComment = YES;
+                        NSString *temp = [[[userInfo valueForKey:@"anchor"] valueForKey:@"short_articles_comment"] valueForKey:@"id"];
+                        vcShortArticle.commentIdentifier = [temp integerValue];
+                    }
+                    weakTargetVc = vcShortArticle;
+                    
+                    if (weakTargetVc) {
+                        [vc mzl_pushViewController:weakTargetVc];
+                    }
+                }];
+            }
+        }
+    }
     
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }

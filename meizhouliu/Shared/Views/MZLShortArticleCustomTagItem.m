@@ -61,8 +61,6 @@
     [self layoutIfNeeded];  //need to update constraint
 }
 
-
-
 - (void)onItemTabed {
    
 }

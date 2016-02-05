@@ -16,7 +16,9 @@ typedef void(^ MZL_SVC_ERR_BLOCK)(NSError *error);
 typedef void(^ MZL_SVC_REDIRECT_SUCC_BLOCK)(NSDictionary *models);
 typedef void(^ MZL_SVC_REDIRECT_ERR_BLOCK)(NSError *error);
 
-@class MZLArticleListSvcParam, MZLChildLocationsSvcParam, MZLPagingSvcParam, MZLModelArticle, MZLRegisterNormalSvcParam,MZLRegisterPhoneSvcParam,MZLRegisterSinaWeiboSvcParam, MZLRegisterTencentQqSvcParam, MZLLoginSvcParam, MZLModelUser, MZLModelUserInfoDetail, MZLModelUserLocationPref, MZLModelUserFavoredArticle, MZLModelComment, MZLModelNotice, MZLFilterParam, MZLModelImage, MZLModelLocation, MZLPersonalizeSvcParam, MZLDescendantsParam, MZLSurroundingLocSvcParam, MZLModelShortArticle, MZLModelShortArticleComment, MZLModelAuthor, MZLRegister3rdPartySvcParam, MZLRegisterBaseSvcParam, MZLModelSurroundingLocations, MZLGetCodeSvcParam, MZLVerifyCodeSvcParam, MZLPhoneLoginSvcParam;
+typedef void(^ MZL_SVC_SUCC_NULL_BLOCK)();
+
+@class MZLArticleListSvcParam, MZLChildLocationsSvcParam, MZLPagingSvcParam, MZLModelArticle, MZLRegisterNormalSvcParam,MZLRegisterPhoneSvcParam,MZLRegisterSinaWeiboSvcParam, MZLRegisterTencentQqSvcParam, MZLLoginSvcParam, MZLModelUser, MZLModelUserInfoDetail, MZLModelUserLocationPref, MZLModelUserFavoredArticle, MZLModelComment, MZLModelNotice, MZLFilterParam, MZLModelImage, MZLModelLocation, MZLPersonalizeSvcParam, MZLDescendantsParam, MZLSurroundingLocSvcParam, MZLModelShortArticle, MZLModelShortArticleComment, MZLModelAuthor, MZLRegister3rdPartySvcParam, MZLRegisterBaseSvcParam, MZLModelSurroundingLocations, MZLGetCodeSvcParam, MZLVerifyCodeSvcParam, MZLPhoneLoginSvcParam, MZLImageUpLoadToUPaiYunResponse;
 
 
 @interface MZLServices : NSObject
@@ -155,6 +157,11 @@ typedef void(^ MZL_SVC_REDIRECT_ERR_BLOCK)(NSError *error);
 + (id)authorShortArticleListWithPagingParam:(MZLPagingSvcParam *)pagingParam succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)surroundingLocations:(MZLSurroundingLocSvcParam *)param succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (id)uploadPhoto:(UIImage *)image succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+/** 将图片名传给服务器获取UpaiYun的upyun_config及图片id */
++ (void)toGetupyun_configAndImageID:(UIImage *)image iamgeName:(NSString *)imageName succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
+/** 上传图片UpaiYun */
++ (id)uploadPhotoToUPaiYun:(UIImage *)image imageName:(NSString *)imageName imageUpToUPaiYunResponse:(MZLImageUpLoadToUPaiYunResponse *)response succBlock:(MZL_SVC_SUCC_NULL_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock; 
+
 + (void)postShortArticleService:(MZLModelShortArticle *)param succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)removeShortArticle:(MZLModelShortArticle *)param succBlock:(MZL_SVC_SUCC_BLOCK)succBlock errorBlock:(MZL_SVC_ERR_BLOCK)errorBlock;
 + (void)shareShortArticleServiceWithId:(NSInteger)identifier;

@@ -12,6 +12,7 @@
 #import "MZLModelAuthor.h"
 #import "MZLModelLocation.h"
 #import "MZLModelImage.h"
+#import "MZLModelImageToUPaiYun.h"
 #import "MZLModelLocationDetail.h"
 #import "MZLModelUserLocationPref.h"
 #import "MZLUserLocPrefResponse.h"
@@ -34,6 +35,8 @@
 #import "MZLImageUploadResponse.h"
 #import "MZLBindPhoneResponse.h"
 #import "MZLTuiJianDaren.h"
+#import "MZLImageUpLoadToUPaiYunResponse.h"
+#import "MZLUpYunConfig.h"
 
 #define ID_MAPPING @"id":@"identifier"
 #define TAGS_MAPPING @"tags_str":@"tags"
@@ -63,6 +66,33 @@
     RKObjectMapping *result = [RKObjectMapping mappingForClass:[MZLModelImage class]];
     [result addAttributeMappingsFromDictionary:[self imageMapping]];
     return result;
+}
+
+#pragma mark - image related mapping uploadToUPaiYun
++ (RKObjectMapping *)imageUpToUPauYunObjectMapping {
+    RKObjectMapping *result = [RKObjectMapping mappingForClass:[MZLModelImageToUPaiYun class]];
+    [result addAttributeMappingsFromDictionary:[self imageUpToUPauYunMapping]];
+    return result;
+}
+
++ (NSDictionary *)imageUpToUPauYunMapping {
+    return @{
+             ID_MAPPING,
+             @"path":@"path"
+             };
+}
+
++ (RKObjectMapping *)upyunconfigObjectMapping {
+    RKObjectMapping *result = [RKObjectMapping mappingForClass:[MZLUpYunConfig class]];
+    [result addAttributeMappingsFromDictionary:[self upyunconfigMapping]];
+    return result;
+}
+
++ (NSDictionary *)upyunconfigMapping {
+    return @{
+             @"policy":@"policy",
+             @"signature":@"signature"
+             };
 }
 
 #pragma mark - route info mapping
@@ -481,7 +511,16 @@
     return result;
 }
 
+
 #pragma mark - upload image response 
+
++ (RKObjectMapping *)imageUploadToUPaiYunResponseObjectMapping {
+    RKObjectMapping *result = [RKObjectMapping mappingForClass:[MZLImageUpLoadToUPaiYunResponse class]];
+    [result addAttributeMappingsFromArray:@[@"error",@"bucket",@"message"]];
+    [result addPropertyMapping:[self relMappingToKeyPath:@"photo" fromAttr:@"image" withMapping:[self imageUpToUPauYunObjectMapping]]];
+    [result addPropertyMapping:[self relMappingToKeyPath:@"upyun_config" fromAttr:@"config" withMapping:[self upyunconfigObjectMapping]]];
+    return result;
+}
 
 + (RKObjectMapping *)imageUploadResponseObjectMapping {
     RKObjectMapping *result = [RKObjectMapping mappingForClass:[MZLImageUploadResponse class]];

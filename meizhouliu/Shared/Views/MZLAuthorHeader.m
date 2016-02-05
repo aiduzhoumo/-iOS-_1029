@@ -12,7 +12,6 @@
 #import "MZLModelUser.h"
 #import "MZLServices.h"
 #import "MZLFeriendListViewController.h"
-#import <IBMessageCenter.h>
 
 @implementation MZLAuthorHeader
 
@@ -141,9 +140,6 @@
         if ([self.delegate respondsToSelector:@selector(hideProgressIndicatorAlertViewOnAuthorDetailVC:)]) {
             [self.delegate hideProgressIndicatorAlertViewOnAuthorDetailVC:YES];
         }
-        
-        [IBMessageCenter sendMessageNamed:MZL_NOTIFICATION_SINGLE_SHORT_ARTICLE_ATTENTION_MODIFIED forSource:nil];
-        
     } errorBlock:^(NSError *error) {
         if ([self.delegate respondsToSelector:@selector(hideProgressIndicatorAlertViewOnAuthorDetailVC:)]) {
             [self.delegate hideProgressIndicatorAlertViewOnAuthorDetailVC:NO];
@@ -165,9 +161,6 @@
         if ([self.delegate respondsToSelector:@selector(hideProgressIndicatorAlertViewOnAuthorDetailVC:)]) {
             [self.delegate hideProgressIndicatorAlertViewOnAuthorDetailVC:YES];
         }
-        
-        [IBMessageCenter sendMessageNamed:MZL_NOTIFICATION_SINGLE_SHORT_ARTICLE_ATTENTION_MODIFIED forSource:nil];
-        
     } errorBlock:^(NSError *error) {
         if ([self.delegate respondsToSelector:@selector(hideProgressIndicatorAlertViewOnAuthorDetailVC:)]) {
             [self.delegate hideProgressIndicatorAlertViewOnAuthorDetailVC:NO];

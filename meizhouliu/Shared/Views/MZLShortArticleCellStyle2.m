@@ -432,14 +432,12 @@ typedef enum : NSInteger {
         self.nameLbl.text = self.shortArticle.author.nickName;
         [self.authorImage loadAuthorImageFromURL:self.shortArticle.author.headerImage.fileUrl];
         self.dateLbl.text = self.shortArticle.publishedAtStr;
-        
-        //判断是不是自己
+
         if ([MZLSharedData appUserId] == self.shortArticle.author.identifier) {
             self.attentionBtn.hidden = YES;
         }else {
             self.attentionBtn.hidden = NO;
         }
-        
         
         if (![MZLSharedData isAppUserLogined]) {
             [self.attentionBtn setImage:[UIImage imageNamed:@"attention_shouye"] forState:UIControlStateNormal];
@@ -761,10 +759,6 @@ typedef enum : NSInteger {
 
 - (void)_onCommentStatusModified {
     [self updateFunctionView];
-}
-
-- (void)_onAttentionStateModified {
-    [self getAttentionStatus];
 }
 
 #pragma mark - public methods
